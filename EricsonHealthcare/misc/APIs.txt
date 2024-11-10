@@ -1,0 +1,15 @@
+1). User Creation --> Divyam
+2). Case Creation and assign case  --> Chetan
+    -- Case Creation
+    -- send list of coordinators (HOD Will select coordinator while creating the case)
+    -- create a function which will store the PDF as of now locally and return the filepath which
+        needs to be stored in database
+3). Update case details (needs to be included in same viewset) --> Chetan
+    -- coordinator will fill up the details required from PDF.
+
+
+4). Create Visit --> Divyam
+    -- create type of visit (full form data)
+    -- send list of Investing officers (coordinator Will select Investing officers while creating the visit)
+
+    
