@@ -1,0 +1,63 @@
+this is the requirement of one of the client 
+
+they are TPA with insurance company basically they need an app (in house) to manage the case investigation 
+
+this is a basic flow of the process:
+-> Case gets registered by HOD to the app (just uploads the pdf of the case that has all the info) 
+-> than hod selects the supervisor (multiple supervisor will be there) who will handle the case
+-> the supervisor will enter the details form the pdf and update the case details like customer name, insurance company and that kind of all details 
+-> while entering the details the supervisor will also verify the PAN number/ adhar number/ doctor info (from api we will connect) the supervisor will enter the details in the app and will click verify button like that 
+-> now in one case there could be multiple visits to different places like hospital/chemist to verify the details and may be the places to be visited would be in different cities
+-> if the case has multiple visits in different than the supervisor will set the % of the work like 50% to both the investigator to pay them 
+-> the supervisor will also create a questionnaire from the pre added questions from question bank for every visits
+-> than the supervisor will select the field investigator based on the city of the place to be visited if different cities than different investigator will be selected (all the data of investigator will be added to db in the start which will include name/number/address/place of work/rate) 
+-> the investigator will receive a push notification, mail & sms of the new case assigned
+-> than the investigator will have a TAT monitored and will also have a deadline of visit the place and collect info 
+-> now after all the visits is completed and all new data is uploaded in form of pdf/notes and all the questions is answered from questionnaire the investigator will select the investigation completed btn 
+-> now after that all the new data is moved to supervisor he will check and will move the date to medical officer which he will select from the db itself
+-> the medical officer will check all the data (pre uploaded & new data from investigator) and will create a summary (remark) that weather the claim is genuine or not and how much claim should be provided 
+-> after that the medical officer will pass the case again to the supervisor who will than pass it to the data entry person who will create a final report based on the data and the remarks of the medical officer  
+-> now the final report will have pre defined things in the db or we can say a theme or word doc where the data entry person will fill the details 
+-> than the case is again passed to the supervisor he will review the final report and will pass the case to HOD 
+
+This is the end to end process with happy path
+now at any point the supervisor can re assign the case to all the stake holders for reassessment 
+
+last step would be a mis report for every stakeholder:
+like total visits by medical officer / TAT and like that for every stakeholder in including supervisor / investigator / medical officer / data entry 
+their report will have all the filters TAT / claim passed / rejected and every possible thing
+
+now there are few things related to case that should be stored in the db
+
+and at any point the case could be reopened
+
+and also the stakeholders can be changed at any point like the supervisor can change the investigator if he / she is not able to complete the task 
+
+insurance company info 
+there is a type of case also so every insurance company rates differ on the type of case 
+so rate will be different on these conditions - insurance company & type of case 
+
+case info : 
+claim number (system generated)
+insurance company claim number 
+type of case
+rate
+
+
+also case can be added in two ways : 
+-> the hod will upload the pdf
+-> they have a software SATA which will call our api and send the details to our app
+
+if the case is from SATA than the final report will be sent to sata after hod confirms through api 
+
+now based on this info create me a well structured proposal
+include each and everything all the stakeholders info
+include every stakeholder view points in the app in dashboard / mis report
+
+also add all the pre added data and table info like which table needs to be crated with data 
+
+add user roles info and what user role will have what data access
+
+so basically i need an in detail proposal focus on scope very much 
+
+also add the tech used : flutter / django / sqlite3
