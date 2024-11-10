@@ -1,0 +1,56 @@
+HOD:
+    Create Case(Form):
+                Case Id
+                Upload PDF Files(multiple)
+                Coordinator_Id
+
+    Assigns Coordinator for the case created.
+
+
+Coordinator:
+    Fill up case details from PDF(form):
+        Refer DB Digram
+
+    Create Visit:
+        Refere DB Digram
+        Select Questions
+    
+    Assign visits to Investigating_Officer
+    after assgining the visit case status needs to be changed to investingation
+
+Investing Officer:
+    Fill Questionaire --> Store in JSON form
+    upload document/photos
+    upload selfie
+    
+    after submitting the form visit status needs to be changed to investingation_confirmation
+
+
+Coordinator:
+    Coordinator confirms the details submitted by investing Officer
+    Post confirmation of all the visits change the status of case to medical.
+    Assign medical officer to the case.(Post all the Visits Completed)
+
+Medical Officer:
+    Reviews the details uploaded by Coordinator and Investinging Office(All Visits)
+    Will create a remark on the basis of above details(rejection, claim_passed)
+    Post submission the status of case changes to medical_confirmation
+
+Coordinator:
+    Will check the remarks of medical officer 
+    on approval change the status of the case to data-entry
+
+Data-Entry:
+    will have access to read all the details and will create a final report from the remarks of medical officer 
+    and data submitted by investing officer.
+
+    Report Form:
+        There will be few pre-filled details from above investigation
+        Data Entry Operator Fields Form
+        Convert form to PDF and give preview
+        post confirmation case status will be changed to data_entry_confirmation
+
+Coordinator:
+    Will verify the final report and confirm.
+    Post confirmation change the case status to Completed.
+    Send the case to HOD.
