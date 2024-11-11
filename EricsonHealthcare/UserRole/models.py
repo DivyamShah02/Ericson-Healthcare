@@ -1,38 +1,17 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Table HOD
-class HOD(models.Model):
-    user_id = models.CharField(max_length=100)  # Link to User ID
+class UserDetail(AbstractUser):
+    ROLE_CHOICES = [
+        ('hod', 'HOD'),
+        ('coordinator', 'Coordinator'),
+        ('investigator', 'InvestigatingOfficer'),
+        ('medical_officer', 'MedicalOfficer'),
+        ('data_entry_personnel', 'DataEntryPersonnel'),
+    ]
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    user_id = models.CharField(max_length=12, unique=True)  # Ensure user_id is unique
     name = models.CharField(max_length=255)
     contact_number = models.CharField(max_length=15)
-    email = models.EmailField()
-
-# Table Coordinator
-class Coordinator(models.Model):
-    user_id = models.CharField(max_length=100)  # Link to User ID
-    name = models.CharField(max_length=255)
-    contact_number = models.CharField(max_length=15)
-    email = models.EmailField()
-
-# Table InvestigatingOfficer
-class InvestigatingOfficer(models.Model):
-    user_id = models.CharField(max_length=100)  # Link to User ID
-    name = models.CharField(max_length=255)
-    contact_number = models.CharField(max_length=15)
-    email = models.EmailField()
-    city = models.CharField(max_length=255)
-    state = models.CharField(max_length=255)
-
-# Table MedicalOfficer
-class MedicalOfficer(models.Model):
-    user_id = models.CharField(max_length=100)  # Link to User ID
-    name = models.CharField(max_length=255)
-    contact_number = models.CharField(max_length=15)
-    email = models.EmailField()
-
-# Table DataEntryPersonnel
-class DataEntryPersonnel(models.Model):
-    user_id = models.CharField(max_length=100)  # Link to User ID
-    name = models.CharField(max_length=255)
-    contact_number = models.CharField(max_length=15)
-    email = models.EmailField()
+    city = models.CharField(max_length=255, null=True, blank=True)
+    state = models.CharField(max_length=255, null=True, blank=True)
