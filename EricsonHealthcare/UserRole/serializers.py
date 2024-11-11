@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import HOD, Coordinator, InvestigatingOfficer, MedicalOfficer, DataEntryPersonnel
+from .models import  UserDetail
 
 
-class HODSerializer(serializers.ModelSerializer):
+class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
-        model = HOD
+        model = UserDetail
         fields = '__all__'
