@@ -1,0 +1,38 @@
+now i am creating screens for each flow steps
+
+what could be the screen for coordinator 
+
+i have this kind of screen in mind
+
+first of all a progress bar kind of this horizontal like on top
+
+Case Creation ----> Investigation ----> Medical remarks ----> Final Report
+
+In case creation tab - 
+A second tab with this content - 
+Case Overview, Documents, Visit, Questions 
+from adding details of the case reading from pdf than uploading docs, than creating visits of the case, adding the visit details, selecting invetigator, and selecting quesitons to be asked for each visit
+
+and a next - prev button to move the case to next or previuos stage
+
+
+In Investigation tab - 
+There would be different section for different visits, all the information of the visit will be shared there like - investigation officer and an edit option, and it would be like accordian type like on click on it, it will be expanded showcasing questions and answers and pdfs uploaded by investigate officer, edit ooption to add or remove questions
+
+and a next - prev button to move the case to next or previuos stage
+
+In Medical remarks -
+First coordinator will select medical officer to be assigned and than will verify the remarks provided by the medical officer
+
+and a next - prev button to move the case to next or previuos stage
+
+In Final Report -
+First coordinator will select data entry personnel to be assigned and than will verify the report (pdf) provided by the data entry personnel
+
+and a next - prev button to move the case to next or previuos stage (to submit the case to HOD) case completion
+
+
+so now can you give me content to explain this screen one by one one screen info should be under 2000 characters
+
+first of all first main screen of case creation step
+
