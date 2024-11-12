@@ -24,8 +24,8 @@ class Case(models.Model):
     case_id = models.IntegerField()
     hod_id = models.CharField(max_length=100)  # Link to HOD ID
     coordinator_id = models.CharField(max_length=100)  # Link to Coordinator ID
-    medical_officer_id = models.CharField(max_length=100)  # Link to Medical Officer ID
-    data_entry_id = models.CharField(max_length=100)  # Link to Data Entry Personnel ID
+    medical_officer_id = models.CharField(max_length=100, null=True, blank=True)  # Link to Medical Officer ID
+    data_entry_id = models.CharField(max_length=100, null=True, blank=True)  # Link to Data Entry Personnel ID
     document_paths = models.JSONField()
     CASE_STATUS_CHOICES = [
         ('Creation', 'Creation'),
@@ -40,7 +40,9 @@ class Case(models.Model):
         ('Final_report_confirmation', 'Final Report Confirmation'),
         ('Complete', 'Complete'),
     ]
-    case_status = models.CharField(max_length=50, choices=CASE_STATUS_CHOICES)
+    case_status = models.CharField(max_length=50, choices=CASE_STATUS_CHOICES,
+                                    default='Creation')
+
 
 # Table CaseDetails
 class CaseDetails(models.Model):
@@ -50,13 +52,14 @@ class CaseDetails(models.Model):
     insurance_company = models.CharField(max_length=255)  # Link to Insurance Company Name
     type_of_case = models.CharField(max_length=255)
     rate = models.CharField(max_length=255)
-    medical_officer_remarks = models.TextField()
+    medical_officer_remarks = models.TextField(null=True, blank=True)
     STATUS_OF_CLAIM_CHOICES = [
         ('Pass', 'Pass'),
         ('Reject', 'Reject'),
     ]
-    status_of_claim = models.CharField(max_length=50, choices=STATUS_OF_CLAIM_CHOICES)
-    claim_approved_amount = models.CharField(max_length=100)
+    status_of_claim = models.CharField(max_length=50, choices=STATUS_OF_CLAIM_CHOICES, null=True, blank=True)
+    claim_approved_amount = models.CharField(max_length=100, null=True, blank=True)
+
 
 # Table FinalReport
 class FinalReport(models.Model):
