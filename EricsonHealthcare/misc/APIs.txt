@@ -8,8 +8,10 @@
     -- coordinator will fill up the details required from PDF.
 
 
-4). Create Visit --> Divyam
+4). Create Visit --> Chetan
     -- create type of visit (full form data)
     -- send list of Investing officers (coordinator Will select Investing officers while creating the visit)
 
+5). Create Questionnaire database
+    -- API to get list/add/edit of questions(CRUD)
     
