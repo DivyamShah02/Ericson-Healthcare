@@ -1,0 +1,80 @@
+body {
+    background-color: #F6F8F9;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.eh-progress-bar {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.eh-progress-bar-line {
+    flex: 1;
+    height: 2px;
+    background-color: #7E8A8C;
+}
+
+.eh-progress-bar-line-completed {
+    flex: 1;
+    height: 4px;
+    background-color: #17C6ED;
+}
+
+.eh-progress-bar-icon {
+    /* margin: 0 8px 0 0; */
+    padding: 18px 0px;
+    color: #17C6ED;
+}
+
+
+.eh-progress-bar-icon-incomplete {
+    margin: 0 6px;
+    color: #7E8A8C;
+    background-color: #EBEDED;
+    padding: 18px 14px;
+    border-radius: 100%;
+}
+
+.eh-progress-bar-text {
+    padding: 0 10px;
+    color: #ccc;
+    font-weight: bold;
+}
+
+.eh-nav-link-case-coordinator {
+    color: #7E8A8C;
+    cursor: pointer;
+}
+
+
+.eh-nav-link-case-coordinator:hover {
+    color: #000;
+    font-weight: 600;
+}
+
+.eh-head {
+    font-weight: 700;
+}
+
+.eh-label {
+    font-weight: 500;
+}
+
+.dark-input {
+    background-color: #EBEDED;
+}
+
+.dark-input:focus {
+    border-color: #17C6ED;
+    /* Green border */
+    box-shadow: 0 0 0px 3px rgba(23, 198, 237, 0.6);
+}
+
+.document-card {
+    border: 2px solid black; 
+    border-radius: 15px;
+    background-color: #EBEDED;
+    cursor: pointer;
+
+}
