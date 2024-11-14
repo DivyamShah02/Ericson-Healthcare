@@ -47,6 +47,11 @@ body {
     background-color: var(--eh-blue-primary) !important;
 }
 
+.eh-text-blue-primary {
+    color: var(--eh-blue-primary) !important;
+}
+
+
 .eh-progress-bar {
     display: flex;
     align-items: center;
