@@ -9,9 +9,16 @@
 
 
 4). Create Visit --> Chetan
-    -- create type of visit (full form data)
+    -- create type of visit (full form data) (type of visit api remaining)
     -- send list of Investing officers (coordinator Will select Investing officers while creating the visit)
 
-5). Create Questionnaire database
+5). Create Questionnaire database --> Divyam
     -- API to get list/add/edit of questions(CRUD)
-    
+
+6). Create API to get all cases by user_id --> Chetan
+
+7). Create API to get Case details by case_id --> Chetan
+
+8). Create API to get data of visit --> Chetan
+    -- case_id && investigating offier user id -> visit details, visit type
+    -- Visit details by visit_id -> Visit details, visit type details, question
