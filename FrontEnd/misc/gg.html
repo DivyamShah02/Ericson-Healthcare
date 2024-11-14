@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Creation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .progress {
+            height: 8px;
+            border-radius: 12px;
+        }
+        .progress-bar {
+            background-color: #00c1f2;
+        }
+        .tab-link {
+            text-decoration: none;
+            color: #212529;
+        }
+        .tab-link.active {
+            font-weight: 600;
+            border-bottom: 2px solid #212529;
+        }
+        .btn-primary {
+            background-color: #00c1f2;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #009ecc;
+        }
+        .check-item {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <!-- Case Progress -->
+        <div class="card shadow-sm">
+            <div class="mb-3">
+                <h5>Case Creation</h5>
+                <div class="d-flex align-items-center">
+                    <div class="d-flex flex-grow-1 align-items-center">
+                        <div class="progress flex-grow-1 me-2">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;"></div>
+                        </div>
+                        <span>Case Creation</span>
+                        <span class="mx-2">|</span>
+                        <span>Investigation</span>
+                        <span class="mx-2">|</span>
+                        <span>Medical Remarks</span>
+                        <span class="mx-2">|</span>
+                        <span>Final Report</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                    <a class="nav-link tab-link active" href="#">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tab-link" href="#">Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tab-link" href="#">Visits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tab-link" href="#">Ques</a>
+                </li>
+            </ul>
+
+            <!-- Form -->
+            <form>
+                <!-- Case Overview -->
+                <div class="mb-4">
+                    <h6>Case Overview</h6>
+                    <div class="mb-3">
+                        <label for="caseID" class="form-label">Case ID</label>
+                        <input type="text" id="caseID" class="form-control" value="12345" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="coordinatorName" class="form-label">Coordinator Name</label>
+                        <input type="text" id="coordinatorName" class="form-control" value="John Smith" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="insuranceCompany" class="form-label">Assigned Insurance Company</label>
+                        <select id="insuranceCompany" class="form-select">
+                            <option selected>Allianz</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Documents -->
+                <div class="mb-4">
+                    <h6>Documents</h6>
+                    <div class="border p-3 text-center">
+                        <span class="text-muted">Drag & Drop or <a href="#" class="text-primary">Upload Files</a></span>
+                    </div>
+                </div>
+
+                <!-- Visits -->
+                <div class="mb-4">
+                    <h6>Visits</h6>
+                    <div class="mb-3">
+                        <label for="visitType" class="form-label">Visit Type</label>
+                        <select id="visitType" class="form-select">
+                            <option selected>Hospital</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="investigator" class="form-label">Assigned Investigator</label>
+                            <input type="text" id="investigator" class="form-control" value="Jane Doe" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label for="timeline" class="form-label">Timeline</label>
+                            <input type="text" id="timeline" class="form-control" value="3 days" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <div class="mb-4">
+                    <h6>Questions</h6>
+                    <div class="form-check">
+                        <input type="checkbox" id="question1" class="form-check-input">
+                        <label for="question1" class="form-check-label check-item">Question 1</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="question2" class="form-check-input">
+                        <label for="question2" class="form-check-label check-item">Question 2</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="question3" class="form-check-input">
+                        <label for="question3" class="form-check-label check-item">Question 3</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="question4" class="form-check-input">
+                        <label for="question4" class="form-check-label check-item">Question 4</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="question5" class="form-check-input">
+                        <label for="question5" class="form-check-label check-item">Question 5</label>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary">Previous</button>
+                    <button type="submit" class="btn btn-primary">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
