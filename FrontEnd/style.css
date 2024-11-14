@@ -1,6 +1,50 @@
+:root {
+    --eh-body-bg-color: #F6F8F9;
+    --eh-blue-primary: #17C6ED;
+    --eh-blue-primary-faded: rgba(23, 198, 237, 0.6);
+    --eh-light-grey: #EBEDED;
+    --eh-dark-grey: #7E8A8C;
+    --eh-dark-grey-faded: #b3b7b882;
+}
+
 body {
-    background-color: #F6F8F9;
+    background-color: var(--eh-body-bg-color);
     font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.block-div {
+    display: block !important;
+}
+
+.none-div {
+    display: none !important;
+}
+
+.eh-btn-blue-primary-no-hover {
+    background-color: var(--eh-blue-primary);
+    color: white;
+    border: none;
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.eh-btn-blue-primary {
+    background-color: var(--eh-blue-primary);
+    color: white;
+    border: none;
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.eh-btn-blue-primary:hover {
+    box-shadow: 1px 1px 4px 4px var(--eh-blue-primary-faded);
+    color: var(--eh-blue-primary);
+    border: none;
+    font-weight: 500;
+}
+
+.eh-bg-blue-primary {
+    background-color: var(--eh-blue-primary) !important;
 }
 
 .eh-progress-bar {
@@ -12,26 +56,25 @@ body {
 .eh-progress-bar-line {
     flex: 1;
     height: 2px;
-    background-color: #7E8A8C;
+    background-color: var(--eh-dark-grey);
 }
 
 .eh-progress-bar-line-completed {
     flex: 1;
     height: 4px;
-    background-color: #17C6ED;
+    background-color: var(--eh-blue-primary);
 }
 
 .eh-progress-bar-icon {
     /* margin: 0 8px 0 0; */
     padding: 18px 0px;
-    color: #17C6ED;
+    color: var(--eh-blue-primary);
 }
-
 
 .eh-progress-bar-icon-incomplete {
     margin: 0 6px;
-    color: #7E8A8C;
-    background-color: #EBEDED;
+    color: var(--eh-dark-grey);
+    background-color: var(--eh-light-grey);
     padding: 18px 14px;
     border-radius: 100%;
 }
@@ -43,10 +86,9 @@ body {
 }
 
 .eh-nav-link-case-coordinator {
-    color: #7E8A8C;
+    color: var(--eh-dark-grey);
     cursor: pointer;
 }
-
 
 .eh-nav-link-case-coordinator:hover {
     color: #000;
@@ -62,19 +104,39 @@ body {
 }
 
 .dark-input {
-    background-color: #EBEDED;
+    background-color: var(--eh-light-grey);
 }
 
 .dark-input:focus {
-    border-color: #17C6ED;
-    /* Green border */
-    box-shadow: 0 0 0px 3px rgba(23, 198, 237, 0.6);
+    border-color: var(--eh-blue-primary);
+    box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
 }
 
 .document-card {
     border: 2px solid black; 
     border-radius: 15px;
-    background-color: #EBEDED;
+    background-color: var(--eh-light-grey);
     cursor: pointer;
+}
+
+.visit-card {
+    background-color: white;
+    box-shadow: 0 0 0 2px var(--eh-dark-grey-faded);
+    border-radius: 15px;
 
 }
+
+.visit-card-eh-hr {
+    color: var(--eh-dark-grey);
+}
+
+.eh-key {
+    color: var(--eh-blue-primary);
+    font-weight: 600;
+}
+
+.eh-value {
+    color: black;
+    font-weight: 500;
+}
+
