@@ -1,6 +1,7 @@
 :root {
     --eh-body-bg-color: #F6F8F9;
     --eh-blue-primary: #17C6ED;
+    /* --eh-blue-primary: #130c3d; */
     --eh-blue-primary-faded: rgba(23, 198, 237, 0.6);
     --eh-light-grey: #EBEDED;
     --eh-dark-grey: #7E8A8C;
@@ -41,6 +42,21 @@ body {
     color: var(--eh-blue-primary);
     border: none;
     font-weight: 500;
+}
+
+.eh-btn-blue-primary-outline {
+    background-color: transparent;
+    color: var(--eh-blue-primary);
+    border: 2px solid var(--eh-blue-primary);
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.eh-btn-blue-primary-outline:hover {
+    box-shadow: 1px 1px 4px 4px var(--eh-blue-primary-faded);
+    color: var(--eh-blue-primary);
+    /* border: none; */
+    /* font-weight: 500; */
 }
 
 .eh-bg-blue-primary {
@@ -145,3 +161,20 @@ body {
     font-weight: 500;
 }
 
+.eh-small{
+    font-weight: 800;
+}
+
+.dashboard-card {
+    box-shadow: 0 0 0 2px var(--eh-dark-grey-faded);
+    background-color: white;
+    /* border: 2px solid black; */
+    border-radius: 20px;
+}
+
+.case-list-card {
+    box-shadow: 0 0 0 2px var(--eh-light-grey);
+    background-color: white;
+    /* border: 2px solid black; */
+    border-radius: 15px;   
+}

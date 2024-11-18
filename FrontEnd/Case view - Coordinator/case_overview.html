@@ -36,14 +36,13 @@
 
     <div id="main-content" class="blur">
         <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary">
-            <div class="row">
-                <div class="col text-start d-flex align-items-center"><i class="fa fa-chevron-left fa-xl"></i></div>
-                <div class="col text-center p-0" style="font-size: 18px;"><b>Case #133</b></div>
-                <div class="col text-end d-flex align-items-center justify-content-end"><i
-                        class="fa fa-ellipsis-vertical fa-xl"></i></div>
-            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <i class="fa fa-chevron-left fa-xl"></i>
+                <div class="mx-auto p-0" style="font-size: 18px;"><b>Case #02658</b></div>
+                <i class="fa fa-ellipsis-vertical fa-xl"></i>
+            </div>            
         </div>
-    
+
         <!-- Process Step Section -->
         <div class="container py-4 pt-3">
             <h1 id="step-name"></h1>
@@ -288,13 +287,13 @@
                             data-bs-target="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                     </li>
                     <li class="nav-item col text-center" role="presentation">
+                        <a class="nav-link eh-nav-link-case-coordinator" id="visits-tab" data-bs-toggle="pill"
+                            data-bs-target="#visits" role="tab" aria-controls="visits" aria-selected="false">Visits</a>
+                    </li>
+                    <li class="nav-item col text-center" role="presentation">
                         <a class="nav-link eh-nav-link-case-coordinator" id="documents-tab" data-bs-toggle="pill"
                             data-bs-target="#documents" role="tab" aria-controls="documents"
                             aria-selected="false">Documents</a>
-                    </li>
-                    <li class="nav-item col text-center" role="presentation">
-                        <a class="nav-link eh-nav-link-case-coordinator" id="visits-tab" data-bs-toggle="pill"
-                            data-bs-target="#visits" role="tab" aria-controls="visits" aria-selected="false">Visits</a>
                     </li>
                     <!-- <li class="nav-item col text-center" role="presentation">
                       <a class="nav-link eh-nav-link-case-coordinator" id="reports-tab" data-bs-toggle="pill" data-bs-target="#reports" role="tab" aria-controls="reports" aria-selected="false">Reports</a>
@@ -352,53 +351,6 @@
                                 </button>
                             </div>
                         </form>
-                    </div>
-                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab" tabindex="0">
-                        <h3 class="eh-head my-3">Case Documents</h3>
-                        <label class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2 mb-3"><b>Upload Document</b>
-                            <input type="file" id="addDocumentInput" hidden>
-                        </label>
-    
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-    
-    
-                        <!-- Modal -->
-                        <div class="modal fade" id="viewDocumentModal" tabindex="-1"
-                            aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="viewDocumentModalLabel">View Document</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <iframe src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="500px"
-                                            style="border: none;"></iframe>
-                                    </div>
-                                    <!-- <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-    
                     </div>
                     <div class="tab-pane fade" id="visits" role="tabpanel" aria-labelledby="visits-tab" tabindex="0">
                         <h3 class="eh-head">Visits Details</h3>
@@ -517,11 +469,14 @@
                                     </div>
                                     <div class="col-6 text-start eh-key">Investigation Officer</div>
                                     <div class="col-6 text-end text-lg-start eh-value">Rajesh Mishra</div>
+                                    <div class="col-12 px-3">
+                                        <hr class="p-0 my-1 visit-card-eh-hr">
+                                    </div>
                                 </div>
                             </div>
     
                         </div>
-    
+
                         <div class="p-3 mt-3 visit-card">
                             <div class="d-flex" id="card-2" onclick="toggleCard(this)" style="cursor: pointer;">
                                 <div class="col text-start">
@@ -533,6 +488,9 @@
                                 style="display: none;" id="card-2-detail">
                                 <hr>
                                 <div class="row">
+                                    <div class="col-12 text-end mb-3"><i
+                                            class="fa fa-pen fa-lg eh-text-blue-primary"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fa fa-trash fa-lg text-danger"></i></div>
                                     <div class="col-6 text-start eh-key">Visit Type</div>
                                     <div class="col-6 text-end text-lg-start eh-value">Lab</div>
                                     <div class="col-12 px-3">
@@ -581,12 +539,65 @@
                                     </div>
                                     <div class="col-6 text-start eh-key">Investigation Officer</div>
                                     <div class="col-6 text-end text-lg-start eh-value">Rajesh Mishra</div>
+                                    <div class="col-12 px-3">
+                                        <hr class="p-0 my-1 visit-card-eh-hr">
+                                    </div>
                                 </div>
                             </div>
     
                         </div>
-    
+                        
+                        <div class="mt-5">
+                            <button class="btn eh-btn-blue-primary-outline w-100 py-2" type="button"><b>Start Investigation</b></button>
+                        </div>
                         <div class="mb-5"></div>
+                    </div>
+                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab" tabindex="0">
+                        <h3 class="eh-head my-3">Case Documents</h3>
+                        <label class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2 mb-3"><b>Upload Document</b>
+                            <input type="file" id="addDocumentInput" hidden>
+                        </label>
+    
+                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
+                            data-bs-target="#viewDocumentModal">
+                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
+                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                        </div>
+                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
+                            data-bs-target="#viewDocumentModal">
+                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
+                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                        </div>
+                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
+                            data-bs-target="#viewDocumentModal">
+                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
+                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                        </div>
+    
+    
+                        <!-- Modal -->
+                        <div class="modal fade" id="viewDocumentModal" tabindex="-1"
+                            aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="viewDocumentModalLabel">View Document</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="500px"
+                                            style="border: none;"></iframe>
+                                    </div>
+                                    <!-- <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+    
                     </div>
                     <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">...
                     </div>
