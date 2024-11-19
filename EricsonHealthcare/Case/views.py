@@ -59,4 +59,4 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             serializer = CaseDetailsSerializer(case_details, many=True)
             return Response(serializer.data, status=200)
         except Exception as e:
-            return Response({"error": str(e)}, status=400)
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
