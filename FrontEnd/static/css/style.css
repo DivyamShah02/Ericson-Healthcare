@@ -165,6 +165,65 @@ body {
     font-weight: 800;
 }
 
+.dashboard-scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    position: relative;
+    scroll-snap-type: x mandatory;
+}
+
+.dashboard-scroll-container::-webkit-scrollbar {
+    display: none; /* Hide the default scrollbar */
+}
+
+.dashboard-main-card {
+    display: inline-block;
+    margin-right: 0.25rem;
+    scroll-snap-align: start; /* Ensure cards snap to position */
+}
+
+/* Flexbox layout for larger screens */
+@media (min-width: 550px) {
+    .dashboard-scroll-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+    }
+
+    .dashboard-main-card {
+        flex: 1;
+        max-width: calc(100% / 5); /* Adjust the number of visible cards */
+    }
+
+    .dashboard-dots-container {
+        display: none;
+    }
+
+    .dashboard-dot {
+        display: none;
+    }
+}
+
+.dashboard-dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+}
+
+.dashboard-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+}
+
+.dashboard-dot.active {
+    background-color: var(--eh-dark-grey);
+}
+
 .dashboard-card {
     box-shadow: 0 0 0 2px var(--eh-dark-grey-faded);
     background-color: white;
