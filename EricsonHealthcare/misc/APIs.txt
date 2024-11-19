@@ -16,9 +16,18 @@
     -- API to get list/add/edit of questions(CRUD)
 
 6). Create API to get all cases by user_id --> Chetan
+    # in Case models we don't have user id, we have coordinator Id or Investigator id
 
-7). Create API to get Case details by case_id --> Chetan
+7). Create API to get Case details by case_id --> Chetan -- Done
 
 8). Create API to get data of visit --> Chetan
     -- case_id && investigating offier user id -> visit details, visit type
     -- Visit details by visit_id -> Visit details, visit type details, question
+
+
+# investigating Officer APIs
+
+--> Get all the cases of Investigator Officers via visit and visit has case id
+--> Get Visit details + visit type details by Investigator officer id and Case id both filters + return questions
+    specific to that type of visit.
+
