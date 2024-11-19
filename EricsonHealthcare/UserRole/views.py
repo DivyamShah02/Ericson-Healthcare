@@ -4,10 +4,8 @@ from rest_framework import viewsets
 from rest_framework.exceptions import NotFound, ParseError
 from django.shortcuts import get_object_or_404, render, redirect
 
-
 from .serializers import UserDetailSerializer, ListCoordinatorsSerializer
 from .models import UserDetail
-
 
 import random
 import string
