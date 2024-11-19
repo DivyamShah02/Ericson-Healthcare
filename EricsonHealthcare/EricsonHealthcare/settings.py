@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Case',
     'Visit',
-    'rest_framework'
+    'rest_framework',
+    'Question',
 ]
 
 MIDDLEWARE = [
