@@ -140,6 +140,13 @@ body {
     cursor: pointer;
 }
 
+.select-question-card {
+    background-color: var(--eh-light-grey);
+    box-shadow: 0 0 0 2px var(--eh-dark-grey-faded);
+    border-radius: 7px;
+
+}
+
 .visit-card {
     background-color: white;
     box-shadow: 0 0 0 2px var(--eh-dark-grey-faded);
