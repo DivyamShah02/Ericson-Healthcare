@@ -165,6 +165,13 @@ body {
     cursor: pointer;
 }
 
+.medical-remark-card {
+    border: 1px solid black; 
+    border-radius: 15px;
+    background-color: var(--eh-light-grey);
+    cursor: pointer;
+}
+
 
 .visit-card {
     background-color: white;
