@@ -1,8 +1,9 @@
 :root {
     --eh-body-bg-color: #F6F8F9;
-    --eh-blue-primary: #17C6ED;
-    /* --eh-blue-primary: #130c3d; */
-    --eh-blue-primary-faded: rgba(23, 198, 237, 0.6);
+    /* --eh-blue-primary: #17C6ED; */
+    --eh-blue-primary: #130c3d;
+    /* --eh-blue-primary-faded: rgba(23, 198, 237, 0.6); */
+    --eh-blue-primary-faded: rgba(19, 12, 61, 0.6);
     --eh-light-grey: #EBEDED;
     --eh-dark-grey: #7E8A8C;
     --eh-dark-grey-faded: #b3b7b882;
@@ -94,7 +95,7 @@ body {
 
 .eh-progress-bar-icon-incomplete {
     margin: 0 6px;
-    color: var(--eh-dark-grey);
+    color: var(--eh-blue-primary);
     background-color: var(--eh-light-grey);
     padding: 18px 14px;
     border-radius: 100%;
@@ -133,6 +134,16 @@ body {
     box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
 }
 
+.eh-checkbox:checked {
+    background-color: var(--eh-blue-primary);
+    border-color: var(--eh-blue-primary);
+}
+
+.eh-checkbox:focus {
+    box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
+    border-color: var(--eh-blue-primary);
+}
+
 .document-card {
     border: 2px solid black; 
     border-radius: 15px;
@@ -146,6 +157,21 @@ body {
     border-radius: 7px;
 
 }
+
+.question-card {
+    border: 1px solid black; 
+    border-radius: 15px;
+    background-color: var(--eh-light-grey);
+    cursor: pointer;
+}
+
+.medical-remark-card {
+    border: 1px solid black; 
+    border-radius: 15px;
+    background-color: var(--eh-light-grey);
+    cursor: pointer;
+}
+
 
 .visit-card {
     background-color: white;
@@ -170,7 +196,14 @@ body {
 
 .eh-small{
     font-weight: 800;
+    color: var(--eh-blue-primary);
 }
+
+.eh-small-white{
+    font-weight: 800;
+    color: white;
+}
+
 
 .dashboard-scroll-container {
     overflow-x: auto;
@@ -223,12 +256,13 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #ccc;
+    /* background-color: #ccc; */
+    background-color: var(--eh-blue-primary-faded);
     transition: background-color 0.3s;
 }
 
 .dashboard-dot.active {
-    background-color: var(--eh-dark-grey);
+    background-color: var(--eh-blue-primary);
 }
 
 .dashboard-card {
@@ -243,4 +277,12 @@ body {
     background-color: white;
     /* border: 2px solid black; */
     border-radius: 15px;   
+}
+
+.case-list-card--temp {
+    box-shadow: 0 0 0 2px var(--eh-light-grey);
+    background-color: var(--eh-blue-primary-faded);
+    color: white;
+    border: 3px solid var(--eh-blue-primary);
+    border-radius: 15px;
 }
