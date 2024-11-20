@@ -27,7 +27,6 @@
 
 # investigating Officer APIs
 
---> Get all the cases of Investigator Officers via visit and visit has case id
+--> Get all the cases of Investigator Officers via visit and visit has case id -- Done
 --> Get Visit details + visit type details by Investigator officer id and Case id both filters + return questions
-    specific to that type of visit.
-
+    specific to that type of visit. -- Done
