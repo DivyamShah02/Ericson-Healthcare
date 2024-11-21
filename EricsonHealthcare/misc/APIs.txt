@@ -1,32 +1,38 @@
 1). User Creation --> Divyam
 2). Case Creation and assign case  --> Chetan
-    -- Case Creation
-    -- send list of coordinators (HOD Will select coordinator while creating the case)
+    -- Case Creation        -- UserCreationViewSet - 
+    -- send list of coordinators (HOD Will select coordinator while creating the case) - ListUsersViewSet
     -- create a function which will store the PDF as of now locally and return the filepath which
-        needs to be stored in database
+        needs to be stored in database  --> Pending
 3). Update case details (needs to be included in same viewset) --> Chetan
-    -- coordinator will fill up the details required from PDF.
+    -- coordinator will fill up the details required from PDF. --> Pending
 
 
 4). Create Visit --> Chetan
     -- create type of visit (full form data) (type of visit api remaining)
-    -- send list of Investing officers (coordinator Will select Investing officers while creating the visit)
+    -- send list of Investing officers (coordinator Will select Investing officers while creating the visit) --> Done
 
 5). Create Questionnaire database --> Divyam
-    -- API to get list/add/edit of questions(CRUD)
+    -- API to get list/add/edit of questions(CRUD)  --> Done
 
 6). Create API to get all cases by user_id --> Chetan
-    # in Case models we don't have user id, we have coordinator Id or Investigator id
+    # in Case models we don't have user id, we have coordinator Id or Investigator id   --> Done
 
-7). Create API to get Case details by case_id --> Chetan -- Done
+7). Create API to get Case details by case_id --> Chetan --> Done
 
 8). Create API to get data of visit --> Chetan
     -- case_id && investigating offier user id -> visit details, visit type
     -- Visit details by visit_id -> Visit details, visit type details, question
-
 
 # investigating Officer APIs
 
 --> Get all the cases of Investigator Officers via visit and visit has case id -- Done
 --> Get Visit details + visit type details by Investigator officer id and Case id both filters + return questions
     specific to that type of visit. -- Done
+
+
+recheck all the APIs
+convert get methods to POST methods
+{
+    "question": [1,2,3,4,5,6,10,54,24]
+}
