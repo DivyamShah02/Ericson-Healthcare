@@ -51,12 +51,20 @@ class CaseDetailsViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-    @action(detail=False, methods=['get'], url_path='by-caseid/(?P<case_id>[^/.]+)')
+    @action(detail=False, methods=['post'], url_path='by-caseid')
     def get_case_details_by_case_id(self, request, case_id=None):
         try:
+            case_id = request.data.get('case_id')
+            print("csaseda ", case_id)
+
+            if not case_id:
+                return Response({"error": "case_id is required."}, status=status.HTTP_400_BAD_REQUEST)
+
             # Filter CaseDetails by case_id
             case_details = CaseDetails.objects.filter(case_id=case_id)
+            print("125235 ", case_details)
             serializer = CaseDetailsSerializer(case_details, many=True)
-            return Response(serializer.data, status=200)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
