@@ -68,6 +68,25 @@ body {
     color: var(--eh-blue-primary) !important;
 }
 
+@media (max-width: 768px) {
+    .offcanvas {
+        width: 75% !important;
+        /* Adjust this percentage as needed */
+    }
+}
+
+.eh-menu-item {
+    font-weight: 600;
+    color: var(--eh-blue-primary);
+    border-radius: 8px;
+}
+
+.eh-menu-item-active {
+    font-weight: 600;
+    background-color: var(--eh-blue-primary);
+    color: white;
+    border-radius: 8px;
+}
 
 .eh-progress-bar {
     display: flex;
