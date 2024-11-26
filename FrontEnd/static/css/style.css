@@ -68,6 +68,25 @@ body {
     color: var(--eh-blue-primary) !important;
 }
 
+@media (max-width: 768px) {
+    .offcanvas {
+        width: 75% !important;
+        /* Adjust this percentage as needed */
+    }
+}
+
+.eh-menu-item {
+    font-weight: 600;
+    color: var(--eh-blue-primary);
+    border-radius: 8px;
+}
+
+.eh-menu-item-active {
+    font-weight: 600;
+    background-color: var(--eh-blue-primary);
+    color: white;
+    border-radius: 8px;
+}
 
 .eh-progress-bar {
     display: flex;
@@ -285,4 +304,14 @@ body {
     color: white;
     border: 3px solid var(--eh-blue-primary);
     border-radius: 15px;
+}
+
+.remark-text-area {
+    background-color: white;
+    border: 2px solid var(--eh-blue-primary);
+}
+
+.remark-text-area:focus {
+    border-color: var(--eh-blue-primary);
+    box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
 }
