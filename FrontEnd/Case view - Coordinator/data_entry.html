@@ -344,28 +344,51 @@
 
                 </div>
 
-                <h3 class="eh-head">Select Medical Officer</h3>
+                <h3 class="eh-head">Select Data Entry personnel</h3>
                 <div class="my-4">
                     <select class="form-select dark-input" aria-label="select" id="meidcal_officer_select"
                         name="meidcal_officer_select">
-                        <option value="">Select Medical Officer</option>
-                        <option value="Dr. Komal">Dr. Komal</option>
-                        <option value="Dr. Sayali">Dr. Sayali</option>
-                        <option value="Dr, Akansha">Dr, Akansha</option>
-                        <option value="Dr. Harithra">Dr. Harithra</option>
-                        <option value="Dr. Rakshana">Dr. Rakshana</option>
+                        <option value="">Select Data Entry personnel</option>
+                        <option value="Personnel Name">Personnel Name</option>
+                        <option value="Personnel Name">Personnel Name</option>
+                        <option value="Personnel Name">Personnel Name</option>
                     </select>
-    
+
                     <button type="button" class="btn btn-primary mt-3 eh-btn-blue-primary-no-hover w-100">
                         <b>Submit</b>
                     </button>
                 </div>
 
-                <h3 class="eh-head">Medical Officer Remark</h3>
-                <div class="medical-remark-card p-3 pe-2">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel provident amet, mollitia fugiat repellendus neque? Earum dolores suscipit, nobis ea id itaque eveniet, harum error debitis soluta, fugiat possimus molestias.
+                <h3 class="eh-head">Final Report</h3>
+                <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
+                    data-bs-target="#viewDocumentModal">
+                    <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Final Report.pdf</u>
+                    <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
                 </div>
-                
+
+                <!-- Modal -->
+                <div class="modal fade" id="viewDocumentModal" tabindex="-1" aria-labelledby="viewDocumentModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="viewDocumentModalLabel">View Document</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="500px"
+                                    style="border: none;"></iframe>
+                            </div>
+                            <!-- <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
+                                                </div> -->
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="mb-5 pb-5"></div>
 
@@ -381,7 +404,7 @@
                         <div class="col-12 col-md-6">
                             <button type="button"
                                 class="btn btn-primary mb-md-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
-                                <b class="mx-auto">Generate Report</b>
+                                <b class="mx-auto">Submit Report</b>
                                 <i class="fa fa-arrow-right fa-xl"></i>
                             </button>
                         </div>
@@ -409,7 +432,7 @@
         window.onload = function () {
             toggle_loader();
         };
-        processStep(3);
+        processStep(4);
     </script>
 
 </body>
