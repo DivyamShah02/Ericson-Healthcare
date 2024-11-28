@@ -41,7 +41,6 @@ convert get methods to POST methods
 --> will get case_id & medical_officer_id assign medical_officer_id to that case
 
 # Medical officer
---> Get all the cases of medical officer on the basis of medical_officer_id
---> store medical_officer_remark on the basis of case_id (update)
---> Get all case details and visit details by case_id
-
+--> Get all the cases of medical officer on the basis of medical_officer_id --> Done
+--> store medical_officer_remark on the basis of case_id (update)   -- Done
+--> Get all case details and visit details by case_id   --  Done
