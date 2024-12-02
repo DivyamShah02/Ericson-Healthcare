@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'Visit',
     'rest_framework',
     'Question',
+    'Reports'
 ]
 
 MIDDLEWARE = [
