@@ -226,3 +226,245 @@ class HealthClaimReport(models.Model): # RR GR
 
     def __str__(self):
         return f"Health Claim Report - {self.claim_number}"
+
+
+class CashlessClaimReport(models.Model):
+    claim_number = models.CharField(max_length=100, null=True, blank=True)
+    hospital_name = models.CharField(max_length=200, null=True, blank=True)
+    date_of_joining = models.DateField(null=True, blank=True)
+    ilhc_trigger = models.CharField(max_length=200, null=True, blank=True)
+    date_of_visit = models.DateField(null=True, blank=True)
+    date_of_intimation = models.DateField(null=True, blank=True)
+    date_of_admission = models.DateField(null=True, blank=True)
+    pt_admitted = models.DateField(null=True, blank=True)
+    advance_paid_details = models.CharField(max_length=100, null=True, blank=True)
+    room_category = models.CharField(max_length=100, null=True, blank=True)
+    ipd_details_finding = models.TextField(null=True, blank=True)
+    insured_statement = models.TextField(null=True, blank=True)
+    treating_dr_statement = models.TextField(null=True, blank=True)
+    home_visit_if_plan_admission = models.CharField(max_length=100, null=True, blank=True)
+    other_findings = models.TextField(null=True, blank=True)
+    evidences_attached_uploaded_in_ft = models.BooleanField(null=True, blank=True)
+    final_recommendation = models.TextField(null=True, blank=True)
+
+
+class ClaimReport(models.Model): # PPD
+    claim_number = models.CharField(max_length=50)
+    policy_number = models.CharField(max_length=50)
+    insured_name = models.CharField(max_length=100)
+    claimant_name = models.CharField(max_length=100)
+    sum_insured = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    nature_of_loss = models.CharField(max_length=100)
+    policy_type = models.CharField(max_length=100)
+    channel_sourcing = models.CharField(max_length=200, null=True, blank=True)
+    family_member = models.CharField(max_length=200, null=True, blank=True)
+    relation_with_insured = models.CharField(max_length=50)
+    insured_occupation = models.CharField(max_length=200)
+    claimant_occupation = models.CharField(max_length=200, null=True, blank=True)
+    event_details = models.TextField()
+    hospital_visit_details = models.TextField()
+    current_condition = models.CharField(max_length=200)
+    other_insurance = models.TextField(null=True, blank=True)
+    mlc_done = models.BooleanField(default=False)
+    post_mortem_done = models.BooleanField(default=False)
+    casuality_note = models.TextField(null=True, blank=True)
+    hospital_visit_details = models.TextField(null=True, blank=True)
+    verification_details = models.CharField(max_length=200, null=True, blank=True)
+    final_report = models.TextField(null=True, blank=True)
+    case_summary = models.TextField(null=True, blank=True)
+    police_document_verified = models.CharField(max_length=200, null=True, blank=True)
+    pm_centre_name = models.CharField(max_length=200, null=True, blank=True)
+    cause_of_death = models.CharField(max_length=200, null=True, blank=True)
+    viscera_status = models.CharField(max_length=200, null=True, blank=True)
+    pm_verified = models.BooleanField(default=False)
+
+    photos = models.CharField(max_length=200, null=True, blank=True)
+    witness = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True) 
+
+    dl_name = models.CharField(max_length=200, null=True, blank=True)
+    dl_validity = models.DateField(null=True, blank=True)
+    cov = models.CharField(max_length=200, null=True, blank=True)
+    online_portal_check = models.CharField(max_length=200, null=True, blank=True)
+
+    total_person_inquired = models.IntegerField(null=True, blank=True)
+    vicinity_check_details = models.TextField(null=True, blank=True)
+
+    media_date = models.DateField(null=True, blank=True)
+    media_details = models.TextField(null=True, blank=True)
+
+    other_insurance_company = models.CharField(max_length=200, null=True, blank=True)
+    claim_status = models.TextField(null=True, blank=True)
+    conclusion = models.TextField(null=True, blank=True)
+
+    intimation_date = models.DateField()
+    report_closed_date = models.DateField()
+    turn_around_time = models.IntegerField()
+    iclm_recommendation = models.CharField(max_length=200, null=True, blank=True)
+    investigator_name = models.CharField(max_length=200, null=True, blank=True)
+    state_manager_name = models.CharField(max_length=200, null=True, blank=True)
+    central_manager_name = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return f"Claim Report - {self.claim_number}"
+    
+
+class HDCClosureReport(models.Model):
+    claim_no = models.CharField(max_length=50, null=True, blank=True)
+    nol = models.CharField(max_length=50, null=True, blank=True)  # Nature of Loss
+    policy_details = models.TextField(null=True, blank=True)
+    insured_name = models.CharField(max_length=100, null=True, blank=True)
+    hospital_name = models.CharField(max_length=100, null=True, blank=True)
+    doj = models.DateField(null=True, blank=True)  # Date of Journey
+    doa = models.DateField(null=True, blank=True)  # Date of Admission
+    dod = models.DateField(null=True, blank=True)  # Date of Discharge
+    diagnosis = models.TextField(null=True, blank=True)
+    trigger = models.TextField(null=True, blank=True)
+    date_of_allocation = models.DateField(null=True, blank=True)
+    date_of_closure = models.DateField(null=True, blank=True)
+    closure_tat = models.IntegerField(null=True, blank=True)  # Turnaround Time in days
+    case_introduction = models.TextField(null=True, blank=True)
+    insured_part_details = models.TextField(null=True, blank=True)
+    hospital_part_details = models.TextField(null=True, blank=True)
+    others = models.TextField(null=True, blank=True)
+    discrepancy_findings = models.TextField(null=True, blank=True)
+    recommendation = models.TextField(null=True, blank=True)
+    ground_of_rejection = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"HDC Closure Report - {self.claim_no or 'Unknown'}"
+
+
+class ICLMClosureReport(models.Model): # LOJ
+    # Insured Information
+    insured_name = models.CharField(max_length=255)
+    policy_no = models.CharField(max_length=50)
+    claim_no = models.CharField(max_length=50)
+    sum_insured = models.DecimalField(max_digits=12, decimal_places=2)
+    policy_inception = models.DateField(null=True, blank=True)
+    nature_of_loss = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+
+    # Recommendation
+    iclm_recommendation = models.CharField(max_length=50, default="Payable")
+
+    # Insured Visit Details
+    insured_details = models.TextField()
+    insured_address = models.TextField()
+    insured_mobile = models.CharField(max_length=15)
+    insured_statement = models.TextField(blank=True, null=True)
+
+    # Employment Details
+    employer_name = models.CharField(max_length=255)
+    employer_address = models.TextField()
+    designation = models.CharField(max_length=255)
+    nature_of_joining = models.CharField(max_length=255)
+    employment_period = models.CharField(max_length=255)
+
+    # PF Details
+    pf_details = models.TextField(null=True, blank=True)
+
+    # Bank Account Details
+    bank_statement_downloaded_on = models.DateField(null=True, blank=True)
+    last_salary_credited_on = models.DateField(null=True, blank=True)
+
+    # Reason for Loss of Job
+    reason_for_loss_of_job = models.TextField(blank=True, null=True)
+
+    # Conclusion
+    conclusion = models.TextField()
+
+    # Intimation and Closure Dates
+    date_of_intimation = models.DateField(null=True, blank=True)
+    date_of_closure = models.DateField(null=True, blank=True)
+
+    # TAT and Manager Details
+    central_tat_days = models.IntegerField(null=True, blank=True)
+    state_manager_name = models.CharField(max_length=255)
+    central_manager_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"ICLM Closure Report - {self.claim_no}"
+
+class SecureMindCriticalIllnessReport(models.Model):    #SMC
+    # Insured Information
+    insured_name = models.CharField(max_length=255)
+    policy_no = models.CharField(max_length=50)
+    claim_no = models.CharField(max_length=50)
+    sum_insured = models.DecimalField(max_digits=12, decimal_places=2)
+    policy_inception = models.DateField(null=True, blank=True)
+    nature_of_loss = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+
+    # Recommendation
+    iclm_recommendation = models.CharField(max_length=50, choices=[("Repudiate", "Repudiate"), ("Payable", "Payable"), ("Query", "Query")])
+
+    # Insured Visit Details
+    insured_age_sex = models.CharField(max_length=50)
+    insured_address = models.TextField()
+    insured_mobile = models.CharField(max_length=15)
+
+    # CI Event Details
+    ci_event_narration = models.TextField(blank=True, null=True)
+    past_history_treatment = models.TextField(blank=True, null=True)
+    ci_details = models.TextField(blank=True, null=True)
+
+    # Employment Details
+    employer_name = models.CharField(max_length=255)
+    employer_address = models.TextField()
+    ghi_policy = models.CharField(max_length=255, blank=True, null=True)
+    industry_check = models.CharField(max_length=255, blank=True, null=True)
+    medical_leave_details = models.TextField(blank=True, null=True)
+
+    # Other Insurance Policy
+    other_policy_details = models.TextField(blank=True, null=True)
+    ucv = models.CharField(max_length=255, blank=True, null=True)
+
+    # Treating Doctor Visit
+    treating_doctor_name = models.CharField(max_length=255)
+    treating_doctor_designation = models.CharField(max_length=255)
+    treating_doctor_registration = models.CharField(max_length=50, blank=True, null=True)
+    treating_hospital_name = models.CharField(max_length=255)
+
+    detailed_narration_of_ci_event = models.CharField(max_length=255)
+    details_of_past_history = models.CharField(max_length=255)
+    details_of_ci = models.CharField(max_length=255)
+
+    doctor_details = models.TextField()
+
+    # Hospitalization Details
+    first_hospital_name = models.CharField(max_length=255)
+    first_hospital_city = models.CharField(max_length=255)
+    first_doa = models.DateField(null=True, blank=True)
+    first_dod = models.DateField(null=True, blank=True)
+    first_diagnosis = models.TextField(blank=True, null=True)
+    first_icp_findings = models.TextField(blank=True, null=True)
+    second_hospital_name = models.CharField(max_length=255, blank=True, null=True)
+    second_doa = models.DateField(null=True, blank=True)
+    second_dod = models.DateField(null=True, blank=True)
+    second_diagnosis = models.TextField(blank=True, null=True)
+    second_icp_findings = models.TextField(blank=True, null=True)
+
+    #OPD Details
+    opd_details = models.TextField(blank=True, null=True)
+
+    # Investigation Details
+    investigation_done = models.TextField(blank=True, null=True)
+
+    # Conclusion
+    conclusion = models.TextField(blank=True, null=True)
+
+    # Intimation and Closure Dates
+    date_of_intimation = models.DateField(null=True, blank=True)
+    date_of_closure = models.DateField(null=True, blank=True)
+
+    # TAT and Manager Details
+    central_tat_days = models.IntegerField(null=True, blank=True)
+    state_manager_name = models.CharField(max_length=255)
+    investigator_name = models.CharField(max_length=255)
+    central_manager_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Critical Illness Report - {self.claim_no}"
