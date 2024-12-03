@@ -7,6 +7,9 @@ from .serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSeria
 from . models import Visit, LabVisit, HospitalVisit, PharmacyVisit
 
 from Question.models import Question
+from Case.models import Case
+
+from Case.serializers import CaseSerializers
 
 class VisitCreationViewSet(viewsets.ViewSet):
     
@@ -27,27 +30,39 @@ class VisitCreationViewSet(viewsets.ViewSet):
         investigator_id = request.data.get('investigator_id')
         case_id = request.data.get('case_id')
 
-        if not investigator_id or not case_id:
-            return Response({"error": "investigator_id and case_id are required."}, status=400)
-        
-        try:
-            visits = Visit.objects.filter(investigator_id=investigator_id, case_id=case_id)
-            
-            if not visits:
-                return Response({"error": "No visits found for the given investigator_id and case_id."}, 
-                                status=status.HTTP_400_BAD_REQUEST)
-            
-            visit_serializer = VisitSerializer(visits, many=True)
-            visit_data = visit_serializer.data
+        # Ensure case_id is provided
+        if not case_id:
+            return Response({"error": "case_id is required."}, status=400)
 
+        try:
+            # If both investigator_id and case_id are provided, filter by both
+            if investigator_id:
+                visits = Visit.objects.filter(investigator_id=investigator_id, case_id=case_id)
+            else:
+                # If only case_id is provided, retrieve all visits for the case_id
+                print("case id is", case_id)
+                visits = Visit.objects.filter(case_id=case_id)
+                print("visits", visits)
+
+            if not visits and investigator_id:
+                return Response({"error": "No visits found for the given case_id and investigating officer id."}, 
+                                status=status.HTTP_400_BAD_REQUEST)
+            elif not visits:
+                return Response({"error": "No visits found for the given case_id."}, 
+                                status=status.HTTP_400_BAD_REQUEST)
+
+
+            visit_serializer = VisitSerializer(visits, many=True)
             response_data = []
 
+            # Collect visit details
             for visit in visits:
                 visit_serializer = VisitSerializer(visit)
                 visit_data = visit_serializer.data
 
                 visit_detail = {"visit": visit_data}
 
+                # Check if the visit has an associated HospitalVisit, LabVisit, or PharmacyVisit
                 if HospitalVisit.objects.filter(visit_id=visit.visit_id).exists():
                     hospital_visit = HospitalVisit.objects.get(visit_id=visit.visit_id)
                     hospital_visit_serializer = HospitalVisitSerializer(hospital_visit)
@@ -55,10 +70,8 @@ class VisitCreationViewSet(viewsets.ViewSet):
                     visit_detail["visit_type"]["visit_type"] = "Hospital"
 
                     questions_ids_lst = list(hospital_visit_serializer.data["questions"].values())
-                    
-                    if len(questions_ids_lst) > 0:
+                    if questions_ids_lst:
                         questions = self.get_questions_from_id(questions_ids_lst)
-
                         visit_detail["visit_type"]["questions"] = questions
 
                 elif LabVisit.objects.filter(visit_id=visit.visit_id).exists():
@@ -68,8 +81,7 @@ class VisitCreationViewSet(viewsets.ViewSet):
                     visit_detail["visit_type"]["visit_type"] = "Lab"
 
                     questions_ids_lst = list(lab_visit_serializer.data["questions"].values())
-                    
-                    if len(questions_ids_lst) > 0:
+                    if questions_ids_lst:
                         questions = self.get_questions_from_id(questions_ids_lst)
                         visit_detail["visit_type"]["questions"] = questions
 
@@ -80,8 +92,7 @@ class VisitCreationViewSet(viewsets.ViewSet):
                     visit_detail["visit_type"]["visit_type"] = "Pharmacy"
 
                     questions_ids_lst = list(pharmacy_visit_serializer.data["questions"].values())
-                    
-                    if len(questions_ids_lst) > 0:
+                    if questions_ids_lst:
                         questions = self.get_questions_from_id(questions_ids_lst)
                         visit_detail["visit_type"]["questions"] = questions
 
@@ -90,8 +101,10 @@ class VisitCreationViewSet(viewsets.ViewSet):
 
                 response_data.append(visit_detail)
 
-            return Response(response_data, status=status.HTTP_200_OK)      
+            return Response(response_data, status=status.HTTP_200_OK)
 
         except Exception as ex:
             return Response({"error": str(ex)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
