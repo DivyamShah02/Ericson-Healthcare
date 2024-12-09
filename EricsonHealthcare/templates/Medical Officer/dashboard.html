@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ericson Healthcare - Dashboard</title>
+
+    <!-- Import BootStrap CSS Library -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Import Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+
+    <!-- Import FontAwsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Import Wow Animation CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/loader.css">
+
+</head>
+
+<body>
+    <div id="spinner" class="spinner-container p-2">
+        <div class="spinner"></div>
+        <!-- <div id="spinner-text" class="loading-text text-center">loading!</div> -->
+    </div>
+
+    <div id="main-content" class="blur">
+        <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <i class="fa fa-circle-user fa-xl"></i>
+                <div class="mx-auto p-0" style="font-size: 18px;"><b>ERICSON HEALTHCARE</b></div>
+                <i class="fa fa-bell fa-xl me-2"></i>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <i class="fa fa-bars fa-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><b>Ericson Healthcare</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div>
+                    <div class="eh-menu-item-active p-3 py-2 mb-2 text-start">
+                        <i class="fa fa-home fa-md me-2"></i>Dashboard
+                    </div>
+
+                    <div class="eh-menu-item p-3 py-2 mb-2 text-start">
+                        <i class="fa fa-chart-line fa-md me-2"></i>Report
+                    </div>
+
+                    <div class="eh-menu-item p-3 py-2 mb-2 text-start">
+                        <i class="fa-regular fa-circle-user fa-md me-2"></i>Account
+                    </div>
+                    <hr>
+
+                    <div class="eh-menu-item p-3 py-2 mb-2 text-start">
+                        <i class="fa fa-arrow-right-from-bracket fa-md me-2"></i>Log Out
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5 pt-3">
+            <div class="text-start mt-3 mb-2">
+                <h3 class="eh-text-blue-primary"><b>Hello Divyam</b></h3>
+                <small class="m-0 eh-small">Dashboard</small>
+            </div>
+
+            <div id="scrollable" class="dashboard-scroll-container">
+                <div class="dashboard-main-card p-1 text-center" style="width: 7rem;">
+                    <div class="py-4 pb-4 text-center dashboard-card">
+                        <i class="fa fa-file-invoice fa-xl mb-4 eh-text-blue-primary" style="font-size: 35px;"></i>
+                        <h6 class="m-0 mt-2">Total Cases</h6>
+                        <h5 class="m-0 mt-2 eh-text-blue-primary"><b>150</b></h5>
+                    </div>
+                </div>
+
+                <div class="dashboard-main-card p-1 text-center" style="width: 7rem;">
+                    <div class="py-4 pb-4 text-center dashboard-card">
+                        <i class="fa fa-file-invoice fa-xl mb-4 eh-text-blue-primary" style="font-size: 35px;"></i>
+                        <h6 class="m-0 mt-2">InProgress</h6>
+                        <h5 class="m-0 mt-2 eh-text-blue-primary"><b>45</b></h5>
+                    </div>
+                </div>
+
+                <div class="dashboard-main-card p-1 text-center" style="width: 7rem;">
+                    <div class="py-4 pb-4 text-center dashboard-card">
+                        <i class="fa fa-file-invoice fa-xl mb-4 eh-text-blue-primary" style="font-size: 35px;"></i>
+                        <h6 class="m-0 mt-2">Closed</h6>
+                        <h5 class="m-0 mt-2 eh-text-blue-primary"><b>80</b></h5>
+                    </div>
+                </div>
+
+                <div class="dashboard-main-card p-1 text-center" style="width: 7rem;">
+                    <div class="py-4 pb-4 text-center dashboard-card">
+                        <i class="fa fa-file-invoice fa-xl mb-4 eh-text-blue-primary" style="font-size: 35px;"></i>
+                        <h6 class="m-0 mt-2">Pending</h6>
+                        <h5 class="m-0 mt-2 eh-text-blue-primary"><b>15</b></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-dots-container">
+                <!-- Dots will be added dynamically -->
+            </div>
+
+            <div class="my-4">
+                <small class="eh-small">Recent Cases</small>
+                <div class="mt-3">
+                    <div class="d-flex align-items-center px-3 ps-2 case-list-card py-3 mb-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-danger"></i> &nbsp;&nbsp;<b>Case #02658</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <div class="d-flex align-items-center px-3 ps-2 case-list-card py-3 mb-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-danger"></i> &nbsp;&nbsp;<b>Case #02659</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <div class="d-flex align-items-center px-3 ps-2 case-list-card py-3 mb-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-danger"></i> &nbsp;&nbsp;<b>Case #02660</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <div class="d-flex align-items-center px-3 ps-2 case-list-card py-3 mb-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-danger"></i> &nbsp;&nbsp;<b>Case #02661</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mt-4 py-4 pt-2 eh-bg-blue-primary text-white">
+            <div class="container">
+                <small class="eh-small-white">All Cases</small>
+                <div class="input-group my-2">
+                    <input type="text" class="form-control dark-input" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-light" type="button" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"><i class="fa fa-magnifying-glass"></i></button>
+                    </div>
+                  </div>
+                <div class="pt-3">
+                    <div class="d-flex align-items-center px-3 ps-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-danger"></i> &nbsp;&nbsp;<b>Case #02658</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <hr class="p-0 my-1 text-white">
+
+                    <div class="d-flex align-items-center px-3 ps-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-danger"></i> &nbsp;&nbsp;<b>Case #02658</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <hr class="p-0 my-1 text-white">
+
+                    <div class="d-flex align-items-center px-3 ps-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-success"></i> &nbsp;&nbsp;<b>Case #02658</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <hr class="p-0 my-1 text-white">
+
+                    <div class="d-flex align-items-center px-3 ps-2" style="cursor: pointer;">
+                        <div class="col-8 text-start">
+                            <h6 class="m-0">
+                                <i class="fa fa-circle fa-sm text-success"></i> &nbsp;&nbsp;<b>Case #02658</b>
+                            </h6>
+                        </div>
+                        <div class="col-4 text-end"><i class="fa fa-chevron-right fa-lg" id="card-1-icon"></i></div>
+                    </div>
+                    <hr class="p-0 my-1 text-white">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import BootStrap JavaScript Library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Import Wow Animation JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+    <script src="../static/js/loader.js"></script>
+
+    <script>
+        window.onload = function () {
+            toggle_loader();
+        };
+    </script>
+
+    <script>
+        const scrollable = document.getElementById('scrollable');
+        const dotsContainer = document.querySelector('.dashboard-dots-container');
+        const cards = document.querySelectorAll('.dashboard-main-card');
+
+        // Create dots based on the number of cards
+        cards.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dashboard-dot');
+            if (index === 0) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dashboard-dot');
+
+        // Update dots on scroll
+        scrollable.addEventListener('scroll', () => {
+            const scrollLeft = scrollable.scrollLeft;
+            const scrollWidth = scrollable.scrollWidth - scrollable.clientWidth;
+
+            // Calculate the active dot
+            const activeIndex = Math.round(
+                (scrollLeft / scrollWidth) * (dots.length - 1)
+            );
+
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
