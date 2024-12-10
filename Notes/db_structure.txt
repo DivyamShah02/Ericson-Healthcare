@@ -82,9 +82,9 @@ Table CaseDetails {
   coordinator_id integer // Disscuss
   claim_number varchar
   
-  insaurance_company varchar //link to insaurancy company
-  type_of_case varchar //link to insaurancy company type of case
-  rate varchar //link to insaurancy company type of case rate
+  insaurance_company varchar //link to insurance company
+  type_of_case varchar //link to insurance company type of case
+  rate varchar //link to insurance company type of case rate
 
   medical_officer_remarks textfield
   status_of_claim select // Pass / reject

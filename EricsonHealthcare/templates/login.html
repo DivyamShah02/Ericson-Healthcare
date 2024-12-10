@@ -22,10 +22,21 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../static/css/style.css">
-        <link rel="stylesheet" href="../static/css/loader.css">
-    
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/loader.css">
+        {% load static %}
+        <style>
+            .eh-background-image {
+                background-image: url("{% static 'images/background.png' %}");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 100vw;
+                height: 100vh;
+            }
+        </style>
     </head>
+
 
 <body>
     <div id="spinner" class="spinner-container p-2">
@@ -33,17 +44,11 @@
         <!-- <div id="spinner-text" class="loading-text text-center">loading!</div> -->
     </div>
 
-    <div id="main-content" class="blur" style="
-        background-image: url('file:///C:/Users/Divyam%20Shah/Downloads/rb_2148833155.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100vw;
-        height: 100vh;">
+    <div id="main-content" class="blur eh-background-image">
         <div class="d-flex justify-content-center align-items-center vh-100">
             <div class="container p-3">
                 <div class="mb-5 text-center">
-                    <img src="C:\Users\Divyam Shah\OneDrive\Desktop\Dynamic Labz\Clients\Clients\Ericson Healthcare\Ericson-Healthcare\FrontEnd_designs\static\images\ericson_logo.jpg" 
+                    <img src="\static\images\ericson_logo.jpg" 
                     alt="" class="img-fluid" style="mix-blend-mode: multiply;">
                 </div>
                 <div class="p-3">
@@ -94,7 +99,7 @@
     <!-- Import Wow Animation JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-    <script src="../static/js/loader.js"></script>
+    <script src="/static/js/loader.js"></script>
 
     <script>
         window.onload = function () {
