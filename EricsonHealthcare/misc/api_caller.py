@@ -12,7 +12,7 @@ def create_user():
         'email': 'divyamshah1234@gmail.com',
         'city': 'Ahmedabad',
         'state': 'Gujarat',
-        'role': 'investigator'
+        'role': 'admin',
     }
 
     response = requests.post(url, data=data)
@@ -30,11 +30,29 @@ def get_user():
 
     return response
 
+def login_user():
+    url = base_url + 'login-api/'
+
+    email = 'divyamshah1234@gmail.com'
+    password = 'divym'
+
+    data = {
+        'email':email,
+        'password':password,
+    }
+
+    response = requests.post(url, data=data)
+
+    return response
+
 
 if __name__ == '__main__':
-    create_user_respone = create_user()
-    print(create_user_respone.text)
+    # create_user_respone = create_user()
+    # print(create_user_respone.text)
 
     # get_user_respone = get_user()
     # print(get_user_respone.text)
+
+    login_user_respone = login_user()
+    print(login_user_respone.text)
 
