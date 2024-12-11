@@ -102,7 +102,7 @@
                                 </div>                            
 
                             
-                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insaurancy Company</div>
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
                                 <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">ICICI Lombard</div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
@@ -122,7 +122,7 @@
                                     <hr class="p-0 my-1 visit-card-eh-hr">
                                 </div> 
                                 
-                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insaurancy Company</div>
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
                                 <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">ICICI Lombard</div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
@@ -149,7 +149,7 @@
                             <div class="p-3 mt-3 visit-card">
                                 <div class="d-flex" id="card-1" onclick="toggleCard(this)" style="cursor: pointer;">
                                     <div class="col-10 text-start">
-                                        <h5 class="m-0">Hospital Visit <b class="text-danger">(2H)</b></h5>
+                                        <h5 class="m-0">Hospital Visit <b class="text-danger">(24H)</b></h5>
                                     </div>
                                     <div class="col-2 text-end"><i class="fa fa-plus" id="card-1-icon"></i></div>
                                 </div>
@@ -261,22 +261,22 @@
                                                         <div class="p-3 my-2 question-card">
                                                             <label class="form-label eh-label m-0"><b>Q1)</b> What are the complaints presented by you during the admission at SUNFLOWER WOMENS HOSPITAL?</label>
                                                             <hr class="m-1">
-                                                            <input type="text" class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
+                                                            <input type="text" disabled class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
                                                         </div>
                                                         <div class="p-3 my-2 question-card">
                                                             <label class="form-label eh-label m-0"><b>Q2)</b> Since when you were suffering from the same?</label>
                                                             <hr class="m-1">
-                                                            <input type="text" class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
+                                                            <input type="text" disabled class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
                                                         </div>
                                                         <div class="p-3 my-2 question-card">
                                                             <label class="form-label eh-label m-0"><b>Q3)</b> Where were you consulting for the same problem before this admission? Kindly provide a copy of the previous consultation paper?</label>
                                                             <hr class="m-1">
-                                                            <input type="text" class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
+                                                            <input type="text" disabled class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
                                                         </div>
                                                         <div class="p-3 my-2 question-card">
                                                             <label class="form-label eh-label m-0"><b>Q4)</b> Please mention the reason for selecting hospital </label>
                                                             <hr class="m-1">
-                                                            <input type="text" class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
+                                                            <input type="text" disabled class="form-control" id="input_id" name="input_id" placeholder="Enter answer">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -292,21 +292,43 @@
                                         <div class="mb-2"></div> <!-- To be removed after adding logic -->
                                         
                                         <div class="col-12">
-                                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100">
-                                                <b>Submit</b>
+                                            <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#issueVisit1Modal">
+                                                <b>Raise an issue</b>
                                             </button>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="issueVisit1Modal" tabindex="-1" aria-labelledby="issueVisit1ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="issueVisit1ModalLabel">Issue in Hospital Visit</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="eh-head">What is the issue</h5>
+                                                    <div class="">
+                                                        <textarea class="form-control remark-text-area" id="textarea_id" name="textarea_id" rows="5"
+                                                            placeholder="Enter Issue"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover">Submit</button>
+                                                </div>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="p-3 mt-3 visit-card">
                                 <div class="d-flex" id="card-2" onclick="toggleCard(this)" style="cursor: pointer;">
-                                    <div class="col text-start">
-                                        <h5 class="m-0">Chemist Visit</h5>
+                                    <div class="col-10 text-start">
+                                        <h5 class="m-0">Chemist Visit <b class="text-danger">(2H)</b></h5>
                                     </div>
-                                    <div class="col text-end"><i class="fa fa-plus" id="card-2-icon"></i></div>
+                                    <div class="col-2 text-end"><i class="fa fa-plus" id="card-1-icon"></i></div>
                                 </div>
                                 <div style="display: none;" id="card-2-detail">
                                     <hr>
@@ -384,14 +406,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-12">
-                                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100">
-                                                <b>Start investigation</b>
-                                            </button>
-                                        </div>
-
-                                        <div class="mb-2"></div> <!-- To be removed after adding logic -->
                                         
                                         <div class="col-12">
                                             <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100">

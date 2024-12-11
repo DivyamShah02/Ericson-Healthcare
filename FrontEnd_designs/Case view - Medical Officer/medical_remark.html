@@ -102,7 +102,7 @@
                                 </div>                            
 
                             
-                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insaurancy Company</div>
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
                                 <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">ICICI Lombard</div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
@@ -122,7 +122,7 @@
                                     <hr class="p-0 my-1 visit-card-eh-hr">
                                 </div>
 
-                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insaurancy Company</div>
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
                                 <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">ICICI Lombard</div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
@@ -246,6 +246,12 @@
                                             <hr class="p-0 my-1 visit-card-eh-hr">
                                         </div>
 
+                                        <div class="col-6 text-start eh-key">Investigating Officer</div>
+                                        <div class="col-6 text-end text-lg-start eh-value">Divyam Shah</div>
+                                        <div class="col-12 px-3">
+                                            <hr class="p-0 my-1 visit-card-eh-hr">
+                                        </div>
+
                                         <div class="col-12 mt-2">
                                             <div class="mb-3">
                                                 <div class="select-question-card p-2">
@@ -288,9 +294,32 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100">
+                                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" data-bs-toggle="modal" data-bs-target="#visit1Modal">
                                                 <b>Re-investigation</b>
                                             </button>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="visit1Modal" tabindex="-1" aria-labelledby="visit1ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="visit1ModalLabel">Re-Investigate Hospital Visit</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="eh-head">Reason for Re-investigation</h5>
+                                                    <div class="">
+                                                        <textarea class="form-control remark-text-area" id="textarea_id" name="textarea_id" rows="5"
+                                                            placeholder="Enter Reason"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover">Re-investigate</button>
+                                                </div>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -342,6 +371,12 @@
                                         <div class="col-12 px-3">
                                             <hr class="p-0 my-1 visit-card-eh-hr">
                                         </div>
+
+                                        <div class="col-6 text-start eh-key">Investigating Officer</div>
+                                        <div class="col-6 text-end text-lg-start eh-value">Divyam Shah</div>
+                                        <div class="col-12 px-3">
+                                            <hr class="p-0 my-1 visit-card-eh-hr">
+                                        </div>
                                         
                                         <div class="col-12 mt-2">
                                             <div class="mb-3">
@@ -385,9 +420,32 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100">
+                                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" data-bs-toggle="modal" data-bs-target="#visit2Modal">
                                                 <b>Re-investigation</b>
                                             </button>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="visit2Modal" tabindex="-1" aria-labelledby="visit2ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="visit2ModalLabel">Re-Investigate Chemist Visit</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="eh-head">Reason for Re-investigation</h5>
+                                                    <div class="">
+                                                        <textarea class="form-control remark-text-area" id="textarea_id" name="textarea_id" rows="5"
+                                                            placeholder="Enter Reason"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover">Re-investigate</button>
+                                                </div>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
