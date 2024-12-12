@@ -110,7 +110,7 @@ class ListUsersViewSet(viewsets.ViewSet):
                         }, status=status.HTTP_200_OK
                     )
 
-class LoginApiView(viewsets.ViewSet):
+class LoginApiViewSet(viewsets.ViewSet):
     def create(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
@@ -177,3 +177,37 @@ class LoginApiView(viewsets.ViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+class DashboardApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        user = request.user
+
+        if not user.is_authenticated:
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": True,
+                        "data":None,
+                        "error": None
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        print(user.name)
+        data = {
+            'id': user.id,
+            'role': user.role,
+            'user_id': user.user_id,
+            'name': user.name,
+            'contact_number': user.contact_number,
+            'city': user.city,
+            'state': user.state,
+        }
+
+        return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "data":data,
+                    "error": None
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
