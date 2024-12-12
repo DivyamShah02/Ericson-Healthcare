@@ -6,13 +6,13 @@ def create_user():
     url = base_url + 'user/'
 
     data = {
-        'name': 'Divyam Shah',
+        'name': 'Divyam Coordinator',
         'password':'divyam',
         'contact_number': '9054413199',
-        'email': 'divyamshah1234@gmail.com',
+        'email': 'coordinator@gmail.com',
         'city': 'Ahmedabad',
         'state': 'Gujarat',
-        'role': 'admin',
+        'role': 'coordinator',
     }
 
     response = requests.post(url, data=data)
@@ -47,11 +47,11 @@ def login_user():
 
 
 if __name__ == '__main__':
-    # create_user_respone = create_user()
-    # print(create_user_respone.text)
+    create_user_respone = create_user()
+    print(create_user_respone.text)
 
-    get_user_respone = get_user()
-    print(get_user_respone.text)
+    # get_user_respone = get_user()
+    # print(get_user_respone.text)
 
     # login_user_respone = login_user()
     # print(login_user_respone.text)

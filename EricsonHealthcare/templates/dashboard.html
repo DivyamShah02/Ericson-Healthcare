@@ -120,10 +120,49 @@
 
             <div class="my-3" style="display: none;" id="add_case_btn">
                 <button type="button"
-                    class="btn btn-primary eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center py-2">
+                    class="btn eh-btn-blue-primary w-100 d-flex justify-content-between align-items-center py-2"
+                    data-bs-toggle="modal" data-bs-target="#addCaseModal">
                     <b class="mx-auto">Add Case</b>
                     <i class="fa fa-plus fa-xl"></i>
                 </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="addCaseModal" tabindex="-1" aria-labelledby="addCaseModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addCaseModalLabel">Add New Case</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="eh-head">Upload New Case document</h5>
+                            <div class="mb-3">
+                                <!-- <label for="file_upload_id" class="form-label eh-label">File Upload</label> -->
+                                <div class="p-5 text-center dark-input" id="upload_box" onclick="document.getElementById('newCaseDocUploadInput').click()"
+                                  style="border-radius: 10px; cursor: pointer;">
+
+                                  <i class="fa fa-cloud-arrow-up fa-xl"></i>
+                                  <p class="p-0 m-0" id="upload_input_text">Click to upload</p>
+                                  <input type="file" id="newCaseDocUploadInput" hidden>
+
+                                </div>
+                            </div>
+                            <div class="mb-3" id="coordinator_select_div" style="display: none;">
+                                <label for="coordinator_select"
+                                    class="form-label eh-label">Select Coordinator</label>
+                                <select class="form-select dark-input" aria-label="select"
+                                    id="coordinator_select" name="coordinator_select">
+                                    <option value="">Select Coordinator</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover" onclick="uploadNewCase()">Add Case</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
 
             <div class="my-4">
@@ -257,6 +296,11 @@
                     document.getElementById('account_name').innerText = UserData.name;
                     if (validRoles.includes(UserData.role)) {
                         document.getElementById('add_case_btn').style.display = '';
+
+                        if (UserData.role == 'hod'){
+                            document.getElementById('coordinator_select_div').style.display = '';
+                            await getCoordinatorDetails();
+                        }
                         
                     }
 
@@ -267,6 +311,68 @@
                 document.getElementById('error-unexpected').style.display = '';
             }
         }
+
+        async function getCoordinatorDetails() {
+            const Params = {
+                user_role: "coordinator",
+            };
+
+            const url = "{% url 'list_users_by_role-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                console.log("GET User Success:", result);
+                const selectElement = document.getElementById('coordinator_select');
+
+                // Loop through the list of dictionaries
+                result.data.users.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.user_id;  // Set the value from the dictionary
+                    option.textContent = item.name;  // Set the text from the dictionary
+                    selectElement.appendChild(option);  // Append the option to the select element
+                });
+
+            } else {
+                console.error("GET User Failed:", result);
+            }
+        }
+
+
+        document.getElementById('newCaseDocUploadInput').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // Get the first selected file
+
+            if (file) {
+                document.getElementById('upload_input_text').innerText = file.name;
+                document.getElementById('upload_box').style.border = '2px solid var(--eh-blue-primary)';
+            }
+        });
+
+        async function uploadNewCase() {
+            let file_ele = document.getElementById('newCaseDocUploadInput');
+            let file = file_ele.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                let coordinator_id = document.getElementById('coordinator_select').value;
+                if (coordinator_id !== "") {
+                    formData.append('coordinator_id', coordinator_id);
+                }
+                
+                const bodyData = formData;
+
+                const url = "{% url 'case-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}", true);
+                if (success) {
+                    console.log("Login User Success:", result);
+                } else {
+                    console.error("Login User Failed:", result);
+                }
+
+            }
+
+        }
+
 
     </script>
 
