@@ -124,7 +124,7 @@
                 console.log("Login User Success:", result);
 
                 if (result.success){
-
+                    window.location.href=`{% url 'dashboard-list' %}`;
                 }
                 
                 else if (result.user_does_not_exist) {

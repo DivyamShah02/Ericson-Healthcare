@@ -9,3 +9,6 @@ class LoginViewSet(viewsets.ViewSet):
     def list(self, request):
         return render(request, 'login.html')
 
+class DashboardViewSet(viewsets.ViewSet):
+    def list(self, request):
+        return render(request, 'dashboard.html')

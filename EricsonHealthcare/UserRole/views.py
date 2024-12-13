@@ -6,7 +6,7 @@ from rest_framework.exceptions import NotFound, ParseError
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 
-from .serializers import UserDetailSerializer, ListCoordinatorsSerializer
+from .serializers import UserDetailSerializer
 from .models import UserDetail
 
 import random
@@ -91,26 +91,36 @@ class UserCreationViewSet(viewsets.ViewSet):
                 return user_id
 
 class ListUsersViewSet(viewsets.ViewSet):
-    
     def list(self, request):
         user_role = request.query_params.get('user_role')
-        user_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel']
+        user_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel', 'admin']
 
         if user_role not in user_roles:
-            return Response({"detail": "Invalid User Role Name"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                "success": False,
+                "invalid_user_roles": True,
+                "data": None,
+            }, status=status.HTTP_400_BAD_REQUEST)
 
         user_data = UserDetail.objects.filter(role=user_role)
-        user_serializer = ListCoordinatorsSerializer(user_data, many=True)
+        user_serializer = UserDetailSerializer(user_data, many=True)
+
         user_serializer_data = user_serializer.data
         len_users = len(user_serializer_data)
 
-        return Response(
-                        {'len_users': len_users,
-                        'data': user_serializer.data,
-                        }, status=status.HTTP_200_OK
-                    )
+        data = {
+            "len_users": len_users,
+            "users": user_serializer_data
+        }
+    
+        return Response({
+                "success": True,
+                "invalid_user_roles": False,
+                "data": data,
+            }, status=status.HTTP_200_OK)
 
-class LoginApiView(viewsets.ViewSet):
+
+class LoginApiViewSet(viewsets.ViewSet):
     def create(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
@@ -177,3 +187,37 @@ class LoginApiView(viewsets.ViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+class DashboardApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        user = request.user
+
+        if not user.is_authenticated:
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": True,
+                        "data":None,
+                        "error": None
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+        data = {
+            'id': user.id,
+            'role': user.role,
+            'user_id': user.user_id,
+            'name': user.name,
+            'contact_number': user.contact_number,
+            'city': user.city,
+            'state': user.state,
+        }
+
+        return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "data":data,
+                    "error": None
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
