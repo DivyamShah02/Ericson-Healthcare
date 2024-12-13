@@ -2,14 +2,17 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.exceptions import NotFound, ParseError
-from django.shortcuts import get_object_or_404, render, redirect
 
-from .serializers import UserDetailSerializer, ListCoordinatorsSerializer
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import authenticate, login
+
+from .serializers import UserDetailSerializer
 from .models import UserDetail
 
 import random
 import string
 
+logger = None
 
 class UserCreationViewSet(viewsets.ViewSet):
     def create(self, request):
@@ -28,6 +31,7 @@ class UserCreationViewSet(viewsets.ViewSet):
             'investigator': 'IO',
             'medical_officer': 'MO',
             'data_entry_personnel': 'DE',
+            'admin': 'AD',
         }
 
         # Validate role and required fields
@@ -41,18 +45,31 @@ class UserCreationViewSet(viewsets.ViewSet):
         # Generate a unique 10-digit user_id with role code
         user_id = self.generate_user_id(role_code=role_codes[role])
 
-        # Create the new user instance
-        user = UserDetail.objects.create_user(
-            user_id=user_id,
-            username = user_id,
-            password = password,
-            name=name,
-            contact_number=contact_number,
-            email=email,
-            city=city,
-            state=state,
-            role=role,
-        )
+        if str(role_codes[role]) == 'AD':
+            user = UserDetail.objects.create_superuser(
+                user_id=user_id,
+                username = user_id,
+                password = password,
+                name=name,
+                contact_number=contact_number,
+                email=email,
+                city=city,
+                state=state,
+                role=role,
+            )
+        
+        else:
+            user = UserDetail.objects.create_user(
+                user_id=user_id,
+                username = user_id,
+                password = password,
+                name=name,
+                contact_number=contact_number,
+                email=email,
+                city=city,
+                state=state,
+                role=role,
+            )
         
         # Serialize the created UserDetail instance
         user_detail_serializer = UserDetailSerializer(user)
@@ -75,22 +92,146 @@ class UserCreationViewSet(viewsets.ViewSet):
                 return user_id
 
 class ListUsersViewSet(viewsets.ViewSet):
-    
     def list(self, request):
         user_role = request.query_params.get('user_role')
-        user_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel']
+        user_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel', 'admin']
 
         if user_role not in user_roles:
-            return Response({"detail": "Invalid User Role Name"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                "success": False,
+                "invalid_user_roles": True,
+                "data": None,
+            }, status=status.HTTP_400_BAD_REQUEST)
 
         user_data = UserDetail.objects.filter(role=user_role)
-        user_serializer = ListCoordinatorsSerializer(user_data, many=True)
+        user_serializer = UserDetailSerializer(user_data, many=True)
+
         user_serializer_data = user_serializer.data
         len_users = len(user_serializer_data)
 
-        return Response(
-                        {'len_users': len_users,
-                        'data': user_serializer.data,
-                        }, status=status.HTTP_200_OK
-                    )
+        data = {
+            "len_users": len_users,
+            "users": user_serializer_data
+        }
     
+        return Response({
+                "success": True,
+                "invalid_user_roles": False,
+                "data": data,
+            }, status=status.HTTP_200_OK)
+
+
+class LoginApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        if not email or not password:
+            return Response(
+                {
+                    "success": False,
+                    "user_does_not_exist": False,
+                    "wrong_password": False,
+                    "error": "Email and password are required."
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            user = UserDetail.objects.filter(email=email).first()
+            if not user:
+                return Response(
+                    {
+                        "success": False,
+                        "user_does_not_exist": True,
+                        "wrong_password": False,
+                        "error": None
+                    },
+                    status=status.HTTP_404_NOT_FOUND
+                )
+
+            # Authenticate the user
+            authenticated_user = authenticate(request, username=user.user_id, password=password)
+            if not authenticated_user:
+                return Response(
+                    {
+                        "success": False,
+                        "user_does_not_exist": False,
+                        "wrong_password": True,
+                        "error": None
+                    },
+                    status=status.HTTP_401_UNAUTHORIZED
+                )
+
+            # Login the user
+            login(request, authenticated_user)
+            request.session.set_expiry(30 * 24 * 60 * 60)
+
+            return Response(
+                {
+                    "success": True,
+                    "user_does_not_exist": False,
+                    "wrong_password": False,
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            return Response(
+                {
+                    "success": False,
+                    "user_does_not_exist": False,
+                    "wrong_password": False,
+                    "error": str(e)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class DashboardApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            data = {
+                'id': user.id,
+                'role': user.role,
+                'user_id': user.user_id,
+                'name': user.name,
+                'contact_number': user.contact_number,
+                'city': user.city,
+                'state': user.state,
+            }
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return Response(
+                            {
+                                "success": False,
+                                "user_not_logged_in": True,
+                                "data":None,
+                                "error": e
+                            },
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
