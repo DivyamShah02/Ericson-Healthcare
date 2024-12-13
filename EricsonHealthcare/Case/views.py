@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from .models import Case, CaseDetails
 from .serializers import CaseSerializers, CaseDetailsSerializer
 
+logger = None
 
 class CaseViewSet_old(viewsets.ViewSet):
     
@@ -160,149 +161,177 @@ class CaseDetailsViewSet(viewsets.ViewSet):
 
 class CaseViewSet(viewsets.ViewSet):
     def create(self, request):
-        user = request.user
-
-        if not user.is_authenticated:
-            return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": True,
-                        "user_unathorized": False,
-                        "file_not_attached": False,
-                        "data":None,
-                        "error": None
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-        user_role = user.role
-
-        if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
-            return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": False,
-                        "user_unathorized": True,
-                        "file_not_attached": False,
-                        "data":None,
-                        "error": None
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-
-        if 'file' not in request.FILES:
-            return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": False,
-                        "user_unathorized": False,
-                        "file_not_attached": True,
-                        "data":None,
-                        "error": None
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-        
-        coordinator_id = request.data.get('coordinator_id')
-
-        uploaded_file = request.FILES['file']
-        file_path = self.save_file(uploaded_file)
-
         try:
-            last_case = Case.objects.latest('id')
-            case_id = int(last_case.case_id) + 1
-        
-        except Case.DoesNotExist:
-            case_id = 1000
-        
-        new_case = Case(case_id=case_id)
-        new_case.document_paths = [f"{file_path}"]
-        
-        if user_role == 'hod':
-            new_case.hod_id = user
-            if coordinator_id:
-                new_case.coordinator_id = coordinator_id
+            user = request.user
 
-        elif user_role == 'coordinator':
-            new_case.coordinator_id = user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
-        new_case.save()
+            user_role = user.role
 
-        return Response(
-                {
-                    "success": True,
-                    "user_not_logged_in": False,
-                    "user_unathorized": False,
-                    "file_not_attached": False,
-                    "data":{'case_id':case_id},
-                    "error": None
-                },
-                status=status.HTTP_200_OK
-            )
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+
+            if 'file' not in request.FILES:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            coordinator_id = request.data.get('coordinator_id')
+
+            uploaded_file = request.FILES['file']
+            file_path = self.save_file(uploaded_file)
+
+            try:
+                last_case = Case.objects.latest('id')
+                case_id = int(last_case.case_id) + 1
+            
+            except Case.DoesNotExist:
+                case_id = 1000
+            
+            new_case = Case(case_id=case_id)
+            new_case.document_paths = [f"{file_path}"]
+            
+            if user_role == 'hod':
+                new_case.hod_id = user
+                if coordinator_id:
+                    new_case.coordinator_id = coordinator_id
+
+            elif user_role == 'coordinator':
+                new_case.coordinator_id = user
+
+            new_case.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "file_not_attached": False,
+                        "data":{'case_id':case_id},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
     def list(self, request):
         """
         This view returns a list of cases associated with the current logged-in user.
         """
-        user = request.user
+        try:
+            user = request.user
 
-        if not user.is_authenticated:
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+
+            if user_role == 'hod':
+                cases = Case.objects.filter(hod_id=user)
+
+            elif user_role == 'coordinator':
+                cases = Case.objects.filter(coordinator_id=user)
+
+            elif user_role == 'investigator':
+                pass
+
+            elif user_role == 'medical_officer':
+                cases = Case.objects.filter(medical_officer_id=user)
+
+            elif user_role == 'data_entry_personnel':
+                cases = Case.objects.filter(data_entry_id=user)
+
+            elif user_role == 'admin':
+                pass
+
+            case_data = CaseSerializers(cases, many=True).data
+
+            total_cases = len(case_data)
+            in_progress_case_data = [case_obj for case_obj in case_data if case_obj['case_status'] != 'Complete']
+            recent_cases = in_progress_case_data[0:5]
+            in_progress_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] != 'Complete' and case_obj['case_status'] != 'Creation'])
+            closed_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Complete'])
+            pending_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Creation'])
+
+            data = {
+                'total_cases': total_cases,
+                'in_progress_cases': in_progress_cases,
+                'closed_cases': closed_cases,
+                'pending_cases': pending_cases,
+                'case_data': case_data,
+                'recent_cases': recent_cases
+            }
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
             return Response(
                     {
                         "success": False,
-                        "user_not_logged_in": True,
+                        "user_not_logged_in": False,
                         "data":None,
-                        "error": None
+                        "error": str(ex)
                     },
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
-
-        user_role = user.role
-
-        if user_role == 'hod':
-            cases = Case.objects.filter(hod_id=user)
-
-        elif user_role == 'coordinator':
-            cases = Case.objects.filter(coordinator_id=user)
-
-        elif user_role == 'investigator':
-            pass
-
-        elif user_role == 'medical_officer':
-            cases = Case.objects.filter(medical_officer_id=user)
-
-        elif user_role == 'data_entry_personnel':
-            cases = Case.objects.filter(data_entry_id=user)
-
-        elif user_role == 'admin':
-            pass
-
-        case_data = CaseSerializers(cases, many=True).data
-
-        total_cases = len(case_data)
-        in_progress_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] != 'Complete' and case_obj['case_status'] != 'Creation'])
-        closed_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Complete'])
-        pending_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Creation'])
-
-        data = {
-            'total_cases': total_cases,
-            'in_progress_cases': in_progress_cases,
-            'closed_cases': closed_cases,
-            'pending_cases': pending_cases,
-            'case_data': case_data
-        }
-
-        return Response(
-                {
-                    "success": True,
-                    "user_not_logged_in": False,
-                    "data":data,
-                    "error": None
-                },
-                status=status.HTTP_200_OK
-            )
-
 
     def save_file(self, uploaded_file):
         # Define the base directory to save the files
