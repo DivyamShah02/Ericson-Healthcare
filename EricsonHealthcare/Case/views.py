@@ -100,8 +100,7 @@ class CaseViewSet_old(viewsets.ViewSet):
             return Response({"error": "case_id is required."}, 
                             status=status.HTTP_400_BAD_REQUEST)
 
-
-class CaseDetailsViewSet(viewsets.ViewSet):
+class CaseDetailsViewSet_old(viewsets.ViewSet):
     
     def create(self, request):
         serializer = CaseDetailsSerializer(data=request.data)
@@ -158,6 +157,184 @@ class CaseDetailsViewSet(viewsets.ViewSet):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+class CaseDetailsViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "case_details_not_added": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.GET.get('case_id')
+
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "case_details_not_added": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
+
+            if case_details_obj is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "case_details_not_added": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_details = CaseDetailsSerializer(case_details_obj).data
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "case_details_not_added": False,
+                        "data":case_details,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "case_details_not_added": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+    def create(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.data.get('case_id')
+
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = Case.objects.filter(case_id=case_id).first()
+
+            if case_data is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
+
+            if case_details_obj is None:
+                case_obj = CaseDetails(case_id=case_id)
+            
+            else:
+                case_obj = CaseDetails.objects.get(case_id=case_id)
+            
+            case_obj.coordinator_id = case_data.coordinator_id
+
+            case_obj.claim_number = request.data.get('claim_number')
+            case_obj.doa = request.data.get('doa')
+            case_obj.dod = request.data.get('dod')
+            case_obj.hospital_name = request.data.get('hospital_name')
+            case_obj.city = request.data.get('city')
+            case_obj.state = request.data.get('state')
+            case_obj.claim_value = request.data.get('claim_value')
+            case_obj.diagnosis = request.data.get('diagnosis')
+
+            case_obj.save()
+
+            updated_case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
+            update_case_details = CaseDetailsSerializer(updated_case_details_obj).data
+            
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data":update_case_details,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
 
 class CaseViewSet(viewsets.ViewSet):
     def create(self, request):
@@ -257,6 +434,96 @@ class CaseViewSet(viewsets.ViewSet):
                     )
 
     def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.GET.get('case_id')
+
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_obj = Case.objects.filter(case_id=case_id).first()
+
+            if case_obj is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = CaseSerializers(case_obj).data
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":case_data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "case_details_not_added": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+    def save_file(self, uploaded_file):
+        # Define the base directory to save the files
+        upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/')
+        os.makedirs(upload_dir, exist_ok=True)
+
+        # Generate a unique filename if a file with the same name exists
+        base_name, extension = os.path.splitext(uploaded_file.name)
+        file_name = uploaded_file.name
+        counter = 1
+
+        while os.path.exists(os.path.join(upload_dir, file_name)):
+            file_name = f"{base_name}({counter}){extension}"
+            counter += 1
+
+        # Save the file
+        file_path = os.path.join(upload_dir, file_name)
+        with open(file_path, 'wb') as f:
+            for chunk in uploaded_file.chunks():
+                f.write(chunk)
+
+        # Return the relative file path
+        return os.path.relpath(file_path, settings.MEDIA_ROOT)
+
+class GetAllCaseViewSet(viewsets.ViewSet):
+    def list(self, request):
         """
         This view returns a list of cases associated with the current logged-in user.
         """
@@ -333,25 +600,3 @@ class CaseViewSet(viewsets.ViewSet):
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
 
-    def save_file(self, uploaded_file):
-        # Define the base directory to save the files
-        upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/')
-        os.makedirs(upload_dir, exist_ok=True)
-
-        # Generate a unique filename if a file with the same name exists
-        base_name, extension = os.path.splitext(uploaded_file.name)
-        file_name = uploaded_file.name
-        counter = 1
-
-        while os.path.exists(os.path.join(upload_dir, file_name)):
-            file_name = f"{base_name}({counter}){extension}"
-            counter += 1
-
-        # Save the file
-        file_path = os.path.join(upload_dir, file_name)
-        with open(file_path, 'wb') as f:
-            for chunk in uploaded_file.chunks():
-                f.write(chunk)
-
-        # Return the relative file path
-        return os.path.relpath(file_path, settings.MEDIA_ROOT)

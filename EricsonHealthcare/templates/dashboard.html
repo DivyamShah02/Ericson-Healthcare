@@ -386,7 +386,7 @@
         }
 
         async function getCaseList() {
-            const url = "{% url 'case-api-list' %}?"; // Construct the full URL with query params
+            const url = "{% url 'get-all-case-api-list' %}?"; // Construct the full URL with query params
             const [success, result] = await callApi("GET", url);
             console.log(result);
             if (success) {

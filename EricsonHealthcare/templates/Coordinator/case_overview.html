@@ -335,7 +335,7 @@
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab"
                         tabindex="0">
                         <h3 class="eh-head my-3">Case Overview</h3>
-                        <form action="">
+                        <form action="" id="case_details_form">
                             <div class="mb-3">
                                 <label for="claim_number" class="form-label eh-label">Claim Number</label>
                                 <input type="text" class="form-control dark-input" id="claim_number" name="claim_number"
@@ -817,6 +817,9 @@
 
     <script src="/static/js/process-step.js"></script>
     <script src="/static/js/loader.js"></script>
+    <script src="/static/js/api_caller.js"></script>
+    <script src="/static/js/script.js"></script>
+
 
     <script>
         new WOW().init();
@@ -1150,6 +1153,7 @@
         });
 
         window.onload = function () {
+            getCaseDetails();
             toggle_loader();
             generateCheckboxes(questions);
         };
@@ -1160,6 +1164,102 @@
     <script>
         const caseId = new URLSearchParams(window.location.search).get('case_id');
 
+        async function getCaseData() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    
+                }
+                else {
+
+                }
+            } else {
+                
+            }
+        }
+
+
+        async function getCaseDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    if (result.case_details_not_added) {
+
+                    }
+                    else {
+                        setFormValues(result.data);
+                    }
+                }
+                else {
+
+                }
+            } else {
+                
+            }
+        }
+
+        document.getElementById("case_details_form").addEventListener("submit", async (event) => {
+            toggle_loader();
+            const form = event.target;
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                // Trigger the browser's built-in validation tooltips
+                form.reportValidity();
+                return;
+            }
+
+            let claim_number = document.getElementById('claim_number').value;
+            let doa = document.getElementById('doa').value;
+            let dod = document.getElementById('dod').value;
+            let hospital_name = document.getElementById('hospital_name').value;
+            let city = document.getElementById('city').value;
+            let state = document.getElementById('state').value;
+            let claim_value = document.getElementById('claim_value').value;
+            let diagnosis = document.getElementById('diagnosis').value;
+
+            const bodyData = {
+                'case_id': caseId,
+                'claim_number': claim_number,
+                'doa': doa,
+                'dod': dod,
+                'hospital_name': hospital_name,
+                'city': city,
+                'state': state,
+                'claim_value': claim_value,
+                'diagnosis': diagnosis,
+            };
+
+            const url = "{% url 'case-details-api-list' %}";
+            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+            console.log(result)
+            if (success) {
+                if (result.success) {
+                    setFormValues(result.data);
+                }
+            } else {
+                
+            }
+
+            toggle_loader();
+        });
+
+
+        async function uploadNewCase() {
+
+        }
     </script>
 
 </body>
