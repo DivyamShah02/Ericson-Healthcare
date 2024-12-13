@@ -215,7 +215,7 @@
                       <button class="btn btn-outline-light" type="button" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"><i class="fa fa-magnifying-glass"></i></button>
                     </div>
                   </div>
-                <div class="pt-3">
+                <div class="pt-3" id="all_cases_div">
                     <div class="d-flex align-items-center px-3 ps-2" style="cursor: pointer;">
                         <div class="col-8 text-start">
                             <h6 class="m-0">
@@ -281,7 +281,6 @@
 
     <script>
         let UserData = {};
-        const validRoles = ['admin', 'hod', 'coordinator'];
 
         async function GetDashboardDetails() {
             
@@ -294,6 +293,8 @@
                     UserData = result.data;
 
                     document.getElementById('account_name').innerText = UserData.name;
+
+                    const validRoles = ['admin', 'hod', 'coordinator'];
                     if (validRoles.includes(UserData.role)) {
                         document.getElementById('add_case_btn').style.display = '';
 
@@ -303,7 +304,8 @@
                         }
                         
                     }
-
+                    
+                    await getCaseList()
                 }
 
                 else {
@@ -339,7 +341,6 @@
                 console.error("GET User Failed:", result);
             }
         }
-
 
         document.getElementById('newCaseDocUploadInput').addEventListener('change', function(event) {
             const file = event.target.files[0]; // Get the first selected file
@@ -377,6 +378,74 @@
 
         }
 
+        async function getCaseList() {
+            const url = "{% url 'case-api-list' %}?"; // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                if (result.success) {
+                    document.getElementById('total_case').innerText = result.data.total_cases;
+                    document.getElementById('inprogress_case').innerText = result.data.in_progress_cases;
+                    document.getElementById('closed_case').innerText = result.data.closed_cases;
+                    document.getElementById('pending_case').innerText = result.data.pending_cases;
+                    createCaseCard(result.data.case_data);
+                }
+                console.log("GET Success:", result);
+            } else {
+                console.error("GET Failed:", result);
+            }
+        }
+
+        function createCaseCard(caseList) {
+            const container = document.getElementById('all_cases_div'); // Container to hold all case cards
+
+            caseList.forEach((caseItem, index) => {
+                const caseDiv = document.createElement('div');
+                caseDiv.className = 'd-flex align-items-center px-3 ps-2';
+                caseDiv.style.cursor = 'pointer';
+                caseDiv.setAttribute('onclick', `window.location.href="{% url 'dashboard-list' %}?case_id=${caseItem.case_id}";`);
+
+                // Left section with case number and status
+                const leftDiv = document.createElement('div');
+                leftDiv.className = 'col-8 text-start';
+
+                const caseHeader = document.createElement('h6');
+                caseHeader.className = 'm-0';
+
+                const statusIcon = document.createElement('i');
+                statusIcon.className = `fa fa-circle fa-sm ${caseItem.case_status === 'Complete' ? 'text-success' : 'text-danger'}`;
+
+                const caseNumber = document.createElement('b');
+                caseNumber.textContent = `Case #${caseItem.case_id}`;
+
+                caseHeader.appendChild(statusIcon);
+                caseHeader.appendChild(document.createTextNode('   '));
+                caseHeader.appendChild(caseNumber);
+                leftDiv.appendChild(caseHeader);
+
+                // Right section with chevron icon
+                const rightDiv = document.createElement('div');
+                rightDiv.className = 'col-4 text-end';
+
+                const chevronIcon = document.createElement('i');
+                chevronIcon.className = 'fa fa-chevron-right fa-lg';
+                chevronIcon.id = `card-${index + 1}-icon`;
+
+                rightDiv.appendChild(chevronIcon);
+
+                // Append left and right sections to the main div
+                caseDiv.appendChild(leftDiv);
+                caseDiv.appendChild(rightDiv);
+
+                // Add a horizontal line below the card
+                const hr = document.createElement('hr');
+                hr.className = 'p-0 my-1 text-white';
+
+                // Append the case div and hr to the container
+                container.appendChild(caseDiv);
+                container.appendChild(hr);
+            });
+
+        }
 
     </script>
 

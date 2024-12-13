@@ -1,11 +1,11 @@
 from .models import Visit, HospitalVisit, LabVisit, PharmacyVisit
 from rest_framework import serializers
 
+
 class VisitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Visit
         fields = '__all__'
-
 
 
 class HospitalVisitSerializer(serializers.ModelSerializer):
@@ -23,4 +23,10 @@ class LabVisitSerializer(serializers.ModelSerializer):
 class PharmacyVisitSerializer(serializers.ModelSerializer):
     class Meta:
         model = PharmacyVisit
+        fields = '__all__'
+
+
+class VisitDetailsViewSet(serializers.ModelSerializer):
+    class Meta:
+        model = Visit
         fields = '__all__'

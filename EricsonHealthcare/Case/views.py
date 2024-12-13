@@ -241,30 +241,6 @@ class CaseViewSet(viewsets.ViewSet):
                 status=status.HTTP_200_OK
             )
 
-
-    def save_file(self, uploaded_file):
-        # Define the base directory to save the files
-        upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/')
-        os.makedirs(upload_dir, exist_ok=True)
-
-        # Generate a unique filename if a file with the same name exists
-        base_name, extension = os.path.splitext(uploaded_file.name)
-        file_name = uploaded_file.name
-        counter = 1
-
-        while os.path.exists(os.path.join(upload_dir, file_name)):
-            file_name = f"{base_name}({counter}){extension}"
-            counter += 1
-
-        # Save the file
-        file_path = os.path.join(upload_dir, file_name)
-        with open(file_path, 'wb') as f:
-            for chunk in uploaded_file.chunks():
-                f.write(chunk)
-
-        # Return the relative file path
-        return os.path.relpath(file_path, settings.MEDIA_ROOT)
-
     def list(self, request):
         """
         This view returns a list of cases associated with the current logged-in user.
@@ -302,14 +278,51 @@ class CaseViewSet(viewsets.ViewSet):
         elif user_role == 'admin':
             pass
 
-        case_data = CaseSerializers(cases, many=True)
+        case_data = CaseSerializers(cases, many=True).data
+
+        total_cases = len(case_data)
+        in_progress_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] != 'Complete' and case_obj['case_status'] != 'Creation'])
+        closed_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Complete'])
+        pending_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Creation'])
+
+        data = {
+            'total_cases': total_cases,
+            'in_progress_cases': in_progress_cases,
+            'closed_cases': closed_cases,
+            'pending_cases': pending_cases,
+            'case_data': case_data
+        }
 
         return Response(
                 {
                     "success": True,
                     "user_not_logged_in": False,
-                    "data":case_data.data,
+                    "data":data,
                     "error": None
                 },
                 status=status.HTTP_200_OK
             )
+
+
+    def save_file(self, uploaded_file):
+        # Define the base directory to save the files
+        upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/')
+        os.makedirs(upload_dir, exist_ok=True)
+
+        # Generate a unique filename if a file with the same name exists
+        base_name, extension = os.path.splitext(uploaded_file.name)
+        file_name = uploaded_file.name
+        counter = 1
+
+        while os.path.exists(os.path.join(upload_dir, file_name)):
+            file_name = f"{base_name}({counter}){extension}"
+            counter += 1
+
+        # Save the file
+        file_path = os.path.join(upload_dir, file_name)
+        with open(file_path, 'wb') as f:
+            for chunk in uploaded_file.chunks():
+                f.write(chunk)
+
+        # Return the relative file path
+        return os.path.relpath(file_path, settings.MEDIA_ROOT)

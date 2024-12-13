@@ -6,6 +6,7 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'create_visit', VisitCreationViewSet, basename='create_visit')
+router.register(r'fetch_visits', VisitDetailsViewSet, basename='fetch_visits')
 
 urlpatterns = [
     path('', include(router.urls)),
