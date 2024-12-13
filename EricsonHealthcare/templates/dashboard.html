@@ -306,6 +306,10 @@
 
                 }
 
+                else {
+                    window.location.href=`{% url 'login-list' %}`;
+                }
+
             } else {
                 console.error("Login User Failed:", result);
                 document.getElementById('error-unexpected').style.display = '';
