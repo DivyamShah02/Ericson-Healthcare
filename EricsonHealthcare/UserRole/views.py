@@ -12,6 +12,7 @@ from .models import UserDetail
 import random
 import string
 
+logger = None
 
 class UserCreationViewSet(viewsets.ViewSet):
     def create(self, request):
@@ -189,35 +190,48 @@ class LoginApiViewSet(viewsets.ViewSet):
 
 class DashboardApiViewSet(viewsets.ViewSet):
     def create(self, request):
-        user = request.user
+        try:
+            user = request.user
 
-        if not user.is_authenticated:
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            data = {
+                'id': user.id,
+                'role': user.role,
+                'user_id': user.user_id,
+                'name': user.name,
+                'contact_number': user.contact_number,
+                'city': user.city,
+                'state': user.state,
+            }
+
             return Response(
                     {
-                        "success": False,
-                        "user_not_logged_in": True,
-                        "data":None,
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":data,
                         "error": None
                     },
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_200_OK
                 )
 
-        data = {
-            'id': user.id,
-            'role': user.role,
-            'user_id': user.user_id,
-            'name': user.name,
-            'contact_number': user.contact_number,
-            'city': user.city,
-            'state': user.state,
-        }
-
-        return Response(
-                {
-                    "success": True,
-                    "user_not_logged_in": False,
-                    "data":data,
-                    "error": None
-                },
-                status=status.HTTP_200_OK
-            )
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return Response(
+                            {
+                                "success": False,
+                                "user_not_logged_in": True,
+                                "data":None,
+                                "error": e
+                            },
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
