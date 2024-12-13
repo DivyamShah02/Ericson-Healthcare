@@ -219,5 +219,5 @@ class DashboardApiViewSet(viewsets.ViewSet):
                     "data":data,
                     "error": None
                 },
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_200_OK
             )
