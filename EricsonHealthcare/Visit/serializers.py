@@ -26,7 +26,7 @@ class PharmacyVisitSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class VisitDetailsViewSet(serializers.ModelSerializer):
+class VisitDetailsViewSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Visit
         fields = '__all__'

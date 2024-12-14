@@ -6,13 +6,13 @@ def create_user():
     url = base_url + 'user/user/'
 
     data = {
-        'name': 'Divyam Coordinator',
+        'name': 'Divyam Investigator',
         'password':'divyam',
         'contact_number': '9054413199',
-        'email': 'coordinator@gmail.com',
+        'email': 'investigator@gmail.com',
         'city': 'Ahmedabad',
         'state': 'Gujarat',
-        'role': 'coordinator',
+        'role': 'investigator',
     }
 
     response = requests.post(url, data=data)
@@ -63,14 +63,14 @@ def get_visit_details_by_case_id_and_investigator_id():
 
 
 if __name__ == '__main__':
-    # create_user_respone = create_user()
-    # print(create_user_respone.text)
+    create_user_respone = create_user()
+    print(create_user_respone.text)
 
     # get_user_respone = get_user()
     # print(get_user_respone.text)
 
-    login_user_respone = login_user()
-    print(login_user_respone.text)
+    # login_user_respone = login_user()
+    # print(login_user_respone.text)
 
-    get_visit_details_by_case_id_and_investigator_id()
+    # get_visit_details_by_case_id_and_investigator_id()
 

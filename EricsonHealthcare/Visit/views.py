@@ -4,12 +4,13 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 
 from .serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSerializer, HospitalVisitSerializer
-from . models import Visit, LabVisit, HospitalVisit, PharmacyVisit
+from .models import Visit, LabVisit, HospitalVisit, PharmacyVisit
 
 from Question.models import Question
 from Case.models import Case
-
 from Case.serializers import CaseSerializers
+
+import random
 
 logger = None
 
@@ -101,11 +102,114 @@ class VisitCreationViewSet(viewsets.ViewSet):
 
         except Exception as ex:
             return Response({"error": str(ex)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
 
-class VisitDetailsViewSet(viewsets.ViewSet):
 
+class VisitViewSet(viewsets.ViewSet):
     def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.data.get('case_id')
+            if not case_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data": None,
+                        "error": "Please provide Case ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            case_obj = Case.objects.filter(case_id=case_id).first()
+            if case_obj is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data": None,
+                            "error": f"Case with id - {case_id} not found"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            new_visit_id = True
+            while new_visit_id:
+                visit_id = random.randint(1111111111,9999999999)
+                if len(Visit.objects.filter(visit_id=visit_id)) == 0:
+                    new_visit_id = False
+
+            new_visit = Visit(visit_id=visit_id,
+                                case_id=case_id,
+                                coordinator_id=case_obj.coordinator_id,
+                                investigator_id=request.data.get('investigator_id'),
+                                type_of_visit=request.data.get('type_of_visit'),
+                                tat=request.data.get('tat'),
+                                visit_status='Investigation'
+                            )
+
+            new_visit.save()
+
+            request_data = request.data
+            print(request_data)
+            print(request_data['type_of_visit'])
+            request_data['type_of_visit'] = 'divyam'
+            request_data['visit_id'] = visit_id
+            print(request_data['visit_id'])
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data": request_data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data": None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+    def list(self, request):
         """
         Custom POST method to get visit details by investigator and case ID.
         """
