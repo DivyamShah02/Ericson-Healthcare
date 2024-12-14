@@ -22,6 +22,9 @@
     <!-- Import Wow Animation CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+    <!-- Import the official PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/loader.css">
@@ -754,23 +757,12 @@
                                 Document</b>
                             <input type="file" id="addDocumentInput" hidden>
                         </label>
-
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                        <div id="document_list_div">
+                            <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" onclick="openDocModal('https://pdfobject.com/pdf/sample.pdf', 'sample.pdf')">
+                                <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>sample.pdf</u>
+                                <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                            </div>                            
                         </div>
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-
 
                         <!-- Modal -->
                         <div class="modal fade" id="viewDocumentModal" tabindex="-1"
@@ -783,14 +775,12 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <iframe src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="500px"
-                                            style="border: none;"></iframe>
+                                        <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                            <canvas id="pdf-renderer"></canvas>
+                                        </div>
+                                        <!-- <iframe src="/media/uploads/suit_divyam(1).jpeg" width="100%" height="500px" id="viewDocumentModalIframe"
+                                            style="border: none;"></iframe> -->
                                     </div>
-                                    <!-- <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -819,7 +809,6 @@
     <script src="/static/js/loader.js"></script>
     <script src="/static/js/api_caller.js"></script>
     <script src="/static/js/script.js"></script>
-
 
     <script>
         new WOW().init();
@@ -1146,7 +1135,6 @@
             }
         }
 
-
         document.getElementById('addDocumentInput').addEventListener('change', function (event) {
             const file = event.target.files[0] || "No file selected";
             console.log(file)
@@ -1154,6 +1142,7 @@
 
         window.onload = function () {
             getCaseDetails();
+            getCaseData();
             toggle_loader();
             generateCheckboxes(questions);
         };
@@ -1174,39 +1163,36 @@
             console.log(result);
             if (success) {
                 if (result.success) {
-                    
+                    console.log(result.data.all_docs);
+                    createDocumentList(result.data.all_docs);
                 }
                 else {
-
+                    window.location.href=`{% url 'dashboard-list' %}`;
                 }
             } else {
-                
+                window.location.href=`{% url 'dashboard-list' %}`;
             }
         }
-
 
         async function getCaseDetails() {
             const Params = {
                 case_id: caseId,
             };
 
-            const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params);
             const [success, result] = await callApi("GET", url);
             console.log(result);
             if (success) {
                 if (result.success) {
-                    if (result.case_details_not_added) {
-
-                    }
-                    else {
+                    if (!result.case_details_not_added) {
                         setFormValues(result.data);
                     }
                 }
                 else {
-
+                    window.location.href=`{% url 'dashboard-list' %}`;
                 }
             } else {
-                
+                window.location.href=`{% url 'dashboard-list' %}`;
             }
         }
 
@@ -1216,7 +1202,6 @@
             event.preventDefault();
 
             if (!form.checkValidity()) {
-                // Trigger the browser's built-in validation tooltips
                 form.reportValidity();
                 return;
             }
@@ -1256,10 +1241,79 @@
             toggle_loader();
         });
 
-
-        async function uploadNewCase() {
-
+        function openDocModal(doc_path, doc_name) {
+            loadPDF(doc_path);
+            document.getElementById('viewDocumentModalLabel').innerText = doc_name;
+            const myModal = new bootstrap.Modal(document.getElementById('viewDocumentModal'));
+            myModal.show();
         }
+
+        function createDocumentList(documentList) {
+            const container = document.getElementById('document_list_div');
+
+            documentList.forEach((docItem) => {
+                const documentDiv = document.createElement('div');
+                documentDiv.className = 'd-flex align-items-center py-3 px-2 mb-2 document-card';
+                documentDiv.setAttribute('onclick', `openDocModal('${docItem.path}','${docItem.name}')`);
+
+                const icon = document.createElement('i');
+                icon.className = 'fa fa-file-pdf fa-xl';
+
+                const documentName = document.createElement('u');
+                documentName.textContent = docItem.name;
+
+                const nameContainer = document.createElement('div');
+                nameContainer.appendChild(icon);
+                nameContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0')); // Adding spaces
+                nameContainer.appendChild(documentName);
+
+                const downloadDiv = document.createElement('div');
+                downloadDiv.className = 'ms-auto';
+
+                const downloadIcon = document.createElement('i');
+                downloadIcon.className = 'fa fa-download fa-xl mx-2';
+
+                downloadDiv.appendChild(downloadIcon);
+
+                documentDiv.appendChild(nameContainer);
+                documentDiv.appendChild(downloadDiv);
+
+                container.appendChild(documentDiv);
+            });
+        }
+        
+        
+    </script>
+
+    <script>
+        // Set the worker source for PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        function loadPDF(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 0.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
+
     </script>
 
 </body>

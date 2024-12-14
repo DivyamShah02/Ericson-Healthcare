@@ -475,6 +475,17 @@ class CaseViewSet(viewsets.ViewSet):
                     )
 
             case_data = CaseSerializers(case_obj).data
+            
+            docs_path_lst = case_data.get('document_paths')
+
+            all_docs = []
+            for doc in docs_path_lst:
+                all_docs.append({
+                    "path": str(doc),
+                    "name": os.path.basename(str(doc))
+                })
+
+            case_data['all_docs'] = all_docs
 
             return Response(
                     {
@@ -492,7 +503,6 @@ class CaseViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "case_details_not_added": False,
                         "data":None,
                         "error": str(ex)
                     },

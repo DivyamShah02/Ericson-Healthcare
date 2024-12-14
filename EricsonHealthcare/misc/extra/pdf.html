@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer</title>
+    <!-- Include the official PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #pdf-viewer-container {
+            width: 100%;
+            height: 500px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        #button-container {
+            margin: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin-right: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="button-container">
+        <button class="btn" onclick="loadPDF('https://pdfobject.com/pdf/sample.pdf')">Load PDF</button>
+    </div>
+
+    <div id="pdf-viewer-container">
+        <canvas id="pdf-renderer"></canvas>
+    </div>
+
+    <script>
+        // Set the worker source for PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        function loadPDF(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 1.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
+    </script>
+</body>
+</html>
