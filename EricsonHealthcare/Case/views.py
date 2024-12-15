@@ -194,13 +194,13 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             if case_details_obj is None:
                 return Response(
                         {
-                            "success": False,
+                            "success": True,
                             "user_not_logged_in": False,
                             "case_details_not_added": True,
                             "data":None,
                             "error": None
                         },
-                        status=status.HTTP_400_BAD_REQUEST
+                        status=status.HTTP_200_OK
                     )
 
             case_details = CaseDetailsSerializer(case_details_obj).data
@@ -481,7 +481,7 @@ class CaseViewSet(viewsets.ViewSet):
             all_docs = []
             for doc in docs_path_lst:
                 all_docs.append({
-                    "path": str(doc),
+                    "path": os.path.join(settings.MEDIA_URL, doc),
                     "name": os.path.basename(str(doc))
                 })
 

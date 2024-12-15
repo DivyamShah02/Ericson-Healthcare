@@ -376,7 +376,8 @@
                 const url = "{% url 'case-api-list' %}";
                 const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}", true);
                 if (success) {
-                    console.log("Login User Success:", result);
+                    let case_id = result.data.case_id;
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${case_id}`;
                 } else {
                     console.error("Login User Failed:", result);
                 }

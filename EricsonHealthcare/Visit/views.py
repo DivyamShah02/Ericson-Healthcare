@@ -9,6 +9,7 @@ from .models import Visit, LabVisit, HospitalVisit, PharmacyVisit
 from Question.models import Question
 from Case.models import Case
 from Case.serializers import CaseSerializers
+from Question.models import Question
 
 import random
 
@@ -278,57 +279,50 @@ class VisitViewSet(viewsets.ViewSet):
         """
         Custom POST method to get visit details by investigator and case ID.
         """
-        user = request.user
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "no_visit_for_case": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
-        if not user.is_authenticated:
-            return Response(
+            case_id = request.GET.get('case_id')
+            if not case_id:
+                return Response(
                     {
                         "success": False,
-                        "user_not_logged_in": True,
+                        "user_not_logged_in": False,
                         "user_unathorized": False,
                         "no_visit_for_case": False,
-                        "data":None,
-                        "error": None
+                        "data": None,
+                        "error": "Please provide Case ID"
                     },
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-        case_id = request.data.get('case_id')
-        
-        # Ensure case_id is provided
-        if not case_id:
-            return Response(
-                {
-                    "success": False,
-                    "user_not_logged_in": False,
-                    "user_unathorized": False,
-                    "no_visit_for_case": False,
-                    "data": None,
-                    "error": "Please provide Case ID"
-                },
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        # Ensure case_id is a valid integer
-        try:
-            case_id = int(case_id)
-        except ValueError:
-            return Response(
-                {
-                    "success": False,
-                    "user_not_logged_in": False,
-                    "user_unathorized": False,
-                    "no_visit_for_case": False,
-                    "data": None,
-                    "error": "Case ID must be a valid integer."
-                },
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        investigator_id = request.data.get('investigator_id')
+            case_data = Case.objects.filter(case_id=case_id).first()
+            if case_data is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "no_visit_for_case": False,
+                        "data": None,
+                        "error": f"Case with id - {case_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-        try:
-            # If both investigator_id and case_id are provided, filter by both
+            investigator_id = request.GET.get('investigator_id')
             if investigator_id:
                 visits = Visit.objects.filter(investigator_id=investigator_id, case_id=case_id)
             else:
@@ -337,41 +331,62 @@ class VisitViewSet(viewsets.ViewSet):
             if not visits and investigator_id:
                 return Response(
                     {
-                        "success": False,
+                        "success": True,
                         "user_not_logged_in": False,
                         "user_unathorized": False,
                         "no_visit_for_case": True,
                         "data": None,
                         "error": "No visits found for the given case_id and investigator_id."
                     },
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_200_OK
                 )
 
             elif not visits:
                 return Response(
                     {
-                        "success": False,
+                        "success": True,
                         "user_not_logged_in": False,
                         "user_unathorized": False,
                         "no_visit_for_case": True,
                         "data": None,
                         "error": "No visits found for the given case_id."
                     },
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_200_OK
                 )
-            
-            case_details_data = []
+
+            case_visit_details_data = []
 
             # Collect visit details
             for visit in visits:
                 visit_serializer = VisitSerializer(visit)
                 visit_data = visit_serializer.data
-                visit_detail = {"visit": visit_data}
 
-                # Check for associated HospitalVisit, LabVisit, or PharmacyVisit
-                visit_detail = self.add_visit_type_details(visit, visit_detail)
+                visit_type_data = self.get_visit_type_data(visit_data=visit_data)
+                if visit_type_data is not False:
+                    visit_data['visit_type_data'] = visit_type_data
+                
+                    final_card_data = visit_data['visit_type_data']
+                    final_card_data = {k: v for k, v in final_card_data.items() if k not in ("id", "visit_id", "document_paths", "photo_path")}
+                    
+                    visit_questions = []
+                    for question_id in final_card_data["questions"]:
+                        que = Question.objects.filter(id=question_id).first()
+                        if que:
+                            visit_questions.append(que.question)
 
-                case_details_data.append(visit_detail)
+                    final_card_data = {k: v for k, v in final_card_data.items() if k is not "questions"}
+
+                    final_card_data = {
+                        key.replace('_', ' ').title(): value
+                        for key, value in final_card_data.items()
+                    }
+
+                    visit_data["questions"] = visit_questions
+
+                    visit_data["final_card_data"] = final_card_data
+
+
+                    case_visit_details_data.append(visit_data)
 
             return Response(
                 {
@@ -379,14 +394,15 @@ class VisitViewSet(viewsets.ViewSet):
                     "user_not_logged_in": False,
                     "user_unathorized": False,
                     "no_visit_for_case": False,
-                    "data": case_details_data,
+                    "data": case_visit_details_data,
                     "error": None
                 },
                 status=status.HTTP_200_OK
             )
 
         except Exception as ex:
-            logger.error(ex, exc_info=True)
+            # logger.error(ex, exc_info=True)
+            print(ex)
             return Response(
                 {
                     "success": False,
@@ -448,3 +464,35 @@ class VisitViewSet(viewsets.ViewSet):
             visit_detail["details"] = "No associated visit details found."
 
         return visit_detail
+
+    def get_visit_type_data(self, visit_data):
+        try:
+            visit_type = str(visit_data.get("type_of_visit", ""))
+            if visit_type == 'Hospital':
+                visit_type_data_obj = HospitalVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = HospitalVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            elif visit_type == 'Lab':
+                visit_type_data_obj = LabVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = LabVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            elif visit_type == 'Chemist':
+                visit_type_data_obj = PharmacyVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = PharmacyVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            else:
+                return False
+
+        except Exception as e:
+            # logger.error(e, exc_info=True)
+            print(e)
+            return False

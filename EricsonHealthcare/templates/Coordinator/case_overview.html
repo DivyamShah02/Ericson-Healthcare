@@ -464,7 +464,14 @@
                             </div>
                         </div>
                         <div id="visit-cards">
-                            <div class="p-3 mt-3 visit-card">
+                            <div class="my-3">
+                                <div class="p-5 text-center dark-input" id="no-visit-created"
+                                  style="border-radius: 10px; background-color: var(--eh-danger);">
+                                  <i class="fa fa-triangle-exclamation fa-xl eh-text-blue-primary" style="font-size: 2.5rem;"></i>
+                                  <p class="p-0 m-0 mt-2 eh-text-blue-primary"><b>0 Visit created for this case</b></p>
+                                </div>
+                            </div>
+                            <!-- <div class="p-3 mt-3 visit-card">
                                 <div class="d-flex" id="card-1" onclick="toggleCard(this)" style="cursor: pointer;">
                                     <div class="col text-start">
                                         <h5 class="m-0">Hospital Visit</h5>
@@ -734,11 +741,11 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="mt-5">
-                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2"
+                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2" id="start_investigation" style="display: none;"
                                 type="button"><b>Start Investigation</b></button>
                         </div>
                         <div class="mb-5"></div>
@@ -877,25 +884,24 @@
         function createHospitalFormInput() {
             deleteElementsWithIdPrefix('type_visit_');
             const parentElement = document.getElementById('add_visit_form_inputs');
-            // parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa_id', 'Date of Admission', 'Enter Date of Admission'));
-            // parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod_id', 'Date of Discharge', 'Enter Date of Discharge'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_name', 'hospital_hospital_name_id', 'Hospital Name', 'Enter Hospital Name'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state_id', 'State', 'Enter State'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_city', 'hospital_city_id', 'City', 'Enter City'));
-            // parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value_id', 'Claim Value', 'Enter Claim Value'));
-            // parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis_id', 'Diagnosis', 'Enter Diagnosis'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number_id', 'Registration Number', 'Enter Registration Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds_id', 'No of Beds', 'Enter No of Beds'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu_id', 'ICU', 'Enter ICU'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot_id', 'OT', 'Enter OT'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff_id', 'Nursing staff', 'Enter Nursing staff'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo_id', 'RMO', 'Enter RMO'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_td_registration_number', 'hospital_td_registration_number_id', 'TD registration number', 'Enter TD registration number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_degree', 'hospital_degree_id', 'Degree', 'Enter Degree'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_owner_of_the_hospital', 'hospital_owner_of_the_hospital_id', 'Owner of the hospital', 'Enter Owner of the hospital'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_name', 'hospital_hospital_name', 'Hospital Name', 'Enter Hospital Name'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state', 'State', 'Enter State'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_city', 'hospital_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis', 'Diagnosis', 'Enter Diagnosis'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number', 'Registration Number', 'Enter Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds', 'No of Beds', 'Enter No of Beds'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu', 'ICU', 'Enter ICU'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo', 'RMO', 'Enter RMO'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_td_registration_number', 'hospital_td_registration_number', 'TD registration number', 'Enter TD registration number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_degree', 'hospital_degree', 'Degree', 'Enter Degree'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_owner_of_the_hospital', 'hospital_owner_of_the_hospital', 'Owner of the hospital', 'Enter Owner of the hospital'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_registration_number', 'hospital_doctor_registration_number', 'Registration Number', 'Enter Registration Number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_contact_number', 'hospital_doctor_contact_number', 'Contact Number', 'Enter Contact Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_email', 'hospital_doctor_email', 'Email Id', 'Enter Email Id'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_email', 'hospital_doctor_email', 'Email Id', 'Enter Email Id'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_tat', 'hospital_tat', 'TAT', 'Enter TAT'));
 
@@ -974,7 +980,7 @@
             });
         }
 
-        function createVisitCard(cardId, visitNumber, details) {
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions) {
             // Create the outer card container
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card';
@@ -992,7 +998,7 @@
             const title = document.createElement('h5');
             title.className = 'm-0';
             // title.textContent = `Visit Number ${visitNumber}`;
-            title.textContent = `Hospital Visit`;
+            title.textContent = `${type_of_visit} Visit`;
             headerLeft.appendChild(title);
 
             // Header - Right side (Toggle Icon)
@@ -1062,6 +1068,64 @@
             // Append the details row to the details div
             detailsDiv.appendChild(detailsRow);
 
+            // Questions Section
+            const questionsContainer = document.createElement('div');
+            questionsContainer.className = 'col-12 mt-2';
+            const questionCard = document.createElement('div');
+            questionCard.className = 'select-question-card p-2';
+
+            const questionHeader = document.createElement('div');
+            questionHeader.className = 'd-flex';
+            questionHeader.id = `visit${visitNumber}-questions`;
+            questionHeader.style.cursor = 'pointer';
+            questionHeader.setAttribute('onclick', 'viewQuestions(this)');
+
+            const questionHeaderLeft = document.createElement('div');
+            questionHeaderLeft.className = 'col text-start';
+            const questionLabel = document.createElement('label');
+            questionLabel.className = 'form-label eh-label m-0';
+            questionLabel.textContent = 'Questions';
+            questionHeaderLeft.appendChild(questionLabel);
+
+            const questionHeaderRight = document.createElement('div');
+            questionHeaderRight.className = 'col text-end';
+            const questionIcon = document.createElement('i');
+            questionIcon.className = 'fa fa-chevron-down';
+            questionIcon.id = `visit${visitNumber}-questions-icon`;
+            questionHeaderRight.appendChild(questionIcon);
+
+            questionHeader.appendChild(questionHeaderLeft);
+            questionHeader.appendChild(questionHeaderRight);
+
+            const questionList = document.createElement('div');
+            questionList.id = `visit${visitNumber}-questions-list`;
+            questionList.className = 'mt-4';
+            questionList.style.display = 'none';
+
+            // Add individual questions
+            questions.forEach((question, index) => {
+                const questionItem = document.createElement('div');
+                questionItem.className = 'p-2 py-0';
+
+                const questionLabel = document.createElement('label');
+                questionLabel.className = 'form-label eh-label m-0';
+                questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                const hr = document.createElement('hr');
+                hr.className = 'm-1';
+
+                questionItem.appendChild(questionLabel);
+                questionItem.appendChild(hr);
+
+                questionList.appendChild(questionItem);
+            });
+
+            questionCard.appendChild(questionHeader);
+            questionCard.appendChild(questionList);
+            questionsContainer.appendChild(questionCard);
+
+            detailsRow.appendChild(questionsContainer);
+
             // Append the header and details section to the card
             card.appendChild(header);
             card.appendChild(detailsDiv);
@@ -1098,9 +1162,9 @@
         };
 
         // const card = createVisitCard(3, 3, visitDetails);
-        // const card_2 = createVisitCard(2, 2, visitDetails);
-
         // document.getElementById('visit-cards').appendChild(card);
+        
+        // const card_2 = createVisitCard(2, 2, visitDetails);
         // document.getElementById('visit-cards').appendChild(card_2);
 
         const questions = [
@@ -1136,7 +1200,8 @@
         window.onload = function () {
             getCaseDetails();
             getCaseData();
-            getInvestigatorDetails()
+            getVistDetails();
+            getInvestigatorDetails();
             getQuestions();
             toggle_loader();
         };
@@ -1146,6 +1211,12 @@
 
     <script>
         const caseId = new URLSearchParams(window.location.search).get('case_id');
+        const visit_tab = new URLSearchParams(window.location.search).get('visit_tab');
+        console.log(visit_tab);
+
+        if (visit_tab == 'true') {
+            document.getElementById('visits-tab').click();
+        }
 
         async function getCaseData() {
             const Params = {
@@ -1187,6 +1258,33 @@
                 }
             } else {
                 window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        async function getVistDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'visit-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    if (!result.no_visit_for_case){
+                        result.data.forEach((visit, index) => {
+                            document.getElementById('start_investigation').style.display = '';
+                            document.getElementById('no-visit-created').style.display = 'none';
+                            const visit_card = createVisitCard(visit.type_of_visit, index+3, index+3, visit.final_card_data, visit.questions);
+                            document.getElementById('visit-cards').appendChild(visit_card);
+                        });
+                    }
+                }
+                else {
+                    // window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                // window.location.href=`{% url 'dashboard-list' %}`;
             }
         }
 
@@ -1279,9 +1377,10 @@
             if (success) {
                 if (result.success) {
                     setFormValues(result.data);
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
                 }
             } else {
-                
+                alert('Unable to save the case details');
             }
 
             toggle_loader();
@@ -1352,14 +1451,14 @@
             const url = "{% url 'visit-api-list' %}";
             const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
             if (success) {
-                console.log("Login User Success:", result);
+                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
             } else {
-                console.error("Login User Failed:", result);
+                
             }
 
         }
 
-        
+
     </script>
 
     <script>
