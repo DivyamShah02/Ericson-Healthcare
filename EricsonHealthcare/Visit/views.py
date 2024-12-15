@@ -496,3 +496,116 @@ class VisitViewSet(viewsets.ViewSet):
             # logger.error(e, exc_info=True)
             print(e)
             return False
+
+
+class VisitDetailViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            visit_id = request.GET.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.filter(visit_id=visit_id).first()
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            visit_data = VisitSerializer(visit_data_obj).data
+            visit_type_data = self.get_visit_type_data(visit_data=visit_data)
+            type_of_visit = str(visit_data['type_of_visit']).lower()
+
+            visit_type_data = {
+                        f'{type_of_visit}_{key}': value
+                        for key, value in visit_type_data.items()
+                    }
+
+            visit_type_data[f'{type_of_visit}_tat'] = visit_data['tat']
+    
+            for que in visit_type_data[f'{type_of_visit}_questions']:
+                visit_type_data[f'question{que}'] = True
+            
+            visit_data = {**visit_data, **visit_type_data}
+            visit_data['edit_visit_id'] = visit_data['visit_id']
+
+            return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "data": visit_data,
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    def get_visit_type_data(self, visit_data):
+        try:
+            visit_type = str(visit_data.get("type_of_visit", ""))
+            if visit_type == 'Hospital':
+                visit_type_data_obj = HospitalVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = HospitalVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            elif visit_type == 'Lab':
+                visit_type_data_obj = LabVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = LabVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            elif visit_type == 'Chemist':
+                visit_type_data_obj = PharmacyVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = PharmacyVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            else:
+                return False
+
+        except Exception as e:
+            # logger.error(e, exc_info=True)
+            print(e)
+            return False

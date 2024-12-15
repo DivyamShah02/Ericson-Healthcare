@@ -391,8 +391,10 @@
                     <div class="tab-pane fade" id="visits" role="tabpanel" aria-labelledby="visits-tab" tabindex="0">
                         <h3 class="eh-head">Visits Details</h3>
 
-                        <button class="btn eh-btn-blue-primary-outline w-100 py-2" type="button" data-bs-toggle="modal"
-                            data-bs-target="#addVisitModal"><b>Add Visit</b></button>
+                        <button class="btn eh-btn-blue-primary-outline w-100 py-2" type="button" id="addVisitBtn" onclick="defaultVisitModal()"><b>Add Visit</b></button>
+
+                        <button style="display: none;" id="addVisitBtnModal" data-bs-toggle="modal"
+                        data-bs-target="#addVisitModal"></button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="addVisitModal" tabindex="-1" aria-labelledby="addVisitModalLabel"
@@ -406,6 +408,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="" id="add_visit_form">
+                                            <input type="text" name="edit_visit_id" id="edit_visit_id">
                                             <div class="mb-3">
                                                 <label for="type_of_visit" class="form-label eh-label">Type of
                                                     visit</label>
@@ -980,7 +983,7 @@
             });
         }
 
-        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions) {
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id) {
             // Create the outer card container
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card';
@@ -1033,6 +1036,7 @@
             actionCol.className = 'col-12 text-end mb-3';
             const editIcon = document.createElement('i');
             editIcon.className = 'fa fa-pen fa-lg eh-text-blue-primary';
+            editIcon.setAttribute('onclick', `editVisitDetail('${visit_id}');`);
             const deleteIcon = document.createElement('i');
             deleteIcon.className = 'fa fa-trash fa-lg text-danger';
             actionCol.appendChild(editIcon);
@@ -1275,7 +1279,8 @@
                         result.data.forEach((visit, index) => {
                             document.getElementById('start_investigation').style.display = '';
                             document.getElementById('no-visit-created').style.display = 'none';
-                            const visit_card = createVisitCard(visit.type_of_visit, index+3, index+3, visit.final_card_data, visit.questions);
+                            console.log(visit);
+                            const visit_card = createVisitCard(visit.type_of_visit, index+3, index+3, visit.final_card_data, visit.questions, visit.visit_id);
                             document.getElementById('visit-cards').appendChild(visit_card);
                         });
                     }
@@ -1428,36 +1433,86 @@
         }
 
         async function createNewVisit() {
-            let new_visit_detail = {
-                'case_id': caseId
+            if (document.getElementById('edit_visit_id').value != ''){
+                let new_visit_detail = {
+                    'case_id': caseId
+                }
+                var form_new_visit = new FormData(document.getElementById('add_visit_form'));
+                form_new_visit.forEach((value, key) => {
+                    if (!Object.prototype.hasOwnProperty.call(new_visit_detail, key)) {
+                        new_visit_detail[key] = value;
+                        return;
+                    }
+                    if (!Array.isArray(new_visit_detail[key])) {
+                        new_visit_detail[key] = [new_visit_detail[key]];
+                    }
+                    new_visit_detail[key].push(value);
+                });
+    
+                new_visit_detail['questions'] = getSelectedVisitQuestions();
+                console.log(new_visit_detail);
+    
+                const bodyData = new_visit_detail;
+    
+                const url = "{% url 'visit-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                if (success) {
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                } else {
+                    
+                }
             }
-            var form_new_visit = new FormData(document.getElementById('add_visit_form'));
-            form_new_visit.forEach((value, key) => {
-                if (!Object.prototype.hasOwnProperty.call(new_visit_detail, key)) {
-                    new_visit_detail[key] = value;
-                    return;
-                }
-                if (!Array.isArray(new_visit_detail[key])) {
-                    new_visit_detail[key] = [new_visit_detail[key]];
-                }
-                new_visit_detail[key].push(value);
-            });
 
-            new_visit_detail['questions'] = getSelectedVisitQuestions();
-            console.log(new_visit_detail);
-
-            const bodyData = new_visit_detail;
-
-            const url = "{% url 'visit-api-list' %}";
-            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-            if (success) {
-                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-            } else {
+            else {
                 
             }
+        }
+
+        async function editVisitDetail(visit_id) {
+            const Params = {
+                visit_id: visit_id,
+            };
+
+            const url = "{% url 'visit-details-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    uncheckQuestions();
+                    handleEditVisitModal(result.data.type_of_visit);
+                    setFormValues(result.data);
+                
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        function handleEditVisitModal(type_of_visit){
+            document.getElementById('addVisitBtn').click();
+            document.getElementById('type_of_visit').value = type_of_visit;
+            handleOptionChange();
+        }
+
+        function defaultVisitModal(){
+            document.getElementById('type_of_visit').value = 'default';
+            handleOptionChange();
+            document.getElementById('edit_visit_id').value = '';
+            document.getElementById('investigator_select').value = '';
+            document.getElementById('addVisitBtnModal').click();
+            uncheckQuestions();
 
         }
 
+        function uncheckQuestions() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name^="question"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
 
     </script>
 

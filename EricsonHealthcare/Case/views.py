@@ -570,7 +570,8 @@ class GetAllCaseViewSet(viewsets.ViewSet):
 
             elif user_role == 'admin':
                 pass
-
+            
+            cases = cases[::-1]
             case_data = CaseSerializers(cases, many=True).data
 
             total_cases = len(case_data)

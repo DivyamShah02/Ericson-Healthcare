@@ -7,6 +7,7 @@ from .views import *
 router = DefaultRouter()
 router.register(r'create_visit', VisitCreationViewSet, basename='create_visit')
 router.register(r'visit-api', VisitViewSet, basename='visit-api')
+router.register(r'visit-details-api', VisitDetailViewSet, basename='visit-details-api')
 
 urlpatterns = [
     path('', include(router.urls)),
