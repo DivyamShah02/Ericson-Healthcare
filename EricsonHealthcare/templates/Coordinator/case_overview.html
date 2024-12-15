@@ -942,7 +942,7 @@
             }
         }
 
-        function generateCheckboxes(questions) {
+        function generateQuestions(questions) {
             const container = document.getElementById('questions-list'); // Create a container for the checkboxes
             questions.forEach((question, index) => {
                 const questionNumber = index + 1; // Calculate the question number
@@ -951,25 +951,21 @@
                 const div = document.createElement('div');
                 div.className = 'form-check';
 
-                // Create the input element
                 const input = document.createElement('input');
                 input.type = 'checkbox';
                 input.className = 'form-check-input eh-checkbox';
-                input.id = `question${questionNumber}`;
+                input.id = `visit_question${questionNumber}`;
                 input.name = `question${questionNumber}`;
-                input.value = question;
+                input.value = question.id;
 
-                // Create the label element
                 const label = document.createElement('label');
                 label.className = 'form-check-label';
-                label.setAttribute('for', `question${questionNumber}`);
-                label.textContent = question;
+                label.setAttribute('for', `visit_question${questionNumber}`);
+                label.textContent = question.question;
 
-                // Append input and label to the div
                 div.appendChild(input);
                 div.appendChild(label);
 
-                // Append the div to the container
                 container.appendChild(div);
 
                 const hr = document.createElement('hr');
@@ -1141,8 +1137,8 @@
             getCaseDetails();
             getCaseData();
             getInvestigatorDetails()
+            getQuestions();
             toggle_loader();
-            generateCheckboxes(questions);
         };
         processStep(1);
 
@@ -1216,6 +1212,34 @@
             } else {
                 console.error("GET User Failed:", result);
             }
+        }
+
+        async function getQuestions() {
+            const url = "{% url 'question-api-list' %}?";
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log(result.data);
+                    generateQuestions(result.data)
+                }
+                else {
+                    // window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                // window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        function getSelectedVisitQuestions() {
+            const checkboxes = document.querySelectorAll("input[type='checkbox'][id^='visit_question']");
+            const selectedValues = [];
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedValues.push(checkbox.value);
+                }
+            });            
+            return selectedValues;
         }
 
         document.getElementById("case_details_form").addEventListener("submit", async (event) => {
@@ -1303,7 +1327,7 @@
                 container.appendChild(documentDiv);
             });
         }
-        
+
         async function createNewVisit() {
             let new_visit_detail = {
                 'case_id': caseId
@@ -1320,7 +1344,9 @@
                 new_visit_detail[key].push(value);
             });
 
+            new_visit_detail['questions'] = getSelectedVisitQuestions();
             console.log(new_visit_detail);
+
             const bodyData = new_visit_detail;
 
             const url = "{% url 'visit-api-list' %}";

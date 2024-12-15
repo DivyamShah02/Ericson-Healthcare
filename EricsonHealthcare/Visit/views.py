@@ -165,35 +165,44 @@ class VisitViewSet(viewsets.ViewSet):
                 if len(Visit.objects.filter(visit_id=visit_id)) == 0:
                     new_visit_id = False
 
+            request_data = self.rename_keys_based_on_visit(data=request.data)
+            request_data['visit_id'] = visit_id
+
             new_visit = Visit(visit_id=visit_id,
                                 case_id=case_id,
                                 coordinator_id=case_obj.coordinator_id,
-                                investigator_id=request.data.get('investigator_id'),
-                                type_of_visit=request.data.get('type_of_visit'),
-                                tat=request.data.get('tat'),
+                                investigator_id=request_data['investigator_id'],
+                                type_of_visit=request_data['type_of_visit'],
+                                tat=request_data['tat'],
                                 visit_status='Investigation'
                             )
 
-            new_visit.save()
+            visit_type_added = self.handle_visit_type(request_data=request_data)
+            if visit_type_added:
+                new_visit.save()
 
-            request_data = request.data
-            print(request_data)
-            print(request_data['type_of_visit'])
-            request_data['type_of_visit'] = 'divyam'
-            request_data['visit_id'] = visit_id
-            print(request_data['visit_id'])
+                return Response(
+                        {
+                            "success": True,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data": request_data,
+                            "error": None
+                        },
+                        status=status.HTTP_200_OK
+                    )
 
-            return Response(
+            else:
+                return Response(
                     {
-                        "success": True,
+                        "success": False,
                         "user_not_logged_in": False,
                         "user_unathorized": False,
-                        "data": request_data,
-                        "error": None
+                        "data": None,
+                        "error": 'Error occured unable to save the visit'
                     },
-                    status=status.HTTP_200_OK
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
-
 
         except Exception as ex:
             # logger.error(ex, exc_info=True)
@@ -206,8 +215,64 @@ class VisitViewSet(viewsets.ViewSet):
                         "data": None,
                         "error": str(ex)
                     },
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
+
+    def rename_keys_based_on_visit(self, data):
+        visit_type = str(data.get("type_of_visit", "")).lower()
+        if not visit_type:
+            return data
+        updated_data = {}
+        for key, value in data.items():
+            if key.startswith(visit_type + "_"):
+                new_key = key[len(visit_type) + 1:]
+                updated_data[new_key] = value
+            else:
+                updated_data[key] = value
+        return updated_data
+
+    def handle_visit_type(self, request_data):
+        try:
+            visit_type = str(request_data.get("type_of_visit", ""))
+
+            if visit_type == 'Hospital':
+                visit_type_data_obj = HospitalVisitSerializer(data=request_data)
+                if visit_type_data_obj.is_valid():
+                    visit_type_data_obj.save()
+                    return True
+                else:
+                    # logger.error(visit_type_data_obj.errors)
+                    print(visit_type_data_obj.errors)
+                    return False
+
+            elif visit_type == 'Lab':
+                visit_type_data_obj = LabVisitSerializer(data=request_data)
+                if visit_type_data_obj.is_valid():
+                    visit_type_data_obj.save()
+                    return True
+                else:
+                    # logger.error(visit_type_data_obj.errors)
+                    print(visit_type_data_obj.errors)
+                    return False
+
+            elif visit_type == 'Chemist':
+                visit_type_data_obj = PharmacyVisitSerializer(data=request_data)
+                if visit_type_data_obj.is_valid():
+                    visit_type_data_obj.save()
+                    return True
+                else:
+                    # logger.error(visit_type_data_obj.errors)
+                    print(visit_type_data_obj.errors)
+                    return False
+
+            else:
+                print('hello here')
+                return False
+        
+        except Exception as e:
+            # logger.error(e, exc_info=True)
+            print(e)
+            return False
 
     def list(self, request):
         """
@@ -333,7 +398,7 @@ class VisitViewSet(viewsets.ViewSet):
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        
+
     def get_questions_from_id(self, questions_id_lst):
         """
         Helper method to fetch questions from their IDs.
