@@ -9,6 +9,7 @@ from rest_framework.response import Response
 
 from .models import Case, CaseDetails
 from .serializers import CaseSerializers, CaseDetailsSerializer
+from Visit.models import Visit
 
 logger = None
 
@@ -552,7 +553,6 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                     )
 
             user_role = user.role
-
             if user_role == 'hod':
                 cases = Case.objects.filter(hod_id=user)
 
@@ -560,7 +560,12 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                 cases = Case.objects.filter(coordinator_id=user)
 
             elif user_role == 'investigator':
-                pass
+                all_visits = Visit.objects.filter(investigator_id=user)
+
+                visit_cases = [visit_details.case_id for visit_details in all_visits]
+                visit_cases = list(set(visit_cases))
+                
+                cases = Case.objects.filter(case_id__in=visit_cases)
 
             elif user_role == 'medical_officer':
                 cases = Case.objects.filter(medical_officer_id=user)
@@ -599,6 +604,7 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                     },
                     status=status.HTTP_200_OK
                 )
+        
         except Exception as ex:
             # logger.error(ex, exc_info=True)
             return Response(
