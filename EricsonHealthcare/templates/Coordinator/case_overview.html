@@ -408,7 +408,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="" id="add_visit_form">
-                                            <input type="text" name="edit_visit_id" id="edit_visit_id">
+                                            <input type="hidden" name="edit_visit_id" id="edit_visit_id">
                                             <div class="mb-3">
                                                 <label for="type_of_visit" class="form-label eh-label">Type of
                                                     visit</label>
@@ -1433,7 +1433,7 @@
         }
 
         async function createNewVisit() {
-            if (document.getElementById('edit_visit_id').value != ''){
+            if (document.getElementById('edit_visit_id').value == ''){
                 let new_visit_detail = {
                     'case_id': caseId
                 }
@@ -1459,12 +1459,12 @@
                 if (success) {
                     window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
                 } else {
-                    
+                    alert('Unable to create new visit`');
                 }
             }
 
             else {
-                
+                updateVisit();
             }
         }
 
@@ -1495,6 +1495,7 @@
             document.getElementById('addVisitBtn').click();
             document.getElementById('type_of_visit').value = type_of_visit;
             handleOptionChange();
+            document.getElementById('type_of_visit').disabled = true;
         }
 
         function defaultVisitModal(){
@@ -1502,6 +1503,7 @@
             handleOptionChange();
             document.getElementById('edit_visit_id').value = '';
             document.getElementById('investigator_select').value = '';
+            document.getElementById('type_of_visit').disabled = false;
             document.getElementById('addVisitBtnModal').click();
             uncheckQuestions();
 
@@ -1513,6 +1515,42 @@
                 checkbox.checked = false;
             });
         }
+
+        async function updateVisit() {
+            visit_id = document.getElementById('edit_visit_id').value
+            let update_visit_detail = {
+                'visit_id': visit_id
+            }
+
+            var form_new_visit = new FormData(document.getElementById('add_visit_form'));
+            form_new_visit.forEach((value, key) => {
+                if (!Object.prototype.hasOwnProperty.call(update_visit_detail, key)) {
+                    update_visit_detail[key] = value;
+                    return;
+                }
+                if (!Array.isArray(update_visit_detail[key])) {
+                    update_visit_detail[key] = [update_visit_detail[key]];
+                }
+                update_visit_detail[key].push(value);
+            });
+
+            update_visit_detail['type_of_visit'] = document.getElementById('type_of_visit').value;
+
+            update_visit_detail['questions'] = getSelectedVisitQuestions();
+            console.log(update_visit_detail);
+
+            const bodyData = update_visit_detail;
+
+            const url = "{% url 'update-visit-api-list' %}";
+            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+            console.log(result);
+            if (success) {
+                // window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+            } else {
+                alert('Unable to save the visit details');
+            }
+        }
+
 
     </script>
 

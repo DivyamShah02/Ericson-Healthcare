@@ -10,6 +10,7 @@ from Question.models import Question
 from Case.models import Case
 from Case.serializers import CaseSerializers
 from Question.models import Question
+from UserRole.models import UserDetail
 
 import random
 
@@ -381,6 +382,9 @@ class VisitViewSet(viewsets.ViewSet):
                         for key, value in final_card_data.items()
                     }
 
+                    final_card_data["Investigator"] = UserDetail.objects.filter(user_id=visit_data['investigator_id']).first().name
+                    final_card_data["TAT"] = visit_data['tat']
+
                     visit_data["questions"] = visit_questions
 
                     visit_data["final_card_data"] = final_card_data
@@ -609,3 +613,151 @@ class VisitDetailViewSet(viewsets.ViewSet):
             # logger.error(e, exc_info=True)
             print(e)
             return False
+
+
+class UpdateVisitViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            visit_id = request.data.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.get(visit_id=visit_id)
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            request_data = self.rename_keys_based_on_visit(data=request.data)
+            visit_type_added = self.handle_visit_type(request_data=request_data)
+            if visit_type_added is not False:
+                visit_data_obj.investigator_id = request_data['investigator_id']
+                visit_data_obj.tat = request_data['tat']
+                visit_data_obj.save()
+
+                return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data": request_data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+            else:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Error while updating visit data"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    def handle_visit_type(self, request_data):
+        try:
+            visit_type = str(request_data.get("type_of_visit", ""))
+            visit_id = str(request_data.get("visit_id", ""))
+
+            if visit_type == 'Hospital':
+                visit_type_data_obj = HospitalVisit.objects.get(visit_id=visit_id)
+                visit_type_serializer = HospitalVisitSerializer(instance=visit_type_data_obj, data=request_data, partial=True)
+
+                if visit_type_serializer.is_valid():
+                    visit_type_serializer.save()
+                    return visit_type_serializer.data
+
+                
+                else:
+                    # logger.error(visit_type_serializer.errors)
+                    print(visit_type_serializer.errors)
+                    return False
+
+            elif visit_type == 'Lab':
+                visit_type_data_obj = LabVisit.objects.get(visit_id=visit_id)
+                visit_type_serializer = LabVisitSerializer(instance=visit_type_data_obj, data=request_data, partial=True)
+                if visit_type_serializer.is_valid():
+                    visit_type_serializer.save()
+                    return visit_type_serializer.data
+                
+                else:
+                    # logger.error(visit_type_serializer.errors)
+                    print(visit_type_serializer.errors)
+                    return False
+
+            elif visit_type == 'Chemist':
+                visit_type_data_obj = PharmacyVisit.objects.get(visit_id=visit_id)
+                visit_type_serializer = PharmacyVisitSerializer(instance=visit_type_data_obj, data=request_data, partial=True)
+
+                if visit_type_serializer.is_valid():
+                    visit_type_serializer.save()
+                    return visit_type_serializer.data
+                
+                else:
+                    # logger.error(visit_type_serializer.errors)
+                    print(visit_type_serializer.errors)
+                    return False
+
+            else:
+                print('hello here')
+                return False
+        
+        except Exception as e:
+            # logger.error(e, exc_info=True)
+            print(e)
+            return False
+
+    def rename_keys_based_on_visit(self, data):
+        visit_type = str(data.get("type_of_visit", "")).lower()
+        if not visit_type:
+            return data
+        updated_data = {}
+        for key, value in data.items():
+            if key.startswith(visit_type + "_"):
+                new_key = key[len(visit_type) + 1:]
+                updated_data[new_key] = value
+            else:
+                updated_data[key] = value
+        return updated_data
+

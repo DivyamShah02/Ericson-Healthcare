@@ -6,10 +6,10 @@ def create_user():
     url = base_url + 'user/user/'
 
     data = {
-        'name': 'Divyam Investigator',
+        'name': 'Chetan Investigator',
         'password':'divyam',
         'contact_number': '9054413199',
-        'email': 'investigator@gmail.com',
+        'email': 'chetan_investigator@gmail.com',
         'city': 'Ahmedabad',
         'state': 'Gujarat',
         'role': 'investigator',
