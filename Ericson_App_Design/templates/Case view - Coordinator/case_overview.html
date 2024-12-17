@@ -377,7 +377,7 @@
                                     placeholder="Enter Diagnosis">
                             </div>
                             <div class="mb-3 mt-4">
-                                <button type="submit"
+                                <button type="button" onclick="document.getElementById('visits-tab').click()"
                                     class="btn btn-primary eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
                                     <b class="mx-auto">Save Case Details</b>
                                     <i class="fa fa-arrow-right fa-xl"></i>
@@ -742,7 +742,7 @@
                         </div>
 
                         <div class="mt-5">
-                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2"
+                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2" onclick="window.location.href=`{% url 'Coordinator_investigation' %}`;"
                                 type="button"><b>Start Investigation</b></button>
                         </div>
                         <div class="mb-5"></div>

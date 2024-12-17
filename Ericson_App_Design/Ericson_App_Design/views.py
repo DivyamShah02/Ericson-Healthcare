@@ -5,16 +5,16 @@ def home(request):
         'urls':[
             'login',
             'Coordinator_dashboard',
-            'Coordinator_case_overview',
-            'Coordinator_investigation',
-            'Coordinator_medical_remark',
-            'Coordinator_data_entry',
-            'Coordinator_final_report_submit',
-            'Coordinator_case_completed',
+            # 'Coordinator_case_overview',
+            # 'Coordinator_investigation',
+            # 'Coordinator_medical_remark',
+            # 'Coordinator_data_entry',
+            # 'Coordinator_final_report_submit',
+            # 'Coordinator_case_completed',
             'Investigate_Officer_dashboard',
-            'Investigate_Officer_investigation',
+            # 'Investigate_Officer_investigation',
             'Medical_Officer_dashboard',
-            'Medical_Officer_medical_remark',
+            # 'Medical_Officer_medical_remark',
         ]
     }
 
