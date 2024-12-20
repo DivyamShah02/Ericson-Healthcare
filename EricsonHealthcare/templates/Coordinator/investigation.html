@@ -22,9 +22,12 @@
     <!-- Import Wow Animation CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+    <!-- Import the official PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/loader.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/loader.css">
 
 </head>
 
@@ -38,7 +41,7 @@
         <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
             <div class="d-flex justify-content-between align-items-center">
                 <i class="fa fa-chevron-left fa-xl"></i>
-                <div class="mx-auto p-0" style="font-size: 18px;"><b>Case #02658</b></div>
+                <div class="mx-auto p-0" style="font-size: 18px;"><b id="case_id_text">Case #</b></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i class="fa fa-bars fa-xl"></i>
@@ -361,8 +364,88 @@
                         </div>
                         
                         <h3 class="eh-head">Visits Details</h3>
+                        <button style="display: none;" id="addVisitBtnModal" data-bs-toggle="modal"
+                        data-bs-target="#addVisitModal"></button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addVisitModal" tabindex="-1" aria-labelledby="addVisitModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="addVisitModalLabel">Add Visit</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" id="add_visit_form">
+                                            <input type="hidden" name="edit_visit_id" id="edit_visit_id">
+                                            <div class="mb-3">
+                                                <label for="type_of_visit" class="form-label eh-label">Type of
+                                                    visit</label>
+                                                <select class="form-select dark-input" aria-label="select"
+                                                    onchange="handleOptionChange()" id="type_of_visit" name="type_of_visit">
+                                                    <option value="default">Select type of visit</option>
+                                                    <option value="Hospital">Hospital</option>
+                                                    <!-- <option value="Treating_doctor">Treating Doctor</option> -->
+                                                    <option value="Lab">Lab</option>
+                                                    <option value="Chemist">Chemist</option>
+                                                </select>
+                                            </div>
+                                            <div id="add_visit_form_inputs"></div>
+                                            <div class="mb-3">
+                                                <label for="investigator_select"
+                                                    class="form-label eh-label">Investigator Officer</label>
+                                                <select class="form-select dark-input" aria-label="select"
+                                                    id="investigator_select" name="investigator_id">
+                                                    <option value="">Select Investigator Officer</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="" class="form-label eh-label">Questions</label>
+                                                <div class="select-question-card p-2">
+                                                    <div class="d-flex" style="cursor: pointer;"
+                                                        onclick="toggleAddQuestions()">
+                                                        <div class="col text-start">
+                                                            <label for="" class="form-label eh-label m-0">Select
+                                                                Questions</label>
+                                                        </div>
+                                                        <div class="col text-end">
+                                                            <i class="fa fa-chevron-down" id="add-question-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div id="questions-list" class="mt-2" style="display: none;">
+                                                        <!-- <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="question1" name="question1"
+                                                                value="option1">
+                                                            <label class="form-check-label"
+                                                                for="question1">Checkbox 1</label>
+                                                        </div>
+                                                         -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn eh-btn-blue-primary" onclick="createNewVisit()">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="visit-cards">
-                            <div class="p-3 mt-3 visit-card">
+                            <div class="my-3">
+                                <div class="p-5 text-center dark-input" id="no-visit-created"
+                                  style="border-radius: 10px; background-color: var(--eh-danger);">
+                                  <i class="fa fa-triangle-exclamation fa-xl eh-text-blue-primary" style="font-size: 2.5rem;"></i>
+                                  <p class="p-0 m-0 mt-2 eh-text-blue-primary"><b>0 Visit created for this case</b></p>
+                                </div>
+                            </div>
+                            <!-- <div class="p-3 mt-3 visit-card">
                                 <div class="d-flex" id="card-1" onclick="toggleCard(this)" style="cursor: pointer;">
                                     <div class="col text-start">
                                         <h5 class="m-0">Hospital Visit</h5>
@@ -476,48 +559,55 @@
                                         <div class="col-12 mt-2">
                                             <div class="mb-3">
                                                 <div class="select-question-card p-2">
-                                                    <div class="d-flex" id="questions1" style="cursor: pointer;" onclick="toggleAddQuestions(this)">
+                                                    <div class="d-flex" id="visit1-questions" style="cursor: pointer;"
+                                                        onclick="viewQuestions(this)">
                                                         <div class="col text-start">
-                                                            <label for="" class="form-label eh-label m-0">Questions</label>
+                                                            <label for=""
+                                                                class="form-label eh-label m-0">Questions</label>
                                                         </div>
                                                         <div class="col text-end">
-                                                            <i class="fa fa-chevron-down" id="questions1-icon"></i>
-                                                        </div>                                                        
+                                                            <i class="fa fa-chevron-down"
+                                                                id="visit1-questions-icon"></i>
+                                                        </div>
                                                     </div>
-                                                    <div id="questions1-list" class="mt-4" style="display: none;">
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q1)</b> What are the complaints presented by you during the admission at SUNFLOWER WOMENS HOSPITAL?</label>
+                                                    <div id="visit1-questions-list" class="mt-4" style="display: none;">
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q1)</b> What are
+                                                                the complaints presented by you during the admission at
+                                                                SUNFLOWER WOMENS HOSPITAL?</label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A1)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q2)</b> Since when you were suffering from the same?</label>
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q2)</b> Since when
+                                                                you were suffering from the same?</label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A2)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q3)</b> Where were you consulting for the same problem before this admission? Kindly provide a copy of the previous consultation paper?</label>
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q3)</b> Where were
+                                                                you consulting for the same problem before this
+                                                                admission? Kindly provide a copy of the previous
+                                                                consultation paper?</label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A3)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q4)</b> Please mention the reason for selecting hospital </label>
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q4)</b> Please
+                                                                mention the reason for selecting hospital </label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A4)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                             </div>
-    
+
                             <div class="p-3 mt-3 visit-card">
                                 <div class="d-flex" id="card-2" onclick="toggleCard(this)" style="cursor: pointer;">
                                     <div class="col text-start">
@@ -575,42 +665,48 @@
                                         <div class="col-12 px-3">
                                             <hr class="p-0 my-1 visit-card-eh-hr">
                                         </div>
-                                        
+
                                         <div class="col-12 mt-2">
                                             <div class="mb-3">
                                                 <div class="select-question-card p-2">
-                                                    <div class="d-flex" id="questions2" style="cursor: pointer;" onclick="toggleAddQuestions(this)">
+                                                    <div class="d-flex" id="visit2-questions" style="cursor: pointer;"
+                                                        onclick="viewQuestions(this)">
                                                         <div class="col text-start">
-                                                            <label for="" class="form-label eh-label m-0">Questions</label>
+                                                            <label for=""
+                                                                class="form-label eh-label m-0">Questions</label>
                                                         </div>
                                                         <div class="col text-end">
-                                                            <i class="fa fa-chevron-down" id="questions2-icon"></i>
-                                                        </div>                                                        
+                                                            <i class="fa fa-chevron-down"
+                                                                id="visit2-questions-icon"></i>
+                                                        </div>
                                                     </div>
-                                                    <div id="questions2-list" class="mt-4" style="display: none;">
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q1)</b> What are the complaints presented by you during the admission at SUNFLOWER WOMENS HOSPITAL?</label>
+                                                    <div id="visit2-questions-list" class="mt-4" style="display: none;">
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q1)</b> What are
+                                                                the complaints presented by you during the admission at
+                                                                SUNFLOWER WOMENS HOSPITAL?</label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A1)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q2)</b> Since when you were suffering from the same?</label>
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q2)</b> Since when
+                                                                you were suffering from the same?</label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A2)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q3)</b> Where were you consulting for the same problem before this admission? Kindly provide a copy of the previous consultation paper?</label>
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q3)</b> Where were
+                                                                you consulting for the same problem before this
+                                                                admission? Kindly provide a copy of the previous
+                                                                consultation paper?</label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A3)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
-                                                        <div class="p-3 my-2 question-card">
-                                                            <label class="form-label eh-label m-0"><b>Q4)</b> Please mention the reason for selecting hospital </label>
+                                                        <div class="p-2 py-0">
+                                                            <label class="form-label eh-label m-0"><b>Q4)</b> Please
+                                                                mention the reason for selecting hospital </label>
                                                             <hr class="m-1">
-                                                            <label class="form-label m-0"><b>A4)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio atque aperiam necessitatibus sit cumque! Architecto tempore totam rerum veritatis sed molestiae eaque error blanditiis exercitationem. Laboriosam sapiente adipisci fuga illum?</label>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -618,9 +714,10 @@
                                         </div>
                                     </div>
                                 </div>
-    
-                            </div>
+
+                            </div> -->
                         </div>
+
                     </div>
                     <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab"
                         tabindex="0">
@@ -629,23 +726,12 @@
                                 Document</b>
                             <input type="file" id="addDocumentInput" hidden>
                         </label>
-
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                        <div id="document_list_div">
+                            <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" onclick="openDocModal('https://pdfobject.com/pdf/sample.pdf', 'sample.pdf')">
+                                <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>sample.pdf</u>
+                                <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-                        <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                            data-bs-target="#viewDocumentModal">
-                            <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Document name.pdf</u>
-                            <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                        </div>
-
 
                         <!-- Modal -->
                         <div class="modal fade" id="viewDocumentModal" tabindex="-1"
@@ -658,14 +744,12 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <iframe src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="500px"
-                                            style="border: none;"></iframe>
+                                        <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                            <canvas id="pdf-renderer"></canvas>
+                                        </div>
+                                        <!-- <iframe src="/media/uploads/suit_divyam(1).jpeg" width="100%" height="500px" id="viewDocumentModalIframe"
+                                            style="border: none;"></iframe> -->
                                     </div>
-                                    <!-- <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -712,12 +796,86 @@
     <!-- Import Wow Animation JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-    <script src="../static/js/process-step.js"></script>
-    <script src="../static/js/loader.js"></script>
+    <script src="/static/js/process-step.js"></script>
+    <script src="/static/js/loader.js"></script>
+    <script src="/static/js/api_caller.js"></script>
+    <script src="/static/js/script.js"></script>
 
     <script>
         new WOW().init();
 
+        const caseId = new URLSearchParams(window.location.search).get('case_id');
+        const visit_tab = new URLSearchParams(window.location.search).get('visit_tab');
+        console.log(visit_tab);
+
+        if (visit_tab == 'true') {
+            document.getElementById('visits-tab').click();
+        }
+
+        window.onload = function () {
+            getCaseDetails();
+            getCaseData();
+            getVistDetails();
+            getInvestigatorDetails();
+            getQuestions();
+            toggle_loader();
+        };
+        processStep(2);
+
+    </script>
+
+    <script>
+        async function getCaseData() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log(result.data.all_docs);
+                    document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    if (result.data.case_status == 'Creation_confirmation') {
+                        document.getElementById('visits-tab').click();
+                    }
+                    createDocumentList(result.data.all_docs);
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        async function getCaseDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    if (!result.case_details_not_added) {
+                        setFormValues(result.data);
+                    }
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+    </script>
+
+    <script>
+        // Handle Visit related functions
         function toggleCard(card) {
             let card_id = card.id;
             let card_detial_id = `${card_id}-detail`;
@@ -736,7 +894,171 @@
             }
         }
 
-        function createVisitCard(cardId, visitNumber, details) {
+        function handleOptionChange() {
+            const select = document.getElementById('type_of_visit');
+            const selectedValue = select.value;
+
+            if (selectedValue === 'Hospital') {
+                createHospitalFormInput();
+            }
+
+            if (selectedValue === 'Lab') {
+                createLabFormInput();
+            }
+
+            if (selectedValue === 'Chemist') {
+                createChemistFormInput();
+            }
+
+            if (selectedValue === 'default') {
+                deleteElementsWithIdPrefix('type_visit_');
+            }
+
+        }
+
+        function createInputDiv(containerId, inputId, labelText, placeholderText) {
+            const div = document.createElement('div');
+            div.className = 'mb-3';
+            div.id = containerId;
+
+            const label = document.createElement('label');
+            label.htmlFor = inputId;
+            label.className = 'form-label eh-label';
+            label.textContent = labelText;
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control dark-input';
+            input.id = inputId;
+            input.name = inputId;
+            input.placeholder = placeholderText;
+
+            div.appendChild(label);
+            div.appendChild(input);
+
+            return div;
+        }
+
+        function deleteElementsWithIdPrefix(prefix) {
+            const elements = document.querySelectorAll(`[id^="${prefix}"]`);
+            elements.forEach(element => element.remove());
+        }
+
+        function createHospitalFormInput() {
+            deleteElementsWithIdPrefix('type_visit_');
+            const parentElement = document.getElementById('add_visit_form_inputs');
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_name', 'hospital_hospital_name', 'Hospital Name', 'Enter Hospital Name'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state', 'State', 'Enter State'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_city', 'hospital_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis', 'Diagnosis', 'Enter Diagnosis'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number', 'Registration Number', 'Enter Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds', 'No of Beds', 'Enter No of Beds'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu', 'ICU', 'Enter ICU'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo', 'RMO', 'Enter RMO'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_td_registration_number', 'hospital_td_registration_number', 'TD registration number', 'Enter TD registration number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_degree', 'hospital_degree', 'Degree', 'Enter Degree'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_owner_of_the_hospital', 'hospital_owner_of_the_hospital', 'Owner of the hospital', 'Enter Owner of the hospital'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_registration_number', 'hospital_doctor_registration_number', 'Registration Number', 'Enter Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_contact_number', 'hospital_doctor_contact_number', 'Contact Number', 'Enter Contact Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doctor_email', 'hospital_doctor_email', 'Email Id', 'Enter Email Id'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_tat', 'hospital_tat', 'TAT', 'Enter TAT'));
+
+        }
+
+        function createLabFormInput() {
+            deleteElementsWithIdPrefix('type_visit_');
+            const parentElement = document.getElementById('add_visit_form_inputs');
+            parentElement.appendChild(createInputDiv('type_visit_lab_name', 'lab_name', 'Name', 'Enter Name'));
+            parentElement.appendChild(createInputDiv('type_visit_lab_city', 'lab_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_lab_state', 'lab_state', 'State', 'Enter State'));
+            parentElement.appendChild(createInputDiv('type_visit_lab_address', 'lab_address', 'Address', 'Enter Address'));
+            parentElement.appendChild(createInputDiv('type_visit_lab_pathologist_name', 'lab_pathologist_name', 'Pathologist Name', 'Enter Pathologist Name'));
+            parentElement.appendChild(createInputDiv('type_visit_lab_registration_number', 'lab_registration_number', 'Registration Number', 'Enter Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_lab_tat', 'lab_tat', 'TAT', 'Enter TAT'));
+
+        }
+
+        function createChemistFormInput() {
+            deleteElementsWithIdPrefix('type_visit_');
+            const parentElement = document.getElementById('add_visit_form_inputs');
+            parentElement.appendChild(createInputDiv('type_visit_chemist_name_of_chemist', 'chemist_name_of_chemist', 'Name of Chemist', 'Enter Name of Chemist'));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_address', 'chemist_address', 'Address', 'Enter Address'));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_state', 'chemist_state', 'State', 'Enter State'));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_city', 'chemist_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_gst_number', 'chemist_gst_number', 'GST Number', 'Enter GST Number'));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_drug_license_number', 'chemist_drug_license_number', 'Drug Licence Number', 'Enter Drug Licence Number'));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_tat', 'chemist_tat', 'TAT', 'Enter TAT'));
+
+        }
+
+        function toggleAddQuestions() {
+            let question_list = document.getElementById('questions-list');
+
+            if (question_list.style.display == 'none') {
+                question_list.style.display = 'block';
+                document.getElementById('add-question-icon').classList.remove('fa-chevron-down');
+                document.getElementById('add-question-icon').classList.add('fa-chevron-up');
+            }
+            else {
+                question_list.style.display = 'none';
+                document.getElementById('add-question-icon').classList.remove('fa-chevron-up');
+                document.getElementById('add-question-icon').classList.add('fa-chevron-down');
+            }
+        }
+
+        function generateQuestions(questions) {
+            const container = document.getElementById('questions-list'); // Create a container for the checkboxes
+            questions.forEach((question, index) => {
+                const questionNumber = index + 1; // Calculate the question number
+
+                // Create the outer div with class "form-check"
+                const div = document.createElement('div');
+                div.className = 'form-check';
+
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.className = 'form-check-input eh-checkbox';
+                input.id = `visit_question${questionNumber}`;
+                input.name = `question${questionNumber}`;
+                input.value = question.id;
+
+                const label = document.createElement('label');
+                label.className = 'form-check-label';
+                label.setAttribute('for', `visit_question${questionNumber}`);
+                label.textContent = question.question;
+
+                div.appendChild(input);
+                div.appendChild(label);
+
+                container.appendChild(div);
+
+                const hr = document.createElement('hr');
+                hr.className = 'my-2';
+                container.appendChild(hr);
+            });
+        }
+
+        function viewQuestions(questions) {
+            let question_list = document.getElementById(`${questions.id}-list`);
+
+            if (question_list.style.display == 'none') {
+                question_list.style.display = 'block';
+                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-down');
+                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-up');
+            }
+            else {
+                question_list.style.display = 'none';
+                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-up');
+                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-down');
+            }
+        }
+
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id) {
             // Create the outer card container
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card';
@@ -753,7 +1075,8 @@
             headerLeft.className = 'col text-start';
             const title = document.createElement('h5');
             title.className = 'm-0';
-            title.textContent = `Visit Number ${visitNumber}`;
+            // title.textContent = `Visit Number ${visitNumber}`;
+            title.textContent = `${type_of_visit} Visit`;
             headerLeft.appendChild(title);
 
             // Header - Right side (Toggle Icon)
@@ -788,6 +1111,7 @@
             actionCol.className = 'col-12 text-end mb-3';
             const editIcon = document.createElement('i');
             editIcon.className = 'fa fa-pen fa-lg eh-text-blue-primary';
+            editIcon.setAttribute('onclick', `editVisitDetail('${visit_id}');`);
             const deleteIcon = document.createElement('i');
             deleteIcon.className = 'fa fa-trash fa-lg text-danger';
             actionCol.appendChild(editIcon);
@@ -823,6 +1147,64 @@
             // Append the details row to the details div
             detailsDiv.appendChild(detailsRow);
 
+            // Questions Section
+            const questionsContainer = document.createElement('div');
+            questionsContainer.className = 'col-12 mt-2';
+            const questionCard = document.createElement('div');
+            questionCard.className = 'select-question-card p-2';
+
+            const questionHeader = document.createElement('div');
+            questionHeader.className = 'd-flex';
+            questionHeader.id = `visit${visitNumber}-questions`;
+            questionHeader.style.cursor = 'pointer';
+            questionHeader.setAttribute('onclick', 'viewQuestions(this)');
+
+            const questionHeaderLeft = document.createElement('div');
+            questionHeaderLeft.className = 'col text-start';
+            const questionLabel = document.createElement('label');
+            questionLabel.className = 'form-label eh-label m-0';
+            questionLabel.textContent = 'Questions';
+            questionHeaderLeft.appendChild(questionLabel);
+
+            const questionHeaderRight = document.createElement('div');
+            questionHeaderRight.className = 'col text-end';
+            const questionIcon = document.createElement('i');
+            questionIcon.className = 'fa fa-chevron-down';
+            questionIcon.id = `visit${visitNumber}-questions-icon`;
+            questionHeaderRight.appendChild(questionIcon);
+
+            questionHeader.appendChild(questionHeaderLeft);
+            questionHeader.appendChild(questionHeaderRight);
+
+            const questionList = document.createElement('div');
+            questionList.id = `visit${visitNumber}-questions-list`;
+            questionList.className = 'mt-4';
+            questionList.style.display = 'none';
+
+            // Add individual questions
+            questions.forEach((question, index) => {
+                const questionItem = document.createElement('div');
+                questionItem.className = 'p-2 py-0';
+
+                const questionLabel = document.createElement('label');
+                questionLabel.className = 'form-label eh-label m-0';
+                questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                const hr = document.createElement('hr');
+                hr.className = 'm-1';
+
+                questionItem.appendChild(questionLabel);
+                questionItem.appendChild(hr);
+
+                questionList.appendChild(questionItem);
+            });
+
+            questionCard.appendChild(questionHeader);
+            questionCard.appendChild(questionList);
+            questionsContainer.appendChild(questionCard);
+
+            detailsRow.appendChild(questionsContainer);
+
             // Append the header and details section to the card
             card.appendChild(header);
             card.appendChild(detailsDiv);
@@ -830,47 +1212,283 @@
             return card;
         }
 
-        function toggleAddQuestions(questions) {
-            let question_list = document.getElementById(`${questions.id}-list`);
+        // All Visit related api caller
+        async function getVistDetails() {
+            const Params = {
+                case_id: caseId,
+            };
 
-            if (question_list.style.display == 'none') {
-                question_list.style.display = 'block';
-                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-down');
-                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-up');
-            }
-            else {
-                question_list.style.display = 'none';
-                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-up');
-                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-down');
+            const url = "{% url 'visit-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    if (!result.no_visit_for_case){
+                        result.data.forEach((visit, index) => {
+                            document.getElementById('no-visit-created').style.display = 'none';
+                            console.log(visit);
+                            const visit_card = createVisitCard(visit.type_of_visit, index+3, index+3, visit.final_card_data, visit.questions, visit.visit_id);
+                            document.getElementById('visit-cards').appendChild(visit_card);
+                        });
+                    }
+                }
+                else {
+                    // window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                // window.location.href=`{% url 'dashboard-list' %}`;
             }
         }
 
-        // Example usage:
-        const visitDetails = {
-            'Name': 'Divyam',
-            'Age': '22',
-            'Country': 'India'
-        };
+        async function getInvestigatorDetails() {
+            const Params = {
+                user_role: "investigator",
+            };
 
-        // const card = createVisitCard(3, 3, visitDetails);
-        // const card_2 = createVisitCard(4, 4, visitDetails);
+            const url = "{% url 'list_users_by_role-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                console.log("GET User Success:", result);
+                const selectElement = document.getElementById('investigator_select');
 
-        // document.getElementById('visit-cards').appendChild(card);
-        // document.getElementById('visit-cards').appendChild(card_2);
+                // Loop through the list of dictionaries
+                result.data.users.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.user_id;  // Set the value from the dictionary
+                    option.textContent = item.name;  // Set the text from the dictionary
+                    selectElement.appendChild(option);  // Append the option to the select element
+                });
+
+            } else {
+                console.error("GET User Failed:", result);
+            }
+        }
+
+        async function getQuestions() {
+            const url = "{% url 'question-api-list' %}?";
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log(result.data);
+                    generateQuestions(result.data)
+                }
+                else {
+                    // window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                // window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        function getSelectedVisitQuestions() {
+            const checkboxes = document.querySelectorAll("input[type='checkbox'][id^='visit_question']");
+            const selectedValues = [];
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedValues.push(checkbox.value);
+                }
+            });            
+            return selectedValues;
+        }
+
+        async function createNewVisit() {
+            if (document.getElementById('edit_visit_id').value == ''){
+                let new_visit_detail = {
+                    'case_id': caseId
+                }
+                var form_new_visit = new FormData(document.getElementById('add_visit_form'));
+                form_new_visit.forEach((value, key) => {
+                    if (!Object.prototype.hasOwnProperty.call(new_visit_detail, key)) {
+                        new_visit_detail[key] = value;
+                        return;
+                    }
+                    if (!Array.isArray(new_visit_detail[key])) {
+                        new_visit_detail[key] = [new_visit_detail[key]];
+                    }
+                    new_visit_detail[key].push(value);
+                });
+    
+                new_visit_detail['questions'] = getSelectedVisitQuestions();
+                console.log(new_visit_detail);
+    
+                const bodyData = new_visit_detail;
+    
+                const url = "{% url 'visit-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                if (success) {
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                } else {
+                    alert('Unable to create new visit`');
+                }
+            }
+
+            else {
+                updateVisit();
+            }
+        }
+
+        async function editVisitDetail(visit_id) {
+            const Params = {
+                visit_id: visit_id,
+            };
+
+            const url = "{% url 'visit-details-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    uncheckQuestions();
+                    handleEditVisitModal(result.data.type_of_visit);
+                    setFormValues(result.data);
+                
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        function handleEditVisitModal(type_of_visit){
+            document.getElementById('addVisitBtn').click();
+            document.getElementById('type_of_visit').value = type_of_visit;
+            handleOptionChange();
+            document.getElementById('type_of_visit').disabled = true;
+        }
+
+        function defaultVisitModal(){
+            document.getElementById('type_of_visit').value = 'default';
+            handleOptionChange();
+            document.getElementById('edit_visit_id').value = '';
+            document.getElementById('investigator_select').value = '';
+            document.getElementById('type_of_visit').disabled = false;
+            document.getElementById('addVisitBtnModal').click();
+            uncheckQuestions();
+
+        }
+
+        function uncheckQuestions() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name^="question"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+
+        async function updateVisit() {
+            visit_id = document.getElementById('edit_visit_id').value
+            let update_visit_detail = {
+                'visit_id': visit_id
+            }
+
+            var form_new_visit = new FormData(document.getElementById('add_visit_form'));
+            form_new_visit.forEach((value, key) => {
+                if (!Object.prototype.hasOwnProperty.call(update_visit_detail, key)) {
+                    update_visit_detail[key] = value;
+                    return;
+                }
+                if (!Array.isArray(update_visit_detail[key])) {
+                    update_visit_detail[key] = [update_visit_detail[key]];
+                }
+                update_visit_detail[key].push(value);
+            });
+
+            update_visit_detail['type_of_visit'] = document.getElementById('type_of_visit').value;
+
+            update_visit_detail['questions'] = getSelectedVisitQuestions();
+            console.log(update_visit_detail);
+
+            const bodyData = update_visit_detail;
+
+            const url = "{% url 'update-visit-api-list' %}";
+            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+            console.log(result);
+            if (success) {
+                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+            } else {
+                alert('Unable to save the visit details');
+            }
+        }
+
+    </script>
+
+    <script>
+        // Handle document section
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        function openDocModal(doc_path, doc_name) {
+            loadPDF(doc_path);
+            document.getElementById('viewDocumentModalLabel').innerText = doc_name;
+            const myModal = new bootstrap.Modal(document.getElementById('viewDocumentModal'));
+            myModal.show();
+        }
+
+        function createDocumentList(documentList) {
+            const container = document.getElementById('document_list_div');
+
+            documentList.forEach((docItem) => {
+                const documentDiv = document.createElement('div');
+                documentDiv.className = 'd-flex align-items-center py-3 px-2 mb-2 document-card';
+                documentDiv.setAttribute('onclick', `openDocModal('${docItem.path}','${docItem.name}')`);
+
+                const icon = document.createElement('i');
+                icon.className = 'fa fa-file-pdf fa-xl';
+
+                const documentName = document.createElement('u');
+                documentName.textContent = docItem.name;
+
+                const nameContainer = document.createElement('div');
+                nameContainer.appendChild(icon);
+                nameContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0')); // Adding spaces
+                nameContainer.appendChild(documentName);
+
+                const downloadDiv = document.createElement('div');
+                downloadDiv.className = 'ms-auto';
+
+                const downloadIcon = document.createElement('i');
+                downloadIcon.className = 'fa fa-download fa-xl mx-2';
+
+                downloadDiv.appendChild(downloadIcon);
+
+                documentDiv.appendChild(nameContainer);
+                documentDiv.appendChild(downloadDiv);
+
+                container.appendChild(documentDiv);
+            });
+        }
+
+        function loadPDF(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 0.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
 
         document.getElementById('addDocumentInput').addEventListener('change', function (event) {
             const file = event.target.files[0] || "No file selected";
             console.log(file)
         });
 
-    </script>
-
-
-    <script>
-        window.onload = function () {
-            toggle_loader();
-        };
-        processStep(2);
     </script>
 
 </body>

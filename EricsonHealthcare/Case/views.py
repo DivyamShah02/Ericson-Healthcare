@@ -274,7 +274,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                         status=status.HTTP_400_BAD_REQUEST
                     )
 
-            case_data = Case.objects.filter(case_id=case_id).first()
+            case_data = Case.objects.get(case_id=case_id)
 
             if case_data is None:
                 return Response(
@@ -299,6 +299,8 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             case_obj.coordinator_id = case_data.coordinator_id
 
             case_obj.claim_number = request.data.get('claim_number')
+            case_obj.insurance_company = request.data.get('insurance_company')
+            case_obj.type_of_case = request.data.get('type_of_case')
             case_obj.doa = request.data.get('doa')
             case_obj.dod = request.data.get('dod')
             case_obj.hospital_name = request.data.get('hospital_name')
@@ -306,8 +308,10 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             case_obj.state = request.data.get('state')
             case_obj.claim_value = request.data.get('claim_value')
             case_obj.diagnosis = request.data.get('diagnosis')
-
             case_obj.save()
+            
+            case_data.case_status = 'Creation_confirmation'
+            case_data.save()
 
             updated_case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
             update_case_details = CaseDetailsSerializer(updated_case_details_obj).data
@@ -617,3 +621,99 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
 
+class SetInvestigationStatus(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.GET.get('case_id')
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_status = request.GET.get('case_status')
+            case_statuses = ['Creation', 'Creation_confirmation', 'Investigation', 'Investigation_confirmation', 'Medical', 'Medical_confirmation', 'Data_entry', 'Data_entry_confirmation', 'Final_report', 'Final_report_confirmation', 'Complete']
+            if not case_status or case_status not in case_statuses:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_status" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = Case.objects.get(case_id=case_id)
+            if case_data is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data.case_status = case_status
+            case_data.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data":None,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
