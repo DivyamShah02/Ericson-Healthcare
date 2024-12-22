@@ -9,7 +9,9 @@ from rest_framework.response import Response
 
 from .models import Case, CaseDetails
 from .serializers import CaseSerializers, CaseDetailsSerializer
+from Visit.models import Visit
 
+logger = None
 
 class CaseViewSet_old(viewsets.ViewSet):
     
@@ -99,8 +101,7 @@ class CaseViewSet_old(viewsets.ViewSet):
             return Response({"error": "case_id is required."}, 
                             status=status.HTTP_400_BAD_REQUEST)
 
-
-class CaseDetailsViewSet(viewsets.ViewSet):
+class CaseDetailsViewSet_old(viewsets.ViewSet):
     
     def create(self, request):
         serializer = CaseDetailsSerializer(data=request.data)
@@ -158,89 +159,360 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+class CaseDetailsViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "case_details_not_added": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.GET.get('case_id')
+
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "case_details_not_added": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
+
+            if case_details_obj is None:
+                return Response(
+                        {
+                            "success": True,
+                            "user_not_logged_in": False,
+                            "case_details_not_added": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_200_OK
+                    )
+
+            case_details = CaseDetailsSerializer(case_details_obj).data
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "case_details_not_added": False,
+                        "data":case_details,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "case_details_not_added": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+    def create(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.data.get('case_id')
+
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = Case.objects.get(case_id=case_id)
+
+            if case_data is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
+
+            if case_details_obj is None:
+                case_obj = CaseDetails(case_id=case_id)
+            
+            else:
+                case_obj = CaseDetails.objects.get(case_id=case_id)
+            
+            case_obj.coordinator_id = case_data.coordinator_id
+
+            case_obj.claim_number = request.data.get('claim_number')
+            case_obj.insurance_company = request.data.get('insurance_company')
+            case_obj.type_of_case = request.data.get('type_of_case')
+            case_obj.doa = request.data.get('doa')
+            case_obj.dod = request.data.get('dod')
+            case_obj.hospital_name = request.data.get('hospital_name')
+            case_obj.city = request.data.get('city')
+            case_obj.state = request.data.get('state')
+            case_obj.claim_value = request.data.get('claim_value')
+            case_obj.diagnosis = request.data.get('diagnosis')
+            case_obj.save()
+            
+            case_data.case_status = 'Creation_confirmation'
+            case_data.save()
+
+            updated_case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()
+            update_case_details = CaseDetailsSerializer(updated_case_details_obj).data
+            
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data":update_case_details,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
 class CaseViewSet(viewsets.ViewSet):
     def create(self, request):
-        user = request.user
-
-        if not user.is_authenticated:
-            return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": True,
-                        "user_unathorized": False,
-                        "file_not_attached": False,
-                        "data":None,
-                        "error": None
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-        user_role = user.role
-
-        if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
-            return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": False,
-                        "user_unathorized": True,
-                        "file_not_attached": False,
-                        "data":None,
-                        "error": None
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-
-        if 'file' not in request.FILES:
-            return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": False,
-                        "user_unathorized": False,
-                        "file_not_attached": True,
-                        "data":None,
-                        "error": None
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-        
-        coordinator_id = request.data.get('coordinator_id')
-
-        uploaded_file = request.FILES['file']
-        file_path = self.save_file(uploaded_file)
-
         try:
-            last_case = Case.objects.latest('id')
-            case_id = int(last_case.case_id) + 1
-        
-        except Case.DoesNotExist:
-            case_id = 1000
-        
-        new_case = Case(case_id=case_id)
-        new_case.document_paths = [f"{file_path}"]
-        
-        if user_role == 'hod':
-            new_case.hod_id = user
-            if coordinator_id:
-                new_case.coordinator_id = coordinator_id
+            user = request.user
 
-        elif user_role == 'coordinator':
-            new_case.coordinator_id = user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
-        new_case.save()
+            user_role = user.role
 
-        return Response(
-                {
-                    "success": True,
-                    "user_not_logged_in": False,
-                    "user_unathorized": False,
-                    "file_not_attached": False,
-                    "data":{'case_id':case_id},
-                    "error": None
-                },
-                status=status.HTTP_200_OK
-            )
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
+
+            if 'file' not in request.FILES:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            coordinator_id = request.data.get('coordinator_id')
+
+            uploaded_file = request.FILES['file']
+            file_path = self.save_file(uploaded_file)
+
+            try:
+                last_case = Case.objects.latest('id')
+                case_id = int(last_case.case_id) + 1
+            
+            except Case.DoesNotExist:
+                case_id = 1000
+            
+            new_case = Case(case_id=case_id)
+            new_case.document_paths = [f"{file_path}"]
+            
+            if user_role == 'hod':
+                new_case.hod_id = user
+                if coordinator_id:
+                    new_case.coordinator_id = coordinator_id
+
+            elif user_role == 'coordinator':
+                new_case.coordinator_id = user
+
+            new_case.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "file_not_attached": False,
+                        "data":{'case_id':case_id},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+    def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.GET.get('case_id')
+
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_obj = Case.objects.filter(case_id=case_id).first()
+
+            if case_obj is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = CaseSerializers(case_obj).data
+            
+            docs_path_lst = case_data.get('document_paths')
+
+            all_docs = []
+            for doc in docs_path_lst:
+                all_docs.append({
+                    "path": os.path.join(settings.MEDIA_URL, doc),
+                    "name": os.path.basename(str(doc))
+                })
+
+            case_data['all_docs'] = all_docs
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":case_data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
 
     def save_file(self, uploaded_file):
         # Define the base directory to save the files
@@ -265,51 +537,183 @@ class CaseViewSet(viewsets.ViewSet):
         # Return the relative file path
         return os.path.relpath(file_path, settings.MEDIA_ROOT)
 
+class GetAllCaseViewSet(viewsets.ViewSet):
     def list(self, request):
         """
         This view returns a list of cases associated with the current logged-in user.
         """
-        user = request.user
+        try:
+            user = request.user
 
-        if not user.is_authenticated:
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role == 'hod':
+                cases = Case.objects.filter(hod_id=user)
+
+            elif user_role == 'coordinator':
+                cases = Case.objects.filter(coordinator_id=user)
+
+            elif user_role == 'investigator':
+                all_visits = Visit.objects.filter(investigator_id=user)
+
+                visit_cases = [visit_details.case_id for visit_details in all_visits]
+                visit_cases = list(set(visit_cases))
+                
+                cases = Case.objects.filter(case_id__in=visit_cases)
+
+            elif user_role == 'medical_officer':
+                cases = Case.objects.filter(medical_officer_id=user)
+
+            elif user_role == 'data_entry_personnel':
+                cases = Case.objects.filter(data_entry_id=user)
+
+            elif user_role == 'admin':
+                pass
+            
+            cases = cases[::-1]
+            case_data = CaseSerializers(cases, many=True).data
+
+            total_cases = len(case_data)
+            in_progress_case_data = [case_obj for case_obj in case_data if case_obj['case_status'] != 'Complete']
+            recent_cases = in_progress_case_data[0:5]
+            in_progress_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] != 'Complete' and case_obj['case_status'] != 'Creation'])
+            closed_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Complete'])
+            pending_cases = len([case_obj for case_obj in case_data if case_obj['case_status'] == 'Creation'])
+
+            data = {
+                'total_cases': total_cases,
+                'in_progress_cases': in_progress_cases,
+                'closed_cases': closed_cases,
+                'pending_cases': pending_cases,
+                'case_data': case_data,
+                'recent_cases': recent_cases
+            }
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+        
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
             return Response(
                     {
                         "success": False,
-                        "user_not_logged_in": True,
+                        "user_not_logged_in": False,
+                        "data":None,
+                        "error": str(ex)
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+class SetInvestigationStatus(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.GET.get('case_id')
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_status = request.GET.get('case_status')
+            case_statuses = ['Creation', 'Creation_confirmation', 'Investigation', 'Investigation_confirmation', 'Medical', 'Medical_confirmation', 'Data_entry', 'Data_entry_confirmation', 'Final_report', 'Final_report_confirmation', 'Complete']
+            if not case_status or case_status not in case_statuses:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_status" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = Case.objects.get(case_id=case_id)
+            if case_data is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data.case_status = case_status
+            case_data.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
                         "data":None,
                         "error": None
                     },
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_200_OK
                 )
 
-        user_role = user.role
 
-        if user_role == 'hod':
-            cases = Case.objects.filter(hod_id=user)
-
-        elif user_role == 'coordinator':
-            cases = Case.objects.filter(coordinator_id=user)
-
-        elif user_role == 'investigator':
-            pass
-
-        elif user_role == 'medical_officer':
-            cases = Case.objects.filter(medical_officer_id=user)
-
-        elif user_role == 'data_entry_personnel':
-            cases = Case.objects.filter(data_entry_id=user)
-
-        elif user_role == 'admin':
-            pass
-
-        case_data = CaseSerializers(cases, many=True)
-
-        return Response(
-                {
-                    "success": True,
-                    "user_not_logged_in": False,
-                    "data":case_data.data,
-                    "error": None
-                },
-                status=status.HTTP_200_OK
-            )
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )

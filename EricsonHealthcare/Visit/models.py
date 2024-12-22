@@ -23,28 +23,28 @@ class Visit(models.Model):
 # Table HospitalVisit
 class HospitalVisit(models.Model):
     visit_id = models.IntegerField()  # Link to Visit ID
-    doa = models.DateTimeField()  # Date of Admission
-    dod = models.DateTimeField()  # Date of Discharge
     hospital_name = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+    doa = models.CharField(max_length=255)
+    dod = models.CharField(max_length=255)
     claim_value = models.CharField(max_length=100)
     diagnosis = models.CharField(max_length=255)
     registration_number = models.CharField(max_length=100)
-    no_of_beds = models.IntegerField()
-    icu = models.BooleanField()
-    ot = models.BooleanField()  # Operating Theater
-    nursing_staff = models.IntegerField()
-    rmo = models.IntegerField()
+    no_of_beds = models.CharField(max_length=255)
+    icu = models.CharField(max_length=255)
+    ot = models.CharField(max_length=255)
+    nursing_staff = models.CharField(max_length=255)
+    rmo = models.CharField(max_length=255)
     td_registration_number = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
     owner_of_the_hospital = models.CharField(max_length=255)
     doctor_registration_number = models.CharField(max_length=100)
     doctor_contact_number = models.CharField(max_length=15)
-    doctor_email = models.EmailField()
-    questions = models.JSONField()
-    document_paths = models.JSONField()
-    photo_path = models.JSONField()
+    doctor_email = models.CharField(max_length=255)
+    questions = models.JSONField(null=True, blank=True)
+    document_paths = models.JSONField(null=True, blank=True)
+    photo_path = models.JSONField(null=True, blank=True)
 
 # Table LabVisit
 class LabVisit(models.Model):
@@ -55,9 +55,9 @@ class LabVisit(models.Model):
     address = models.TextField()
     pathologist_name = models.CharField(max_length=255)
     registration_number = models.CharField(max_length=100)
-    questions = models.JSONField()
-    document_paths = models.JSONField()
-    photo_path = models.JSONField()
+    questions = models.JSONField(null=True, blank=True)
+    document_paths = models.JSONField(null=True, blank=True)
+    photo_path = models.JSONField(null=True, blank=True)
 
 # Table PharmacyVisit
 class PharmacyVisit(models.Model):
@@ -67,6 +67,6 @@ class PharmacyVisit(models.Model):
     city = models.CharField(max_length=255)
     gst_number = models.CharField(max_length=100)
     drug_license_number = models.CharField(max_length=100)
-    questions = models.JSONField()
-    document_paths = models.JSONField()
-    photo_path = models.JSONField()
+    questions = models.JSONField(null=True, blank=True)
+    document_paths = models.JSONField(null=True, blank=True)
+    photo_path = models.JSONField(null=True, blank=True)
