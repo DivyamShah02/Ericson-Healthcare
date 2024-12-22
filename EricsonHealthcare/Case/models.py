@@ -52,6 +52,15 @@ class CaseDetails(models.Model):
     insurance_company = models.CharField(max_length=255)  # Link to Insurance Company Name
     type_of_case = models.CharField(max_length=255)
     rate = models.CharField(max_length=255)
+
+    doa = models.CharField(max_length=255, null=True, blank=True)
+    dod = models.CharField(max_length=255, null=True, blank=True)
+    hospital_name = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
+    state = models.CharField(max_length=255, null=True, blank=True)
+    claim_value = models.CharField(max_length=255, null=True, blank=True)
+    diagnosis = models.CharField(max_length=255, null=True, blank=True)
+
     medical_officer_remarks = models.TextField(null=True, blank=True)
     STATUS_OF_CLAIM_CHOICES = [
         ('Pass', 'Pass'),
