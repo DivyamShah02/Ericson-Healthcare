@@ -2,6 +2,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.views import APIView
+from django.http import JsonResponse
 
 from .serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSerializer, HospitalVisitSerializer
 from .models import Visit, LabVisit, HospitalVisit, PharmacyVisit
@@ -733,7 +735,7 @@ class UpdateVisitViewSet(viewsets.ViewSet):
                 if visit_type_serializer.is_valid():
                     visit_type_serializer.save()
                     return visit_type_serializer.data
-                
+        
                 else:
                     # logger.error(visit_type_serializer.errors)
                     print(visit_type_serializer.errors)
@@ -742,7 +744,7 @@ class UpdateVisitViewSet(viewsets.ViewSet):
             else:
                 print('hello here')
                 return False
-        
+  
         except Exception as e:
             # logger.error(e, exc_info=True)
             print(e)
@@ -761,3 +763,111 @@ class UpdateVisitViewSet(viewsets.ViewSet):
                 updated_data[key] = value
         return updated_data
 
+
+class UpdateVisitAnswersView(APIView):
+    def post(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+  
+            visit_id = request.data.get('visit_id')
+            answers = request.data.get('answers')
+
+            # Validate that 'visit_id' and 'answers' are present
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "visit_id is required"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+ 
+            if not answers:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "answer is required"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            try:
+                # Check if a visit with the given 'visit_id' exists
+                visit = Visit.objects.get(visit_id=visit_id)
+            except Visit.DoesNotExist:
+                # If the visit doesn't exist, return a 404 error
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Visit ID does not exists"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Get visit type from Visit
+            visit_type = visit.type_of_visit
+
+            print("visit_type", visit_type)
+
+            if visit_type == 'Hospital':
+                visit_type_obj = HospitalVisit.objects.get(visit_id=visit_id)
+            if visit_type == 'Lab':
+                visit_type_obj = LabVisit.objects.get(visit_id=visit_id)
+            elif visit_type == 'Chemist':
+                visit_type_obj = PharmacyVisit.objects.get(visit_id=visit_id)
+ 
+            # Get current visit questions list
+            current_visit_questions = visit_type_obj.questions
+            result = {
+                current_visit_questions[int(k)]: v
+                for k, v in answers.items()
+                if int(k) < len(current_visit_questions)
+            }
+
+            # Update the answers field
+            if visit_type_obj.answers is None:
+                visit_answers = {}
+            else:
+                visit_answers = visit_type_obj.answers
+
+            visit_answers.update(result)  # Update the existing dictionary with new key-value pairs
+
+            visit_type_obj.answers = visit_answers
+            visit_type_obj.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data": "Successfully Updated the answer table",
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": f"Error Occurred {e}"
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
