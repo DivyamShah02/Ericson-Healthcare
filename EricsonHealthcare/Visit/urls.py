@@ -12,4 +12,6 @@ router.register(r'update-visit-api', UpdateVisitViewSet, basename='update-visit-
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('update-visit-answers/', UpdateVisitAnswersView.as_view(), name='update-visit-answers'),
+
 ]

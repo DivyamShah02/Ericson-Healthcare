@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Table Visit
 class Visit(models.Model):
     visit_id = models.IntegerField()
@@ -19,6 +20,7 @@ class Visit(models.Model):
         ('Investigation_confirmation', 'Investigation Confirmation'),
     ]
     visit_status = models.CharField(max_length=50, choices=VISIT_STATUS_CHOICES)
+
 
 # Table HospitalVisit
 class HospitalVisit(models.Model):
@@ -43,8 +45,10 @@ class HospitalVisit(models.Model):
     doctor_contact_number = models.CharField(max_length=15)
     doctor_email = models.CharField(max_length=255)
     questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)
+
 
 # Table LabVisit
 class LabVisit(models.Model):
@@ -56,8 +60,10 @@ class LabVisit(models.Model):
     pathologist_name = models.CharField(max_length=255)
     registration_number = models.CharField(max_length=100)
     questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)
+
 
 # Table PharmacyVisit
 class PharmacyVisit(models.Model):
@@ -68,5 +74,6 @@ class PharmacyVisit(models.Model):
     gst_number = models.CharField(max_length=100)
     drug_license_number = models.CharField(max_length=100)
     questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)
