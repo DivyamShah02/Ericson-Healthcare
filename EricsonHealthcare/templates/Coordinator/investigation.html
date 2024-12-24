@@ -40,7 +40,7 @@
     <div id="main-content" class="blur">
         <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
             <div class="d-flex justify-content-between align-items-center">
-                <i class="fa fa-chevron-left fa-xl"></i>
+                <i class="fa fa-chevron-left fa-xl" onclick="window.location.href=`{% url 'dashboard-list' %}`;"></i>
                 <div class="mx-auto p-0" style="font-size: 18px;"><b id="case_id_text">Case #</b></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -335,28 +335,28 @@
                         <div class="row mb-4">
                             
                                 <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Id</div>
-                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">02658</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_case_id"></div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
                                 </div>                            
 
                             
                                 <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
-                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">ICICI Lombard</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_insaurance_company"></div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
                                 </div>                            
 
                             
                                 <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Type</div>
-                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">RR</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_type_of_case"></div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
                                 </div>                            
 
                             
-                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Id</div>
-                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">02658</div>
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Diagnosis</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_diagnosis"></div>
                                 <div class="col-12 px-3">
                                     <hr class="p-0 my-1 visit-card-eh-hr">
                                 </div>                            
@@ -364,6 +364,9 @@
                         </div>
                         
                         <h3 class="eh-head">Visits Details</h3>
+
+                        <button class="btn eh-btn-blue-primary-outline w-100 py-2" type="button" id="addVisitBtn" onclick="defaultVisitModal()" style="display: none;"><b>Add Visit</b></button>
+
                         <button style="display: none;" id="addVisitBtnModal" data-bs-toggle="modal"
                         data-bs-target="#addVisitModal"></button>
 
@@ -768,14 +771,14 @@
                 <div class="fixed-bottom mb-2 mx-2 mx-md-5 px-md-5">
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <button type="button"
+                            <button type="button" onclick="updateCaseStatus('Creation_confirmation')"
                                 class="btn btn-primary mb-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
                                 <i class="fa fa-arrow-left fa-xl"></i>
                                 <b class="mx-auto">Edit Case Details</b>
                             </button>
                         </div>
                         <div class="col-12 col-md-6">
-                            <button type="button"
+                            <button type="button" onclick="updateCaseStatus('Medical')"
                                 class="btn btn-primary mb-md-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
                                 <b class="mx-auto">Send Case to Medical Officer</b>
                                 <i class="fa fa-arrow-right fa-xl"></i>
@@ -805,12 +808,6 @@
         new WOW().init();
 
         const caseId = new URLSearchParams(window.location.search).get('case_id');
-        const visit_tab = new URLSearchParams(window.location.search).get('visit_tab');
-        console.log(visit_tab);
-
-        if (visit_tab == 'true') {
-            document.getElementById('visits-tab').click();
-        }
 
         window.onload = function () {
             getCaseDetails();
@@ -860,9 +857,13 @@
             console.log(result);
             if (success) {
                 if (result.success) {
-                    if (!result.case_details_not_added) {
-                        setFormValues(result.data);
-                    }
+                    console.log('hello');
+                    console.log(result.data);
+
+                    document.getElementById('case_details_case_id').innerText = result.data.case_id;
+                    document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
+                    document.getElementById('case_details_type_of_case').innerText = result.data.type_of_case;
+                    document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -874,8 +875,8 @@
 
     </script>
 
+    <!-- // Handle Visit related functions -->
     <script>
-        // Handle Visit related functions
         function toggleCard(card) {
             let card_id = card.id;
             let card_detial_id = `${card_id}-detail`;
@@ -1128,7 +1129,7 @@
 
                 // Value column
                 const valueCol = document.createElement('div');
-                valueCol.className = 'col-6 text-end text-lg-start eh-value';
+                valueCol.className = 'col-6 text-end text-lg-start text-break eh-value';
                 valueCol.textContent = value;
 
                 // Append key and value columns
@@ -1405,7 +1406,7 @@
             const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
             console.log(result);
             if (success) {
-                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
             } else {
                 alert('Unable to save the visit details');
             }
@@ -1488,6 +1489,31 @@
             const file = event.target.files[0] || "No file selected";
             console.log(file)
         });
+
+    </script>
+
+    <script>
+        async function updateCaseStatus(status) {
+            const Params = {
+                case_id: caseId,
+                case_status: status
+            };
+
+            const url = "{% url 'set-investigation-status-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {                
+                        console.log(result.data);
+                        location.reload();
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
 
     </script>
 

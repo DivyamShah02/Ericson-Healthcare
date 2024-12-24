@@ -44,7 +44,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 if case_details.case_status == 'Creation' or case_details.case_status == 'Creation_confirmation':
                     return render(request, 'Coordinator/case_overview.html')
 
-                elif case_details.case_status == 'Investigation_confirmation':
+                elif case_details.case_status == 'Investigation' or case_details.case_status == 'Investigation_confirmation':
                     return render(request, 'Coordinator/investigation.html')
 
             elif user_role == 'investigator':

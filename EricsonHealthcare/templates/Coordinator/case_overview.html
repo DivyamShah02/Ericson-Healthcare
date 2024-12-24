@@ -758,7 +758,7 @@
                         </div>
 
                         <div class="mt-5">
-                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2" id="start_investigation" style="display: none;"
+                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2" id="start_investigation" style="display: none;" onclick="updateCaseStatus('Investigation')"
                                 type="button"><b>Start Investigation</b></button>
                         </div>
                         <div class="mb-5"></div>
@@ -1150,7 +1150,7 @@
 
                 // Value column
                 const valueCol = document.createElement('div');
-                valueCol.className = 'col-6 text-end text-lg-start eh-value';
+                valueCol.className = 'col-6 text-end text-lg-start text-break eh-value';
                 valueCol.textContent = value;
 
                 // Append key and value columns
@@ -1564,6 +1564,31 @@
             const file = event.target.files[0] || "No file selected";
             console.log(file)
         });
+
+    </script>
+
+    <script>
+        async function updateCaseStatus(status) {
+            const Params = {
+                case_id: caseId,
+                case_status: status
+            };
+
+            const url = "{% url 'set-investigation-status-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {                
+                        console.log(result.data);
+                        location.reload();
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
 
     </script>
 
