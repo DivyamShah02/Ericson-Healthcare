@@ -486,7 +486,7 @@ class CaseViewSet(viewsets.ViewSet):
             all_docs = []
             for doc in docs_path_lst:
                 all_docs.append({
-                    "path": os.path.join(settings.MEDIA_URL, doc),
+                    "path": os.path.normpath(os.path.join(settings.MEDIA_URL, doc)).replace(os.sep, '/'),
                     "name": os.path.basename(str(doc))
                 })
 

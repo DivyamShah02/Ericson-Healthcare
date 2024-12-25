@@ -10,6 +10,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 AUTH_USER_MODEL = 'UserRole.UserDetail'
 
 # Application definition

@@ -156,7 +156,6 @@ class VisitQuestionViewSet(viewsets.ViewSet):
             answers_dict = visit_type_data["answers"]
             if answers_dict is None or answers_dict == '':
                 answers_dict = {}
-            print(answers_dict)
             
             questions_id_lst = visit_type_data["questions"]
             questions = []
@@ -167,7 +166,6 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                     'answer':False
                 }
                 if que_id in answers_dict.keys():
-                    print(answers_dict[que_id])
                     question_temp_dict['answer'] = answers_dict[que_id]
 
                 questions.append(question_temp_dict)
