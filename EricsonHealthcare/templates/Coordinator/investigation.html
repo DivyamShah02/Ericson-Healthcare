@@ -742,7 +742,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="viewDocumentModalLabel">View Document</h1>
+                                        <h1 class="modal-title fs-5 text-wrap text-break" id="viewDocumentModalLabel">View Document</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -808,6 +808,12 @@
         new WOW().init();
 
         const caseId = new URLSearchParams(window.location.search).get('case_id');
+        const document_tab = new URLSearchParams(window.location.search).get('document_tab');
+        console.log(document_tab);
+
+        if (document_tab == 'true') {
+            document.getElementById('documents-tab').click();
+        }
 
         window.onload = function () {
             getCaseDetails();
@@ -1184,18 +1190,49 @@
 
             // Add individual questions
             questions.forEach((question, index) => {
+                // const questionItem = document.createElement('div');
+                // questionItem.className = 'p-2 py-0';
+
+                // const questionLabel = document.createElement('label');
+                // questionLabel.className = 'form-label eh-label m-0';
+                // questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                // const hr = document.createElement('hr');
+                // hr.className = 'm-1';
+
+                // questionItem.appendChild(questionLabel);
+                // questionItem.appendChild(hr);
+
+                // New code for answers in visit card
+                // Create the main card div
                 const questionItem = document.createElement('div');
-                questionItem.className = 'p-2 py-0';
+                questionItem.classList.add('p-3', 'my-2', 'question-card');
 
+                // Create the question label
                 const questionLabel = document.createElement('label');
-                questionLabel.className = 'form-label eh-label m-0';
-                questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+                questionLabel.classList.add('form-label', 'eh-label', 'm-0');
+                questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question.question}`;
 
+                // Create the horizontal line
                 const hr = document.createElement('hr');
-                hr.className = 'm-1';
+                hr.classList.add('m-1');
 
+                // Create the answer label
+                const answerLabel = document.createElement('label');
+                if (question.answer === false) {
+                    answerLabel.classList.add('form-label', 'm-0', 'text-danger');
+                    answerLabel.innerHTML = `<b>A${index + 1}) Not Yet Answered</b>`;    
+                }
+                else {
+                    answerLabel.classList.add('form-label', 'm-0');
+                    answerLabel.innerHTML = `<b>A${index + 1})</b> ${question.answer}`;
+                }
+
+                // Append children to the card
                 questionItem.appendChild(questionLabel);
                 questionItem.appendChild(hr);
+                questionItem.appendChild(answerLabel);
+
 
                 questionList.appendChild(questionItem);
             });
@@ -1228,8 +1265,15 @@
                         result.data.forEach((visit, index) => {
                             document.getElementById('no-visit-created').style.display = 'none';
                             console.log(visit);
-                            const visit_card = createVisitCard(visit.type_of_visit, index+3, index+3, visit.final_card_data, visit.questions, visit.visit_id);
-                            document.getElementById('visit-cards').appendChild(visit_card);
+                            console.log(visit.visit_id);
+                            let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
+                                console.log(question_lst)
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id);
+                                document.getElementById('visit-cards').appendChild(visit_card);
+                            }).catch((error) => {
+                                console.error("An error occurred:", error);
+                            });
+                            
                         });
                     }
                 }
@@ -1240,6 +1284,28 @@
                 // window.location.href=`{% url 'dashboard-list' %}`;
             }
         }
+
+        async function getQuestionAnsersForVisit(visit_id) {
+            const Params = {
+                visit_id: visit_id
+            };
+
+            const url = "{% url 'visit-question-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                if (result.success) {
+                    return result.data;
+                }
+
+                else {
+                    return [];
+                }
+
+            } else {
+                console.error("GET User Failed:", result);
+            }
+        }
+
 
         async function getInvestigatorDetails() {
             const Params = {
@@ -1485,9 +1551,28 @@
             });
         }
 
-        document.getElementById('addDocumentInput').addEventListener('change', function (event) {
-            const file = event.target.files[0] || "No file selected";
+        document.getElementById('addDocumentInput').addEventListener('change',async function (event) {
+            const file = event.target.files[0];
             console.log(file)
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const bodyData = formData;
+                formData.append('case_id', caseId);
+            
+                const url = "{% url 'add-case-document-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}", true);
+                console.log(result);
+                if (success) {
+                    let case_id = result.data.case_id;
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${case_id}&document_tab=true`;
+                } else {
+                    
+                }
+
+            }
         });
 
     </script>

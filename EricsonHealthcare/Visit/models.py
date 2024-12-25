@@ -43,6 +43,7 @@ class HospitalVisit(models.Model):
     doctor_contact_number = models.CharField(max_length=15)
     doctor_email = models.CharField(max_length=255)
     questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)
 
@@ -56,6 +57,7 @@ class LabVisit(models.Model):
     pathologist_name = models.CharField(max_length=255)
     registration_number = models.CharField(max_length=100)
     questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)
 
@@ -65,8 +67,10 @@ class PharmacyVisit(models.Model):
     name_of_chemist = models.CharField(max_length=255)
     address = models.TextField()
     city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
     gst_number = models.CharField(max_length=100)
     drug_license_number = models.CharField(max_length=100)
     questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)

@@ -10,17 +10,17 @@ class VisitAdmin(admin.ModelAdmin):
 @admin.register(HospitalVisit)
 class HospitalVisitAdmin(admin.ModelAdmin):
     list_display = ('id', 'visit_id', 'hospital_name', 'state', 'city', 'claim_value', 'diagnosis')
-    search_fields = ('hospital_name', 'state', 'city', 'diagnosis')
-    list_filter = ('state', 'city')
+    search_fields = ('hospital_name', 'state', 'city', 'diagnosis', 'visit_id')
+    list_filter = ('city', 'state')
 
 @admin.register(LabVisit)
 class LabVisitAdmin(admin.ModelAdmin):
     list_display = ('id', 'visit_id', 'name', 'city', 'state', 'address')
-    search_fields = ('name', 'city', 'state')
+    search_fields = ('name', 'city', 'state', 'visit_id')
     list_filter = ('city', 'state')
 
 @admin.register(PharmacyVisit)
 class PharmacyVisitAdmin(admin.ModelAdmin):
     list_display = ('id', 'visit_id', 'name_of_chemist', 'city', 'gst_number')
-    search_fields = ('name_of_chemist', 'city', 'gst_number')
-    list_filter = ('city',)
+    search_fields = ('name_of_chemist', 'city', 'gst_number', 'visit_id')
+    list_filter = ('city', 'state')

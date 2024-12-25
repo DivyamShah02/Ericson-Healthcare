@@ -40,7 +40,7 @@
     <div id="main-content" class="blur">
         <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
             <div class="d-flex justify-content-between align-items-center">
-                <i class="fa fa-chevron-left fa-xl"></i>
+                <i class="fa fa-chevron-left fa-xl" onclick="window.location.href=`{% url 'dashboard-list' %}`;"></i>
                 <div class="mx-auto p-0" style="font-size: 18px;"><b id="case_id_text">Case #</b></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -783,7 +783,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="viewDocumentModalLabel">View Document</h1>
+                                        <h1 class="modal-title fs-5 text-wrap text-break" id="viewDocumentModalLabel">View Document</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -828,10 +828,15 @@
 
         const caseId = new URLSearchParams(window.location.search).get('case_id');
         const visit_tab = new URLSearchParams(window.location.search).get('visit_tab');
-        console.log(visit_tab);
 
         if (visit_tab == 'true') {
             document.getElementById('visits-tab').click();
+        }
+
+        const document_tab = new URLSearchParams(window.location.search).get('document_tab');
+
+        if (document_tab == 'true') {
+            document.getElementById('documents-tab').click();
         }
 
         window.onload = function () {
@@ -859,7 +864,7 @@
                 if (result.success) {
                     console.log(result.data.all_docs);
                     document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
-                    if (result.data.case_status == 'Creation_confirmation') {
+                    if (result.data.case_status == 'Creation_confirmation' && document_tab == null) {
                         document.getElementById('visits-tab').click();
                     }
                     createDocumentList(result.data.all_docs);
@@ -1250,7 +1255,7 @@
                             document.getElementById('start_investigation').style.display = '';
                             document.getElementById('no-visit-created').style.display = 'none';
                             console.log(visit);
-                            const visit_card = createVisitCard(visit.type_of_visit, index+3, index+3, visit.final_card_data, visit.questions, visit.visit_id);
+                            const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, visit.questions, visit.visit_id);
                             document.getElementById('visit-cards').appendChild(visit_card);
                         });
                     }
@@ -1560,9 +1565,28 @@
             });
         }
 
-        document.getElementById('addDocumentInput').addEventListener('change', function (event) {
-            const file = event.target.files[0] || "No file selected";
+        document.getElementById('addDocumentInput').addEventListener('change',async function (event) {
+            const file = event.target.files[0];
             console.log(file)
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const bodyData = formData;
+                formData.append('case_id', caseId);
+            
+                const url = "{% url 'add-case-document-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}", true);
+                console.log(result);
+                if (success) {
+                    let case_id = result.data.case_id;
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${case_id}&document_tab=true`;
+                } else {
+                    
+                }
+
+            }
         });
 
     </script>

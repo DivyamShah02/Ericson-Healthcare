@@ -621,6 +621,126 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
 
+class AddDocumentViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin' and user_role != 'investigator':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+
+            if 'file' not in request.FILES:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            case_id = request.data.get('case_id')
+            case_data = Case.objects.get(case_id=case_id)
+            if not case_data:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":f"Case with id {case_id} does not exists",
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            uploaded_file = request.FILES['file']
+            file_path = self.save_file(uploaded_file)
+
+            document_paths = case_data.document_paths
+            if document_paths is None:
+                document_paths = []
+            
+            document_paths.append(file_path)
+            case_data.document_paths = document_paths
+            case_data.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "file_not_attached": False,
+                        "data":{'case_id':case_id},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "file_not_attached": False,
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+    def save_file(self, uploaded_file):
+        # Define the base directory to save the files
+        upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/')
+        os.makedirs(upload_dir, exist_ok=True)
+
+        # Generate a unique filename if a file with the same name exists
+        base_name, extension = os.path.splitext(uploaded_file.name)
+        file_name = uploaded_file.name
+        counter = 1
+
+        while os.path.exists(os.path.join(upload_dir, file_name)):
+            file_name = f"{base_name}({counter}){extension}"
+            counter += 1
+
+        # Save the file
+        file_path = os.path.join(upload_dir, file_name)
+        with open(file_path, 'wb') as f:
+            for chunk in uploaded_file.chunks():
+                f.write(chunk)
+
+        # Return the relative file path
+        return os.path.relpath(file_path, settings.MEDIA_ROOT)
+
 class SetInvestigationStatus(viewsets.ViewSet):
     def list(self, request):
         try:
