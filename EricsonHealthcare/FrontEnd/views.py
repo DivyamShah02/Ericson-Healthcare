@@ -56,6 +56,9 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 elif case_details.case_status == 'Final_report' or case_details.case_status == 'Final_report_confirmation':
                     return render(request, 'Coordinator/final_report_submit.html')
 
+                elif case_details.case_status == 'Complete':
+                    return render(request, 'Coordinator/case_completed.html')
+
             elif user_role == 'investigator':
                 pass
             elif user_role == 'medical_officer':
