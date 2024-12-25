@@ -762,9 +762,6 @@
                         ...
                     </div>
                 </div>
-                <div>
-
-                </div>
 
                 <div class="mb-5 pb-5"></div>
 
@@ -1584,7 +1581,7 @@
                 case_status: status
             };
 
-            const url = "{% url 'set-investigation-status-api-list' %}?" + toQueryString(Params);
+            const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
             const [success, result] = await callApi("GET", url);
             console.log(result);
             if (success) {

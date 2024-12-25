@@ -1598,7 +1598,7 @@
                 case_status: status
             };
 
-            const url = "{% url 'set-investigation-status-api-list' %}?" + toQueryString(Params);
+            const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
             const [success, result] = await callApi("GET", url);
             console.log(result);
             if (success) {

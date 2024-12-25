@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from .models import Case, CaseDetails
 from .serializers import CaseSerializers, CaseDetailsSerializer
 from Visit.models import Visit
+from UserRole.models import UserDetail
 
 logger = None
 
@@ -682,6 +683,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+            
             uploaded_file = request.FILES['file']
             file_path = self.save_file(uploaded_file)
 
@@ -741,7 +743,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
         # Return the relative file path
         return os.path.relpath(file_path, settings.MEDIA_ROOT)
 
-class SetInvestigationStatus(viewsets.ViewSet):
+class SetCaseStatus(viewsets.ViewSet):
     def list(self, request):
         try:
             user = request.user
@@ -827,6 +829,116 @@ class SetInvestigationStatus(viewsets.ViewSet):
 
         except Exception as ex:
             # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+class AssignMedicalOfficer(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": True,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_id = request.data.get('case_id')
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            medical_officer_id = request.data.get('medical_officer_id')
+            if not medical_officer_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"medical_officer_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = Case.objects.get(case_id=case_id)
+            if not case_data:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,                            
+                            "data":f"Case with id {case_id} does not exists",
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            medical_officer_data = UserDetail.objects.filter(user_id=medical_officer_id).first()
+            if not medical_officer_data:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,                        
+                        "data":f"medical_officer with id {medical_officer_id} does not exists",
+                        "error": None
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            case_data.medical_officer_id = medical_officer_id
+            case_data.case_status = 'Medical_confirmation'
+            case_data.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,                        
+                        "data":{'case_id':case_id},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
             return Response(
                         {
                             "success": False,
