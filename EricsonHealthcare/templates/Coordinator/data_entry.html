@@ -384,7 +384,7 @@
                             </div>
 
                             <div id="final-report">
-                                <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" id="final-report-card" onclick="openFinalReportModal('/media/uploads/Trainee_Assessment_Plan(1).pdf', 'Final Report.pdf')">
+                                <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" id="final-report-card">
                                     <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Final Report.pdf</u>
                                     <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
                                 </div>
@@ -470,7 +470,7 @@
                             </button>
                         </div>
                         <div class="col-12 col-md-6">
-                            <button type="button"
+                            <button type="button" onclick="updateCaseStatus('Final_report')"
                                 class="btn btn-primary mb-md-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
                                 <b class="mx-auto">Submit Report</b>
                                 <i class="fa fa-arrow-right fa-xl"></i>
