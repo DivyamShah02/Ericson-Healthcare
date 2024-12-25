@@ -62,6 +62,7 @@ class CaseDetails(models.Model):
     diagnosis = models.CharField(max_length=255, null=True, blank=True)
 
     medical_officer_remarks = models.TextField(null=True, blank=True)
+    final_report = models.CharField(max_length=255, null=True, blank=True)
     STATUS_OF_CLAIM_CHOICES = [
         ('Pass', 'Pass'),
         ('Reject', 'Reject'),

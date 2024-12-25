@@ -37,8 +37,8 @@
     <div id="main-content" class="blur">
         <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
             <div class="d-flex justify-content-between align-items-center">
-                <i class="fa fa-chevron-left fa-xl"></i>
-                <div class="mx-auto p-0" style="font-size: 18px;"><b>Case #02658</b></div>
+                <i class="fa fa-chevron-left fa-xl" onclick="window.location.href=`{% url 'dashboard-list' %}`;"></i>
+                <div class="mx-auto p-0" style="font-size: 18px;"><b id="case_id_text">Case #</b></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i class="fa fa-bars fa-xl"></i>
@@ -312,90 +312,158 @@
 
         <section>
             <div class="container">
-                <h3 class="eh-head">Case Details</h3>
-                <div class="row my-4">
+                <ul class="nav nav-underline mb-3 row" id="case-tab" role="tablist">
+                    <li class="nav-item col text-center" role="presentation">
+                        <a class="nav-link eh-nav-link-case-coordinator active" id="visits-tab" data-bs-toggle="pill"
+                            data-bs-target="#visits" role="tab" aria-controls="visits" aria-selected="true">Case Overview</a>
+                    </li>
+                    <li class="nav-item col text-center" role="presentation">
+                        <a class="nav-link eh-nav-link-case-coordinator" id="documents-tab" data-bs-toggle="pill"
+                            data-bs-target="#documents" role="tab" aria-controls="documents"
+                            aria-selected="false">Documents</a>
+                    </li>
+                    <!-- <li class="nav-item col text-center" role="presentation">
+                      <a class="nav-link eh-nav-link-case-coordinator" id="reports-tab" data-bs-toggle="pill" data-bs-target="#reports" role="tab" aria-controls="reports" aria-selected="false">Reports</a>
+                    </li> -->
+                </ul>
+                <div class="tab-content" id="case-tabContent">
+                    <div class="tab-pane fade show active" id="visits" role="tabpanel" aria-labelledby="visits-tab" tabindex="0">                
+                        <h3 class="eh-head">Case Details</h3>
+                        <div class="row mb-4">
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Id</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_case_id"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
 
-                    <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Id</div>
-                    <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">02658</div>
-                    <div class="col-12 px-3">
-                        <hr class="p-0 my-1 visit-card-eh-hr">
-                    </div>
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_insaurance_company"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
 
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Type</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_type_of_case"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
 
-                    <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
-                    <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">ICICI Lombard</div>
-                    <div class="col-12 px-3">
-                        <hr class="p-0 my-1 visit-card-eh-hr">
-                    </div>
-
-
-                    <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Type</div>
-                    <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">RR</div>
-                    <div class="col-12 px-3">
-                        <hr class="p-0 my-1 visit-card-eh-hr">
-                    </div>
-
-
-                    <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Id</div>
-                    <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2">02658</div>
-                    <div class="col-12 px-3">
-                        <hr class="p-0 my-1 visit-card-eh-hr">
-                    </div>
-
-                </div>
-
-                <h3 class="eh-head">Select Data Entry personnel</h3>
-                <div class="my-4">
-                    <select class="form-select dark-input" aria-label="select" id="meidcal_officer_select"
-                        name="meidcal_officer_select">
-                        <option value="">Select Data Entry personnel</option>
-                        <option value="Personnel Name">Personnel Name</option>
-                        <option value="Personnel Name">Personnel Name</option>
-                        <option value="Personnel Name">Personnel Name</option>
-                    </select>
-
-                    <button type="button" class="btn btn-primary mt-3 eh-btn-blue-primary-no-hover w-100">
-                        <b>Submit</b>
-                    </button>
-                </div>
-
-                <h3 class="eh-head">Final Report</h3>
-                <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" data-bs-toggle="modal"
-                    data-bs-target="#viewDocumentModal">
-                    <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Final Report.pdf</u>
-                    <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
-                </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="viewDocumentModal" tabindex="-1" aria-labelledby="viewDocumentModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="viewDocumentModalLabel">View Document</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Diagnosis</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_diagnosis"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
+                            
+                        </div>
+                        
+                        <h3 class="eh-head" id="select_data_entry_personnel_heading">Select Data Entry personnel</h3>
+                        <div class="my-4">
+                            <select class="form-select dark-input" aria-label="select" id="data_entry_personnel_select"
+                                name="data_entry_personnel_select">
+                                <option value="">Select Data Entry personnel</option>                                
+                            </select>
+        
+                            <button type="button" class="btn btn-primary mt-3 eh-btn-blue-primary-no-hover w-100" id="submit_data_entry_personnel"
+                                onclick="setDataEntryPersonnel()">
+                                <b>Submit</b>
+                            </button>
+                        </div>
+                        <div id="final_report" style="display: none;">
+                            <h3 class="eh-head">Final Report</h3>
+                            
+                            <div class="my-3" id="final-report-not-generated" style="display: none;">
+                                <div class="p-5 text-center dark-input"
+                                  style="border-radius: 10px; background-color: var(--eh-danger);">
+                                  <i class="fa fa-triangle-exclamation fa-xl eh-text-blue-primary" style="font-size: 2.5rem;"></i>
+                                  <p class="p-0 m-0 mt-2 eh-text-blue-primary"><b>Final Report has not been generated yet</b></p>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <iframe src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="500px"
-                                    style="border: none;"></iframe>
+
+                            <div id="final-report">
+                                <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" id="final-report-card" onclick="openFinalReportModal('/media/uploads/Trainee_Assessment_Plan(1).pdf', 'Final Report.pdf')">
+                                    <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Final Report.pdf</u>
+                                    <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                                </div>
+                
+                                <!-- Modal -->
+                                <div class="modal fade" id="viewReportModal" tabindex="-1" aria-labelledby="viewReportModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="viewReportModalLabel">View Document</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                                    <canvas id="pdf-renderer-final-report"></canvas>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
+                                                                </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <!-- <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
-                                                </div> -->
+
                         </div>
                     </div>
-                </div>
+                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab"
+                        tabindex="0">
+                        <h3 class="eh-head my-3">Case Documents</h3>
+                        <label class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2 mb-3"><b>Upload
+                                Document</b>
+                            <input type="file" id="addDocumentInput" hidden>
+                        </label>
+                        <div id="document_list_div">
+                            <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" onclick="openDocModal('https://pdfobject.com/pdf/sample.pdf', 'sample.pdf')">
+                                <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>sample.pdf</u>
+                                <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                            </div>
+                        </div>
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="viewDocumentModal" tabindex="-1"
+                            aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 text-wrap text-break" id="viewDocumentModalLabel">View Document</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                            <canvas id="pdf-renderer"></canvas>
+                                        </div>
+                                        <!-- <iframe src="/media/uploads/suit_divyam(1).jpeg" width="100%" height="500px" id="viewDocumentModalIframe"
+                                            style="border: none;"></iframe> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+                        ...
+                    </div>
+                </div>
 
                 <div class="mb-5 pb-5"></div>
 
                 <div class="fixed-bottom mb-2 mx-2 mx-md-5 px-md-5">
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <button type="button"
+                            <button type="button" onclick="updateCaseStatus('Investigation_confirmation')"
                                 class="btn btn-primary mb-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
                                 <i class="fa fa-arrow-left fa-xl"></i>
                                 <b class="mx-auto">Re-Investigate</b>
@@ -423,16 +491,312 @@
     <!-- Import Wow Animation JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-    <script src="../static/js/process-step.js"></script>
-    <script src="../static/js/loader.js"></script>
+    <!-- Import the official PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+    <script src="/static/js/process-step.js"></script>
+    <script src="/static/js/loader.js"></script>
+    <script src="/static/js/api_caller.js"></script>
+    <script src="/static/js/script.js"></script>
 
     <script>
         new WOW().init();
 
+        const caseId = new URLSearchParams(window.location.search).get('case_id');
+        const document_tab = new URLSearchParams(window.location.search).get('document_tab');
+        console.log(document_tab);
+
+        if (document_tab == 'true') {
+            document.getElementById('documents-tab').click();
+        }
+
         window.onload = function () {
+            getCaseDetails();
+            getCaseData();
+            getDataEntryPersonnelDetails();
             toggle_loader();
         };
         processStep(4);
+
+    </script>
+
+    <script>
+        let data_entry_personnel_id = '';
+        async function getCaseData() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log(result.data.all_docs);
+                    document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    if (result.data.data_entry_id != null) {
+                        document.getElementById('final_report').style.display = '';
+                        document.getElementById('submit_data_entry_personnel').innerHTML = '<b>Update Data Entry Personnel</b>';
+                        document.getElementById('select_data_entry_personnel_heading').innerText = 'Update Data Entry Personnel';
+                        data_entry_personnel_id = result.data.data_entry_id;
+                    }
+                    createDocumentList(result.data.all_docs);
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        async function getCaseDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log(result.data);
+
+                    document.getElementById('case_details_case_id').innerText = result.data.case_id;
+                    document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
+                    document.getElementById('case_details_type_of_case').innerText = result.data.type_of_case;
+                    document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+
+                    if (result.data.final_report) {
+                        document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('${result.data.final_report}','Final Report.pdf')`);
+
+                    }
+                    else {
+                        document.getElementById('final-report').style.display = 'none';
+                        document.getElementById('final-report-not-generated').style.display = '';
+                    }
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+    </script>
+
+    <script>
+        async function getDataEntryPersonnelDetails() {
+            const Params = {
+                user_role: "data_entry_personnel",
+            };
+
+            const url = "{% url 'list_users_by_role-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                console.log("GET User Success:", result);
+                const selectElement = document.getElementById('data_entry_personnel_select');
+
+                // Loop through the list of dictionaries
+                result.data.users.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.user_id;
+                    option.textContent = item.name;
+                    selectElement.appendChild(option);
+                });
+                selectElement.value = data_entry_personnel_id;
+
+            } else {
+                console.error("GET User Failed:", result);
+            }
+        }
+
+        async function setDataEntryPersonnel() {
+            toggle_loader();
+            
+            let data_entry_personnel_id_value = document.getElementById('data_entry_personnel_select').value;
+
+            if (data_entry_personnel_id_value == '') {
+                console.log(data_entry_personnel_id_value);
+                document.getElementById('data_entry_personnel_select').focus();
+            }
+            else {
+                const bodyData = {
+                    'case_id': caseId,
+                    'data_entry_personnel_id': data_entry_personnel_id_value,
+                };
+
+                const url = "{% url 'set-data-entry-personnel-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                console.log(result)
+                if (success) {
+                    if (result.success) {                    
+                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
+                    }
+                } else {
+                    alert('Unable to assign medical officer');
+                }
+            }
+            toggle_loader();
+        }
+
+        function openFinalReportModal(doc_path, doc_name) {
+            loadFinalReport(doc_path);
+            document.getElementById('viewReportModalLabel').innerText = doc_name;
+            const myModal = new bootstrap.Modal(document.getElementById('viewReportModal'));
+            myModal.show();
+        }
+
+        function loadFinalReport(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer-final-report');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 0.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
+
+
+    </script>
+
+
+    <script>
+        // Handle document section
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        function openDocModal(doc_path, doc_name) {
+            loadPDF(doc_path);
+            document.getElementById('viewDocumentModalLabel').innerText = doc_name;
+            const myModal = new bootstrap.Modal(document.getElementById('viewDocumentModal'));
+            myModal.show();
+        }
+
+        function createDocumentList(documentList) {
+            const container = document.getElementById('document_list_div');
+
+            documentList.forEach((docItem) => {
+                const documentDiv = document.createElement('div');
+                documentDiv.className = 'd-flex align-items-center py-3 px-2 mb-2 document-card';
+                documentDiv.setAttribute('onclick', `openDocModal('${docItem.path}','${docItem.name}')`);
+
+                const icon = document.createElement('i');
+                icon.className = 'fa fa-file-pdf fa-xl';
+
+                const documentName = document.createElement('u');
+                documentName.textContent = docItem.name;
+
+                const nameContainer = document.createElement('div');
+                nameContainer.appendChild(icon);
+                nameContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0')); // Adding spaces
+                nameContainer.appendChild(documentName);
+
+                const downloadDiv = document.createElement('div');
+                downloadDiv.className = 'ms-auto';
+
+                const downloadIcon = document.createElement('i');
+                downloadIcon.className = 'fa fa-download fa-xl mx-2';
+
+                downloadDiv.appendChild(downloadIcon);
+
+                documentDiv.appendChild(nameContainer);
+                documentDiv.appendChild(downloadDiv);
+
+                container.appendChild(documentDiv);
+            });
+        }
+
+        function loadPDF(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 0.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
+
+        document.getElementById('addDocumentInput').addEventListener('change',async function (event) {
+            const file = event.target.files[0];
+            console.log(file)
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const bodyData = formData;
+                formData.append('case_id', caseId);
+            
+                const url = "{% url 'add-case-document-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}", true);
+                console.log(result);
+                if (success) {
+                    let case_id = result.data.case_id;
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${case_id}&document_tab=true`;
+                } else {
+                    
+                }
+
+            }
+        });
+
+    </script>
+
+    <script>
+        async function updateCaseStatus(status) {
+            const Params = {
+                case_id: caseId,
+                case_status: status
+            };
+
+            const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {                
+                        console.log(result.data);
+                        location.reload();
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
     </script>
 
 </body>

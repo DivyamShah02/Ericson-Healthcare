@@ -6,13 +6,13 @@ def create_user():
     url = base_url + 'user/user/'
 
     data = {
-        'name': 'Chetan Medical',
+        'name': 'Divyam Data',
         'password':'divyam',
         'contact_number': '9054413199',
-        'email': 'chetan_medical@gmail.com',
+        'email': 'dataentry@gmail.com',
         'city': 'Ahmedabad',
         'state': 'Gujarat',
-        'role': 'medical_officer',
+        'role': 'data_entry_personnel',
     }
 
     response = requests.post(url, data=data)

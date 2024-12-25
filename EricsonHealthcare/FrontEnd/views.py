@@ -50,6 +50,9 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 elif case_details.case_status == 'Medical' or case_details.case_status == 'Medical_confirmation':
                     return render(request, 'Coordinator/medical_remark.html')
 
+                elif case_details.case_status == 'Data_entry' or case_details.case_status == 'Data_entry_confirmation':
+                    return render(request, 'Coordinator/data_entry.html')
+
             elif user_role == 'investigator':
                 pass
             elif user_role == 'medical_officer':

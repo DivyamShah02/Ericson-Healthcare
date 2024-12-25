@@ -365,8 +365,8 @@
 
                         <h3 class="eh-head" id="select_medical_officer_heading">Select Medical Officer</h3>
                         <div class="my-4">
-                            <select class="form-select dark-input" aria-label="select" id="meidcal_officer_select"
-                                name="meidcal_officer_select">
+                            <select class="form-select dark-input" aria-label="select" id="medical_officer_select"
+                                name="medical_officer_select">
                                 <option value="">Select Medical Officer</option>                                
                             </select>
             
@@ -378,9 +378,7 @@
                         </div>
                         <div id="medical_officer_remark" style="display: none;">
                             <h3 class="eh-head">Medical Officer Remark</h3>
-                            <div class="medical-remark-card p-3 pe-2" id="medical-remark">
-
-                            </div>
+                            <div class="medical-remark-card p-3 pe-2" id="medical-remark"></div>
                             <div class="my-3">
                                 <div class="p-5 text-center dark-input" id="medical-remark-not-given"
                                   style="border-radius: 10px; background-color: var(--eh-danger); display: none;">
@@ -505,7 +503,7 @@
                 if (result.success) {
                     console.log(result.data.all_docs);
                     document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
-                    if (result.data.case_status == 'Medical_confirmation') {
+                    if (result.data.medical_officer_id != null) {
                         document.getElementById('medical_officer_remark').style.display = '';
                         document.getElementById('submit_medical_officer').innerHTML = '<b>Update Medical Officer</b>';
                         document.getElementById('select_medical_officer_heading').innerText = 'Update Medical Officer';
@@ -531,7 +529,6 @@
             console.log(result);
             if (success) {
                 if (result.success) {
-                    console.log('hello');
                     console.log(result.data);
 
                     document.getElementById('case_details_case_id').innerText = result.data.case_id;
@@ -567,7 +564,7 @@
             const [success, result] = await callApi("GET", url);
             if (success) {
                 console.log("GET User Success:", result);
-                const selectElement = document.getElementById('meidcal_officer_select');
+                const selectElement = document.getElementById('medical_officer_select');
 
                 // Loop through the list of dictionaries
                 result.data.users.forEach(item => {
@@ -582,6 +579,36 @@
                 console.error("GET User Failed:", result);
             }
         }
+    
+        async function setMedicalOfficer() {
+            toggle_loader();
+            
+            let medical_officer_id_value = document.getElementById('medical_officer_select').value;
+
+            if (medical_officer_id_value == '') {
+                console.log(medical_officer_id_value);
+                document.getElementById('medical_officer_select').focus();
+            }
+            else {
+                const bodyData = {
+                    'case_id': caseId,
+                    'medical_officer_id': medical_officer_id_value,
+                };
+    
+                const url = "{% url 'set-medical-officer-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                console.log(result)
+                if (success) {
+                    if (result.success) {                    
+                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
+                    }
+                } else {
+                    alert('Unable to assign medical officer');
+                }
+            }
+            toggle_loader();
+        }
+
     </script>
 
     <!-- Handle document section -->
@@ -702,38 +729,6 @@
             } else {
                 window.location.href=`{% url 'dashboard-list' %}`;
             }
-        }
-
-    </script>
-
-    <script>
-        async function setMedicalOfficer() {
-            toggle_loader();
-            
-            let medical_officer_id = document.getElementById('meidcal_officer_select').value;
-
-            if (medical_officer_id == '') {
-                console.log(medical_officer_id);
-                document.getElementById('meidcal_officer_select').focus();
-            }
-            else {
-                const bodyData = {
-                    'case_id': caseId,
-                    'medical_officer_id': medical_officer_id,
-                };
-    
-                const url = "{% url 'set-medical-officer-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {                    
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
-                    }
-                } else {
-                    alert('Unable to assign medical officer');
-                }
-            }
-            toggle_loader();
         }
 
     </script>
