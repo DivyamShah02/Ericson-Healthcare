@@ -9,6 +9,8 @@ router.register(r'create_visit', VisitCreationViewSet, basename='create_visit')
 router.register(r'visit-api', VisitViewSet, basename='visit-api')
 router.register(r'visit-details-api', VisitDetailViewSet, basename='visit-details-api')
 router.register(r'update-visit-api', UpdateVisitViewSet, basename='update-visit-api')
+router.register(r'start-investigation-visit-api', StartInvestigationVisitViewSet, basename='start-investigation-visit-api')
+router.register(r'raise-visit-issue-api', RaiseVisitIssueViewSet, basename='raise-visit-issue-api')
 
 urlpatterns = [
     path('', include(router.urls)),

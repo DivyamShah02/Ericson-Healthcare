@@ -1,1 +1,2 @@
 -> All the data to be set to default after re-opening all going back ? (case going back)
+-> can invetigator report an issue after the investigation is started?

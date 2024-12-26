@@ -6,6 +6,9 @@ class Visit(models.Model):
     case_id = models.IntegerField()  # Link to Case ID
     coordinator_id = models.CharField(max_length=100)  # Link to Coordinator ID
     investigator_id = models.CharField(max_length=100)  # Link to Investigating Officer ID
+    investigation_started = models.BooleanField(default=False)
+    issue_in_investigation = models.BooleanField(default=False)
+    issue_of_investigator = models.CharField(max_length=255, null=True, blank=True, default='')
     TYPE_OF_VISIT_CHOICES = [
         ('Hospital', 'Hospital'),
         ('Treating_doctor', 'Treating Doctor'),

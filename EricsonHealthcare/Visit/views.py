@@ -761,3 +761,150 @@ class UpdateVisitViewSet(viewsets.ViewSet):
                 updated_data[key] = value
         return updated_data
 
+
+class StartInvestigationVisitViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            visit_id = request.data.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.get(visit_id=visit_id)
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj.issue_in_investigation = False
+            visit_data_obj.issue_of_investigator = ''
+            visit_data_obj.investigation_started = True
+            visit_data_obj.save()
+        
+            return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "data": 'Investigation started',
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class RaiseVisitIssueViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            issue_text = request.data.get('issue_text')
+            if not issue_text:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Please provide issue_text"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+
+            visit_id = request.data.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.get(visit_id=visit_id)
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj.issue_in_investigation = True
+            visit_data_obj.issue_of_investigator = issue_text
+            visit_data_obj.save()
+        
+            return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "data": 'Investigation started',
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
