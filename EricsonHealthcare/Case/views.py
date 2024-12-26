@@ -572,6 +572,8 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                 
                 cases = Case.objects.filter(case_id__in=visit_cases)
 
+                cases = [case for case in cases if case.case_status != "Creation" and case.case_status != "Creation_confirmation"]
+
             elif user_role == 'medical_officer':
                 cases = Case.objects.filter(medical_officer_id=user)
 

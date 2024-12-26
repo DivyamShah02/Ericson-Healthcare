@@ -1,0 +1,1 @@
+-> All the data to be set to default after re-opening all going back ? (case going back)

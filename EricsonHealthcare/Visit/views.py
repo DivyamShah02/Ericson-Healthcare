@@ -367,7 +367,7 @@ class VisitViewSet(viewsets.ViewSet):
                     visit_data['visit_type_data'] = visit_type_data
                 
                     final_card_data = visit_data['visit_type_data']
-                    final_card_data = {k: v for k, v in final_card_data.items() if k not in ("id", "visit_id", "document_paths", "photo_path")}
+                    final_card_data = {k: v for k, v in final_card_data.items() if k not in ("id", "visit_id", "document_paths", "photo_path", "answers")}
                     
                     visit_questions = []
                     for question_id in final_card_data["questions"]:
