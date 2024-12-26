@@ -60,8 +60,11 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                     return render(request, 'Coordinator/case_completed.html')
 
             elif user_role == 'investigator':
-                if case_details.case_status == 'Investigation' or case_details.case_status == 'Investigation_confirmation':
+                if case_details.case_status == 'Investigation':
                     return render(request, 'Investigate Officer/investigation.html')
+                
+                elif case_details.case_status == 'Investigation_confirmation':
+                    return render(request, 'Investigate Officer/case_completed.html')
 
             elif user_role == 'medical_officer':
                 pass

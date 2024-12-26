@@ -26,8 +26,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/loader.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/loader.css">
 
 </head>
 
@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <section class="pt-4 mt-5">
+        <section>
             <div class="container">
                 <ul class="nav nav-underline mb-3 row" id="case-tab" role="tablist">
                     <li class="nav-item col text-center" role="presentation">
@@ -138,32 +138,6 @@
                             </div>                            
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="issueVisitModal" tabindex="-1" aria-labelledby="issueVisitModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="issueVisitModalLabel">Issue in</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h5 class="eh-head">What is the issue</h5>
-                                    <div class="">
-                                        <textarea class="form-control remark-text-area" id="issue_input" name="issue_input" rows="5"
-                                            placeholder="Enter Issue"></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" id="remove_issue" style="display: none;"
-                                        >Remove Issue</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover" id="submit_issue"
-                                        >Submit</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab"
                         tabindex="0">
@@ -199,27 +173,16 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
                         ...
                     </div>
                 </div>
+                <div>
 
-                <div class="mb-5 pb-5"></div>
-
-                <div class="fixed-bottom mb-2 mx-2 mx-md-5 px-md-5">
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="button" onclick="updateCaseStatus('Investigation_confirmation')"
-                                class="btn btn-primary mb-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
-                                <b class="mx-auto">Submit Investigation Details</b>
-                                <i class="fa fa-arrow-right fa-xl"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
 
+                <div class="mb-5 pb-5"></div>
             </div>
         </section>
 
@@ -301,6 +264,7 @@
                     document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
                     document.getElementById('case_details_type_of_case').innerText = result.data.type_of_case;
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -347,13 +311,10 @@
             }
         }
 
-        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, investigation_started, issue_in_investigation, issue) {
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id) {
             // Create the outer card container
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card';
-            if (issue_in_investigation) {
-                card.style.backgroundColor = '#ff00002b';
-            }
 
             // Create the header section
             const header = document.createElement('div');
@@ -368,7 +329,7 @@
             const title = document.createElement('h5');
             title.className = 'm-0';
             // title.textContent = `Visit Number ${visitNumber}`;
-            title.innerHTML = `${type_of_visit} Visit <b class="text-danger">(${details.TAT}H)</b>`;
+            title.textContent = `${type_of_visit} Visit`;
             headerLeft.appendChild(title);
 
             // Header - Right side (Toggle Icon)
@@ -385,6 +346,8 @@
 
             // Create the details section
             const detailsDiv = document.createElement('div');
+            // detailsDiv.className = 'wow animate__animated animate__fadeInDown';
+            // detailsDiv.setAttribute('data-wow-duration', '0.2s');
             detailsDiv.style.display = 'none';
             detailsDiv.id = `card-${cardId}-detail`;
 
@@ -460,6 +423,20 @@
 
             // Add individual questions
             questions.forEach((question, index) => {
+                // const questionItem = document.createElement('div');
+                // questionItem.className = 'p-2 py-0';
+
+                // const questionLabel = document.createElement('label');
+                // questionLabel.className = 'form-label eh-label m-0';
+                // questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                // const hr = document.createElement('hr');
+                // hr.className = 'm-1';
+
+                // questionItem.appendChild(questionLabel);
+                // questionItem.appendChild(hr);
+
+                // New code for answers in visit card
                 // Create the main card div
                 const questionItem = document.createElement('div');
                 questionItem.classList.add('p-3', 'my-2', 'question-card');
@@ -484,26 +461,11 @@
                     answerLabel.innerHTML = `<b>A${index + 1})</b> ${question.answer}`;
                 }
 
-                const answerInput = document.createElement('input');
-                answerInput.type = 'text';
-                answerInput.className = 'form-control';
-                answerInput.id = `input_${visit_id}_${index}`;
-                answerInput.name = `input_${visit_id}_${index}`;
-                answerInput.placeholder = 'Enter answer';
-                if (question.answer !== false) {
-                    answerInput.value = question.answer;
-                    answerInput.className = 'form-control dark-input';                    
-                }
-
-                if (!investigation_started) {
-                    answerInput.setAttribute('disabled', 'true');
-                }
-
                 // Append children to the card
                 questionItem.appendChild(questionLabel);
                 questionItem.appendChild(hr);
-                // questionItem.appendChild(answerLabel);
-                questionItem.appendChild(answerInput);
+                questionItem.appendChild(answerLabel);
+
 
                 questionList.appendChild(questionItem);
             });
@@ -513,73 +475,6 @@
             questionsContainer.appendChild(questionCard);
 
             detailsRow.appendChild(questionsContainer);
-
-            if (!investigation_started) {
-                // Create the first button container
-                const start_investigator_div = document.createElement('div');
-                start_investigator_div.className = 'col-12 mt-4 mb-2';
-    
-                const start_investigator_btn = document.createElement('button');
-                start_investigator_btn.className = 'btn btn-primary eh-btn-blue-primary-no-hover w-100';
-                start_investigator_btn.innerHTML = '<b>Start investigation</b>';
-                start_investigator_btn.setAttribute('onclick', `startInvestigationVisitApi(${visit_id})`);
-
-                start_investigator_div.appendChild(start_investigator_btn);
-
-                // Create the second button container
-                const raise_issue_div = document.createElement('div');
-                raise_issue_div.className = 'col-12';
-    
-                const raise_issue_btn = document.createElement('button');
-                raise_issue_btn.className = 'btn btn-danger w-100';
-                
-                if (issue_in_investigation) {
-                    raise_issue_btn.setAttribute('onclick', `openIssueModal('${type_of_visit}', '${visit_id}', '${issue}')`);
-                }
-                else {
-                    raise_issue_btn.setAttribute('onclick', `openIssueModal('${type_of_visit}', '${visit_id}', null)`);    
-                }
-                raise_issue_btn.innerHTML = '<b>Raise an issue</b>';
-    
-                raise_issue_div.appendChild(raise_issue_btn);
-    
-                detailsDiv.appendChild(start_investigator_div);
-                detailsDiv.appendChild(raise_issue_div);
-
-            }
-            else {
-                // Create the first button container
-                const submit_div = document.createElement('div');
-                submit_div.className = 'col-12 mt-4 mb-2';
-    
-                const submit_btn = document.createElement('button');
-                submit_btn.id = `submit_${visit_id}`
-                submit_btn.className = 'btn btn-primary eh-btn-blue-primary-no-hover w-100';
-                submit_btn.innerHTML = '<b>Save Details</b>';
-                submit_btn.setAttribute('onclick', `submitVisitAnswers('${visit_id}')`);
-
-                submit_div.appendChild(submit_btn);
-
-                // Create the second button container
-                const raise_issue_div = document.createElement('div');
-                raise_issue_div.className = 'col-12';
-    
-                const raise_issue_btn = document.createElement('button');
-                raise_issue_btn.className = 'btn btn-danger w-100';
-                if (issue_in_investigation) {
-                    raise_issue_btn.setAttribute('onclick', `openIssueModal('${type_of_visit}', '${visit_id}', '${issue}')`);
-                }
-                else {
-                    raise_issue_btn.setAttribute('onclick', `openIssueModal('${type_of_visit}', '${visit_id}', null)`);    
-                }
-                raise_issue_btn.innerHTML = '<b>Raise an issue</b>';
-    
-                raise_issue_div.appendChild(raise_issue_btn);
-    
-                detailsDiv.appendChild(submit_div);
-                detailsDiv.appendChild(raise_issue_div);
-
-            }
 
             // Append the header and details section to the card
             card.appendChild(header);
@@ -606,7 +501,8 @@
                             console.log(visit);
                             console.log(visit.visit_id);
                             let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
-                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id, visit.investigation_started, visit.issue_in_investigation, visit.issue_of_investigator);
+                                console.log(question_lst)
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id);
                                 document.getElementById('visit-cards').appendChild(visit_card);
                             }).catch((error) => {
                                 console.error("An error occurred:", error);
@@ -641,109 +537,6 @@
 
             } else {
                 console.error("GET User Failed:", result);
-            }
-        }
-
-        async function startInvestigationVisitApi(visit_id) {
-            const bodyData = {
-                'visit_id': visit_id,
-            };
-
-            const url = "{% url 'start-investigation-visit-api-list' %}";
-            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-            console.log(result)
-            if (success) {
-                if (result.success) {
-                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                }
-            } else {
-                alert('Unable to save the case details');
-            }
-        }
-
-        function openIssueModal(visit_type, visit_id, issue) {
-            document.getElementById('remove_issue').style.display = 'none';
-            document.getElementById('issueVisitModalLabel').innerText = `Issue in ${visit_type} Visit`;
-            document.getElementById('submit_issue').setAttribute('onclick', `raiseVisitIssue('${visit_id}')`)
-            console.log(issue);
-            if (issue) {
-                document.getElementById('issue_input').value = issue;
-                document.getElementById('remove_issue').style.display = '';
-                document.getElementById('remove_issue').setAttribute('onclick', `removeVisitIssue('${visit_id}')`)
-            }
-            else {
-                document.getElementById('issue_input').value = '';
-            }
-            const myModal = new bootstrap.Modal(document.getElementById('issueVisitModal'));
-            myModal.show();
-        }
-
-        async function raiseVisitIssue(visit_id) {
-            let issue_text = document.getElementById('issue_input').value;
-
-            if (issue_text != "") {
-                const bodyData = {
-                    visit_id: visit_id,
-                    issue_text: issue_text
-                };
-
-                const url = "{% url 'raise-visit-issue-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                    }
-                } else {
-                    alert('Unable to raise issue');
-                }
-
-            }
-
-            else {
-                document.getElementById('issue_input').focus();
-            }
-        }
-
-        async function removeVisitIssue(visit_id) {
-                const bodyData = {
-                    visit_id: visit_id,
-                };
-
-                const url = "{% url 'remove-visit-issue-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                    }
-                } else {
-                    alert('Unable to raise issue');
-                }
-        }
-
-        async function submitVisitAnswers(visit_id) {
-            let inputs = document.querySelectorAll(`input[id^="input_${visit_id}"]`); 
-
-            let values = {};
-            inputs.forEach(input => {
-                values[input.id.replace(`input_${visit_id}_`, '')] = input.value;
-            });
-
-            const bodyData = {
-                visit_id: visit_id,
-                answers: values,
-            };
-
-            const url = "{% url 'visit-question-api-list' %}";
-            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-            console.log(result)
-            if (success) {
-                if (result.success) {
-                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                }
-            } else {
-                alert('Unable to raise issue');
             }
         }
 
@@ -862,10 +655,10 @@
                         location.reload();
                 }
                 else {
-                    // window.location.href=`{% url 'dashboard-list' %}`;
+                    window.location.href=`{% url 'dashboard-list' %}`;
                 }
             } else {
-                // window.location.href=`{% url 'dashboard-list' %}`;
+                window.location.href=`{% url 'dashboard-list' %}`;
             }
         }
 

@@ -761,18 +761,18 @@ class SetCaseStatus(viewsets.ViewSet):
                         status=status.HTTP_400_BAD_REQUEST
                     )
 
-            user_role = user.role
-            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
-                return Response(
-                        {
-                            "success": False,
-                            "user_not_logged_in": False,
-                            "user_unathorized": True,                            
-                            "data":None,
-                            "error": None
-                        },
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
+            # user_role = user.role
+            # if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+            #     return Response(
+            #             {
+            #                 "success": False,
+            #                 "user_not_logged_in": False,
+            #                 "user_unathorized": True,                            
+            #                 "data":None,
+            #                 "error": None
+            #             },
+            #             status=status.HTTP_400_BAD_REQUEST
+            #         )
 
             case_id = request.GET.get('case_id')
             if not case_id:

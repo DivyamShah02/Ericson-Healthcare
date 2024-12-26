@@ -166,7 +166,8 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                     'answer':False
                 }
                 if que_id in answers_dict.keys():
-                    question_temp_dict['answer'] = answers_dict[que_id]
+                    if str(answers_dict[que_id]) != '':
+                        question_temp_dict['answer'] = answers_dict[que_id]
 
                 questions.append(question_temp_dict)
 

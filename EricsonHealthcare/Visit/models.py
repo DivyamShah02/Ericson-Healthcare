@@ -9,6 +9,7 @@ class Visit(models.Model):
     investigation_started = models.BooleanField(default=False)
     issue_in_investigation = models.BooleanField(default=False)
     issue_of_investigator = models.CharField(max_length=255, null=True, blank=True, default='')
+    submitted_by_investigator = models.BooleanField(default=False)
     TYPE_OF_VISIT_CHOICES = [
         ('Hospital', 'Hospital'),
         ('Treating_doctor', 'Treating Doctor'),
