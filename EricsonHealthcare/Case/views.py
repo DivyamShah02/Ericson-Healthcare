@@ -1061,3 +1061,105 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+
+class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            # user_role = user.role
+            # if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+            #     return Response(
+            #             {
+            #                 "success": False,
+            #                 "user_not_logged_in": False,
+            #                 "user_unathorized": True,                            
+            #                 "data":None,
+            #                 "error": None
+            #             },
+            #             status=status.HTTP_400_BAD_REQUEST
+            #         )
+
+            case_id = request.data.get('case_id')
+            if not case_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"case_id" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            medical_remark = request.data.get('medical_remark')
+            if not medical_remark:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": '"medical_remark" is required'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_data = Case.objects.get(case_id=case_id)
+            if case_data is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,
+                            "data":None,
+                            "error": f'Case with id - {case_id} not found'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            case_details = CaseDetails.objects.get(case_id=case_id)
+            
+            case_details.medical_officer_remarks = medical_remark
+            case_data.case_status = 'Medical_confirmation'
+
+            case_details.save()
+            case_data.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unathorized": False,
+                        "data":None,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unathorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+

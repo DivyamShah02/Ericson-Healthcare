@@ -77,8 +77,8 @@
             </div>
         </div>
 
-        <section class="pt-4 mt-5">
-            <div class="container">
+        <section>
+            <div class="container pt-4 mt-5">
                 <ul class="nav nav-underline mb-3 row" id="case-tab" role="tablist">
                     <li class="nav-item col text-center" role="presentation">
                         <a class="nav-link eh-nav-link-case-coordinator active" id="visits-tab" data-bs-toggle="pill"
@@ -138,43 +138,9 @@
                             </div>                            
                         </div>
 
-                        <div class="modal fade" id="reInvestigateModal" tabindex="-1" aria-labelledby="reInvestigateModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="reInvestigateModalLabel">Re-Investigate Hospital Visit</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h5 class="eh-head">Reason for Re-investigation</h5>
-                                    <div class="">
-                                        <textarea class="form-control remark-text-area" id="reason-re-investigate" name="reason-re-investigate" rows="5"
-                                            placeholder="Enter Reason"></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="remove-re-investigation" style="display: none;"
-                                    >Remove Re-Investigation</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover" id="Re-investigate-btn">Re-investigate</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
+                        <h3 class="eh-head mt-4">Medical Officer Remark</h3>
+                        <div class="medical-remark-card p-3 pe-2" id="medical-remark"></div>
 
-                        <div class="mt-4 pt-2">
-                            <h3 class="eh-head">Enter Remark</h3>
-                            <div class="my-3">                        
-                                <textarea class="form-control remark-text-area" id="medical_remark_text" name="medical_remark_text" rows="5"
-                                  placeholder="Enter Remark"></textarea>
-                              </div>
-                        </div>
-                        <div class="my-3">
-                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" id="medical_remark_submit_btn"
-                                onclick="submitMeidcalRemark()">
-                                <b>Submit</b>
-                            </button>
-                        </div>
                     </div>
                     <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab"
                         tabindex="0">
@@ -255,6 +221,7 @@
             getVistDetails();
             toggle_loader();
         };
+        processStep(6);
 
     </script>
 
@@ -271,6 +238,9 @@
                 if (result.success) {
                     console.log(result.data.all_docs);
                     document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    if (result.data.case_status == 'Creation_confirmation') {
+                        document.getElementById('visits-tab').click();
+                    }
                     createDocumentList(result.data.all_docs);
                 }
                 else {
@@ -291,12 +261,16 @@
             console.log(result);
             if (success) {
                 if (result.success) {
+                    console.log('hello');
                     console.log(result.data);
 
                     document.getElementById('case_details_case_id').innerText = result.data.case_id;
                     document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
                     document.getElementById('case_details_type_of_case').innerText = result.data.type_of_case;
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+
+                    document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
+
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -343,13 +317,10 @@
             }
         }
 
-        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, re_investigation, re_investigation_reason) {
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id) {
             // Create the outer card container
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card';
-            if (re_investigation) {
-                card.style.backgroundColor = '#ff00002b';
-            }
 
             // Create the header section
             const header = document.createElement('div');
@@ -458,6 +429,20 @@
 
             // Add individual questions
             questions.forEach((question, index) => {
+                // const questionItem = document.createElement('div');
+                // questionItem.className = 'p-2 py-0';
+
+                // const questionLabel = document.createElement('label');
+                // questionLabel.className = 'form-label eh-label m-0';
+                // questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                // const hr = document.createElement('hr');
+                // hr.className = 'm-1';
+
+                // questionItem.appendChild(questionLabel);
+                // questionItem.appendChild(hr);
+
+                // New code for answers in visit card
                 // Create the main card div
                 const questionItem = document.createElement('div');
                 questionItem.classList.add('p-3', 'my-2', 'question-card');
@@ -497,17 +482,6 @@
 
             detailsRow.appendChild(questionsContainer);
 
-            const re_investigate_div = document.createElement('div');
-            re_investigate_div.className = 'col-12 mt-4 mb-2';
-
-            const re_investigate_btn = document.createElement('button');
-            re_investigate_btn.className = 'btn btn-danger w-100';
-            re_investigate_btn.innerHTML = '<b>Re-Investigate</b>';
-            re_investigate_btn.setAttribute('onclick', `openReInvestigateModal('${type_of_visit}', '${visit_id}', ${re_investigation}, '${re_investigation_reason}')`);
-
-            re_investigate_div.appendChild(re_investigate_btn);
-            detailsDiv.appendChild(re_investigate_div);
-
             // Append the header and details section to the card
             card.appendChild(header);
             card.appendChild(detailsDiv);
@@ -533,7 +507,7 @@
                             console.log(visit.visit_id);
                             let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
                                 console.log(question_lst)
-                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id, visit.re_investigation, visit.re_investigation_reason);
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id);
                                 document.getElementById('visit-cards').appendChild(visit_card);
                             }).catch((error) => {
                                 console.error("An error occurred:", error);
@@ -570,100 +544,6 @@
                 console.error("GET User Failed:", result);
             }
         }
-
-        function openReInvestigateModal(visit_type, visit_id, re_investigation, re_investigation_reason) {
-            document.getElementById('remove-re-investigation').style.display = 'none';
-            document.getElementById('reason-re-investigate').value = '';
-            document.getElementById('reInvestigateModalLabel').innerText = `Re-Investigate ${visit_type} Visit`;
-            document.getElementById('Re-investigate-btn').setAttribute('onclick', `reInvestigateVisit('${visit_id}')`)
-
-            if (re_investigation !== false) {
-                document.getElementById('remove-re-investigation').style.display = '';
-                document.getElementById('remove-re-investigation').setAttribute('onclick', `removeReInvestigateVisit('${visit_id}')`)
-                document.getElementById('reason-re-investigate').value = re_investigation_reason
-            }
-
-            const myModal = new bootstrap.Modal(document.getElementById('reInvestigateModal'));
-            myModal.show();
-        }
-
-        async function reInvestigateVisit(visit_id) {
-            let reason_re_investigate_text = document.getElementById('reason-re-investigate').value;
-
-            if (reason_re_investigate_text != "") {
-                const bodyData = {
-                    visit_id: visit_id,
-                    reason_re_investigate_text: reason_re_investigate_text
-                };
-
-                const url = "{% url 're-investigate-visit-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
-                    }
-                    else {
-                        alert('Unable to raise issue');
-                    }
-                } else {
-                    alert('Unable to raise issue');
-                }
-
-            }
-
-            else {
-                document.getElementById('reason-re-investigate').focus();
-            }
-        }
-
-        async function removeReInvestigateVisit(visit_id) {
-                const bodyData = {
-                    visit_id: visit_id,
-                };
-
-                const url = "{% url 'remove-re-investigate-visit-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                    }
-                    else {
-                        alert('Unable to raise issue');
-                    }
-                } else {
-                    alert('Unable to raise issue');
-                }
-        }
-
-        async function submitMeidcalRemark() {
-            let medical_remark = document.getElementById('medical_remark_text').value;
-            if (medical_remark != '') {
-                const bodyData = {
-                    case_id: caseId,
-                    medical_remark: medical_remark
-                };
-    
-                const url = "{% url 'set-medical-remark-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                    }
-                    else {
-                        alert('Unable to raise issue');
-                    }
-                } else {
-                    alert('Unable to raise issue');
-                }
-            }
-            else {
-                document.getElementById('medical_remark_text').focus();
-            }
-        }
-
 
     </script>
 

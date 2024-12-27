@@ -63,11 +63,31 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 if case_details.case_status == 'Investigation':
                     return render(request, 'Investigate Officer/investigation.html')
                 
-                elif case_details.case_status == 'Investigation_confirmation':
+                elif case_details.case_status == 'Investigation_confirmation' or\
+                    case_details.case_status == 'Medical' or case_details.case_status == 'Medical_confirmation' or\
+                    case_details.case_status == 'Data_entry' or case_details.case_status == 'Data_entry_confirmation' or\
+                    case_details.case_status == 'Final_report' or case_details.case_status == 'Final_report_confirmation' or\
+                    case_details.case_status == 'Complete':
+                    
                     return render(request, 'Investigate Officer/case_completed.html')
+                
+                else:
+                    return redirect('dashboard')
 
             elif user_role == 'medical_officer':
-                pass
+                if case_details.case_status == 'Medical':
+                    return render(request, 'Medical Officer/medical_remark.html')
+                
+                elif case_details.case_status == 'Medical_confirmation' or\
+                    case_details.case_status == 'Data_entry' or case_details.case_status == 'Data_entry_confirmation' or\
+                    case_details.case_status == 'Final_report' or case_details.case_status == 'Final_report_confirmation' or\
+                    case_details.case_status == 'Complete':
+                    
+                    return render(request, 'Medical Officer/case_completed.html')
+
+                else:
+                    return redirect('dashboard')
+
             elif user_role == 'data_entry_personnel':
                 pass
             elif user_role == 'admin':

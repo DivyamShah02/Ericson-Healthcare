@@ -12,6 +12,8 @@ router.register(r'update-visit-api', UpdateVisitViewSet, basename='update-visit-
 router.register(r'start-investigation-visit-api', StartInvestigationVisitViewSet, basename='start-investigation-visit-api')
 router.register(r'raise-visit-issue-api', RaiseVisitIssueViewSet, basename='raise-visit-issue-api')
 router.register(r'remove-visit-issue-api', RemoveVisitIssueViewSet, basename='remove-visit-issue-api')
+router.register(r're-investigate-visit-api', ReInvestigateVisitViewSet, basename='re-investigate-visit-api')
+router.register(r'remove-re-investigate-visit-api', RemoveReInvestigateVisitViewSet, basename='remove-re-investigate-visit-api')
 
 urlpatterns = [
     path('', include(router.urls)),
