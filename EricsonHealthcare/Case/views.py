@@ -546,6 +546,8 @@ class GetAllCaseViewSet(viewsets.ViewSet):
         try:
             user = request.user
 
+            case_statuses = ['Creation', 'Creation_confirmation', 'Investigation', 'Investigation_confirmation', 'Medical', 'Medical_confirmation', 'Data_entry', 'Data_entry_confirmation', 'Final_report', 'Final_report_confirmation', 'Complete']
+
             if not user.is_authenticated:
                 return Response(
                         {
@@ -571,14 +573,18 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                 visit_cases = list(set(visit_cases))
                 
                 cases = Case.objects.filter(case_id__in=visit_cases)
-
-                cases = [case for case in cases if case.case_status != "Creation" and case.case_status != "Creation_confirmation"]
+                investigation_case_status = case_statuses[2:len(case_statuses)]
+                cases = [case for case in cases if case.case_status in investigation_case_status]
 
             elif user_role == 'medical_officer':
                 cases = Case.objects.filter(medical_officer_id=user)
+                medical_case_status = case_statuses[4:len(case_statuses)]
+                cases = [case for case in cases if case.case_status in medical_case_status]
 
             elif user_role == 'data_entry_personnel':
                 cases = Case.objects.filter(data_entry_id=user)
+                data_entry_case_status = case_statuses[6:len(case_statuses)]
+                cases = [case for case in cases if case.case_status in data_entry_case_status]
 
             elif user_role == 'admin':
                 pass

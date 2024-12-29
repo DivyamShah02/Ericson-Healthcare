@@ -1,10 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-
-from django.db import models
-
 class PADeathReport(models.Model):
     claim_number = models.CharField(max_length=100)
     policy_number = models.CharField(max_length=100)
@@ -54,7 +49,7 @@ class PADeathReport(models.Model):
 
     def __str__(self):
         return f"Claim Report - {self.claim_number}"
-    
+
 
 class TTDReport(models.Model):
     claim_number = models.CharField(max_length=100)
@@ -132,6 +127,7 @@ class TTDReport(models.Model):
 
     def __str__(self):
         return f"TTD Report - {self.claim_number}"
+
 
 class HealthClaimReport(models.Model): # RR GR
     # insured details
@@ -387,6 +383,7 @@ class ICLMClosureReport(models.Model): # LOJ
     def __str__(self):
         return f"ICLM Closure Report - {self.claim_no}"
 
+
 class SecureMindCriticalIllnessReport(models.Model):    #SMC
     # Insured Information
     insured_name = models.CharField(max_length=255)
@@ -468,3 +465,4 @@ class SecureMindCriticalIllnessReport(models.Model):    #SMC
 
     def __str__(self):
         return f"Critical Illness Report - {self.claim_no}"
+

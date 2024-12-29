@@ -190,6 +190,11 @@ body {
     cursor: pointer;
 }
 
+.generate-final-report-card {
+    border: 1px solid var(--eh-blue-primary); 
+    border-radius: 15px;
+}
+
 
 .visit-card {
     background-color: white;

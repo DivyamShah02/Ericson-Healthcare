@@ -1,0 +1,206 @@
+<!-- Claim Details -->
+<div class="mb-3">
+    <label for="claim_number" class="form-label eh-label">Claim Number</label>
+    <input type="text" class="form-control dark-input" id="claim_number" name="claim_number" maxlength="50" required>
+</div>
+<div class="mb-3">
+    <label for="policy_number" class="form-label eh-label">Policy Number</label>
+    <input type="text" class="form-control dark-input" id="policy_number" name="policy_number" maxlength="50" required>
+</div>
+<div class="mb-3">
+    <label for="insured_name" class="form-label eh-label">Insured Name</label>
+    <input type="text" class="form-control dark-input" id="insured_name" name="insured_name" maxlength="100" required>
+</div>
+<div class="mb-3">
+    <label for="claimant_name" class="form-label eh-label">Claimant Name</label>
+    <input type="text" class="form-control dark-input" id="claimant_name" name="claimant_name" maxlength="100" required>
+</div>
+<div class="mb-3">
+    <label for="sum_insured" class="form-label eh-label">Sum Insured</label>
+    <input type="number" class="form-control dark-input" id="sum_insured" name="sum_insured" step="0.01" max="999999999999" min="0"
+        required>
+</div>
+<div class="mb-3">
+    <label for="nature_of_loss" class="form-label eh-label">Nature of Loss</label>
+    <input type="text" class="form-control dark-input" id="nature_of_loss" name="nature_of_loss" maxlength="100" required>
+</div>
+<div class="mb-3">
+    <label for="policy_type" class="form-label eh-label">Policy Type</label>
+    <input type="text" class="form-control dark-input" id="policy_type" name="policy_type" maxlength="100" required>
+</div>
+
+<!-- Optional Fields -->
+<div class="mb-3">
+    <label for="channel_sourcing" class="form-label eh-label">Channel Sourcing</label>
+    <input type="text" class="form-control dark-input" id="channel_sourcing" name="channel_sourcing" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="family_member" class="form-label eh-label">Family Member</label>
+    <input type="text" class="form-control dark-input" id="family_member" name="family_member" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="relation_with_insured" class="form-label eh-label">Relation with Insured</label>
+    <input type="text" class="form-control dark-input" id="relation_with_insured" name="relation_with_insured" maxlength="50"
+        required>
+</div>
+<div class="mb-3">
+    <label for="insured_occupation" class="form-label eh-label">Insured Occupation</label>
+    <input type="text" class="form-control dark-input" id="insured_occupation" name="insured_occupation" maxlength="200" required>
+</div>
+<div class="mb-3">
+    <label for="claimant_occupation" class="form-label eh-label">Claimant Occupation</label>
+    <input type="text" class="form-control dark-input" id="claimant_occupation" name="claimant_occupation" maxlength="200">
+</div>
+
+<!-- Event Details -->
+<div class="mb-3">
+    <label for="event_details" class="form-label eh-label">Event Details</label>
+    <textarea class="form-control dark-input" id="event_details" name="event_details" rows="4" required></textarea>
+</div>
+<div class="mb-3">
+    <label for="hospital_visit_details" class="form-label eh-label">Hospital Visit Details</label>
+    <textarea class="form-control dark-input" id="hospital_visit_details" name="hospital_visit_details" rows="4"></textarea>
+</div>
+
+<!-- Health and Post-Mortem Information -->
+<div class="mb-3">
+    <label for="current_condition" class="form-label eh-label">Current Condition</label>
+    <input type="text" class="form-control dark-input" id="current_condition" name="current_condition" maxlength="200" required>
+</div>
+<div class="mb-3">
+    <label for="other_insurance" class="form-label eh-label">Other Insurance</label>
+    <textarea class="form-control dark-input" id="other_insurance" name="other_insurance" rows="3"></textarea>
+</div>
+<div class="mb-3">
+    <label for="mlc_done" class="form-label eh-label">MLC Done</label>
+    <input type="checkbox" class="form-check-input" id="mlc_done" name="mlc_done">
+</div>
+<div class="mb-3">
+    <label for="post_mortem_done" class="form-label eh-label">Post Mortem Done</label>
+    <input type="checkbox" class="form-check-input" id="post_mortem_done" name="post_mortem_done">
+</div>
+<div class="mb-3">
+    <label for="casuality_note" class="form-label eh-label">Casualty Note</label>
+    <textarea class="form-control dark-input" id="casuality_note" name="casuality_note" rows="3"></textarea>
+</div>
+<div class="mb-3">
+    <label for="police_document_verified" class="form-label eh-label">Police Document Verified</label>
+    <input type="text" class="form-control dark-input" id="police_document_verified" name="police_document_verified"
+        maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="pm_centre_name" class="form-label eh-label">Post Mortem Centre Name</label>
+    <input type="text" class="form-control dark-input" id="pm_centre_name" name="pm_centre_name" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="cause_of_death" class="form-label eh-label">Cause of Death</label>
+    <input type="text" class="form-control dark-input" id="cause_of_death" name="cause_of_death" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="viscera_status" class="form-label eh-label">Viscera Status</label>
+    <input type="text" class="form-control dark-input" id="viscera_status" name="viscera_status" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="pm_verified" class="form-label eh-label">Post Mortem Verified</label>
+    <input type="checkbox" class="form-check-input" id="pm_verified" name="pm_verified">
+</div>
+
+<!-- Miscellaneous Information -->
+<div class="mb-3">
+    <label for="photos" class="form-label eh-label">Photos</label>
+    <input type="text" class="form-control dark-input" id="photos" name="photos" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="witness" class="form-label eh-label">Witness</label>
+    <input type="text" class="form-control dark-input" id="witness" name="witness" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="description" class="form-label eh-label">Description</label>
+    <input type="text" class="form-control dark-input" id="description" name="description" maxlength="200">
+</div>
+
+<!-- Driver's License Details -->
+<div class="mb-3">
+    <label for="dl_name" class="form-label eh-label">Driver's License Name</label>
+    <input type="text" class="form-control dark-input" id="dl_name" name="dl_name" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="dl_validity" class="form-label eh-label">Driver's License Validity</label>
+    <input type="date" class="form-control dark-input" id="dl_validity" name="dl_validity">
+</div>
+
+<!-- Additional Information -->
+<div class="mb-3">
+    <label for="cov" class="form-label eh-label">Coverage</label>
+    <input type="text" class="form-control dark-input" id="cov" name="cov" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="online_portal_check" class="form-label eh-label">Online Portal Check</label>
+    <input type="text" class="form-control dark-input" id="online_portal_check" name="online_portal_check" maxlength="200">
+</div>
+
+<!-- Investigation Details -->
+<div class="mb-3">
+    <label for="total_person_inquired" class="form-label eh-label">Total Persons Inquired</label>
+    <input type="number" class="form-control dark-input" id="total_person_inquired" name="total_person_inquired">
+</div>
+<div class="mb-3">
+    <label for="vicinity_check_details" class="form-label eh-label">Vicinity Check Details</label>
+    <textarea class="form-control dark-input" id="vicinity_check_details" name="vicinity_check_details" rows="3"></textarea>
+</div>
+
+<!-- Media Information -->
+<div class="mb-3">
+    <label for="media_date" class="form-label eh-label">Media Date</label>
+    <input type="date" class="form-control dark-input" id="media_date" name="media_date">
+</div>
+<div class="mb-3">
+    <label for="media_details" class="form-label eh-label">Media Details</label>
+    <textarea class="form-control dark-input" id="media_details" name="media_details" rows="3"></textarea>
+</div>
+
+<!-- Claim Conclusion -->
+<div class="mb-3">
+    <label for="other_insurance_company" class="form-label eh-label">Other Insurance Company</label>
+    <input type="text" class="form-control dark-input" id="other_insurance_company" name="other_insurance_company" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="claim_status" class="form-label eh-label">Claim Status</label>
+    <textarea class="form-control dark-input" id="claim_status" name="claim_status" rows="3"></textarea>
+</div>
+<div class="mb-3">
+    <label for="conclusion" class="form-label eh-label">Conclusion</label>
+    <textarea class="form-control dark-input" id="conclusion" name="conclusion" rows="3"></textarea>
+</div>
+
+<!-- Important Dates -->
+<div class="mb-3">
+    <label for="intimation_date" class="form-label eh-label">Intimation Date</label>
+    <input type="date" class="form-control dark-input" id="intimation_date" name="intimation_date" required>
+</div>
+<div class="mb-3">
+    <label for="report_closed_date" class="form-label eh-label">Report Closed Date</label>
+    <input type="date" class="form-control dark-input" id="report_closed_date" name="report_closed_date" required>
+</div>
+<div class="mb-3">
+    <label for="turn_around_time" class="form-label eh-label">Turnaround Time (Days)</label>
+    <input type="number" class="form-control dark-input" id="turn_around_time" name="turn_around_time" required>
+</div>
+
+<!-- Manager Information -->
+<div class="mb-3">
+    <label for="iclm_recommendation" class="form-label eh-label">ICLM Recommendation</label>
+    <input type="text" class="form-control dark-input" id="iclm_recommendation" name="iclm_recommendation" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="investigator_name" class="form-label eh-label">Investigator Name</label>
+    <input type="text" class="form-control dark-input" id="investigator_name" name="investigator_name" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="state_manager_name" class="form-label eh-label">State Manager Name</label>
+    <input type="text" class="form-control dark-input" id="state_manager_name" name="state_manager_name" maxlength="200">
+</div>
+<div class="mb-3">
+    <label for="central_manager_name" class="form-label eh-label">Central Manager Name</label>
+    <input type="text" class="form-control dark-input" id="central_manager_name" name="central_manager_name" maxlength="200">
+</div>

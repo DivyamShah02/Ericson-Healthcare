@@ -32,6 +32,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 return redirect('dashboard-list')
 
             case_details = Case.objects.filter(case_id=case_id).first()
+            case_details_data = CaseDetails.objects.filter(case_id=case_id).first()
 
             if case_details is None:
                 print(f'Wrong case id | No case with id {case_id} present')
@@ -72,7 +73,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                     return render(request, 'Investigate Officer/case_completed.html')
                 
                 else:
-                    return redirect('dashboard')
+                    return redirect('dashboard-list')
 
             elif user_role == 'medical_officer':
                 if case_details.case_status == 'Medical':
@@ -86,10 +87,23 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                     return render(request, 'Medical Officer/case_completed.html')
 
                 else:
-                    return redirect('dashboard')
+                    return redirect('dashboard-list')
 
             elif user_role == 'data_entry_personnel':
-                pass
+                if case_details.case_status == 'Data_entry':
+                    case_type = case_details_data.type_of_case
+                    print(case_type)
+                    return render(request, 'DataEntry/data_entry.html', {'case_type':case_type})
+                
+                elif case_details.case_status == 'Data_entry_confirmation' or\
+                    case_details.case_status == 'Final_report' or case_details.case_status == 'Final_report_confirmation' or\
+                    case_details.case_status == 'Complete':
+                    
+                    return render(request, 'Medical Officer/case_completed.html')
+
+                else:
+                    return redirect('dashboard-list')
+
             elif user_role == 'admin':
                 pass
         
