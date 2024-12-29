@@ -1,6 +1,7 @@
 from django.db import models
 
 class PADeathReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID
     claim_number = models.CharField(max_length=100)
     policy_number = models.CharField(max_length=100)
     insured_name = models.CharField(max_length=200)
@@ -52,6 +53,7 @@ class PADeathReport(models.Model):
 
 
 class TTDReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID
     claim_number = models.CharField(max_length=100)
     policy_number = models.CharField(max_length=100)
     insured_name = models.CharField(max_length=200)
@@ -129,7 +131,8 @@ class TTDReport(models.Model):
         return f"TTD Report - {self.claim_number}"
 
 
-class HealthClaimReport(models.Model): # RR GR
+class HealthClaimReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID # RR GR
     # insured details
     insurer = models.CharField(max_length=200, null=True, blank=True)
     insured_name = models.CharField(max_length=200, null=True, blank=True)
@@ -225,6 +228,7 @@ class HealthClaimReport(models.Model): # RR GR
 
 
 class CashlessClaimReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID
     claim_number = models.CharField(max_length=100, null=True, blank=True)
     hospital_name = models.CharField(max_length=200, null=True, blank=True)
     date_of_joining = models.DateField(null=True, blank=True)
@@ -244,7 +248,8 @@ class CashlessClaimReport(models.Model):
     final_recommendation = models.TextField(null=True, blank=True)
 
 
-class ClaimReport(models.Model): # PPD
+class ClaimReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID # PPD
     claim_number = models.CharField(max_length=50)
     policy_number = models.CharField(max_length=50)
     insured_name = models.CharField(max_length=100)
@@ -306,6 +311,7 @@ class ClaimReport(models.Model): # PPD
     
 
 class HDCClosureReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID
     claim_no = models.CharField(max_length=50, null=True, blank=True)
     nol = models.CharField(max_length=50, null=True, blank=True)  # Nature of Loss
     policy_details = models.TextField(null=True, blank=True)
@@ -331,7 +337,8 @@ class HDCClosureReport(models.Model):
         return f"HDC Closure Report - {self.claim_no or 'Unknown'}"
 
 
-class ICLMClosureReport(models.Model): # LOJ
+class ICLMClosureReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID # LOJ
     # Insured Information
     insured_name = models.CharField(max_length=255)
     policy_no = models.CharField(max_length=50)
@@ -384,7 +391,8 @@ class ICLMClosureReport(models.Model): # LOJ
         return f"ICLM Closure Report - {self.claim_no}"
 
 
-class SecureMindCriticalIllnessReport(models.Model):    #SMC
+class SecureMindCriticalIllnessReport(models.Model):
+    case_id = models.IntegerField()  # Link to Case ID    #SMC
     # Insured Information
     insured_name = models.CharField(max_length=255)
     policy_no = models.CharField(max_length=50)

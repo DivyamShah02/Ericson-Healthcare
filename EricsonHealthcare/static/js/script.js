@@ -53,3 +53,26 @@ function setFormValues(data) {
     }
 
 }
+
+function addSpaces(input) {
+    // Check if the input is a string
+    if (typeof input !== 'string') {
+        console.error('Input must be a string');
+        return input; // Return the original string if input is not a string
+    }
+
+    // Check if the string is empty
+    if (input.trim() === '') {
+        console.error('Input string cannot be empty');
+        return input; // Return the original string if it's empty
+    }
+
+    try {
+        // Add space before each capital letter
+        return input.replace(/([A-Z])/g, ' $1').trim();
+    } catch (error) {
+        // Log any unexpected error and return the original string
+        console.error('An error occurred while processing the input:', error);
+        return input;
+    }
+}

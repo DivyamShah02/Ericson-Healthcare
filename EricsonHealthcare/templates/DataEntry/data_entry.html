@@ -143,30 +143,37 @@
 
                         <h3 class="eh-head mt-4">Generate Final Report</h3>
                         <div class="generate-final-report-card p-3">
-                            {% if case_type == 'CashlessClaimReport' %}
-                                {% include 'Reports/CashlessClaimReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'ClaimReport' %}
-                                {% include 'Reports/ClaimReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'HDCClosureReport' %}
-                                {% include 'Reports/HDCClosureReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'HealthClaimReport' %}
-                                {% include 'Reports/HealthClaimReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'ICLMClosureReport' %}
-                                {% include 'Reports/ICLMClosureReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'PADeathReport' %}
-                                {% include 'Reports/PADeathReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'SecureMindCriticalIllnessReport' %}
-                                {% include 'Reports/SecureMindCriticalIllnessReport.html' %}
-                            {% endif %}
-                            {% if case_type == 'TTDReport' %}
-                                {% include 'Reports/TTDReport.html' %}
-                            {% endif %}
+                            <form id="final_report_form">
+                                {% if case_type == 'CashlessClaimReport' %}
+                                    {% include 'Reports/CashlessClaimReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'ClaimReport' %}
+                                    {% include 'Reports/ClaimReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'HDCClosureReport' %}
+                                    {% include 'Reports/HDCClosureReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'HealthClaimReport' %}
+                                    {% include 'Reports/HealthClaimReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'ICLMClosureReport' %}
+                                    {% include 'Reports/ICLMClosureReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'PADeathReport' %}
+                                    {% include 'Reports/PADeathReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'SecureMindCriticalIllnessReport' %}
+                                    {% include 'Reports/SecureMindCriticalIllnessReport.html' %}
+                                {% endif %}
+                                {% if case_type == 'TTDReport' %}
+                                    {% include 'Reports/TTDReport.html' %}
+                                {% endif %}
+                                <div class="my-3">
+                                    <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" type="submit">
+                                        <b>Submit</b>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
 
                     </div>
@@ -287,7 +294,7 @@
                 if (result.success) {
                     document.getElementById('case_details_case_id').innerText = result.data.case_id;
                     document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
-                    document.getElementById('case_details_type_of_case').innerText = result.data.type_of_case;
+                    document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
 
                     document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
@@ -300,6 +307,49 @@
             }
         }
 
+    </script>
+
+    <script>
+        document.getElementById("final_report_form").addEventListener("submit", async (event) => {
+            toggle_loader();
+            const form = event.target;
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const bodyData = {
+                'case_id': caseId,
+            };
+
+            var form_final_report = new FormData(document.getElementById('final_report_form'));
+            form_final_report.forEach((value, key) => {
+                if (!Object.prototype.hasOwnProperty.call(bodyData, key)) {
+                    bodyData[key] = value;
+                    return;
+                }
+                if (!Array.isArray(bodyData[key])) {
+                    bodyData[key] = [bodyData[key]];
+                }
+                bodyData[key].push(value);
+            });
+
+            const url = "{% url 'final-report-api-list' %}";
+            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+            console.log(result)
+            if (success) {
+                if (result.success) {
+                    setFormValues(result.data);
+                    // window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                }
+            } else {
+                alert('Unable to save the case details');
+            }
+
+            toggle_loader();
+        });
     </script>
 
     <!-- // Handle Visit related functions -->
