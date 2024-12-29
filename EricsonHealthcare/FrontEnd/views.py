@@ -99,7 +99,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                     case_details.case_status == 'Final_report' or case_details.case_status == 'Final_report_confirmation' or\
                     case_details.case_status == 'Complete':
                     
-                    return render(request, 'Medical Officer/case_completed.html')
+                    return render(request, 'DataEntry/case_completed.html')
 
                 else:
                     return redirect('dashboard-list')

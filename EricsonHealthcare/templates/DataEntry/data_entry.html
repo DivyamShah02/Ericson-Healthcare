@@ -170,10 +170,17 @@
                                 {% endif %}
                                 <div class="my-3">
                                     <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" type="submit">
-                                        <b>Submit</b>
+                                        <b>Save</b>
                                     </button>
                                 </div>
                             </form>
+                        </div>
+
+                        <div class="my-3">
+                            <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" type="button"
+                                id="generate_final_report" onclick="updateCaseStatus('Data_entry_confirmation')">
+                                <b>Generate Final Report</b>
+                            </button>
                         </div>
 
                     </div>
@@ -220,7 +227,8 @@
 
                 </div>
 
-                <div class="mb-5 pb-5"></div>
+                <div class="mb-2 pb-2"></div>
+                <!-- <div class="mb-5 pb-5"></div> -->
             </div>
         </section>
 
@@ -254,6 +262,7 @@
             getCaseDetails();
             getCaseData();
             getVistDetails();
+            getFinalReportData();
             toggle_loader();
         };
 
@@ -298,6 +307,10 @@
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
 
                     document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
+
+                    if (result.data.final_report == '' || result.data.final_report == null) {
+                        document.getElementById('generate_final_report').setAttribute('disabled', 'true');
+                    }
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -310,6 +323,26 @@
     </script>
 
     <script>
+        async function getFinalReportData() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'final-report-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    setFormValues(result.data);
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
         document.getElementById("final_report_form").addEventListener("submit", async (event) => {
             toggle_loader();
             const form = event.target;

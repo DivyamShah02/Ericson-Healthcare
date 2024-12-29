@@ -558,7 +558,7 @@
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
 
                     document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
-                    document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('${result.data.final_report}','Final Report.pdf')`);
+                    document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
 
 
                 }
