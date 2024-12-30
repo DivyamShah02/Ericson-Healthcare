@@ -16,6 +16,9 @@ logger = None
 
 class UserCreationViewSet(viewsets.ViewSet):
     def create(self, request):
+        if not request.user.is_staff:
+            return Response({"detail": "User not authorized"}, status=status.HTTP_400_BAD_REQUEST)
+
         # Extract data from the request
         name = request.data.get('name')
         password = request.data.get('password')
@@ -33,6 +36,12 @@ class UserCreationViewSet(viewsets.ViewSet):
             'data_entry_personnel': 'DE',
             'admin': 'AD',
         }
+
+        email_already_user = UserDetail.objects.filter(email=email).first()
+        contact_number_already_user = UserDetail.objects.filter(contact_number=contact_number).first()
+
+        if email_already_user or contact_number_already_user:
+            return Response({"detail": "User already registered."}, status=status.HTTP_400_BAD_REQUEST)
 
         # Validate role and required fields
         if not name or not contact_number or not email or role not in role_codes.keys():
@@ -73,7 +82,7 @@ class UserCreationViewSet(viewsets.ViewSet):
         
         # Serialize the created UserDetail instance
         user_detail_serializer = UserDetailSerializer(user)
-        return Response(user_detail_serializer.data, status=status.HTTP_201_CREATED)
+        return Response({'success':True, 'data':user_detail_serializer.data}, status=status.HTTP_201_CREATED)
     
     def list(self, request):
         user_id = request.query_params.get('user_id')  # Use query_params for GET requests
