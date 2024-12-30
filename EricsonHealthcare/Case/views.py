@@ -930,7 +930,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                 )
 
             case_data.medical_officer_id = medical_officer_id
-            case_data.case_status = 'Medical_confirmation'
+            # case_data.case_status = 'Medical_confirmation'
             case_data.save()
 
             return Response(
@@ -1040,7 +1040,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                 )
 
             case_data.data_entry_id = data_entry_personnel_id
-            case_data.case_status = 'Data_entry_confirmation'
+            # case_data.case_status = 'Data_entry_confirmation'
             case_data.save()
 
             return Response(

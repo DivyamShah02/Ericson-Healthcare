@@ -522,6 +522,7 @@
 
     <script>
         let data_entry_personnel_id = '';
+        let current_case_status = '';
         async function getCaseData() {
             const Params = {
                 case_id: caseId,
@@ -539,6 +540,7 @@
                         document.getElementById('submit_data_entry_personnel').innerHTML = '<b>Update Data Entry Personnel</b>';
                         document.getElementById('select_data_entry_personnel_heading').innerText = 'Update Data Entry Personnel';
                         data_entry_personnel_id = result.data.data_entry_id;
+                        current_case_status = result.data.case_status;
                     }
                     createDocumentList(result.data.all_docs);
                 }
@@ -561,15 +563,21 @@
             if (success) {
                 if (result.success) {
                     console.log(result.data);
+                    console.log('hesrgeargagre')
 
                     document.getElementById('case_details_case_id').innerText = result.data.case_id;
                     document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
                     document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
-
-                    if (result.data.final_report) {
-                        document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
-
+                    
+                    if (current_case_status == "Data_entry_confirmation") {
+                        if (result.data.final_report) {
+                            document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
+                        }
+                        else {
+                        document.getElementById('final-report').style.display = 'none';
+                        document.getElementById('final-report-not-generated').style.display = '';
+                    }
                     }
                     else {
                         document.getElementById('final-report').style.display = 'none';

@@ -1062,10 +1062,10 @@
             }
         }
 
-        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id) {
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, visit) {
             // Create the outer card container
             const card = document.createElement('div');
-            card.className = 'p-3 mt-3 visit-card';
+            card.className = 'p-3 mt-3 visit-card px-0 pe-3';
 
             // Create the header section
             const header = document.createElement('div');
@@ -1073,10 +1073,41 @@
             header.id = `card-${cardId}`;
             header.setAttribute('onclick', 'toggleCard(this)');
             header.style.cursor = 'pointer';
+            
+            if (visit.issue_in_investigation) {
+                const headerIcon = document.createElement('div');
+                headerIcon.className = 'col-2 text-center';
+                const headerIconI = document.createElement('i');
+                headerIconI.className = 'fa fa-triangle-exclamation fa-xl';
+                headerIcon.appendChild(headerIconI);
+                card.style.backgroundColor = '#ff00002b';
+                header.appendChild(headerIcon);
+            }
+            else {
+                if (visit.investigation_started) {
+                    const headerIcon = document.createElement('div');
+                    headerIcon.className = 'col-2 text-center';
+                    const headerIconI = document.createElement('i');
+                    headerIconI.className = 'fa fa-check fa-xl';
+                    headerIcon.appendChild(headerIconI);
+                    header.appendChild(headerIcon);
+                }
+    
+                else{
+                    const headerIcon = document.createElement('div');
+                    headerIcon.className = 'col-2 text-center';
+                    const headerIconI = document.createElement('i');
+                    headerIconI.className = 'fa fa-stopwatch fa-xl';
+                    headerIcon.appendChild(headerIconI);
+                    header.appendChild(headerIcon);
+    
+                }
+
+            }
 
             // Header - Left side (Visit Number)
             const headerLeft = document.createElement('div');
-            headerLeft.className = 'col-10 text-start';
+            headerLeft.className = 'col-8 text-start';
             const title = document.createElement('h5');
             title.className = 'm-0';
             // title.textContent = `Visit Number ${visitNumber}`;
@@ -1097,6 +1128,7 @@
 
             // Create the details section
             const detailsDiv = document.createElement('div');
+            detailsDiv.className = 'px-3 pe-0';
             // detailsDiv.className = 'wow animate__animated animate__fadeInDown';
             // detailsDiv.setAttribute('data-wow-duration', '0.2s');
             detailsDiv.style.display = 'none';
@@ -1123,6 +1155,28 @@
             actionCol.appendChild(deleteIcon);
             detailsRow.appendChild(actionCol);
 
+            if (visit.issue_in_investigation) {
+                const issueCol = document.createElement('div');
+                issueCol.className = 'col-6 text-start eh-key';
+                issueCol.textContent = 'Investigator Issue';
+
+                // Value column
+                const reasonCol = document.createElement('div');
+                reasonCol.className = 'col-6 text-end text-lg-start text-break eh-value';
+                reasonCol.textContent = visit.issue_of_investigator;
+
+                // Append key and value columns
+                detailsRow.appendChild(issueCol);
+                detailsRow.appendChild(reasonCol);
+
+                // Add a horizontal line after each detail
+                const detailHrDiv = document.createElement('div');
+                detailHrDiv.className = 'col-12 px-3';
+                const detailHr = document.createElement('hr');
+                detailHr.className = 'p-0 my-1 visit-card-eh-hr';
+                detailHrDiv.appendChild(detailHr);
+                detailsRow.appendChild(detailHrDiv);
+            }
             // Add each key-value pair to the details
             for (const [key, value] of Object.entries(details)) {
                 // Key column
@@ -1265,7 +1319,7 @@
                             console.log(visit.visit_id);
                             let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
                                 console.log(question_lst)
-                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id);
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id, visit);
                                 document.getElementById('visit-cards').appendChild(visit_card);
                             }).catch((error) => {
                                 console.error("An error occurred:", error);

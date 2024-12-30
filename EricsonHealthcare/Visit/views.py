@@ -659,6 +659,13 @@ class UpdateVisitViewSet(viewsets.ViewSet):
             if visit_type_added is not False:
                 visit_data_obj.investigator_id = request_data['investigator_id']
                 visit_data_obj.tat = request_data['tat']
+                visit_data_obj.investigation_started = False
+                visit_data_obj.issue_in_investigation = False
+                visit_data_obj.issue_of_investigator = ''
+                visit_data_obj.submitted_by_investigator = False
+                visit_data_obj.re_investigation = False
+                visit_data_obj.re_investigation_reason = ''
+
                 visit_data_obj.save()
 
                 return Response(

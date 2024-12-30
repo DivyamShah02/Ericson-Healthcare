@@ -39,7 +39,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 return redirect('dashboard-list')
 
             if user_role == 'hod':
-                pass
+                return redirect('dashboard-list')
 
             elif user_role == 'coordinator':
                 if case_details.case_status == 'Creation' or case_details.case_status == 'Creation_confirmation':
@@ -105,7 +105,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                     return redirect('dashboard-list')
 
             elif user_role == 'admin':
-                pass
+                return redirect('dashboard-list')
         
         except Exception as ex:
             # logger.error(ex, exc_info=True)

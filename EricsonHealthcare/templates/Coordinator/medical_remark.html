@@ -362,6 +362,17 @@
                                 </div>                            
                             
                         </div>
+                        
+                        <h3 class="eh-head">Visits Details</h3>
+                        <div id="visit-cards" class="mb-4">
+                            <div class="my-3">
+                                <div class="p-5 text-center dark-input" id="no-visit-created"
+                                  style="border-radius: 10px; background-color: var(--eh-danger);">
+                                  <i class="fa fa-triangle-exclamation fa-xl eh-text-blue-primary" style="font-size: 2.5rem;"></i>
+                                  <p class="p-0 m-0 mt-2 eh-text-blue-primary"><b>0 Visit created for this case</b></p>
+                                </div>
+                            </div>                            
+                        </div>
 
                         <h3 class="eh-head" id="select_medical_officer_heading">Select Medical Officer</h3>
                         <div class="my-4">
@@ -482,6 +493,7 @@
         window.onload = function () {
             getCaseDetails();
             getCaseData();
+            getVistDetails();
             getMedicalOfficerDetails();
             toggle_loader();
         };
@@ -549,6 +561,295 @@
                 }
             } else {
                 window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+    </script>
+
+    <!-- // Handle Visit related functions -->
+    <script>
+        function toggleCard(card) {
+            let card_id = card.id;
+            let card_detial_id = `${card_id}-detail`;
+            let card_icon_id = `${card_id}-icon`;
+            let card_details_ele = document.getElementById(card_detial_id);
+            console.log(card_detial_id);
+            if (card_details_ele.style.display == 'none') {
+                card_details_ele.style.display = 'block';
+                document.getElementById(card_icon_id).classList.remove('fa-plus');
+                document.getElementById(card_icon_id).classList.add('fa-minus');
+            }
+            else {
+                card_details_ele.style.display = 'none';
+                document.getElementById(card_icon_id).classList.remove('fa-minus');
+                document.getElementById(card_icon_id).classList.add('fa-plus');
+            }
+        }
+
+        function viewQuestions(questions) {
+            let question_list = document.getElementById(`${questions.id}-list`);
+
+            if (question_list.style.display == 'none') {
+                question_list.style.display = 'block';
+                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-down');
+                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-up');
+            }
+            else {
+                question_list.style.display = 'none';
+                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-up');
+                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-down');
+            }
+        }
+
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, visit) {
+            // Create the outer card container
+            const card = document.createElement('div');
+            card.className = 'p-3 mt-3 visit-card';
+
+            // Create the header section
+            const header = document.createElement('div');
+            header.className = 'd-flex';
+            header.id = `card-${cardId}`;
+            header.setAttribute('onclick', 'toggleCard(this)');
+            header.style.cursor = 'pointer';
+
+            // Header - Left side (Visit Number)
+            const headerLeft = document.createElement('div');
+            headerLeft.className = 'col-10 text-start';
+            const title = document.createElement('h5');
+            title.className = 'm-0';
+            // title.textContent = `Visit Number ${visitNumber}`;
+            title.textContent = `${type_of_visit} Visit`;
+            headerLeft.appendChild(title);
+
+            // Header - Right side (Toggle Icon)
+            const headerRight = document.createElement('div');
+            headerRight.className = 'col text-end';
+            const icon = document.createElement('i');
+            icon.className = 'fa fa-plus';
+            icon.id = `card-${cardId}-icon`;
+            headerRight.appendChild(icon);
+
+            // Append header left and right to the header
+            header.appendChild(headerLeft);
+            header.appendChild(headerRight);
+
+            // Create the details section
+            const detailsDiv = document.createElement('div');
+            // detailsDiv.className = 'wow animate__animated animate__fadeInDown';
+            // detailsDiv.setAttribute('data-wow-duration', '0.2s');
+            detailsDiv.style.display = 'none';
+            detailsDiv.id = `card-${cardId}-detail`;
+
+            // Add a horizontal line
+            const hr = document.createElement('hr');
+            detailsDiv.appendChild(hr);
+
+            // Create the details content
+            const detailsRow = document.createElement('div');
+            detailsRow.className = 'row';
+
+            if (visit.re_investigation) {
+                card.style.backgroundColor = '#ff00002b';
+                const issueCol = document.createElement('div');
+                issueCol.className = 'col-6 text-start eh-key';
+                issueCol.textContent = 'Re-invstigation Reason';
+
+                // Value column
+                const reasonCol = document.createElement('div');
+                reasonCol.className = 'col-6 text-end text-lg-start text-break eh-value';
+                reasonCol.textContent = visit.re_investigation_reason;
+
+                // Append key and value columns
+                detailsRow.appendChild(issueCol);
+                detailsRow.appendChild(reasonCol);
+
+                // Add a horizontal line after each detail
+                const detailHrDiv = document.createElement('div');
+                detailHrDiv.className = 'col-12 px-3';
+                const detailHr = document.createElement('hr');
+                detailHr.className = 'p-0 my-1 visit-card-eh-hr';
+                detailHrDiv.appendChild(detailHr);
+                detailsRow.appendChild(detailHrDiv);
+            }
+
+            // Add each key-value pair to the details
+            for (const [key, value] of Object.entries(details)) {
+                // Key column
+                const keyCol = document.createElement('div');
+                keyCol.className = 'col-6 text-start eh-key';
+                keyCol.textContent = key;
+
+                // Value column
+                const valueCol = document.createElement('div');
+                valueCol.className = 'col-6 text-end text-lg-start text-break eh-value';
+                valueCol.textContent = value;
+
+                // Append key and value columns
+                detailsRow.appendChild(keyCol);
+                detailsRow.appendChild(valueCol);
+
+                // Add a horizontal line after each detail
+                const detailHrDiv = document.createElement('div');
+                detailHrDiv.className = 'col-12 px-3';
+                const detailHr = document.createElement('hr');
+                detailHr.className = 'p-0 my-1 visit-card-eh-hr';
+                detailHrDiv.appendChild(detailHr);
+                detailsRow.appendChild(detailHrDiv);
+            }
+
+            // Append the details row to the details div
+            detailsDiv.appendChild(detailsRow);
+
+            // Questions Section
+            const questionsContainer = document.createElement('div');
+            questionsContainer.className = 'col-12 mt-2';
+            const questionCard = document.createElement('div');
+            questionCard.className = 'select-question-card p-2';
+
+            const questionHeader = document.createElement('div');
+            questionHeader.className = 'd-flex';
+            questionHeader.id = `visit${visitNumber}-questions`;
+            questionHeader.style.cursor = 'pointer';
+            questionHeader.setAttribute('onclick', 'viewQuestions(this)');
+
+            const questionHeaderLeft = document.createElement('div');
+            questionHeaderLeft.className = 'col text-start';
+            const questionLabel = document.createElement('label');
+            questionLabel.className = 'form-label eh-label m-0';
+            questionLabel.textContent = 'Questions';
+            questionHeaderLeft.appendChild(questionLabel);
+
+            const questionHeaderRight = document.createElement('div');
+            questionHeaderRight.className = 'col text-end';
+            const questionIcon = document.createElement('i');
+            questionIcon.className = 'fa fa-chevron-down';
+            questionIcon.id = `visit${visitNumber}-questions-icon`;
+            questionHeaderRight.appendChild(questionIcon);
+
+            questionHeader.appendChild(questionHeaderLeft);
+            questionHeader.appendChild(questionHeaderRight);
+
+            const questionList = document.createElement('div');
+            questionList.id = `visit${visitNumber}-questions-list`;
+            questionList.className = 'mt-4';
+            questionList.style.display = 'none';
+
+            // Add individual questions
+            questions.forEach((question, index) => {
+                // const questionItem = document.createElement('div');
+                // questionItem.className = 'p-2 py-0';
+
+                // const questionLabel = document.createElement('label');
+                // questionLabel.className = 'form-label eh-label m-0';
+                // questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                // const hr = document.createElement('hr');
+                // hr.className = 'm-1';
+
+                // questionItem.appendChild(questionLabel);
+                // questionItem.appendChild(hr);
+
+                // New code for answers in visit card
+                // Create the main card div
+                const questionItem = document.createElement('div');
+                questionItem.classList.add('p-3', 'my-2', 'question-card');
+
+                // Create the question label
+                const questionLabel = document.createElement('label');
+                questionLabel.classList.add('form-label', 'eh-label', 'm-0');
+                questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question.question}`;
+
+                // Create the horizontal line
+                const hr = document.createElement('hr');
+                hr.classList.add('m-1');
+
+                // Create the answer label
+                const answerLabel = document.createElement('label');
+                if (question.answer === false) {
+                    answerLabel.classList.add('form-label', 'm-0', 'text-danger');
+                    answerLabel.innerHTML = `<b>A${index + 1}) Not Yet Answered</b>`;    
+                }
+                else {
+                    answerLabel.classList.add('form-label', 'm-0');
+                    answerLabel.innerHTML = `<b>A${index + 1})</b> ${question.answer}`;
+                }
+
+                // Append children to the card
+                questionItem.appendChild(questionLabel);
+                questionItem.appendChild(hr);
+                questionItem.appendChild(answerLabel);
+
+
+                questionList.appendChild(questionItem);
+            });
+
+            questionCard.appendChild(questionHeader);
+            questionCard.appendChild(questionList);
+            questionsContainer.appendChild(questionCard);
+
+            detailsRow.appendChild(questionsContainer);
+
+            // Append the header and details section to the card
+            card.appendChild(header);
+            card.appendChild(detailsDiv);
+
+            return card;
+        }
+
+        // All Visit related api caller
+        async function getVistDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'visit-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    if (!result.no_visit_for_case){
+                        result.data.forEach((visit, index) => {
+                            document.getElementById('no-visit-created').style.display = 'none';
+                            console.log(visit);
+                            console.log(visit.visit_id);
+                            let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
+                                console.log(question_lst)
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id, visit);
+                                document.getElementById('visit-cards').appendChild(visit_card);
+                            }).catch((error) => {
+                                console.error("An error occurred:", error);
+                            });
+                            
+                        });
+                    }
+                }
+                else {
+                    // window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                // window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        async function getQuestionAnsersForVisit(visit_id) {
+            const Params = {
+                visit_id: visit_id
+            };
+
+            const url = "{% url 'visit-question-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                if (result.success) {
+                    return result.data;
+                }
+
+                else {
+                    return [];
+                }
+
+            } else {
+                console.error("GET User Failed:", result);
             }
         }
 

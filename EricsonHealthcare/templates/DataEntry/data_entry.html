@@ -375,7 +375,7 @@
             if (success) {
                 if (result.success) {
                     setFormValues(result.data);
-                    // window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
                 }
             } else {
                 alert('Unable to save the case details');

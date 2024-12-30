@@ -351,8 +351,19 @@
                             </div>
                             <div class="mb-3">
                                 <label for="type_of_case" class="form-label eh-label">Type Of Case</label>
-                                <input type="text" class="form-control dark-input" id="type_of_case" name="type_of_case"
-                                    placeholder="Enter Type Of Case">
+                                <!-- <input type="text" class="form-control dark-input" id="type_of_case" name="type_of_case"
+                                    placeholder="Enter Type Of Case"> -->
+                                <select class="form-select dark-input" aria-label="select" id="type_of_case" name="type_of_case">
+                                    <option value="">Select type of case</option>
+                                    <option value="CashlessClaimReport">Cashless Claim Report</option>
+                                    <option value="ClaimReport">Claim Report</option>
+                                    <option value="HDCClosureReport">HDC Closure Report</option>
+                                    <option value="HealthClaimReport">Health Claim Report</option>
+                                    <option value="ICLMClosureReport">ICLM Closure Report</option>
+                                    <option value="PADeathReport">PA Death Report</option>
+                                    <option value="SecureMindCriticalIllnessReport">Secure Mind Critical Illness Report</option>
+                                    <option value="TTDReport">TTD Report</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="doa" class="form-label eh-label">DOA</label>
