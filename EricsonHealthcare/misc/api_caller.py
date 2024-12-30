@@ -6,13 +6,13 @@ def create_user():
     url = base_url + 'user/user/'
 
     data = {
-        'name': 'Divyam Data',
-        'password':'divyam',
-        'contact_number': '9054413199',
-        'email': 'dataentry@gmail.com',
+        'name': 'Admin',
+        'password':'Admin@123',
+        'contact_number': '1234567890',
+        'email': 'admin@admin.com',
         'city': 'Ahmedabad',
         'state': 'Gujarat',
-        'role': 'data_entry_personnel',
+        'role': 'admin',
     }
 
     response = requests.post(url, data=data)

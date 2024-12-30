@@ -17,6 +17,8 @@ class UserRegisterViewSet(viewsets.ViewSet):
 
 class DashboardViewSet(viewsets.ViewSet):
     def list(self, request):
+        if request.user.is_staff:
+            return redirect('register-list')
         return render(request, 'dashboard.html')
 
 class CaseOverviewViewSet(viewsets.ViewSet):
