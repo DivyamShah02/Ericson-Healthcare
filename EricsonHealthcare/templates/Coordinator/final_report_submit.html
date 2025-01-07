@@ -972,25 +972,33 @@
 
     <script>
         async function updateCaseStatus(status) {
-            const Params = {
-                case_id: caseId,
-                case_status: status
-            };
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to continue?</p>',
+                async () => {
+                    const Params = {
+                        case_id: caseId,
+                        case_status: status
+                    };
+        
+                    const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
+                    const [success, result] = await callApi("GET", url);
+                    console.log(result);
+                    if (success) {
+                        if (result.success) {                
+                                console.log(result.data);
+                                location.reload();
+                        }
+                        else {
+                            window.location.href=`{% url 'dashboard-list' %}`;
+                        }
+                    } else {
+                        window.location.href=`{% url 'dashboard-list' %}`;
+                    }
+                    
+                }
+            );
 
-            const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
-            const [success, result] = await callApi("GET", url);
-            console.log(result);
-            if (success) {
-                if (result.success) {                
-                        console.log(result.data);
-                        location.reload();
-                }
-                else {
-                    window.location.href=`{% url 'dashboard-list' %}`;
-                }
-            } else {
-                window.location.href=`{% url 'dashboard-list' %}`;
-            }
         }
 
     </script>

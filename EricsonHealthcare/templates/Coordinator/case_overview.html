@@ -1463,43 +1463,52 @@
                 return;
             }
 
-            let claim_number = document.getElementById('claim_number').value;
-            let insurance_company = document.getElementById('insurance_company').value;
-            let type_of_case = document.getElementById('type_of_case').value;
-            let doa = document.getElementById('doa').value;
-            let dod = document.getElementById('dod').value;
-            let hospital_name = document.getElementById('hospital_name').value;
-            let city = document.getElementById('city').value;
-            let state = document.getElementById('state').value;
-            let claim_value = document.getElementById('claim_value').value;
-            let diagnosis = document.getElementById('diagnosis').value;
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to submit case details?</p>',
+                async () => {
+                    let claim_number = document.getElementById('claim_number').value;
+                    let insurance_company = document.getElementById('insurance_company').value;
+                    let type_of_case = document.getElementById('type_of_case').value;
+                    let doa = document.getElementById('doa').value;
+                    let dod = document.getElementById('dod').value;
+                    let hospital_name = document.getElementById('hospital_name').value;
+                    let city = document.getElementById('city').value;
+                    let state = document.getElementById('state').value;
+                    let claim_value = document.getElementById('claim_value').value;
+                    let diagnosis = document.getElementById('diagnosis').value;
 
-            const bodyData = {
-                'case_id': caseId,
-                'claim_number': claim_number,
-                'insurance_company': insurance_company,
-                'type_of_case': type_of_case,
-                'doa': doa,
-                'dod': dod,
-                'hospital_name': hospital_name,
-                'city': city,
-                'state': state,
-                'claim_value': claim_value,
-                'diagnosis': diagnosis,
-            };
+                    const bodyData = {
+                        'case_id': caseId,
+                        'claim_number': claim_number,
+                        'insurance_company': insurance_company,
+                        'type_of_case': type_of_case,
+                        'doa': doa,
+                        'dod': dod,
+                        'hospital_name': hospital_name,
+                        'city': city,
+                        'state': state,
+                        'claim_value': claim_value,
+                        'diagnosis': diagnosis,
+                    };
 
-            const url = "{% url 'case-details-api-list' %}";
-            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-            console.log(result)
-            if (success) {
-                if (result.success) {
-                    setFormValues(result.data);
-                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                    const url = "{% url 'case-details-api-list' %}";
+                    const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                    console.log(result)
+                    if (success) {
+                        if (result.success) {
+                            setFormValues(result.data);
+                            window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                        }
+                    } else {
+                        alert('Unable to save the case details');
+                    }
+
+                
                 }
-            } else {
-                alert('Unable to save the case details');
-            }
+            );
 
+            
             toggle_loader();
         });
 
@@ -1604,25 +1613,33 @@
 
     <script>
         async function updateCaseStatus(status) {
-            const Params = {
-                case_id: caseId,
-                case_status: status
-            };
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to continue?</p>',
+                async () => {
+                    const Params = {
+                        case_id: caseId,
+                        case_status: status
+                    };
+        
+                    const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
+                    const [success, result] = await callApi("GET", url);
+                    console.log(result);
+                    if (success) {
+                        if (result.success) {                
+                                console.log(result.data);
+                                location.reload();
+                        }
+                        else {
+                            window.location.href=`{% url 'dashboard-list' %}`;
+                        }
+                    } else {
+                        window.location.href=`{% url 'dashboard-list' %}`;
+                    }
+                    
+                }
+            );
 
-            const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
-            const [success, result] = await callApi("GET", url);
-            console.log(result);
-            if (success) {
-                if (result.success) {                
-                        console.log(result.data);
-                        location.reload();
-                }
-                else {
-                    window.location.href=`{% url 'dashboard-list' %}`;
-                }
-            } else {
-                window.location.href=`{% url 'dashboard-list' %}`;
-            }
         }
 
     </script>
