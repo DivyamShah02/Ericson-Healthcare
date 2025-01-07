@@ -1,0 +1,3062 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "0gh5fnemka5gk16mwopqkk1at7advrma",
+  "fields": {
+    "session_data": ".eJxVjMsKwjAQRf8lawl503Tp3m8ImXTGRiWRpAVF_HctdKHbe849Lxbiusxh7dhCntjILDv8bhDTFcsGpkss58pTLUvLwDeF77TzU53wdtzdv8Ac-_x9e2klJYFA2nsiMRgdkzLoktTeYASQ5IYBHCBoqVUyJDxJQ4a8Nc5t0Y6951oCPu65PdmorFdCiPcHHi1Afw:1tLxYt:DlP-Pkqqzei2e3T5NwHN0oaaZhYpglVdS71qatg6SrY",
+    "expire_date": "2025-01-12T04:45:59.011Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2ak943riaw16zwinzy2bkpf8bbr3by7a",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2jQDwhS6dO8ZCAOjRQ2Y0iYa4921SRe6_e_99xI-LPPol8aTz0kMohe7341CvHJZQbqEcq5drGWeMnWr0m20dcea-HbY3L_AGNr4fSsNjjhYCTposmwxudijY3KRQzqhZqMCIaJEtrYnApDgpNmbaBzGNdq4tVyL58c9T08xKOMUALw_DbJAJQ:1tNGcE:ukTOvsAij7CpV3geZQ_WcsEROILPul0eMmhsvMFqYbg",
+    "expire_date": "2025-01-15T19:18:50.849Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3hoge7pvvbvj64s4yk3dlsetwrs3z6ut",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tFyZJ:RHwYgl7YJLFZ1rkq3Lsg8F2J53-r5gcLa1hgBsv2eFI",
+    "expire_date": "2024-12-10T16:37:41.987Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5251a68jyzl3c95igv05vtdr0t9uqe9y",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCY0o64dO8ZyMwAUjUlKe3KeHdD0oVu_3vvv1WgfSthb2kNc1QXBer0uzHJMy0dxAct96qlLts6s-6KPmjTtxrT63q4fweFWum1IQLIMuSMXmgCwvPAzqfIDhEoTwjWeCMERtgCjFFk9BmSE8to1ecL_O44SQ:1tLH5l:0rdJwdvyTTDUSHGPxGtlD1_M1YXqElp-bLsuNCC7Jic",
+    "expire_date": "2024-12-25T07:25:05.244Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6ryvchpao4rru7byp7n4t5hpfoeo03bp",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tIBU5:uJaoz-TZ8BUnY49gj1ba2hGXFkDB5aUKsdtx2jR99Pk",
+    "expire_date": "2024-12-16T18:49:25.376Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6v4mf5w5pk1ho10es4h2nuv1u1ohufo2",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tLFeU:5rE47573wqXzWfmjj-I2bjmWBsJquLBFwO8PmZtbqAY",
+    "expire_date": "2024-12-25T05:52:50.932Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "brd3xowabwizb8whvxztishajj8w1rsw",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJMO:U4bi5UefP0UV5-WJRhyNRcwA07bw3vsyLSGjuaPYabY",
+    "expire_date": "2025-01-24T04:51:04.698Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "c2mjp59dx5ljiihozez4clf4smn5hs18",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2jQDwhS6dO8ZCAOjRQ2Y0iYa4921SRe6_e_99xI-LPPol8aTz0kMohe7341CvHJZQbqEcq5drGWeMnWr0m20dcea-HbY3L_AGNr4fSsNjjhYCTposmwxudijY3KRQzqhZqMCIaJEtrYnApDgpNmbaBzGNdq4tVyL58c9T08xKOMUALw_DbJAJQ:1tS7dG:gXWeas6gETxc_Gf_nT_tfaL84G6MbMFEuNdXmQ5YlvA",
+    "expire_date": "2025-01-29T04:43:58.024Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "doyj1dddnefozdpj0o83wy5hxj5rd5yo",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJDG:zcMU6g50Zb6PvZWSohURaPjoMoUk-u8gKKjlNChn4Gs",
+    "expire_date": "2025-01-24T04:41:38.134Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "fwi9zm8662pesjpl1yqb31g0b4omehne",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyEUWhZ69O43kIWlFjXQlDbRGP_dNulBrzPvzZs5XJfRrTXOLhHrmWWnX-Yx3GPeBd0wXwsPJS9z8nyf8MNWfikUH-dj-xcYsY7bO3rdeRgkSOMJ0MCgsNEahWxtY1Cip1ZBMKRboTYIGyYwjbA2gOrCHq2x1lSyi88pzS_Wy85KIcTnC-fiP18:1tS7dr:727US76O25rHBaXK7PEqIPovnmI1rNieY5KdrqNaxco",
+    "expire_date": "2025-01-29T04:44:35.667Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ht6vhw0pdvzya2x6um17iyhyjh53g1r9",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJCg:lnnvTteRYi7iQI0ILaChJx38VXUrTaWUped9JScDyI8",
+    "expire_date": "2025-01-24T04:41:02.385Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "hxrdtbw48c54s6qtlqq39k2usdw2bob2",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGUR4Eu3fsN5AIXixpoSptojP9uSLrQ7Zk58yYO9m12e8PV5UgmMpLT7-Yh3LF0EG9QrpWGWrY1e9oVetBGLzXi43y4f4EZ2tzf4DFFLiIaL1kYtIpJG6mUNMkwPqAUaEGPiQkm9WgTmgAInhtuQQ2iRxu2lmtx-Fzy-iITV5Yzxj5fKR5AgA:1tMSSq:KrVvR-dOqGCFGAFdfxYgwv3hinFBA_74pTLgehRkF1I",
+    "expire_date": "2025-01-13T13:45:48.664Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "i499wgmdlq5k6t0t7iaz2ppxvuwbo9r4",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJJd:9gl7E0otzV6QNh4-79YlLhV11xty4xaPH7FW7QH2V8M",
+    "expire_date": "2025-01-24T04:48:13.190Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "i8ltj4w9ad7rc9u47kct9woepw4jjn3z",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tLoO2:JBZjVVF903zRYRpcGSye5Z3AkQRqgF0C0t_IDSKPT_s",
+    "expire_date": "2025-01-11T18:58:10.837Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "jre1ewlcofu44478qs4othv3d2y6epxh",
+  "fields": {
+    "session_data": ".eJxVjE0OwiAYBe_C2hCgtgWX7j0D4fuzqKGmtInGeHdt0oVu38ybl4ppmYe4VJ5iJnVQ1qnd7wgJr1xWQpdUzqPGscxTBr0qeqNVn0bi23Fz_wJDqsP3jewctuh7IdOIUHBgwJLsbcfBYpPAEUHXdOKxJQTC3ognEfCBgfs1WrnWPJbIj3uenurg2uCMMe8PoEVCig:1tRXen:OCG8D9fiYGegxZhThEhOP3J7PKQ-N_1EPHmvzw6lbfU",
+    "expire_date": "2025-01-27T14:19:09.565Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "k3uhvt0fwtmmu3txtrim7p2fy88jmm5r",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tMZ0Z:JQjdJjwKK-Wkq_G22SkIQpfQM8_IhPEmZVd9lMDlNGk",
+    "expire_date": "2025-01-13T20:45:03.309Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "m7pjjvsl03vm56nar8a07p7cntnawub9",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tLS2C:TURuXNQauj-lN0HlrjoeE9d5kwBvDtrQ8yv8KLIL3mM",
+    "expire_date": "2024-12-25T19:06:08.386Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "n9wqrb92hrq146q1473h364l4y49kubx",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tLR1N:h_rdRUfyUc3syyp5NTBg9eyp-1rSnqmu-dOgyRdEb9s",
+    "expire_date": "2025-01-10T18:01:13.216Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "oa23gpwd95f9nfpvuggm6osjol0bl6cp",
+  "fields": {
+    "session_data": ".eJxVjM0OwiAQhN-FsyEL9Ad69O4zkIVdLWrAlDbRGN9da3rQ22Tmm-8pPC7z6JfKk08kBqFA7H7LgPHCeV3ojPlUZCx5nlKQKyK3tcpDIb7uN_ZPMGIdP-9gkTGCMgosdcoR22NoFBJFo61rOOqIKrDp-p6B2m9EBK1b01tnV2nlWlPJnu-3ND3EoFunAeD1BlOYQL8:1tS7c3:I1eV_0eV9Ryi3aCtF14dhnkur6nZIJa-Mw7sdLkOd6Y",
+    "expire_date": "2025-01-29T04:42:43.931Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pd3gc7bfs9f32rfi1yotioju9kp2dr6n",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tLS1O:W99ib60FQL55Od39uhtTWG18MEAW6FzyLx9_2_qECxE",
+    "expire_date": "2025-01-10T19:05:18.778Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "q1evr6hukja2vp13acw9g7pektlfdb2f",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tNmuZ:x8MMaZuzyiyblbfOW6c1ENWmOSm22erkH9gOJ3JXTHs",
+    "expire_date": "2025-01-17T05:47:55.104Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "q5ah7kn6nttyjllyzmtw010zrh3urkqu",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJOS:NY_991I4spdXZEldEfEz1H2k1ztYYFWA0eBI2Dor69Q",
+    "expire_date": "2025-01-24T04:53:12.132Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qtqeeqdxmblg907n4j9wm1e3o9gwm6xp",
+  "fields": {
+    "session_data": ".eJxVjMsKwjAQRf8lawl503Tp3m8ImXTGRiWRpAVF_HctdKHbe849Lxbiusxh7dhCntjILDv8bhDTFcsGpkss58pTLUvLwDeF77TzU53wdtzdv8Ac-_x9e2klJYFA2nsiMRgdkzLoktTeYASQ5IYBHCBoqVUyJDxJQ4a8Nc5t0Y6951oCPu65PdmorFdCiPcHHi1Afw:1tLokq:2QIcE5PcgcC01rTt5D0O1Ik8oqrKBu6N7wfq-NgamKE",
+    "expire_date": "2025-01-11T19:21:44.542Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "r9ce4kagv79nqa1cbnuz8nthe4ql7d4x",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJLr:KGH9iSzD5kYTW-k-9LDRKU_tpr2NS17ijiX0r4tiz1U",
+    "expire_date": "2025-01-24T04:50:31.770Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rvouf825b50hyo3yad1x1h3wmrx104fi",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGUR4Eu3fsN5AIXixpoSptojP9uSLrQ7Zk58yYO9m12e8PV5UgmMpLT7-Yh3LF0EG9QrpWGWrY1e9oVetBGLzXi43y4f4EZ2tzf4DFFLiIaL1kYtIpJG6mUNMkwPqAUaEGPiQkm9WgTmgAInhtuQQ2iRxu2lmtx-Fzy-iITV5Yzxj5fKR5AgA:1tM86z:E01XOxZsiHlU06YeAvjR6vwgVXKLNGnQqlKqOrnl6Kg",
+    "expire_date": "2025-01-12T16:01:53.272Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "scwcv8hdxn3lgd7sgmalotcc3cgattf2",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQ3c3:jBQR_V7-6X_ylK2l5y5hTEGydFr1Af2Y38VFANz7108",
+    "expire_date": "2025-01-23T12:02:11.546Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "solnx58gil60n59786wjara7m0o7iglq",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGUR4Eu3fsN5AIXixpoSptojP9uSLrQ7Zk58yYO9m12e8PV5UgmMpLT7-Yh3LF0EG9QrpWGWrY1e9oVetBGLzXi43y4f4EZ2tzf4DFFLiIaL1kYtIpJG6mUNMkwPqAUaEGPiQkm9WgTmgAInhtuQQ2iRxu2lmtx-Fzy-iITV5Yzxj5fKR5AgA:1tNmR5:bu40CrnbvKCWTnh8pnOUoVj9MFVN8xLG-rd3HE8JuyQ",
+    "expire_date": "2025-01-17T05:17:27.164Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "v2xu5clfsdm0poi7cesjk4fw5b4w92hz",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tAScR:-WcngjPzWMYGdO8Y6k4cTMCjXkHqHDyI1UL8HxyZ1uw",
+    "expire_date": "2024-11-25T11:30:07.203Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vyxqs1j47bs17dqyd9wxoltmba8yo6oj",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tAtSa:8o4mc29zkk61v1Xqqbl6hxJ6N_Si3p4Ijy8TD2leA20",
+    "expire_date": "2024-11-26T16:09:44.249Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xjt1arn07jkxkxwvnt9aghefztc85mid",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJQ6:puX4PPZGL2y5P4petwmAHPgkLTcuEbol6sddBqi-Dj4",
+    "expire_date": "2025-01-24T04:54:54.270Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xl6j22we8bj378i8kve6rbjdpnlg33q0",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGUR4Eu3fsN5AIXixpoSptojP9uSLrQ7Zk58yYO9m12e8PV5UgmMpLT7-Yh3LF0EG9QrpWGWrY1e9oVetBGLzXi43y4f4EZ2tzf4DFFLiIaL1kYtIpJG6mUNMkwPqAUaEGPiQkm9WgTmgAInhtuQQ2iRxu2lmtx-Fzy-iITV5Yzxj5fKR5AgA:1tRbEJ:NW5b01XGIKGFIiNVqQ8LThrWY0eUiFdlSCRxk0eDD7I",
+    "expire_date": "2025-01-27T18:08:03.261Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xs2ge0ixs867wd129kgxyfe8ey4umw6l",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlm2A16bkp4zWPszCaBEipMKcXeIlALaNzPvZQquS1_WpnMZxJyNN4ffjZAfOm5A7jjeJsvTuMwD2U2xO232Ook-L7v7d9Bj6781OcmBY-cIjpWqUKQsAC6or4lVmLMmTxxiFxzmjCAeCaALNWmEk3l_AAicOJo:1tDJ90:xBO2wKFWoKKeJQNvu_0qE_F6fzSsXRYi7D0_ze_fD4I",
+    "expire_date": "2024-12-03T07:59:30.647Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yuwi1645gu8xt36k3ybm3w0f7aydvagq",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tQJQu:Hq71_i8_Gp95ivljE_iICkCK3wUDzDwpjqfiJYdiyKU",
+    "expire_date": "2025-01-24T04:55:44.436Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zmevrkea8v52ha27hiy2p3iwmbwyezw8",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEwfSBduvcbyDAMFjVgSptojP9uSLrQ7T3nnrdwuK2z2yovLgUxCRCH380j3Tg3EK6YL0VSyeuSvGyK3GmV5xL4ftrdv8CMdW5vhQgQqYvRWMIR0Bw731sOvjcGMI4GtLKKEBR5DTAEosFG4J60N7pFK9eaSnb8fKTlJSYYLCilPl8sz0C4:1tSC02:jXlBia5prj-24YnQDUZz3YPhsQ9Myz1QgYmUziaAMiM",
+    "expire_date": "2025-01-29T09:23:46.013Z"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 1,
+  "fields": {
+    "case_id": 123,
+    "hod_id": "HOD_001",
+    "coordinator_id": "COORD_001",
+    "medical_officer_id": "MO_001",
+    "data_entry_id": "DE_001",
+    "document_paths": [
+      "path/to/document1.pdf",
+      "path/to/document2.pdf"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 2,
+  "fields": {
+    "case_id": 123,
+    "hod_id": "HOD_001",
+    "coordinator_id": "COORD_001",
+    "medical_officer_id": "MO_001",
+    "data_entry_id": "DE_001",
+    "document_paths": [
+      "path/to/document1.pdf",
+      "path/to/document2.pdf"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 3,
+  "fields": {
+    "case_id": 123,
+    "hod_id": "HOD_001",
+    "coordinator_id": "COORD_001",
+    "medical_officer_id": "MO_001",
+    "data_entry_id": "DE_001",
+    "document_paths": [
+      "path/to/document1.pdf",
+      "path/to/document2.pdf"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 4,
+  "fields": {
+    "case_id": 123,
+    "hod_id": "HOD001",
+    "coordinator_id": "COORD123",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "path/to/document3.pdf"
+    ],
+    "case_status": "Investigation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 5,
+  "fields": {
+    "case_id": 1234,
+    "hod_id": "HOD001",
+    "coordinator_id": "COORD123",
+    "medical_officer_id": "180",
+    "data_entry_id": null,
+    "document_paths": [
+      "path/to/document3.pdf"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 6,
+  "fields": {
+    "case_id": 1235,
+    "hod_id": "",
+    "coordinator_id": "",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads\\2.png"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 7,
+  "fields": {
+    "case_id": 1236,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads\\4.png"
+    ],
+    "case_status": "Final_report"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 8,
+  "fields": {
+    "case_id": 1237,
+    "hod_id": "",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads\\suit_divyam.jpeg"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 9,
+  "fields": {
+    "case_id": 1238,
+    "hod_id": "",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads\\suit_divyam(1).jpeg"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 10,
+  "fields": {
+    "case_id": 1239,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads\\2(1).png"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 11,
+  "fields": {
+    "case_id": 1240,
+    "hod_id": "",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads\\Messaging_App_Proposal.pdf"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 12,
+  "fields": {
+    "case_id": 1241,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": "MO4903683978",
+    "data_entry_id": "DE9097377811",
+    "document_paths": [
+      "uploads\\Website Development Proposal - Kakaria & Associates LLP.pdf",
+      "uploads\\Trainee_Assessment_Plan(1).pdf",
+      "uploads\\Messaging_App_Proposal(1).pdf",
+      "uploads\\resume.pdf",
+      "uploads\\suit_divyam(2).jpeg"
+    ],
+    "case_status": "Data_entry_confirmation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 13,
+  "fields": {
+    "case_id": 1242,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": "MO4903683978",
+    "data_entry_id": "DE9097377811",
+    "document_paths": [
+      "uploads\\sample.pdf"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 14,
+  "fields": {
+    "case_id": 1243,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": "MO4903683978",
+    "data_entry_id": "DE9097377811",
+    "document_paths": [
+      "uploads\\sample(1).pdf"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 15,
+  "fields": {
+    "case_id": 1244,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": "MO4903683978",
+    "data_entry_id": "DE9097377811",
+    "document_paths": [
+      "uploads\\sample(2).pdf"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 16,
+  "fields": {
+    "case_id": 1245,
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO0639538382",
+    "medical_officer_id": "MO4903683978",
+    "data_entry_id": "DE9097377811",
+    "document_paths": [
+      "uploads\\sample(3).pdf"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 1,
+  "fields": {
+    "case_id": 101,
+    "coordinator_id": "COORD12345",
+    "claim_number": "CLAIM98765",
+    "insurance_company": "HealthCare Insurance Co.",
+    "type_of_case": "Medical",
+    "rate": "High",
+    "doa": null,
+    "dod": null,
+    "hospital_name": null,
+    "city": null,
+    "state": null,
+    "claim_value": null,
+    "diagnosis": null,
+    "medical_officer_remarks": "The claim has been reviewed and approved by the medical officer.",
+    "final_report": null,
+    "status_of_claim": "Pass",
+    "claim_approved_amount": "25000"
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 2,
+  "fields": {
+    "case_id": 11,
+    "coordinator_id": "COORD12345",
+    "claim_number": "CLAIM98765",
+    "insurance_company": "HealthCare Insurance Co.",
+    "type_of_case": "Medical",
+    "rate": "High",
+    "doa": null,
+    "dod": null,
+    "hospital_name": null,
+    "city": null,
+    "state": null,
+    "claim_value": null,
+    "diagnosis": null,
+    "medical_officer_remarks": "The claim has been reviewed and approved by the medical officer.",
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 3,
+  "fields": {
+    "case_id": 1,
+    "coordinator_id": "COORD12345",
+    "claim_number": "CLAIM98765",
+    "insurance_company": "HealthCare Insurance Co.",
+    "type_of_case": "Medical",
+    "rate": "High",
+    "doa": null,
+    "dod": null,
+    "hospital_name": null,
+    "city": null,
+    "state": null,
+    "claim_value": null,
+    "diagnosis": null,
+    "medical_officer_remarks": "",
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 4,
+  "fields": {
+    "case_id": 1238,
+    "coordinator_id": "CO0639538382",
+    "claim_number": "daergewfw",
+    "insurance_company": "",
+    "type_of_case": "",
+    "rate": "",
+    "doa": "2002-12-12",
+    "dod": "2022-12-14",
+    "hospital_name": "sdaesth",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "claim_value": "120000",
+    "diagnosis": "cdsaefrgs",
+    "medical_officer_remarks": null,
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 5,
+  "fields": {
+    "case_id": 1241,
+    "coordinator_id": "CO0639538382",
+    "claim_number": "earg",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "CashlessClaimReport",
+    "rate": "10",
+    "doa": "2002-12-12",
+    "dod": "2003-02-12",
+    "hospital_name": "szfveDSv",
+    "city": "Adfvz",
+    "state": "vfz",
+    "claim_value": "erg",
+    "diagnosis": "Heart Attack",
+    "medical_officer_remarks": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, perferendis officiis. Commodi perspiciatis illum enim minus dolores aliquid facere accusamus ad provident? Quidem saepe eligendi animi nisi, hic deserunt eveniet!",
+    "final_report": "1",
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 6,
+  "fields": {
+    "case_id": 1242,
+    "coordinator_id": "CO0639538382",
+    "claim_number": "123422",
+    "insurance_company": "Dynamic Labz",
+    "type_of_case": "TTDReport",
+    "rate": "10",
+    "doa": "2024-12-15",
+    "dod": "2024-12-16",
+    "hospital_name": "City Hospital",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "claim_value": "12000",
+    "diagnosis": "Nonedd",
+    "medical_officer_remarks": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quae odio aut impedit iusto beatae animi vitae at corrupti amet neque, optio laboriosam a quod soluta vero expedita quaerat ex.",
+    "final_report": "/media/uploads/Website Development Proposal - Kakaria & Associates LLP.pdf",
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 7,
+  "fields": {
+    "case_id": 1243,
+    "coordinator_id": "CO0639538382",
+    "claim_number": "123422",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "ClaimReport",
+    "rate": "",
+    "doa": "2024-12-29",
+    "dod": "2024-12-31",
+    "hospital_name": "City Hospital",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "claim_value": "200000",
+    "diagnosis": "Heart attack",
+    "medical_officer_remarks": "Pass 100% claim",
+    "final_report": "3",
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 8,
+  "fields": {
+    "case_id": 1244,
+    "coordinator_id": "CO0639538382",
+    "claim_number": "132433",
+    "insurance_company": "icici lombard",
+    "type_of_case": "HDCClosureReport",
+    "rate": "",
+    "doa": "2024-12-12",
+    "dod": "2024-12-12",
+    "hospital_name": "City Hospital",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "claim_value": "20000",
+    "diagnosis": "Heart attack",
+    "medical_officer_remarks": "Pass claim 100%",
+    "final_report": "1",
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 9,
+  "fields": {
+    "case_id": 1245,
+    "coordinator_id": "CO0639538382",
+    "claim_number": "12313113",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "HDCClosureReport",
+    "rate": "",
+    "doa": "2024-12-12",
+    "dod": "2024-12-12",
+    "hospital_name": "City Hospital",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "claim_value": "120000",
+    "diagnosis": "Heart Attack",
+    "medical_officer_remarks": "Claim 100%",
+    "final_report": "2",
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 6,
+  "fields": {
+    "visit_id": 3099110094,
+    "case_id": 1238,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO7263079909",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "10",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 7,
+  "fields": {
+    "visit_id": 3845604398,
+    "case_id": 1238,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Hospital",
+    "tat": "wrh",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 8,
+  "fields": {
+    "visit_id": 3323962814,
+    "case_id": 1238,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Chemist",
+    "tat": "aerg",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 9,
+  "fields": {
+    "visit_id": 5774609522,
+    "case_id": 1238,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Hospital",
+    "tat": "wrh",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 10,
+  "fields": {
+    "visit_id": 9128328856,
+    "case_id": 1238,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "aerg",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 11,
+  "fields": {
+    "visit_id": 5171847118,
+    "case_id": 1242,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Hospital",
+    "tat": "24",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 12,
+  "fields": {
+    "visit_id": 9042588360,
+    "case_id": 1242,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "24",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 13,
+  "fields": {
+    "visit_id": 2532532444,
+    "case_id": 1241,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "10",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 14,
+  "fields": {
+    "visit_id": 9079258494,
+    "case_id": 1241,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO7263079909",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Chemist",
+    "tat": "12",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 15,
+  "fields": {
+    "visit_id": 6889751345,
+    "case_id": 1243,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Hospital",
+    "tat": "10",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 16,
+  "fields": {
+    "visit_id": 5974099116,
+    "case_id": 1243,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "12",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 17,
+  "fields": {
+    "visit_id": 3594053066,
+    "case_id": 1244,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO7263079909",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "12",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 18,
+  "fields": {
+    "visit_id": 9108020740,
+    "case_id": 1244,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO7263079909",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Chemist",
+    "tat": "20",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 19,
+  "fields": {
+    "visit_id": 3507672338,
+    "case_id": 1245,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "24",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 20,
+  "fields": {
+    "visit_id": 7688903305,
+    "case_id": 1245,
+    "coordinator_id": "CO0639538382",
+    "investigator_id": "IO4000719657",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Chemist",
+    "tat": "12",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.hospitalvisit",
+  "pk": 2,
+  "fields": {
+    "visit_id": 3845604398,
+    "hospital_name": "hospital divyam",
+    "state": "earg",
+    "city": "erag",
+    "doa": "erag",
+    "dod": "erggt",
+    "claim_value": "trh",
+    "diagnosis": "rsth",
+    "registration_number": "rtwh",
+    "no_of_beds": "rt",
+    "icu": "rhyt",
+    "ot": "itku",
+    "nursing_staff": "etyj",
+    "rmo": "etyh",
+    "td_registration_number": "trwh",
+    "degree": "rtwh",
+    "owner_of_the_hospital": "wtrh",
+    "doctor_registration_number": "ukr",
+    "doctor_contact_number": "wh",
+    "doctor_email": "twhr",
+    "questions": [
+      "1",
+      "3",
+      "5"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.hospitalvisit",
+  "pk": 3,
+  "fields": {
+    "visit_id": 5774609522,
+    "hospital_name": "egrdd",
+    "state": "earg",
+    "city": "erag",
+    "doa": "erag",
+    "dod": "erggt",
+    "claim_value": "trh",
+    "diagnosis": "rsth",
+    "registration_number": "rtwh",
+    "no_of_beds": "rt",
+    "icu": "rhyt",
+    "ot": "itku",
+    "nursing_staff": "etyj",
+    "rmo": "etyh",
+    "td_registration_number": "trwh",
+    "degree": "rtwh",
+    "owner_of_the_hospital": "wtrh",
+    "doctor_registration_number": "ukr",
+    "doctor_contact_number": "wh",
+    "doctor_email": "twhr",
+    "questions": [
+      "1",
+      "3",
+      "5"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.hospitalvisit",
+  "pk": 4,
+  "fields": {
+    "visit_id": 5171847118,
+    "hospital_name": "City Hospital",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "doa": "12-12-2024",
+    "dod": "14-12-2024",
+    "claim_value": "12000",
+    "diagnosis": "Noneeeed",
+    "registration_number": "123456789",
+    "no_of_beds": "2",
+    "icu": "Yes",
+    "ot": "No",
+    "nursing_staff": "12",
+    "rmo": "12",
+    "td_registration_number": "123456564",
+    "degree": "MSCIT",
+    "owner_of_the_hospital": "Divyam Shah",
+    "doctor_registration_number": "6523541",
+    "doctor_contact_number": "9054413199",
+    "doctor_email": "divyamshah1234@gmail.com",
+    "questions": [
+      "1",
+      "2",
+      "5",
+      "7",
+      "8"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.hospitalvisit",
+  "pk": 5,
+  "fields": {
+    "visit_id": 6889751345,
+    "hospital_name": "City Hospital",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "doa": "12-12-2024",
+    "dod": "14-12-2024",
+    "claim_value": "200000",
+    "diagnosis": "Heart Attack",
+    "registration_number": "123424534",
+    "no_of_beds": "12",
+    "icu": "1",
+    "ot": "12",
+    "nursing_staff": "12",
+    "rmo": "12",
+    "td_registration_number": "123455321",
+    "degree": "MSCIT",
+    "owner_of_the_hospital": "Divyam Shah",
+    "doctor_registration_number": "124354342312`",
+    "doctor_contact_number": "1234567890",
+    "doctor_email": "d@d.com",
+    "questions": [
+      "1",
+      "3",
+      "4",
+      "8"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 5,
+  "fields": {
+    "visit_id": 3099110094,
+    "name": "aerfg",
+    "city": "earg",
+    "state": "aerg",
+    "address": "aegr",
+    "pathologist_name": "aegr",
+    "registration_number": "aegr",
+    "questions": [
+      "1",
+      "6",
+      "8",
+      "10"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 6,
+  "fields": {
+    "visit_id": 9128328856,
+    "name": "Divyam shah",
+    "city": "earg",
+    "state": "aerg",
+    "address": "aegr",
+    "pathologist_name": "aegr",
+    "registration_number": "aegr",
+    "questions": [
+      "2",
+      "7",
+      "9"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 7,
+  "fields": {
+    "visit_id": 9042588360,
+    "name": "Sil Lab",
+    "city": "Ahmedabad",
+    "state": "Gujarāt",
+    "address": "Pankaj Society, Bhattha, Paldi",
+    "pathologist_name": "Rakesh",
+    "registration_number": "123456789",
+    "questions": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 8,
+  "fields": {
+    "visit_id": 2532532444,
+    "name": "DD Lab",
+    "city": "Ahmedabad",
+    "state": "Gujarāt",
+    "address": "Pankaj Society, Bhattha, Paldi",
+    "pathologist_name": "Rersg ssha",
+    "registration_number": "divyamshah1234@gmail.co",
+    "questions": [
+      "6",
+      "7",
+      "8",
+      "10"
+    ],
+    "answers": {
+      "6": "best",
+      "7": "second"
+    },
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 9,
+  "fields": {
+    "visit_id": 5974099116,
+    "name": "Raj Laboratary",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "address": "Pankaj Society",
+    "pathologist_name": "Raj Shah",
+    "registration_number": "132456454231",
+    "questions": [
+      "1",
+      "2",
+      "4",
+      "5",
+      "8"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 10,
+  "fields": {
+    "visit_id": 3594053066,
+    "name": "Raj Laboratary",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "address": "Pankaj Society",
+    "pathologist_name": "Raj Shah",
+    "registration_number": "324354312`",
+    "questions": [
+      "1",
+      "3",
+      "7"
+    ],
+    "answers": {
+      "1": "festgrh",
+      "3": "efag",
+      "7": "erag"
+    },
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 11,
+  "fields": {
+    "visit_id": 3507672338,
+    "name": "City Hospital",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "address": "Pankaj Society",
+    "pathologist_name": "Raj Shah",
+    "registration_number": "13431321433434",
+    "questions": [
+      "1",
+      "6",
+      "8",
+      "10"
+    ],
+    "answers": {
+      "1": "aergae",
+      "6": "",
+      "8": "",
+      "10": ""
+    },
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.pharmacyvisit",
+  "pk": 1,
+  "fields": {
+    "visit_id": 3323962814,
+    "name_of_chemist": "chemistry",
+    "address": "rtyj",
+    "city": "eta",
+    "state": "",
+    "gst_number": "thaeh",
+    "drug_license_number": "erah",
+    "questions": [
+      "5"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.pharmacyvisit",
+  "pk": 2,
+  "fields": {
+    "visit_id": 9079258494,
+    "name_of_chemist": "Divyam shah",
+    "address": "603, Siddhi Sadhan Appt, Pankaj Society, Bhattha, Paldi",
+    "city": "Ahmedabad",
+    "state": "Gujarāt",
+    "gst_number": "132432134232",
+    "drug_license_number": "45434312354",
+    "questions": [
+      "1",
+      "2",
+      "4",
+      "5",
+      "7",
+      "9",
+      "10"
+    ],
+    "answers": {
+      "1": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, voluptas? Nulla maiores, numquam eos, minus veniam inventore assumenda deserunt quis amet magnam quam, ipsum eveniet. Veniam nostrum vel quod commodi!",
+      "2": "egrea",
+      "5": "best",
+      "10": "best",
+      "9": "final tetingav",
+      "4": "No it is not acceptable",
+      "7": ""
+    },
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.pharmacyvisit",
+  "pk": 3,
+  "fields": {
+    "visit_id": 9108020740,
+    "name_of_chemist": "Divyam Chemist",
+    "address": "Pankaj Society",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "gst_number": "24544124",
+    "drug_license_number": "1324354",
+    "questions": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.pharmacyvisit",
+  "pk": 4,
+  "fields": {
+    "visit_id": 7688903305,
+    "name_of_chemist": "Divyam Shah",
+    "address": "Pankaj Society",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "gst_number": "stgre23435424dfav",
+    "drug_license_number": "34542312354",
+    "questions": [
+      "6",
+      "7",
+      "8"
+    ],
+    "answers": {
+      "6": "aersgea",
+      "7": "aersgths",
+      "8": "aersg"
+    },
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 1,
+  "fields": {
+    "question": "None thing involve close region let whatever team fill popular serve class."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 2,
+  "fields": {
+    "question": "Seven ok recognize student skill suggest market again."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 3,
+  "fields": {
+    "question": "Certainly cold kitchen everybody account great."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 4,
+  "fields": {
+    "question": "Country citizen hot strategy condition approach popular often."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 5,
+  "fields": {
+    "question": "Glass way because boy series style glass popular choice his late."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 6,
+  "fields": {
+    "question": "Challenge contain just game change discover tax."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 7,
+  "fields": {
+    "question": "Responsibility age choose forward always cost country measure."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 8,
+  "fields": {
+    "question": "Message pay stock bed onto reality force young popular especially your anyone bed eat."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 9,
+  "fields": {
+    "question": "Already new table let truth build change total over."
+  }
+},
+{
+  "model": "Question.question",
+  "pk": 10,
+  "fields": {
+    "question": "Away degree prevent across result name half lawyer six coach development set."
+  }
+},
+{
+  "model": "Reports.cashlessclaimreport",
+  "pk": 1,
+  "fields": {
+    "case_id": 1241,
+    "claim_number": "1233423",
+    "hospital_name": "rege",
+    "date_of_joining": "2023-02-12",
+    "ilhc_trigger": "reaghrt",
+    "date_of_visit": "2024-05-23",
+    "date_of_intimation": "2023-11-30",
+    "date_of_admission": "2024-12-12",
+    "pt_admitted": "2023-06-23",
+    "advance_paid_details": "fsrn323",
+    "room_category": "deas",
+    "ipd_details_finding": "reag",
+    "insured_statement": "rgae",
+    "treating_dr_statement": "erga",
+    "home_visit_if_plan_admission": "rega",
+    "other_findings": "egar",
+    "evidences_attached_uploaded_in_ft": true,
+    "final_recommendation": "sdaerfg"
+  }
+},
+{
+  "model": "Reports.claimreport",
+  "pk": 1,
+  "fields": {
+    "case_id": 1243,
+    "claim_number": "2343122",
+    "policy_number": "23431",
+    "insured_name": "defbsefv",
+    "claimant_name": "reg",
+    "sum_insured": "243.00",
+    "nature_of_loss": "ae",
+    "policy_type": "earg",
+    "channel_sourcing": "erag",
+    "family_member": "raeg",
+    "relation_with_insured": "eagr",
+    "insured_occupation": "erag",
+    "claimant_occupation": "fbae",
+    "event_details": "sferagwth4",
+    "current_condition": "earsth",
+    "other_insurance": "eath",
+    "mlc_done": true,
+    "post_mortem_done": true,
+    "casuality_note": "dsaergsth",
+    "hospital_visit_details": "bsr",
+    "verification_details": null,
+    "final_report": null,
+    "case_summary": null,
+    "police_document_verified": "aegth",
+    "pm_centre_name": "aegtshr",
+    "cause_of_death": "aegtsh",
+    "viscera_status": "svfeasthr",
+    "pm_verified": true,
+    "photos": "saergsth",
+    "witness": "earg",
+    "description": "fveagsgtr",
+    "dl_name": "stgrh",
+    "dl_validity": "2022-12-12",
+    "cov": "dfgstrh",
+    "online_portal_check": "eaftgh",
+    "total_person_inquired": 12,
+    "vicinity_check_details": "dvfegtwh4",
+    "media_date": "2024-12-12",
+    "media_details": "daergt",
+    "other_insurance_company": "eag",
+    "claim_status": "fea",
+    "conclusion": "dfbsr",
+    "intimation_date": "2022-12-12",
+    "report_closed_date": "2022-12-12",
+    "turn_around_time": 234354,
+    "iclm_recommendation": "weareg",
+    "investigator_name": "afegth",
+    "state_manager_name": "ba",
+    "central_manager_name": "fesrh"
+  }
+},
+{
+  "model": "Reports.claimreport",
+  "pk": 2,
+  "fields": {
+    "case_id": 1243,
+    "claim_number": "2343122",
+    "policy_number": "23431",
+    "insured_name": "defbsefv",
+    "claimant_name": "reg",
+    "sum_insured": "243.00",
+    "nature_of_loss": "ae",
+    "policy_type": "earg",
+    "channel_sourcing": "erag",
+    "family_member": "raeg",
+    "relation_with_insured": "eagr",
+    "insured_occupation": "erag",
+    "claimant_occupation": "fbae",
+    "event_details": "sferagwth4",
+    "current_condition": "earsth",
+    "other_insurance": "eath",
+    "mlc_done": true,
+    "post_mortem_done": true,
+    "casuality_note": "dsaergsth",
+    "hospital_visit_details": "bsr",
+    "verification_details": null,
+    "final_report": null,
+    "case_summary": null,
+    "police_document_verified": "aegth",
+    "pm_centre_name": "aegtshr",
+    "cause_of_death": "aegtsh",
+    "viscera_status": "svfeasthr",
+    "pm_verified": true,
+    "photos": "saergsth",
+    "witness": "earg",
+    "description": "fveagsgtr",
+    "dl_name": "stgrh",
+    "dl_validity": "2022-12-12",
+    "cov": "dfgstrh",
+    "online_portal_check": "eaftgh",
+    "total_person_inquired": 12,
+    "vicinity_check_details": "dvfegtwh4",
+    "media_date": "2024-12-12",
+    "media_details": "daergt",
+    "other_insurance_company": "eag",
+    "claim_status": "fea",
+    "conclusion": "dfbsr",
+    "intimation_date": "2022-12-12",
+    "report_closed_date": "2022-12-12",
+    "turn_around_time": 234354,
+    "iclm_recommendation": "weareg",
+    "investigator_name": "afegth",
+    "state_manager_name": "ba",
+    "central_manager_name": "fesrh"
+  }
+},
+{
+  "model": "Reports.claimreport",
+  "pk": 3,
+  "fields": {
+    "case_id": 1243,
+    "claim_number": "2343122",
+    "policy_number": "23431",
+    "insured_name": "defbsefv",
+    "claimant_name": "reg",
+    "sum_insured": "243.00",
+    "nature_of_loss": "ae",
+    "policy_type": "earg",
+    "channel_sourcing": "erag",
+    "family_member": "raeg",
+    "relation_with_insured": "eagr",
+    "insured_occupation": "erag",
+    "claimant_occupation": "fbae",
+    "event_details": "sferagwth4",
+    "current_condition": "earsth",
+    "other_insurance": "eath",
+    "mlc_done": true,
+    "post_mortem_done": true,
+    "casuality_note": "dsaergsth",
+    "hospital_visit_details": "bsr",
+    "verification_details": null,
+    "final_report": null,
+    "case_summary": null,
+    "police_document_verified": "aegth",
+    "pm_centre_name": "aegtshr",
+    "cause_of_death": "aegtsh",
+    "viscera_status": "svfeasthr",
+    "pm_verified": true,
+    "photos": "saergsth",
+    "witness": "earg",
+    "description": "fveagsgtr",
+    "dl_name": "stgrh",
+    "dl_validity": "2022-12-12",
+    "cov": "dfgstrh",
+    "online_portal_check": "eaftgh",
+    "total_person_inquired": 12,
+    "vicinity_check_details": "dvfegtwh4",
+    "media_date": "2024-12-12",
+    "media_details": "daergt",
+    "other_insurance_company": "eag",
+    "claim_status": "fea",
+    "conclusion": "dfbsr",
+    "intimation_date": "2022-12-12",
+    "report_closed_date": "2022-12-12",
+    "turn_around_time": 234354,
+    "iclm_recommendation": "weareg",
+    "investigator_name": "afegth",
+    "state_manager_name": "ba",
+    "central_manager_name": "fesrh"
+  }
+},
+{
+  "model": "Reports.hdcclosurereport",
+  "pk": 1,
+  "fields": {
+    "case_id": 1244,
+    "claim_no": "13431",
+    "nol": "ewargtrhs",
+    "policy_details": "reathr",
+    "insured_name": "babr",
+    "hospital_name": "etga",
+    "doj": "2024-12-12",
+    "doa": "2024-12-12",
+    "dod": "2024-12-12",
+    "diagnosis": "vfdrshdtjhr",
+    "trigger": "etrhsyj",
+    "date_of_allocation": "2024-12-12",
+    "date_of_closure": "2024-12-12",
+    "closure_tat": 12,
+    "case_introduction": "warfegt",
+    "insured_part_details": "reag",
+    "hospital_part_details": "reag",
+    "others": "efabth",
+    "discrepancy_findings": "efab",
+    "recommendation": "a",
+    "ground_of_rejection": "eargt"
+  }
+},
+{
+  "model": "Reports.hdcclosurereport",
+  "pk": 2,
+  "fields": {
+    "case_id": 1245,
+    "claim_no": "12431",
+    "nol": "ewawfeg",
+    "policy_details": "ver",
+    "insured_name": "aerge",
+    "hospital_name": "reaeag",
+    "doj": "2024-12-12",
+    "doa": "2024-12-12",
+    "dod": "2024-12-12",
+    "diagnosis": "ersgth",
+    "trigger": "rsthw",
+    "date_of_allocation": "2024-12-12",
+    "date_of_closure": "2024-12-12",
+    "closure_tat": 12,
+    "case_introduction": "faegst",
+    "insured_part_details": "strgh",
+    "hospital_part_details": "est",
+    "others": "eagr",
+    "discrepancy_findings": "erga",
+    "recommendation": "earg",
+    "ground_of_rejection": "age"
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$bhwqQ7EdBnqQLrukXsooS0$rcupZr5W74hhlDq69uYD8kNU7bPoSR5f9QpRKg6F8Fc=",
+    "last_login": "2024-12-30T09:23:46.003Z",
+    "is_superuser": true,
+    "username": "IO7169754192",
+    "first_name": "Divyam",
+    "last_name": "Shah",
+    "email": "divyamshah1234@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-11-11T11:32:36Z",
+    "role": "admin",
+    "user_id": "IO7169754192",
+    "name": "Divyam Shah",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$8C9I617KpkfLyMMNUViODA$MDQ6cJIFhCHZkff1l0uqWiKAEpqasq3KdI7vDPXVp5o=",
+    "last_login": "2024-12-30T04:34:16.293Z",
+    "is_superuser": false,
+    "username": "HO9674504149",
+    "first_name": "",
+    "last_name": "",
+    "email": "hod@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-12T19:21:22.461Z",
+    "role": "hod",
+    "user_id": "HO9674504149",
+    "name": "Divyam HOD",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$9iiw2Mx6UVu81JQDEBT8Dc$OI6ffNB9fIx7sMwypclMKPOphInKzd4FMjJcGL/9kkc=",
+    "last_login": "2024-12-28T18:08:03.251Z",
+    "is_superuser": false,
+    "username": "CO0639538382",
+    "first_name": "",
+    "last_name": "",
+    "email": "coordinator@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-12T19:49:21.438Z",
+    "role": "coordinator",
+    "user_id": "CO0639538382",
+    "name": "Divyam Coordinator",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Kxh5BsEMY5NHRzbdXL3Qb3$EtVVw016s7p7lZPVMVFiGW3Fg339VKqx4P1J2HyQ+S0=",
+    "last_login": "2024-12-30T04:43:58.017Z",
+    "is_superuser": false,
+    "username": "IO4000719657",
+    "first_name": "",
+    "last_name": "",
+    "email": "investigator@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-14T20:30:20.030Z",
+    "role": "investigator",
+    "user_id": "IO4000719657",
+    "name": "Divyam Investigator",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$afdXv9rF1APGvvzaehqCUW$mtJZnC7tumpsz7yAS44qhbGv6HPRBxYf/H0koLjxpYo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "CO9443553966",
+    "first_name": "",
+    "last_name": "",
+    "email": "chetan_coordinator@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-16T08:48:52.474Z",
+    "role": "coordinator",
+    "user_id": "CO9443553966",
+    "name": "Chetan Coordinator",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Aozj3FH9E0xQrqJ9pXkiFi$it/P9ykikx1Y5RVUY6RCTG6N69L6Avb5C2eylqe2sXY=",
+    "last_login": "2024-12-30T04:44:35.657Z",
+    "is_superuser": false,
+    "username": "IO7263079909",
+    "first_name": "",
+    "last_name": "",
+    "email": "chetan_investigator@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-16T08:49:35.395Z",
+    "role": "investigator",
+    "user_id": "IO7263079909",
+    "name": "Chetan Investigator",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Gc3cgw8ccQjMYgXiqZcUMR$IDvs30frNv7S82JkdmINWy/dT4GyK4vTfeK9pq5aib0=",
+    "last_login": "2024-12-30T04:42:43.923Z",
+    "is_superuser": false,
+    "username": "MO4903683978",
+    "first_name": "",
+    "last_name": "",
+    "email": "medical@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-25T10:03:53.263Z",
+    "role": "medical_officer",
+    "user_id": "MO4903683978",
+    "name": "Divyam Medical",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$FaJBJMjX57s30RbG7tr7Y9$YplMpEzM/TRTDtq7/TGidEXt6jWe5N5XkNfzlgT+kCw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "MO1413788477",
+    "first_name": "",
+    "last_name": "",
+    "email": "chetan_medical@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-25T11:37:06.944Z",
+    "role": "medical_officer",
+    "user_id": "MO1413788477",
+    "name": "Chetan Medical",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$yATwgyrssRoUwi0tZxjqZC$dUrsZ1vDBZs5YKZJc6K5JDozpoKlSF/ZDHFHF9bNZRs=",
+    "last_login": "2024-12-28T14:19:09.555Z",
+    "is_superuser": false,
+    "username": "DE9097377811",
+    "first_name": "",
+    "last_name": "",
+    "email": "dataentry@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-25T14:06:59.333Z",
+    "role": "data_entry_personnel",
+    "user_id": "DE9097377811",
+    "name": "Divyam Data",
+    "contact_number": "9054413199",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Rk1UCCHdbdEcxiYi9NS2a3$Q0RT8jRps9SdNZ0Oq6BfHOfTC7mMwnXd64wDCTL1p48=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "HO1231397803",
+    "first_name": "",
+    "last_name": "",
+    "email": "av@aerg.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-30T09:26:34.530Z",
+    "role": "hod",
+    "user_id": "HO1231397803",
+    "name": "ar raeg",
+    "contact_number": "1234567890",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$EVJoZ4Kjy6IUhCSRgo1zsn$YZIGFyk/EC1LhPqb3cMlQ16bF+Bctj7niQKJEQ6qRxU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "HO0957202500",
+    "first_name": "",
+    "last_name": "",
+    "email": "av@aerg.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-30T09:27:55.605Z",
+    "role": "hod",
+    "user_id": "HO0957202500",
+    "name": "ar raeg",
+    "contact_number": "1234567890",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2024-12-12T15:38:47.171Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "2",
+    "object_repr": "IO7169754192",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2024-12-12T15:39:05.225Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "2",
+    "object_repr": "IO7169754192",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Role\", \"User id\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2024-12-12T15:39:17.094Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "4",
+    "object_repr": "IO2952271708",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2024-12-12T15:39:17.094Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "3",
+    "object_repr": "test_co",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2024-12-12T15:39:17.094Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "1",
+    "object_repr": "admin",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2024-12-12T18:58:04.834Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "2",
+    "object_repr": "IO7169754192",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Last login\", \"User id\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2024-12-13T09:34:52.868Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "10",
+    "object_repr": "Case object (10)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2024-12-13T09:51:55.588Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "7",
+    "object_repr": "Case object (7)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Coordinator id\", \"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2024-12-15T11:56:58.548Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "visit"
+    ],
+    "object_id": "4",
+    "object_repr": "Visit object (4)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2024-12-15T11:56:58.548Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "visit"
+    ],
+    "object_id": "3",
+    "object_repr": "Visit object (3)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2024-12-15T11:56:58.548Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "visit"
+    ],
+    "object_id": "2",
+    "object_repr": "Visit object (2)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2024-12-15T11:56:58.548Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "visit"
+    ],
+    "object_id": "1",
+    "object_repr": "Visit object (1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2024-12-15T11:57:27.117Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "visit"
+    ],
+    "object_id": "5",
+    "object_repr": "Visit object (5)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2024-12-15T11:57:41.246Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "labvisit"
+    ],
+    "object_id": "4",
+    "object_repr": "LabVisit object (4)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2024-12-15T11:57:41.246Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "labvisit"
+    ],
+    "object_id": "3",
+    "object_repr": "LabVisit object (3)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2024-12-15T11:57:41.246Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "labvisit"
+    ],
+    "object_id": "2",
+    "object_repr": "LabVisit object (2)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2024-12-15T11:57:41.246Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "labvisit"
+    ],
+    "object_id": "1",
+    "object_repr": "LabVisit object (1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2024-12-15T15:44:27.651Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "hospitalvisit"
+    ],
+    "object_id": "1",
+    "object_repr": "HospitalVisit object (1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2024-12-24T12:22:34.146Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Hod id\", \"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2024-12-24T12:29:26.882Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2024-12-24T12:30:20.317Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2024-12-24T12:35:08.749Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2024-12-24T12:35:23.927Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2024-12-25T10:58:46.302Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2024-12-25T10:59:31.255Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2024-12-25T11:54:21.839Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Rate\", \"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2024-12-25T11:56:47.642Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2024-12-25T11:59:32.685Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2024-12-25T11:59:59.310Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2024-12-25T13:40:05.774Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2024-12-25T18:31:39.191Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Data entry id\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2024-12-25T18:31:58.311Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2024-12-25T19:05:27.866Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Final report\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2024-12-25T19:10:04.691Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Final report\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2024-12-25T19:10:25.717Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Final report\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2024-12-25T19:10:47.429Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Data entry id\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2024-12-25T19:11:04.751Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Final report\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2024-12-25T19:30:49.612Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2024-12-25T19:59:07.227Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "13",
+    "object_repr": "Case object (13)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Hod id\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2024-12-25T20:00:26.989Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "6",
+    "object_repr": "CaseDetails object (6)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Insurance company\", \"Type of case\", \"Rate\", \"Medical officer remarks\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2024-12-25T20:01:29.749Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "6",
+    "object_repr": "CaseDetails object (6)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Final report\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2024-12-26T13:43:36.500Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Visit",
+      "visit"
+    ],
+    "object_id": "14",
+    "object_repr": "Visit object (14)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Issue in investigation\", \"Issue of investigator\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2024-12-26T17:41:35.313Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2024-12-27T05:54:30.801Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2024-12-27T05:55:32.554Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2024-12-27T05:56:42.841Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2024-12-27T06:12:43.116Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2024-12-27T06:13:04.275Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2024-12-27T06:13:20.361Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2024-12-27T09:38:18.527Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2024-12-28T05:05:54.254Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2024-12-28T13:27:49.355Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2024-12-28T14:15:58.431Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2024-12-28T18:10:33.816Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2024-12-29T05:55:52.681Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "6",
+    "object_repr": "CaseDetails object (6)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Type of case\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2024-12-29T05:56:00.726Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Type of case\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2024-12-29T06:19:27.237Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Type of case\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2024-12-29T09:14:57.595Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "casedetails"
+    ],
+    "object_id": "5",
+    "object_repr": "CaseDetails object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Type of case\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2024-12-29T17:10:49.792Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2024-12-29T17:12:00.062Z",
+    "user": [
+      "IO7169754192"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "12",
+    "object_repr": "Case object (12)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Case status\"]}}]"
+  }
+}
+]
