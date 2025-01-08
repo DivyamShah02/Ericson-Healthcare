@@ -195,3 +195,52 @@ function displayFinalReportDocument(url) {
 
 }
 
+const doa = document.getElementById('doa');
+const dod = document.getElementById('dod');
+
+doa.addEventListener('change', function () {
+    const startDate = new Date(this.value);
+    if (dod.value) {
+        const endDate = new Date(dod.value);
+        if (endDate < startDate) {
+            dod.value = ''; // Reset the end date if it's invalid
+            alert('DOD cannot be before the DOA.');
+        }
+    }
+    dod.min = this.value; // Set the min attribute for the end date
+});
+
+dod.addEventListener('change', function () {
+    const startDate = new Date(doa.value);
+    const endDate = new Date(this.value);
+    if (endDate < startDate) {
+        this.value = ''; // Reset the end date if it's invalid
+        alert('DOD cannot be before the DOA.');
+    }
+});
+
+function handle_hospital() {
+    const hospital_doa = document.getElementById('hospital_doa');
+    const hospital_dod = document.getElementById('hospital_dod');
+
+    hospital_doa.addEventListener('change', function () {
+        const startDate = new Date(this.value);
+        if (hospital_dod.value) {
+            const endDate = new Date(hospital_dod.value);
+            if (endDate < startDate) {
+                hospital_dod.value = ''; // Reset the end date if it's invalid
+                alert('DOD cannot be before the DOA.');
+            }
+        }
+        hospital_dod.min = this.value; // Set the min attribute for the end date
+    });
+
+    hospital_dod.addEventListener('change', function () {
+        const startDate = new Date(hospital_doa.value);
+        const endDate = new Date(this.value);
+        if (endDate < startDate) {
+            this.value = ''; // Reset the end date if it's invalid
+            alert('DOD cannot be before the DOA.');
+        }
+    });
+}

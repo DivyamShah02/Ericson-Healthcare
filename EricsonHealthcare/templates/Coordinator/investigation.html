@@ -905,6 +905,7 @@
 
             if (selectedValue === 'Hospital') {
                 createHospitalFormInput();
+                handle_hospital();
             }
 
             if (selectedValue === 'Lab') {
@@ -921,7 +922,7 @@
 
         }
 
-        function createInputDiv(containerId, inputId, labelText, placeholderText) {
+        function createInputDiv(containerId, inputId, labelText, placeholderText, not_text=null) {
             const div = document.createElement('div');
             div.className = 'mb-3';
             div.id = containerId;
@@ -932,7 +933,12 @@
             label.textContent = labelText;
 
             const input = document.createElement('input');
-            input.type = 'text';
+            if (not_text == 'date') {
+                input.type = 'date';
+            } else {
+                input.type = 'text';
+            }
+            // input.type = 'text';
             input.className = 'form-control dark-input';
             input.id = inputId;
             input.name = inputId;
@@ -955,8 +961,8 @@
             parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_name', 'hospital_hospital_name', 'Hospital Name', 'Enter Hospital Name'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state', 'State', 'Enter State'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_city', 'hospital_city', 'City', 'Enter City'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission', 'date'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge', 'date'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis', 'Diagnosis', 'Enter Diagnosis'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number', 'Registration Number', 'Enter Registration Number'));
