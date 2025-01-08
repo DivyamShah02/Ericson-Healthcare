@@ -118,3 +118,59 @@ function showModal(title, content, callback) {
         modalElement.remove();
     });
 }
+
+function displayDocument(url) {
+    console.log(url);
+    // const domain = window.location.origin;
+    const domain = 'https://ericsontpa.pythonanywhere.com';
+    const fullUrl = `${domain}${url}`;
+    console.log(fullUrl);
+    const viewer = document.getElementById('document-viewer');
+    viewer.innerHTML = ''; // Clear previous content
+
+    // Get the file extension
+    const extension = url.split('.').pop().toLowerCase();
+
+    // Create the appropriate element based on the file type
+    if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)) {
+        // Image
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = "Image document";
+        img.className = 'img-fluid';
+        viewer.appendChild(img);
+    }
+    else if (extension === 'pdf') {
+        // PDF
+        console.log(url);
+        const iframe = document.createElement('iframe');
+        iframe.src = fullUrl;
+        iframe.allow = "fullscreen";
+        iframe.width = "100%";
+        iframe.height = "500px";
+        viewer.appendChild(iframe);
+
+    }
+    else if (['mp4', 'webm', 'ogg'].includes(extension)) {
+        // Video
+        const video = document.createElement('video');
+        video.src = url;
+        video.controls = true;
+        video.style.width = "100%";
+        video.style.maxHeight = '500px';
+        viewer.appendChild(video);
+    }
+    else if (['mp3', 'wav', 'ogg'].includes(extension)) {
+        // Audio
+        const audio = document.createElement('audio');
+        audio.src = url;
+        audio.controls = true;
+        audio.style.width = "100%";
+        audio.style.maxHeight = '500px';
+        viewer.appendChild(audio);
+    }
+    else {
+        // Unsupported file type
+        viewer.innerHTML = `<p>Unsupported document type: ${extension}</p>`;
+    }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Document Viewer</title>
+    <style>
+        .viewer-video,
+        .viewer-audio {
+            width: 100%;
+            max-height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="document-viewer" class="viewer">
+    </div>
+    <script>
+        // Function to display a document dynamically
+        function displayDocument(url) {
+            const viewer = document.getElementById('document-viewer');
+            viewer.innerHTML = ''; // Clear previous content
+
+            // Get the file extension
+            const extension = url.split('.').pop().toLowerCase();
+
+            // Create the appropriate element based on the file type
+            if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)) {
+                // Image
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = "Image document";
+                img.className = 'img-fluid';
+                viewer.appendChild(img);
+            } 
+            else if (extension === 'pdf') {
+                // PDF
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.allow = "fullscreen";
+                iframe.width = "100%";
+                iframe.height = "500px";
+                viewer.appendChild(iframe);
+
+            } 
+            else if (['mp4', 'webm', 'ogg'].includes(extension)) {
+                // Video
+                const video = document.createElement('video');
+                video.src = url;
+                video.controls = true;
+                video.style.width = "100%";
+                video.style.maxHeight = '500px';
+                viewer.appendChild(video);
+            } 
+            else if (['mp3', 'wav', 'ogg'].includes(extension)) {
+                // Audio
+                const audio = document.createElement('audio');
+                audio.src = url;
+                audio.controls = true;
+                audio.style.width = "100%";
+                audio.style.maxHeight = '500px';
+                viewer.appendChild(audio);
+            } 
+            else {
+                // Unsupported file type
+                viewer.innerHTML = `<p>Unsupported document type: ${extension}</p>`;
+            }
+        }
+
+        // Example usage
+        const documentUrl = "20241007_135508.mp4"; // Replace with your document URL
+        displayDocument(documentUrl);
+    </script>
+</body>
+
+</html>

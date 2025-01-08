@@ -180,7 +180,7 @@
                         <h3 class="eh-head my-3">Case Documents</h3>
                         <label class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2 mb-3"><b>Upload
                                 Document</b>
-                            <input type="file" id="addDocumentInput" hidden>
+                                <input type="file" id="addDocumentInput" hidden accept=".mp3, .wav, .ogg, .mp4, .webm, .jpg, .jpeg, .png, .gif, .webp, .pdf">
                         </label>
                         <div id="document_list_div">
                             <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" onclick="openDocModal('https://pdfobject.com/pdf/sample.pdf', 'sample.pdf')">
@@ -200,9 +200,10 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                        <div id="document-viewer" class="viewer"></div>
+                                        <!-- <div id="pdf-viewer-container" class="pdf-viewer-container">
                                             <canvas id="pdf-renderer"></canvas>
-                                        </div>
+                                        </div> -->
                                         <!-- <iframe src="/media/uploads/suit_divyam(1).jpeg" width="100%" height="500px" id="viewDocumentModalIframe"
                                             style="border: none;"></iframe> -->
                                     </div>
@@ -622,7 +623,7 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
         function openDocModal(doc_path, doc_name) {
-            loadPDF(doc_path);
+            displayDocument(doc_path);
             document.getElementById('viewDocumentModalLabel').innerText = doc_name;
             const myModal = new bootstrap.Modal(document.getElementById('viewDocumentModal'));
             myModal.show();
@@ -650,8 +651,13 @@
                 const downloadDiv = document.createElement('div');
                 downloadDiv.className = 'ms-auto';
 
-                const downloadIcon = document.createElement('i');
-                downloadIcon.className = 'fa fa-download fa-xl mx-2';
+                const downloadIcon = document.createElement('a');
+                downloadIcon.href = docItem.path;
+                downloadIcon.download = docItem.name;
+                downloadIcon.className = 'fa fa-download fa-xl mx-2 text-black';
+                downloadIcon.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
 
                 downloadDiv.appendChild(downloadIcon);
 
@@ -688,10 +694,20 @@
         }
 
         document.getElementById('addDocumentInput').addEventListener('change',async function (event) {
+            const allowedExtensions = ['mp3', 'wav', 'ogg', 'mp4', 'webm', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf'];
             const file = event.target.files[0];
             console.log(file)
 
             if (file) {
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                if (!allowedExtensions.includes(fileExtension)) {
+                    alert(`Unsupported file type: ${file.name}`);
+                    // Clear the input if invalid file is uploaded
+                    event.target.value = '';
+                    return;
+                }
+
                 const formData = new FormData();
                 formData.append('file', file);
 
