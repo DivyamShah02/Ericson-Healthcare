@@ -159,9 +159,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                            <div id="final-report-document-viewer" class="viewer"></div>
+                                            <!-- <div id="pdf-viewer-container" class="pdf-viewer-container">
                                                 <canvas id="pdf-renderer-final-report"></canvas>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <!-- <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -318,7 +319,7 @@
 
     <script>
         function openFinalReportModal(doc_path, doc_name) {
-            loadFinalReport(doc_path);
+            displayFinalReportDocument(doc_path);
             document.getElementById('viewReportModalLabel').innerText = doc_name;
             const myModal = new bootstrap.Modal(document.getElementById('viewReportModal'));
             myModal.show();

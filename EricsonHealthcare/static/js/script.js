@@ -174,3 +174,24 @@ function displayDocument(url) {
         viewer.innerHTML = `<p>Unsupported document type: ${extension}</p>`;
     }
 }
+
+function displayFinalReportDocument(url) {
+    console.log(url);
+    const viewer = document.getElementById('final-report-document-viewer');
+    viewer.innerHTML = ''; // Clear previous content
+    const domain = window.location.origin;
+    // const domain = 'https://ericsontpa.pythonanywhere.com';
+    const fullUrl = `${domain}${url}`;
+    console.log(fullUrl);
+    // PDF
+    console.log(url);
+    const iframe = document.createElement('iframe');
+    iframe.src = fullUrl;
+    iframe.allow = "fullscreen";
+    iframe.width = "100%";
+    iframe.height = "500px";
+    viewer.appendChild(iframe);
+
+
+}
+
