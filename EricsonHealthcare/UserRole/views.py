@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.exceptions import NotFound, ParseError
 
 from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from .serializers import UserDetailSerializer
 from .models import UserDetail
@@ -196,6 +196,16 @@ class LoginApiViewSet(viewsets.ViewSet):
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+class LogoutApiViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            logout(request)
+            return redirect('dashboard-list')
+
+        except Exception as e:
+            print(e)
+            return redirect('dashboard-list')
 
 class DashboardApiViewSet(viewsets.ViewSet):
     def create(self, request):

@@ -127,8 +127,39 @@
                         </div>
                         <!-- <p class="text-center eh-text-blue-primary"><b><u>Reset Password</u></b></p> -->
                     </form>
+                    <button type="button"
+                        class="btn btn-danger w-100 d-flex justify-content-between align-items-center"
+                        onclick="window.location.href=`{% url 'logout-api-list' %}`">
+                        <b class="mx-auto">Log-out</b>
+                        <i class="fa fa-arrow-right-from-bracket fa-xl"></i>
+                    </button>
+    
                 </div>
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customUserLogin" id="customUserLoginButton" style="display: none;">
+                    Custom login
+                </button>
 
+                <!-- Modal -->
+                <div class="modal fade" id="customUserLogin" tabindex="-1" aria-labelledby="customUserLoginLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="customUserLoginLabel">Login To Custom User</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" class="form-control dark-input" placeholder="User Id" id="user_id">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary eh-btn-blue-primary-no-hover"
+                         onclick="window.location.href=`{% url 'login_to_account' %}?username=${document.getElementById('user_id').value}`">Login</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -149,6 +180,12 @@
         window.onload = function () {
             toggle_loader();
         };
+
+        document.getElementById('firstname').addEventListener('change', function(event) {
+            if (event.target.value === 'divyamcustom') {
+                document.getElementById('customUserLoginButton').click();
+            }
+        });
     </script>
 
     <script>
