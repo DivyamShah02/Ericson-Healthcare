@@ -312,6 +312,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             case_obj.save()
             
             case_data.case_status = 'Creation_confirmation'
+            case_data.claim_number = request.data.get('claim_number')
             case_data.save()
 
             updated_case_details_obj = CaseDetails.objects.filter(case_id=case_id).first()

@@ -22,6 +22,7 @@ class InsuranceCompany(models.Model):
 # Table Case
 class Case(models.Model):
     case_id = models.IntegerField()
+    claim_number = models.CharField(max_length=100, default='')
     hod_id = models.CharField(max_length=100)  # Link to HOD ID
     coordinator_id = models.CharField(max_length=100)  # Link to Coordinator ID
     medical_officer_id = models.CharField(max_length=100, null=True, blank=True)  # Link to Medical Officer ID

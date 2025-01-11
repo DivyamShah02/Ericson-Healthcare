@@ -271,7 +271,11 @@
             if (success) {
                 if (result.success) {
                     console.log(result.data.all_docs);
-                    document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    if (result.data.claim_number != '') {
+                        document.getElementById('case_id_text').innerText = `Case #${result.data.claim_number}`;
+                    } else {
+                        document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    }
                     if (result.data.case_status == 'Creation_confirmation') {
                         document.getElementById('visits-tab').click();
                     }
@@ -642,6 +646,7 @@
                 icon.className = 'fa fa-file-pdf fa-xl';
 
                 const documentName = document.createElement('u');
+                documentName.className = 'text-break';
                 documentName.textContent = docItem.name;
 
                 const nameContainer = document.createElement('div');

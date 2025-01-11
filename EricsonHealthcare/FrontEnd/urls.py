@@ -4,7 +4,7 @@ from .views import *
 
 
 router = DefaultRouter()
-router.register(r'', LoginViewSet, basename='home')
+router.register(r'', DashboardViewSet, basename='home')
 router.register(r'login', LoginViewSet, basename='login')
 router.register(r'register', UserRegisterViewSet, basename='register')
 router.register(r'dashboard', DashboardViewSet, basename='dashboard')

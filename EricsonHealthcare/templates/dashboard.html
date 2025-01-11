@@ -419,7 +419,7 @@
 
                 // Left section with case number and status
                 const leftDiv = document.createElement('div');
-                leftDiv.className = 'col-8 text-start';
+                leftDiv.className = 'col-10 text-start';
 
                 const caseHeader = document.createElement('h6');
                 caseHeader.className = 'm-0';
@@ -428,7 +428,13 @@
                 statusIcon.className = `fa fa-circle fa-sm ${caseItem.case_status === 'Complete' ? 'text-success' : 'text-danger'}`;
 
                 const caseNumber = document.createElement('b');
-                caseNumber.textContent = `Case #${caseItem.case_id}`;
+                caseNumber.className = 'text-break';
+
+                if (caseItem.claim_number != '') {
+                    caseNumber.textContent = `Case #${caseItem.claim_number}`;
+                } else {
+                    caseNumber.textContent = `Case #${caseItem.case_id}`;
+                }
 
                 caseHeader.appendChild(statusIcon);
                 caseHeader.appendChild(document.createTextNode('   '));
@@ -437,7 +443,7 @@
 
                 // Right section with chevron icon
                 const rightDiv = document.createElement('div');
-                rightDiv.className = 'col-4 text-end';
+                rightDiv.className = 'col-2 text-end';
 
                 const chevronIcon = document.createElement('i');
                 chevronIcon.className = 'fa fa-chevron-right fa-lg';
@@ -471,7 +477,7 @@
 
                 // Left section with case number and status
                 const leftDiv = document.createElement('div');
-                leftDiv.className = 'col-8 text-start';
+                leftDiv.className = 'col-10 text-start';
 
                 const caseHeader = document.createElement('h6');
                 caseHeader.className = 'm-0';
@@ -480,7 +486,13 @@
                 statusIcon.className = `fa fa-circle fa-sm ${caseItem.case_status === 'Complete' ? 'text-success' : 'text-danger'}`;
 
                 const caseNumber = document.createElement('b');
-                caseNumber.textContent = `Case #${caseItem.case_id}`;
+                caseNumber.className = 'text-break';
+
+                if (caseItem.claim_number != '') {
+                    caseNumber.textContent = `Case #${caseItem.claim_number}`;
+                } else {
+                    caseNumber.textContent = `Case #${caseItem.case_id}`;
+                }
 
                 caseHeader.appendChild(statusIcon);
                 caseHeader.appendChild(document.createTextNode('   '));
@@ -489,7 +501,7 @@
 
                 // Right section with chevron icon
                 const rightDiv = document.createElement('div');
-                rightDiv.className = 'col-4 text-end';
+                rightDiv.className = 'col-2 text-end';
 
                 const chevronIcon = document.createElement('i');
                 chevronIcon.className = 'fa fa-chevron-right fa-lg';

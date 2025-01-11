@@ -375,7 +375,7 @@ class VisitViewSet(viewsets.ViewSet):
                         if que:
                             visit_questions.append(que.question)
 
-                    final_card_data = {k: v for k, v in final_card_data.items() if k is not "questions"}
+                    final_card_data = {k: v for k, v in final_card_data.items() if k != "questions"}
 
                     final_card_data = {
                         key.replace('_', ' ').title(): value

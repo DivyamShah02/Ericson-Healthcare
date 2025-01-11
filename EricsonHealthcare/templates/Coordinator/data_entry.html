@@ -536,7 +536,11 @@
             if (success) {
                 if (result.success) {
                     console.log(result.data.all_docs);
-                    document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    if (result.data.claim_number != '') {
+                        document.getElementById('case_id_text').innerText = `Case #${result.data.claim_number}`;
+                    } else {
+                        document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    }
                     if (result.data.data_entry_id != null) {
                         document.getElementById('final_report').style.display = '';
                         document.getElementById('submit_data_entry_personnel').innerHTML = '<b>Update Data Entry Personnel</b>';
@@ -711,6 +715,7 @@
                 icon.className = 'fa fa-file-pdf fa-xl';
 
                 const documentName = document.createElement('u');
+                documentName.className = 'text-break';
                 documentName.textContent = docItem.name;
 
                 const nameContainer = document.createElement('div');
