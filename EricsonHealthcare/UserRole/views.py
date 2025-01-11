@@ -288,3 +288,68 @@ class DashboardApiViewSet(viewsets.ViewSet):
                             },
                             status=status.HTTP_400_BAD_REQUEST
                         )
+
+class SaveDeviceIdApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            # user = request.user
+            # if not user.is_authenticated:
+            #     return Response(
+            #             {
+            #                 "success": False,
+            #                 "user_not_logged_in": True,
+            #                 "error": None
+            #             },
+            #             status=status.HTTP_400_BAD_REQUEST
+            #         )
+
+            user_id = request.data.get('user_id')
+            device_id = request.data.get('device_id')
+            print(user_id)
+            print('__________________________________')
+            if not user_id or not device_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "error": "Please provide User ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            user_data_obj = UserDetail.objects.get(user_id=user_id)
+            print(user_data_obj)
+            if user_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "error": f"User with id - {user_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            user_data_obj.device_id = device_id
+            user_data_obj.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            print(e)
+            # logger.error(e, exc_info=True)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": True,
+                        "error": e
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+

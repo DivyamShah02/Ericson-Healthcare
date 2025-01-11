@@ -8,6 +8,7 @@ router.register(r'user', UserCreationViewSet, basename='user')
 router.register(r'list_users_by_role', ListUsersViewSet, basename='list_users_by_role')
 router.register(r'login-api', LoginApiViewSet, basename='login-api')
 router.register(r'logout-api', LogoutApiViewSet, basename='logout-api')
+router.register(r'save-device-id-api', SaveDeviceIdApiViewSet, basename='save-device-id-api')
 router.register(r'dashboard-api', DashboardApiViewSet, basename='dashboard-api')
 
 urlpatterns = [

@@ -16,3 +16,4 @@ class UserDetail(AbstractUser):
     contact_number = models.CharField(max_length=15)
     city = models.CharField(max_length=255, null=True, blank=True)
     state = models.CharField(max_length=255, null=True, blank=True)
+    device_id = models.CharField(max_length=255, null=True, blank=True, default='')

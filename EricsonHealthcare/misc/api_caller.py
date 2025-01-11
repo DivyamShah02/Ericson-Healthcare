@@ -1,7 +1,7 @@
 import requests
 
 base_url = 'http://127.0.0.1:8000/'
-base_url = 'https://ericsontpa.pythonanywhere.com/'
+# base_url = 'https://ericsontpa.pythonanywhere.com/'
 
 def create_user():
     url = base_url + 'user/user/'
@@ -79,11 +79,24 @@ def add_answer_of_visit():
 
     return response
 
+def save_device_id():
+    url = base_url + 'user/save-device-id-api/'
+
+    data = {
+        'user_id':'CO3070257634',
+        'device_id':'1234567890'
+    }
+
+    response = requests.post(url, data=data)
+    return response
 
 if __name__ == '__main__':
-    print('Hello')
-    create_user_respone = create_user()
-    print(create_user_respone.text)
+    # print('Hello')
+    # create_user_respone = create_user()
+    # print(create_user_respone.text)
+
+    sace_device_id_respone = save_device_id()
+    print(sace_device_id_respone.text)
 
     # get_user_respone = get_user()
     # print(get_user_respone.text)
