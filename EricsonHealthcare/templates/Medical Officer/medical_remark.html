@@ -297,11 +297,12 @@
             if (success) {
                 if (result.success) {
                     console.log(result.data);
-
+                    console.log(result.data.medical_officer_remarks);
                     document.getElementById('case_details_case_id').innerText = result.data.case_id;
                     document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
                     document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
                     document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+                    document.getElementById('medical_remark_text').value = result.data.medical_officer_remarks;
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
