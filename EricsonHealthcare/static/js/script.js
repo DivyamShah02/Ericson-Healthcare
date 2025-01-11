@@ -119,10 +119,10 @@ function showModal(title, content, callback) {
     });
 }
 
-function old_displayDocument(url) {
+function displayDocument(url) {
     console.log(url);
-    // const domain = window.location.origin;
-    const domain = 'https://ericsontpa.pythonanywhere.com';
+    const domain = window.location.origin;
+    // const domain = 'https://ericsontpa.pythonanywhere.com';
     const fullUrl = `${domain}${url}`;
     console.log(fullUrl);
     const viewer = document.getElementById('document-viewer');
@@ -175,7 +175,7 @@ function old_displayDocument(url) {
     }
 }
 
-function displayDocument(url) {
+function odisplayDocument(url) {
     console.log(url);
     const domain = 'https://ericsontpa.pythonanywhere.com';
     const fullUrl = `${domain}${url}`;
@@ -282,7 +282,6 @@ function displayDocument(url) {
         viewer.innerHTML = `<p>Unsupported document type: ${extension}</p>`;
     }
 }
-
 
 function displayFinalReportDocument(url) {
     console.log(url);
