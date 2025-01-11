@@ -102,32 +102,66 @@ class UserCreationViewSet(viewsets.ViewSet):
 
 class ListUsersViewSet(viewsets.ViewSet):
     def list(self, request):
-        user_role = request.query_params.get('user_role')
-        user_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel', 'admin']
+        try:
+            user = request.user
 
-        if user_role not in user_roles:
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "invalid_user_roles": False,
+                            "data": None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = request.query_params.get('user_role')
+            user_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel', 'admin']
+
+            if user_role not in user_roles:
+                return Response({
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "invalid_user_roles": True,
+                    "data": None,
+                    "error": None
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            state = request.query_params.get('state')
+            if state:
+                user_data = UserDetail.objects.filter(role=user_role, state__icontains=state)
+            else:
+                user_data = UserDetail.objects.filter(role=user_role)
+            user_serializer = UserDetailSerializer(user_data, many=True)
+
+            user_serializer_data = user_serializer.data
+            len_users = len(user_serializer_data)
+
+            data = {
+                "len_users": len_users,
+                "users": user_serializer_data
+            }
+        
             return Response({
-                "success": False,
-                "invalid_user_roles": True,
-                "data": None,
-            }, status=status.HTTP_400_BAD_REQUEST)
-
-        user_data = UserDetail.objects.filter(role=user_role)
-        user_serializer = UserDetailSerializer(user_data, many=True)
-
-        user_serializer_data = user_serializer.data
-        len_users = len(user_serializer_data)
-
-        data = {
-            "len_users": len_users,
-            "users": user_serializer_data
-        }
-    
-        return Response({
-                "success": True,
-                "invalid_user_roles": False,
-                "data": data,
-            }, status=status.HTTP_200_OK)
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "invalid_user_roles": False,
+                    "data": data,
+                    "error": None
+                }, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            print(e)
+            # logger.error(e, exc_info=True)
+            return Response({
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "invalid_user_roles": False,
+                    "data": None,
+                    "error": str(e)
+                }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginApiViewSet(viewsets.ViewSet):
