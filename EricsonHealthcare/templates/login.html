@@ -124,7 +124,8 @@
                 console.log("Login User Success:", result);
 
                 if (result.success){
-                    window.location.href=`{% url 'dashboard-list' %}`;
+                    let user_id = result.data.user_id;
+                    window.location.href=`{% url 'dashboard-list' %}?user_id=${user_id}`;
                 }
                 
                 else if (result.user_does_not_exist) {

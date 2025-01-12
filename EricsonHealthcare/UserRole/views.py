@@ -215,7 +215,8 @@ class LoginApiViewSet(viewsets.ViewSet):
                     "success": True,
                     "user_does_not_exist": False,
                     "wrong_password": False,
-                    "error": None
+                    "error": None,
+                    "data": {"user_id": user.user_id}
                 },
                 status=status.HTTP_200_OK
             )

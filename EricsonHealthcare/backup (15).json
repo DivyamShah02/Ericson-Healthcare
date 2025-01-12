@@ -1,0 +1,1132 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "0oond7gwcwba6tummmgljv7t94zvtnam",
+  "fields": {
+    "session_data": ".eJxVjDsOAiEUAO9CbQj_B5b2ewbC5yGrBpJltzLe3ZBsoe3MZN7Eh2Ov_hi4-TWTKzHk8stiSE9sU-RHaPdOU2_7tkY6E3raQZee8XU7279BDaPObTHAwSawmnNji8yysITcyGKEZiWoyBwTPCKgddoKVBCAF5G0kswB-XwBwdg2yQ:1tWrFn:P9hn4Oi6MoW3n9um6jxYN15xLEedIXzUX3Hxttpn09I",
+    "expire_date": "2025-01-26T06:15:19.052Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0st9b9wiyhtzd36idjysijivmby2r7lt",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tT0Zi:HvWOx87m5KutITfq4JW6Ova98l6bhzPiTeZjffU5rv8",
+    "expire_date": "2025-01-31T15:23:58.715Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3dnga2m5nexv2z0jc3cc27r5ptw5rxsl",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWrjg:9t3xyqzGFCS29MoaCTwylxEh8GylT2DKwHKU13ZC9qM",
+    "expire_date": "2025-02-11T06:46:12.983Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "4vmgzcknl7pwv5hplzyqg9hp9ycwhl94",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tSUO1:YNHV1JkPOeoD63G_ruCTlvvMeXadcWGUkelM4TzcaB4",
+    "expire_date": "2025-01-30T05:01:45.950Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "66oeya4f3zbngmyttpnclu4vt3d7vvao",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWseY:-R3aCgoKItU4zCMabn0J0B3k43qLjijPH78dswx1Hag",
+    "expire_date": "2025-02-11T07:44:58.252Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8i16sow3tktgoc5i6c8hdvxjt74pg1e6",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tWhht:Np9N6k4T4QIEp_8p_z_qex8tXMZGQiAI6Jj51CeFq-o",
+    "expire_date": "2025-02-10T20:03:41.826Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9cr7db5zct667jzxh9r8vi4opqyyfu0q",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tWhxK:g3fsYVfklc6uABi_5EV7jMszo8KLSJZw6TyrF41vsuw",
+    "expire_date": "2025-02-10T20:19:38.535Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "am8qugcpoiziosxwoslpyfttlcie3qrm",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWi0A:ctcBVqeLUNY1sJ9T_wSQXAOMW4mFxU_ebkSk0hy1wCA",
+    "expire_date": "2025-02-10T20:22:34.693Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cq8vquptocrjspkayxytaf4pjq6e02wt",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tSElP:iDSdjiIGbvqTmEirFUDIg4q1gxrlBRRVPjb2xgDUjTA",
+    "expire_date": "2025-01-29T12:20:51.798Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "czerakp77arjwjivpit99f6mymktjkrw",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tX1NV:wyK8dvWnIxiOzXrRdSZFIhyk7lQws4pLd5oZh4w-Yjw",
+    "expire_date": "2025-02-11T17:03:57.018Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "e6ovr6btfvgph1rt785px58jc0d72fjw",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWqKk:mESb9iDDHwxYDPagKeCKzD4CkBtJcf_vs8qzYPgmciE",
+    "expire_date": "2025-02-11T05:16:22.149Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "iwr6dve5bdqkuqynoeidsg961xi1wbmb",
+  "fields": {
+    "session_data": ".eJxVjDsOAiEUAO9CbQj_B5b2ewbC5yGrBpJltzLe3ZBsoe3MZN7Eh2Ov_hi4-TWTKzHk8stiSE9sU-RHaPdOU2_7tkY6E3raQZee8XU7279BDaPObTHAwSawmnNji8yysITcyGKEZiWoyBwTPCKgddoKVBCAF5G0kswB-XwBwdg2yQ:1tX3id:0hFSZwJB7cpvsFBczxc0GYHoIMQj9tLWbUu9YgLWwIY",
+    "expire_date": "2025-01-26T19:33:55.064Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "j24oy4czrw0z5wehs72dqjggsavaha0f",
+  "fields": {
+    "session_data": ".eJxVjEsOwiAUAO_C2pAHlJ9L956B8HlY1IApbaIx3t2QdKHbmcm8ifPbOrut4-JKIkeiyOGXBR9vWIdIV18vjcZW16UEOhK6207PLeH9tLd_g9n3eWyz0kybqI1kTJksksgQkSmRFZeQ_RTAAmcBNRorDcdJe80yj3ISYPWYduy9tOrw-SjLixy5tBwAPl_Kqj84:1tSXd4:PeAeIN1XCiLxO910oWfduxAYD5brXWAnVCR7_bWSajU",
+    "expire_date": "2025-01-30T08:29:30.068Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "jqrxbsd2w9fcmcekkb0ra3wkituxsxse",
+  "fields": {
+    "session_data": ".eJxVjEsOwiAUAO_C2pAHlJ9L956B8HlY1IApbaIx3t2QdKHbmcm8ifPbOrut4-JKIkeiyOGXBR9vWIdIV18vjcZW16UEOhK6207PLeH9tLd_g9n3eWyz0kybqI1kTJksksgQkSmRFZeQ_RTAAmcBNRorDcdJe80yj3ISYPWYduy9tOrw-SjLixy5tBwAPl_Kqj84:1tSZ8e:OSXedzLyOgelpUjIN5hFPLQZZTDkDbZlOerqu8zVzX4",
+    "expire_date": "2025-01-30T10:06:12.047Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "l4l0zpprmxzs4xyvovue4jnm2nvn81i0",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tT22h:ya4rHZtK5-lmZpBXBW0Pekrc44c-zGiU62mlpVkoiHE",
+    "expire_date": "2025-01-31T16:57:59.329Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "l68rqaxk699thygce0h26xzwewa4fbtz",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tSCfd:cEKr4mF9J9fxm8kN2vR_-Fd9nc8kzQPeEBBmm_eMjNY",
+    "expire_date": "2025-01-29T10:06:45.953Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mno6zh3scffthh0os6dnrgx3kot69a0e",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWrEI:cI4rFdDOYgtiE_ywxJtF2o7aOM2uU6-YHqbffFFJlCE",
+    "expire_date": "2025-02-11T06:13:46.345Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nq7qw0judienuc9wrbewqfnfir9et43q",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tSCNQ:-u0EA9l-u96gcqH3Btf229jAUM7xAPwyhfuR9NkEFHU",
+    "expire_date": "2025-01-29T09:47:56.565Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "oczke1tlup9w2zncy7u7e7yhv54jar81",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWhvt:TghS3SbGMgcMR029myJT0M5CjMYlSfP4jSG2z_5v4RE",
+    "expire_date": "2025-02-10T20:18:09.066Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "oz61i6wyaoeftqt297trybdrj6yoo4k7",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tX2Dd:Z1GAwy6g65TgoChhbg4xN-fdEDu4_BGFb4ICmZ3R-Fg",
+    "expire_date": "2025-02-11T17:57:49.606Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pc9kbuxwwxgs7crc9ml0ri5nvyq287uq",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tX2r5:IPEhfyQRkhHNxhBl2hQP5_pasPQsCg-ptJYBLQKbDzE",
+    "expire_date": "2025-02-11T18:38:35.665Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "sb0lntlc6eedckk88b3eg2bhx59kg8xw",
+  "fields": {
+    "session_data": ".eJxVjDsOAiEUAO9CbQj_B5b2ewbC5yGrBpJltzLe3ZBsoe3MZN7Eh2Ov_hi4-TWTKzHk8stiSE9sU-RHaPdOU2_7tkY6E3raQZee8XU7279BDaPObTHAwSawmnNji8yysITcyGKEZiWoyBwTPCKgddoKVBCAF5G0kswB-XwBwdg2yQ:1tX2Po:O2mRWz6x9KPRNWyqOH8abn0oXkQP8niKFVNebXRqdxs",
+    "expire_date": "2025-01-26T18:10:24.511Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "soylblx2q5d4o70ax9q7o9j5q9a9yy5b",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hDEGYEu3XsGMlDGogZMaRON8e62SRe6_e_99xae5mnwc0ujz73oBIrd7xYo3lJZQX-lcqky1jKNOchVkRtt8lz7dD9t7l9goDYsb-McxAOHPYOJGrQDgkQBLAeNzInAmqNRuAiIxMyOYmBrUTkCJLNGW2ot1-LT85HHl-g0Oq2U-nwBKXdA7w:1tSYGI:yxGY6Q4mjdSahGak-BOMMmcunnE7OSU_f0-qvymc_F0",
+    "expire_date": "2025-01-30T09:10:02.481Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "u1jjpvgvk35e5fb07npglk1m6u8n4qb2",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tSIR3:Z_OLv7yCyy4f15BmTkPIzQjZ9Ja_kX6ZQeHhuA-PuxI",
+    "expire_date": "2025-01-29T16:16:05.020Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vm5gxghdzwsjxe4yvmand5r1wdgwokql",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWhcX:OSZA6kmvGNfy2fT2YfY88b8o7w9fOE4XRBNRKnJid8A",
+    "expire_date": "2025-02-10T19:58:09.386Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "w9nhenhl0i598kro4k3ualot955073qp",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWrIT:Q3zULlb3yefwz4ZAHIYZ614pKT5V4ixP102SNpU4KBU",
+    "expire_date": "2025-02-11T06:18:05.430Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "woncmftu169r6466027wpng7ao0308zj",
+  "fields": {
+    "session_data": ".eJxVjDsOAiEUAO9CbQj_B5b2ewbC5yGrBpJltzLe3ZBsoe3MZN7Eh2Ov_hi4-TWTKzHk8stiSE9sU-RHaPdOU2_7tkY6E3raQZee8XU7279BDaPObTHAwSawmnNji8yysITcyGKEZiWoyBwTPCKgddoKVBCAF5G0kswB-XwBwdg2yQ:1tWq3V:DL1JyB0bgGWr5mY4WZUxqcYGVR5Xfs5NVmU94UyNO8A",
+    "expire_date": "2025-01-26T04:58:33.714Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "z5pd9liy73uhzw0u9ih7rvcb26hncbnw",
+  "fields": {
+    "session_data": ".eJxVjssOwiAURP-FtSE8C3Tp3m8gF7ha1ICBNtEY_11rutDtnDOTeRIPyzz5pWPzOZGRWLL7zQLEC5YVpDOUU6WxlrnlQFeFbrTTQ0143W_u38AEffq0WUiMS-4cCObMIBlXcjDHaDE4FMlF6TDZIKPmVhtuhRYKZBRKRZM4fF917D3X4vF-y-1BRqGdYIy93snsP1c:1tWqkx:ufMDbW98Q3lE72RAT5ZWVxpJwJfbsdRbpdJHRyzN1zk",
+    "expire_date": "2025-02-11T05:43:27.278Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zr7tuxtnoa990ywvc4mf54nuuafbvcz2",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU8ihduvcbyMAMFjVgSptojP-uTbrQ7T3nnhfzsC6TXxvNPiMbWccOv1uAeKWyAbxAOVcea1nmHPim8J02fqpIt-Pu_gUmaNP37foIGE0fyCrTaymSESTJDgoHB6gsGJeiCjYmlSJQsJ1DnZJWGoxG2qKNWsu1eHrc8_xko9ROCiHeHzclQUs:1tSW2U:RC7rC2R1JLR-Ds_MeneSGVd1BC06xwk8QQKloeJe4mA",
+    "expire_date": "2025-01-30T06:47:38.969Z"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 1,
+  "fields": {
+    "case_id": 1000,
+    "claim_number": "",
+    "hod_id": "",
+    "coordinator_id": "CO3070257634",
+    "medical_officer_id": "MO2464589212",
+    "data_entry_id": "DE8004001489",
+    "document_paths": [
+      "uploads/ICICI Form.pdf",
+      "uploads/220204031559.zip",
+      "uploads/Adobe Scan 30-Dec-2024 (3).pdf",
+      "uploads/Adobe Scan 30-Dec-2024 (4).pdf",
+      "uploads/Adobe Scan 30-Dec-2024 (8).pdf",
+      "uploads/Adobe Scan 30-Dec-2024 (11).pdf",
+      "uploads/220204031559_TDS.pdf"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 2,
+  "fields": {
+    "case_id": 1001,
+    "claim_number": "11",
+    "hod_id": "HO4511418465",
+    "coordinator_id": "CO3070257634",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/IMG-20241231-WA0009.jpg"
+    ],
+    "case_status": "Creation_confirmation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 3,
+  "fields": {
+    "case_id": 1002,
+    "claim_number": "",
+    "hod_id": "HO1215113527",
+    "coordinator_id": "CO3070257634",
+    "medical_officer_id": "MO2464589212",
+    "data_entry_id": "DE8004001489",
+    "document_paths": [
+      "uploads/220204031559_TDS(1).pdf",
+      "uploads/Adobe Scan 30-Dec-2024 (7).pdf",
+      "uploads/lab.pdf"
+    ],
+    "case_status": "Complete"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 4,
+  "fields": {
+    "case_id": 1003,
+    "claim_number": "",
+    "hod_id": "",
+    "coordinator_id": "CO3070257634",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/Adobe Scan 30-Dec-2024 (10).pdf"
+    ],
+    "case_status": "Creation_confirmation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 5,
+  "fields": {
+    "case_id": 1004,
+    "claim_number": "749241",
+    "hod_id": "HO9674504149",
+    "coordinator_id": "CO2122490557",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/case.pdf",
+      "uploads/video.mp4",
+      "uploads/image.jpeg",
+      "uploads/audio.ogg",
+      "uploads/20250110_031717.mp4",
+      "uploads/Screenshot_20250108_145520.jpg",
+      "uploads/IMG-20250111-WA0003.jpg",
+      "uploads/image2477452406541584811.jpg",
+      "uploads/image1233919000883389037.jpg",
+      "uploads/video8697131879711318499.mp4",
+      "uploads/20250111_232951.jpg",
+      "uploads/image5714348478979406396.jpg"
+    ],
+    "case_status": "Creation_confirmation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 6,
+  "fields": {
+    "case_id": 1005,
+    "claim_number": "",
+    "hod_id": "",
+    "coordinator_id": "CO2122490557",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/image2868390522222940893.jpg"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 7,
+  "fields": {
+    "case_id": 1006,
+    "claim_number": "",
+    "hod_id": "",
+    "coordinator_id": "CO2122490557",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/image177627196261402911.jpg",
+      "uploads/image378763463995102731.jpg",
+      "uploads/video1916975134381952492.mp4"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 8,
+  "fields": {
+    "case_id": 1007,
+    "claim_number": "",
+    "hod_id": "",
+    "coordinator_id": "CO2122490557",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/image8706486070089635634.jpg"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 9,
+  "fields": {
+    "case_id": 1008,
+    "claim_number": "",
+    "hod_id": "",
+    "coordinator_id": "CO2122490557",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/Ramayan instrumental music ringtone  shree ram instrumental ringtone Peaceful ringtone of ramayan.mp3",
+      "uploads/20250111_215302.mp4"
+    ],
+    "case_status": "Creation"
+  }
+},
+{
+  "model": "Case.case",
+  "pk": 10,
+  "fields": {
+    "case_id": 1009,
+    "claim_number": "1221",
+    "hod_id": "",
+    "coordinator_id": "CO3070257634",
+    "medical_officer_id": null,
+    "data_entry_id": null,
+    "document_paths": [
+      "uploads/PoraOaObv4IzdWUtAdzy.pdf"
+    ],
+    "case_status": "Creation_confirmation"
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 1,
+  "fields": {
+    "case_id": 1000,
+    "coordinator_id": "CO3070257634",
+    "claim_number": "220204031559",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "HealthClaimReport",
+    "rate": "",
+    "doa": "2024-12-01",
+    "dod": "2024-12-06",
+    "hospital_name": "Gayathri Hospital Pvt.ltd",
+    "city": "Banglore",
+    "state": "karnataka",
+    "claim_value": "120000",
+    "diagnosis": "Infective fistula in ano anterior for AD fistulotomy ",
+    "medical_officer_remarks": "As per documents, 3 months/ Female patient was admitted from 20-11-2024 to 27-11-2024 under Dr. Chandrakant for the C/O-pain while urination since 7-8 days with h/o-fever 10-12 days before. Diagnosed as UTI-urine culture +ve ( Klebsiella SPP) and was treated conservatively. As per TD-patient admitted with C/O- pain while micturition (mostly at midnight) since 7-8 days with fever. Etiology is bacteria and other microbes enter urinary tract and cause UTI. Need of admission is due to UTI. Hospital is 45 bedded with 4 RMO, 16 doctors, 15 nursing staff. Admitted in Semi special which costing Rs.4000/- day, paid Rs. 29100/- against final hospital bill by online transactions. Hospital is 5 bedded. Treating doctor and pathologist registration details, verified on NMC site. As per Google review, hospital works 24/7 (4.2/5 rating). The distance between hospital and insured’s residence is approx. 6.7 km. Investigation done in SS Clinical lab but reports are signed and verified by DMLT person i.e. Mr. Kamalkar Ahirrao. No MD pathologist attached. Microbiology test report done in Aarmaan micro lab- after scanning QR code –report findings matched with submitted report. Some done in Rajole path lab, pathologist is Dr. Mahendra Rajole- registration details verified on NMC site.  Only ICP’s seems single stretched. No any other discrepancies found. Based on findings, said claim seems genuine hence recommended for payable.",
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 2,
+  "fields": {
+    "case_id": 1002,
+    "coordinator_id": "CO3070257634",
+    "claim_number": "220204032363",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "HealthClaimReport",
+    "rate": "",
+    "doa": "2024-12-12",
+    "dod": "2024-12-16",
+    "hospital_name": "Gaurav Accidental Hospital",
+    "city": "nNashik",
+    "state": "Mahara",
+    "claim_value": "120000",
+    "diagnosis": "Scaphoid Waist",
+    "medical_officer_remarks": "As per documents, 3 months/ Female patient was admitted from 20-11-2024 to 27-11-2024 under Dr. Chandrakant for the C/O-pain while urination since 7-8 days with h/o-fever 10-12 days before. Diagnosed as UTI-urine culture +ve ( Klebsiella SPP) and was treated conservatively. As per TD-patient admitted with C/O- pain while micturition (mostly at midnight) since 7-8 days with fever. Etiology is bacteria and other microbes enter urinary tract and cause UTI. Need of admission is due to UTI. Hospital is 45 bedded with 4 RMO, 16 doctors, 15 nursing staff. Admitted in Semi special which costing Rs.4000/- day, paid Rs. 29100/- against final hospital bill by online transactions. Hospital is 5 bedded. Treating doctor and pathologist registration details, verified on NMC site. As per Google review, hospital works 24/7 (4.2/5 rating). The distance between hospital and insured’s residence is approx. 6.7 km. Investigation done in SS Clinical lab but reports are signed and verified by DMLT person i.e. Mr. Kamalkar Ahirrao. No MD pathologist attached. Microbiology test report done in Aarmaan micro lab- after scanning QR code –report findings matched with submitted report. Some done in Rajole path lab, pathologist is Dr. Mahendra Rajole- registration details verified on NMC site.  Only ICP’s seems single stretched. No any other discrepancies found. Based on findings, said claim seems genuine hence recommended for payable.",
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 3,
+  "fields": {
+    "case_id": 1003,
+    "coordinator_id": "CO3070257634",
+    "claim_number": "2202044030365",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "CashlessClaimReport",
+    "rate": "",
+    "doa": "2024-12-12",
+    "dod": "2024-11-18",
+    "hospital_name": "Gaurav Accidental Hospital",
+    "city": "nNashik",
+    "state": "Mahara",
+    "claim_value": "120000",
+    "diagnosis": "Scaphoid Waist",
+    "medical_officer_remarks": null,
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 4,
+  "fields": {
+    "case_id": 1004,
+    "coordinator_id": "CO2122490557",
+    "claim_number": "749241",
+    "insurance_company": "ICICI Lombard",
+    "type_of_case": "HDCClosureReport",
+    "rate": "",
+    "doa": "2025-01-14",
+    "dod": "2025-01-20",
+    "hospital_name": "City Hospital",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "claim_value": "120000",
+    "diagnosis": "Scaphoid Waist",
+    "medical_officer_remarks": null,
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 5,
+  "fields": {
+    "case_id": 1001,
+    "coordinator_id": "CO3070257634",
+    "claim_number": "11",
+    "insurance_company": "",
+    "type_of_case": "",
+    "rate": "",
+    "doa": "",
+    "dod": "",
+    "hospital_name": "",
+    "city": "",
+    "state": "",
+    "claim_value": "",
+    "diagnosis": "",
+    "medical_officer_remarks": null,
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Case.casedetails",
+  "pk": 6,
+  "fields": {
+    "case_id": 1009,
+    "coordinator_id": "CO3070257634",
+    "claim_number": "1221",
+    "insurance_company": "Xyz",
+    "type_of_case": "HDCClosureReport",
+    "rate": "",
+    "doa": "",
+    "dod": "",
+    "hospital_name": "",
+    "city": "",
+    "state": "",
+    "claim_value": "",
+    "diagnosis": "",
+    "medical_officer_remarks": null,
+    "final_report": null,
+    "status_of_claim": null,
+    "claim_approved_amount": null
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 1,
+  "fields": {
+    "visit_id": 2663752353,
+    "case_id": 1000,
+    "coordinator_id": "CO3070257634",
+    "investigator_id": "IO2096667455",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Hospital",
+    "tat": "1",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 2,
+  "fields": {
+    "visit_id": 4708843401,
+    "case_id": 1000,
+    "coordinator_id": "CO3070257634",
+    "investigator_id": "IO2096667455",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "1",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 3,
+  "fields": {
+    "visit_id": 2148883464,
+    "case_id": 1000,
+    "coordinator_id": "CO3070257634",
+    "investigator_id": "IO2096667455",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Chemist",
+    "tat": "1",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 4,
+  "fields": {
+    "visit_id": 5632983222,
+    "case_id": 1002,
+    "coordinator_id": "CO3070257634",
+    "investigator_id": "IO2096667455",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Hospital",
+    "tat": "1",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 5,
+  "fields": {
+    "visit_id": 2254144526,
+    "case_id": 1002,
+    "coordinator_id": "CO3070257634",
+    "investigator_id": "IO2096667455",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "1",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 6,
+  "fields": {
+    "visit_id": 7411801087,
+    "case_id": 1002,
+    "coordinator_id": "CO3070257634",
+    "investigator_id": "IO2096667455",
+    "investigation_started": true,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Chemist",
+    "tat": "1",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.visit",
+  "pk": 7,
+  "fields": {
+    "visit_id": 4927938365,
+    "case_id": 1004,
+    "coordinator_id": "CO2122490557",
+    "investigator_id": "IO2096667455",
+    "investigation_started": false,
+    "issue_in_investigation": false,
+    "issue_of_investigator": "",
+    "submitted_by_investigator": false,
+    "re_investigation": false,
+    "re_investigation_reason": "",
+    "type_of_visit": "Lab",
+    "tat": "10",
+    "visit_status": "Investigation"
+  }
+},
+{
+  "model": "Visit.hospitalvisit",
+  "pk": 1,
+  "fields": {
+    "visit_id": 2663752353,
+    "hospital_name": "Gayathri hospital",
+    "state": "karnataka",
+    "city": "banglore",
+    "doa": "01/12/2024",
+    "dod": "05/12/2024",
+    "claim_value": "120000",
+    "diagnosis": "Infective fistula in ano",
+    "registration_number": "1234",
+    "no_of_beds": "25",
+    "icu": "yes",
+    "ot": "yes",
+    "nursing_staff": "25",
+    "rmo": "4",
+    "td_registration_number": "123456",
+    "degree": "MBBS MS",
+    "owner_of_the_hospital": "Dr. Raviprakash",
+    "doctor_registration_number": "12345",
+    "doctor_contact_number": "123456789",
+    "doctor_email": "123@gmail.com",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.hospitalvisit",
+  "pk": 2,
+  "fields": {
+    "visit_id": 5632983222,
+    "hospital_name": "Gaurav accident hospital",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "doa": "12/12/2024",
+    "dod": "16/12/2024",
+    "claim_value": "120000",
+    "diagnosis": "SCAPHOID WAISTE",
+    "registration_number": "12345",
+    "no_of_beds": "25",
+    "icu": "yes",
+    "ot": "yes",
+    "nursing_staff": "25",
+    "rmo": "4",
+    "td_registration_number": "123456",
+    "degree": "MBBS MS",
+    "owner_of_the_hospital": "Dr. Gaurav Pagare",
+    "doctor_registration_number": "123456",
+    "doctor_contact_number": "8149327390",
+    "doctor_email": "1234@gmail.com",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 1,
+  "fields": {
+    "visit_id": 4708843401,
+    "name": "Gaythri lab",
+    "city": "banglore",
+    "state": "karnataka",
+    "address": "123, banglore, karnataka",
+    "pathologist_name": "Dr.",
+    "registration_number": "123",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 2,
+  "fields": {
+    "visit_id": 2254144526,
+    "name": "Gaurav LAB",
+    "city": "NASIK",
+    "state": "Maharashtra",
+    "address": "123, NASIK",
+    "pathologist_name": "Dr. Satish Shimpi",
+    "registration_number": "12345",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.labvisit",
+  "pk": 3,
+  "fields": {
+    "visit_id": 4927938365,
+    "name": "Divyam shah",
+    "city": "Ahmedabad",
+    "state": "maharashtra",
+    "address": "Pankaj Society, Bhattha, Paldi",
+    "pathologist_name": "Rakesh",
+    "registration_number": "1324323",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.pharmacyvisit",
+  "pk": 1,
+  "fields": {
+    "visit_id": 2148883464,
+    "name_of_chemist": "gaythri chemist",
+    "address": "123, banglore, karnataka",
+    "city": "banglore",
+    "state": "karnataka",
+    "gst_number": "121313131313",
+    "drug_license_number": "12121213313",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "Visit.pharmacyvisit",
+  "pk": 2,
+  "fields": {
+    "visit_id": 7411801087,
+    "name_of_chemist": "gaurav chemist",
+    "address": "123, NASIK",
+    "city": "NASIK",
+    "state": "Maharashtra",
+    "gst_number": "121313131313",
+    "drug_license_number": "12121213313",
+    "questions": [],
+    "answers": null,
+    "document_paths": null,
+    "photo_path": null
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$pcVBbRRJNMbaxQAjTEPibG$V1vaU1CdBYJHucTnt9M7ZJdtUgSEW39XlMNKPpq4Y00=",
+    "last_login": "2025-01-12T19:32:58.717Z",
+    "is_superuser": true,
+    "username": "AD9242849082",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-12-30T09:47:45.863Z",
+    "role": "admin",
+    "user_id": "AD9242849082",
+    "name": "Admin",
+    "contact_number": "1234567890",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$nw2vq5HeIIWWrrI20cpmOj$MkUmIqW4hN9yUUi/3okZA7dHYN6yg2I43d9hnLi9430=",
+    "last_login": "2024-12-31T09:35:48.251Z",
+    "is_superuser": false,
+    "username": "HO1215113527",
+    "first_name": "",
+    "last_name": "",
+    "email": "drnandkishors@ericsonhealthcare.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-30T12:33:37Z",
+    "role": "hod",
+    "user_id": "HO1215113527",
+    "name": "Dr Nandkishor  Sonawane",
+    "contact_number": "8828424905",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$7IAzsakFbssCBBzkSEA6X5$E+RMIgNEVnG6t6yqNfMfSg1DdM/x6JBvkOakhLXSBho=",
+    "last_login": "2024-12-31T09:07:09.810Z",
+    "is_superuser": false,
+    "username": "MO2464589212",
+    "first_name": "",
+    "last_name": "",
+    "email": "deepmala@ericsonhelathcare.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-31T04:51:18.619Z",
+    "role": "medical_officer",
+    "user_id": "MO2464589212",
+    "name": "Deepmala T",
+    "contact_number": "9152007955",
+    "city": "mumbai",
+    "state": "Mumbai",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$pcVBbRRJNMbaxQAjTEPibG$V1vaU1CdBYJHucTnt9M7ZJdtUgSEW39XlMNKPpq4Y00=",
+    "last_login": "2024-12-31T08:43:39.708Z",
+    "is_superuser": false,
+    "username": "IO2096667455",
+    "first_name": "",
+    "last_name": "",
+    "email": "mahesh123kadam@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-31T04:58:53Z",
+    "role": "investigator",
+    "user_id": "IO2096667455",
+    "name": "Mahesh Kadam",
+    "contact_number": "7208042978",
+    "city": "mumbai",
+    "state": "Maharashtra",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$b5nRpzwKEbbQQjwApejr1k$81OiFbpbXriVduHjtLzQuLeXKkMCUS3KS7X5AqBSLgE=",
+    "last_login": "2024-12-31T09:58:08.816Z",
+    "is_superuser": false,
+    "username": "DE8004001489",
+    "first_name": "",
+    "last_name": "",
+    "email": "nileshnyayanit@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-31T05:17:37.565Z",
+    "role": "data_entry_personnel",
+    "user_id": "DE8004001489",
+    "name": "Nilesh N",
+    "contact_number": "8149327390",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$5v4czmaTGCkLd6SMoRuqRq$qf8y/75DCTJYfYG/I37cnXOmVLvua8ncPe0vWp92dDU=",
+    "last_login": "2025-01-12T19:33:55.039Z",
+    "is_superuser": false,
+    "username": "CO3070257634",
+    "first_name": "",
+    "last_name": "",
+    "email": "fasttrack@ericsonhealthcare.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-31T05:31:02Z",
+    "role": "coordinator",
+    "user_id": "CO3070257634",
+    "name": "Sameer Parbhate",
+    "contact_number": "08291582125",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$LbwnBScfWAHa8P6Bmwo6pX$t5n2bg4rdWhuwXAilTtyP37a4RVPhzY5pKWmApuj/58=",
+    "last_login": "2024-12-31T06:46:14.395Z",
+    "is_superuser": false,
+    "username": "HO4511418465",
+    "first_name": "",
+    "last_name": "",
+    "email": "chetan@admin.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-31T06:44:38.513Z",
+    "role": "hod",
+    "user_id": "HO4511418465",
+    "name": "Chetan Sagathiya",
+    "contact_number": "7283940983",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "UserRole.userdetail",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$mkZ2ntD8b6EinqLgJMWTKt$U/sIDwnHXe6xK0JN/SSSceWzWtM7Ix6iE2ZWiRtZ5qk=",
+    "last_login": "2025-01-12T18:38:35.647Z",
+    "is_superuser": false,
+    "username": "CO2122490557",
+    "first_name": "",
+    "last_name": "",
+    "email": "flutter@app.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-01-11T19:57:58.073Z",
+    "role": "coordinator",
+    "user_id": "CO2122490557",
+    "name": "Flutter App",
+    "contact_number": "08754511196",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "device_id": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2024-12-31T05:58:11.338Z",
+    "user": [
+      "AD9242849082"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "2",
+    "object_repr": "HO1215113527",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2024-12-31T06:06:26.807Z",
+    "user": [
+      "AD9242849082"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "4",
+    "object_repr": "IO2096667455",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2024-12-31T06:53:47.887Z",
+    "user": [
+      "AD9242849082"
+    ],
+    "content_type": [
+      "UserRole",
+      "userdetail"
+    ],
+    "object_id": "6",
+    "object_repr": "CO3070257634",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-01-11T20:04:21.494Z",
+    "user": [
+      "AD9242849082"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "5",
+    "object_repr": "Case object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Hod id\", \"Document paths\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-01-11T20:05:10.586Z",
+    "user": [
+      "AD9242849082"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "5",
+    "object_repr": "Case object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Document paths\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-01-11T20:20:52.850Z",
+    "user": [
+      "AD9242849082"
+    ],
+    "content_type": [
+      "Case",
+      "case"
+    ],
+    "object_id": "5",
+    "object_repr": "Case object (5)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Document paths\"]}}]"
+  }
+}
+]
