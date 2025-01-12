@@ -115,7 +115,7 @@ class VisitViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": None
                         },
@@ -128,7 +128,7 @@ class VisitViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,
+                            "user_unauthorized": True,
                             "data":None,
                             "error": None
                         },
@@ -141,7 +141,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": "Please provide Case ID"
                     },
@@ -154,7 +154,7 @@ class VisitViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data": None,
                             "error": f"Case with id - {case_id} not found"
                         },
@@ -187,7 +187,7 @@ class VisitViewSet(viewsets.ViewSet):
                         {
                             "success": True,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data": request_data,
                             "error": None
                         },
@@ -199,7 +199,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": 'Error occured unable to save the visit'
                     },
@@ -213,7 +213,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": str(ex)
                     },
@@ -287,7 +287,7 @@ class VisitViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "no_visit_for_case": False,
                             "data":None,
                             "error": None
@@ -301,7 +301,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "no_visit_for_case": False,
                         "data": None,
                         "error": "Please provide Case ID"
@@ -315,7 +315,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "no_visit_for_case": False,
                         "data": None,
                         "error": f"Case with id - {case_id} not found"
@@ -334,7 +334,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "no_visit_for_case": True,
                         "data": None,
                         "error": "No visits found for the given case_id and investigator_id."
@@ -347,7 +347,7 @@ class VisitViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "no_visit_for_case": True,
                         "data": None,
                         "error": "No visits found for the given case_id."
@@ -396,7 +396,7 @@ class VisitViewSet(viewsets.ViewSet):
                 {
                     "success": True,
                     "user_not_logged_in": False,
-                    "user_unathorized": False,
+                    "user_unauthorized": False,
                     "no_visit_for_case": False,
                     "data": case_visit_details_data,
                     "error": None
@@ -411,7 +411,7 @@ class VisitViewSet(viewsets.ViewSet):
                 {
                     "success": False,
                     "user_not_logged_in": False,
-                    "user_unathorized": False,
+                    "user_unauthorized": False,
                     "no_visit_for_case": False,
                     "data": None,
                     "error": str(ex)

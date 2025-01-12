@@ -56,17 +56,17 @@
             </div>
             <div class="offcanvas-body">
                 <div>
-                    <div class="eh-menu-item-active p-3 py-2 mb-2 text-start">
+                    <div class="eh-menu-item-active p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'dashboard-list' %}`">
                         <i class="fa fa-home fa-md me-2"></i>Dashboard
                     </div>
 
-                    <div class="eh-menu-item p-3 py-2 mb-2 text-start">
-                        <i class="fa fa-chart-line fa-md me-2"></i>Report
-                    </div>
+                    <!-- <div class="eh-menu-item p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'reports-list' %}`">
+                        <i class="fa fa-chart-line fa-md me-2"></i>Reports
+                    </div> -->
 
-                    <div class="eh-menu-item p-3 py-2 mb-2 text-start">
+                    <!-- <div class="eh-menu-item p-3 py-2 mb-2 text-start">
                         <i class="fa-regular fa-circle-user fa-md me-2"></i>Account
-                    </div>
+                    </div> -->
                     <hr>
 
                     <div class="eh-menu-item p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'logout-api-list' %}`">

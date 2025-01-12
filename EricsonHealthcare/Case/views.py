@@ -240,7 +240,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": None
                         },
@@ -254,7 +254,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,
+                            "user_unauthorized": True,
                             "data":None,
                             "error": None
                         },
@@ -268,7 +268,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -282,7 +282,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": f'Case with id - {case_id} not found'
                         },
@@ -322,7 +322,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data":update_case_details,
                         "error": None
                     },
@@ -336,7 +336,7 @@ class CaseDetailsViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data":None,
                         "error": str(ex)
                     },
@@ -353,7 +353,7 @@ class CaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": False,
                             "data":None,
                             "error": None
@@ -368,7 +368,7 @@ class CaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,
+                            "user_unauthorized": True,
                             "file_not_attached": False,
                             "data":None,
                             "error": None
@@ -382,7 +382,7 @@ class CaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": True,
                             "data":None,
                             "error": None
@@ -419,7 +419,7 @@ class CaseViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "file_not_attached": False,
                         "data":{'case_id':case_id},
                         "error": None
@@ -432,7 +432,7 @@ class CaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": False,
                             "data":None,
                             "error": str(ex)
@@ -559,6 +559,10 @@ class GetAllCaseViewSet(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+            
+            custom_user = request.GET.get('custom_user')
+            if custom_user:
+                user = UserDetail.objects.filter(user_id=custom_user).first()
 
             user_role = user.role
             if user_role == 'hod':
@@ -641,7 +645,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": False,
                             "data":None,
                             "error": None
@@ -656,7 +660,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,
+                            "user_unauthorized": True,
                             "file_not_attached": False,
                             "data":None,
                             "error": None
@@ -670,7 +674,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": True,
                             "data":None,
                             "error": None
@@ -685,7 +689,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": False,
                             "data":f"Case with id {case_id} does not exists",
                             "error": None
@@ -708,7 +712,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "file_not_attached": False,
                         "data":{'case_id':case_id},
                         "error": None
@@ -721,7 +725,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "file_not_attached": False,
                             "data":None,
                             "error": str(ex)
@@ -761,7 +765,7 @@ class SetCaseStatus(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -774,7 +778,7 @@ class SetCaseStatus(viewsets.ViewSet):
             #             {
             #                 "success": False,
             #                 "user_not_logged_in": False,
-            #                 "user_unathorized": True,                            
+            #                 "user_unauthorized": True,                            
             #                 "data":None,
             #                 "error": None
             #             },
@@ -787,7 +791,7 @@ class SetCaseStatus(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -801,7 +805,7 @@ class SetCaseStatus(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_status" is required'
                         },
@@ -814,7 +818,7 @@ class SetCaseStatus(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": f'Case with id - {case_id} not found'
                         },
@@ -828,7 +832,7 @@ class SetCaseStatus(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data":None,
                         "error": None
                     },
@@ -842,7 +846,7 @@ class SetCaseStatus(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },
@@ -858,7 +862,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -871,7 +875,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,                            
+                            "user_unauthorized": True,                            
                             "data":None,
                             "error": None
                         },
@@ -884,7 +888,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -897,7 +901,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"medical_officer_id" is required'
                         },
@@ -910,7 +914,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":f"Case with id {case_id} does not exists",
                             "error": None
                         },
@@ -923,7 +927,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,                        
+                        "user_unauthorized": False,                        
                         "data":f"medical_officer with id {medical_officer_id} does not exists",
                         "error": None
                     },
@@ -938,7 +942,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,                        
+                        "user_unauthorized": False,                        
                         "data":{'case_id':case_id},
                         "error": None
                     },
@@ -952,7 +956,7 @@ class AssignMedicalOfficer(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },
@@ -968,7 +972,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -981,7 +985,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,                            
+                            "user_unauthorized": True,                            
                             "data":None,
                             "error": None
                         },
@@ -994,7 +998,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -1007,7 +1011,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"data_entry_personnel_id" is required'
                         },
@@ -1020,7 +1024,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":f"Case with id {case_id} does not exists",
                             "error": None
                         },
@@ -1033,7 +1037,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,                        
+                        "user_unauthorized": False,                        
                         "data":f"medical_officer with id {data_entry_personnel_id} does not exists",
                         "error": None
                     },
@@ -1048,7 +1052,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,                        
+                        "user_unauthorized": False,                        
                         "data":{'case_id':case_id},
                         "error": None
                     },
@@ -1062,7 +1066,7 @@ class AssignDataEntryPersonnel(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },
@@ -1078,7 +1082,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -1091,7 +1095,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
             #             {
             #                 "success": False,
             #                 "user_not_logged_in": False,
-            #                 "user_unathorized": True,                            
+            #                 "user_unauthorized": True,                            
             #                 "data":None,
             #                 "error": None
             #             },
@@ -1104,7 +1108,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -1117,7 +1121,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"medical_remark" is required'
                         },
@@ -1130,7 +1134,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": f'Case with id - {case_id} not found'
                         },
@@ -1149,7 +1153,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data":None,
                         "error": None
                     },
@@ -1163,7 +1167,7 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },

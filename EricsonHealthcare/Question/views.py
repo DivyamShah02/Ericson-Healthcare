@@ -22,7 +22,7 @@ class QuestionViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": None
                         },
@@ -35,7 +35,7 @@ class QuestionViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": True,
+                            "user_unauthorized": True,
                             "data":None,
                             "error": None
                         },
@@ -50,7 +50,7 @@ class QuestionViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": str(ex)
                     },
@@ -65,7 +65,7 @@ class QuestionViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": None
                         },
@@ -79,7 +79,7 @@ class QuestionViewSet(viewsets.ViewSet):
                         {
                             "success": True,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":all_question,
                             "error": None
                         },
@@ -93,7 +93,7 @@ class QuestionViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": str(ex)
                     },
@@ -109,7 +109,7 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": None
                         },
@@ -146,7 +146,7 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": "Error occured while getting visit type details"
                     },
@@ -175,7 +175,7 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                         {
                             "success": True,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":questions,
                             "error": None
                         },
@@ -189,7 +189,7 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                     {
                         "success": False,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data": None,
                         "error": str(ex)
                     },

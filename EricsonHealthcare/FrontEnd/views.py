@@ -117,3 +117,7 @@ class CaseOverviewViewSet(viewsets.ViewSet):
             # logger.error(ex, exc_info=True)
             print(ex)
             return redirect('dashboard-list')
+
+class ReportViewSet(viewsets.ViewSet):
+    def list(self, request):
+        return render(request, 'Analytics/report.html')

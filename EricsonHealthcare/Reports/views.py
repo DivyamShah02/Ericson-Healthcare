@@ -24,7 +24,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -37,7 +37,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -50,7 +50,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": f'Case with id - {case_id} not found'
                         },
@@ -65,7 +65,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str('Final Report not saved to database')
                         },
@@ -110,7 +110,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data":report_serializer.data,
                         "error": None
                     },
@@ -123,7 +123,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },
@@ -138,7 +138,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -151,7 +151,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -164,7 +164,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": f'Case with id - {case_id} not found'
                         },
@@ -204,7 +204,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": True,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":report_serializer.data,
                             "error": None
                         },
@@ -221,7 +221,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": report_serializer.errors
                         },
@@ -235,7 +235,7 @@ class AddFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },
@@ -252,7 +252,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": True,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": None
                         },
@@ -265,7 +265,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": '"case_id" is required'
                         },
@@ -278,7 +278,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,
+                            "user_unauthorized": False,
                             "data":None,
                             "error": f'Case with id - {case_id} not found'
                         },
@@ -293,7 +293,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str('Final Report not saved to database')
                         },
@@ -350,7 +350,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
                     {
                         "success": True,
                         "user_not_logged_in": False,
-                        "user_unathorized": False,
+                        "user_unauthorized": False,
                         "data":report_serializer.data,
                         "error": None
                     },
@@ -363,7 +363,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
                         {
                             "success": False,
                             "user_not_logged_in": False,
-                            "user_unathorized": False,                            
+                            "user_unauthorized": False,                            
                             "data":None,
                             "error": str(ex)
                         },

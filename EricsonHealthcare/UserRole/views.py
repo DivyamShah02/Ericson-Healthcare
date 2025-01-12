@@ -353,3 +353,77 @@ class SaveDeviceIdApiViewSet(viewsets.ViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
+class GetReportInfoApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            report_role = request.data.get('report_role')
+            all_roles = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel', 'admin']
+            if not report_role or report_role not in all_roles:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": False,
+                            "data":None,
+                            "error": "Please provide report role"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_data = UserDetail.objects.filter(role=report_role)
+            user_data_list = UserDetailSerializer(user_data, many=True).data
+
+            data = {
+                "len_users": len(user_data_list),
+                "users": user_data_list
+            }
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data":data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return Response(
+                            {
+                                "success": False,
+                                "user_not_logged_in": True,
+                                "user_unauthorized": False,
+                                "data":None,
+                                "error": e
+                            },
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
