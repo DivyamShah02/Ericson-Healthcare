@@ -3,9 +3,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import login_to_account
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('favicon.ico', RedirectView.as_view(url='/static/logo.png')),
     path('user/', include('UserRole.urls')),
     path('case/', include('Case.urls')),
     path('visit/', include('Visit.urls')),
