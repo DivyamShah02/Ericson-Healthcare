@@ -57,7 +57,7 @@
                         <i class="fa fa-home fa-md me-2"></i>Dashboard
                     </div>
 
-                    <div class="eh-menu-item p-3 py-2 mb-2 text-start" id="report-nav-tab" onclick="window.location.href=`{% url 'reports-list' %}`" style="display: none;">
+                    <div class="eh-menu-item p-3 py-2 mb-2 text-start" id="report-nav-tab" onclick="window.location.href=`{% url 'reports-list' %}`">
                         <i class="fa fa-chart-line fa-md me-2"></i>Reports
                     </div>
 
@@ -304,7 +304,7 @@
                     const validRoles = ['admin', 'hod', 'coordinator'];
                     if (validRoles.includes(UserData.role)) {
                         document.getElementById('add_case_btn').style.display = '';
-                        document.getElementById('report-nav-tab').style.display = '';
+                        // document.getElementById('report-nav-tab').style.display = '';
 
                         if (UserData.role == 'hod'){
                             document.getElementById('coordinator_select_div').style.display = '';

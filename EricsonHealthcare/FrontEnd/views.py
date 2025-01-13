@@ -45,6 +45,24 @@ class CaseOverviewViewSet(viewsets.ViewSet):
                 return redirect('dashboard-list')
 
             if user_role == 'hod':
+                if case_details.case_status == 'Creation' or case_details.case_status == 'Creation_confirmation':
+                    return render(request, 'Hod/case_overview.html')
+
+                elif case_details.case_status == 'Investigation' or case_details.case_status == 'Investigation_confirmation':
+                    return render(request, 'Hod/investigation.html')
+
+                elif case_details.case_status == 'Medical' or case_details.case_status == 'Medical_confirmation':
+                    return render(request, 'Hod/medical_remark.html')
+
+                elif case_details.case_status == 'Data_entry' or case_details.case_status == 'Data_entry_confirmation':
+                    return render(request, 'Hod/data_entry.html')
+
+                elif case_details.case_status == 'Final_report' or case_details.case_status == 'Final_report_confirmation':
+                    return render(request, 'Hod/final_report_submit.html')
+
+                elif case_details.case_status == 'Complete':
+                    return render(request, 'Hod/case_completed.html')
+
                 return redirect('dashboard-list')
 
             elif user_role == 'coordinator':
@@ -120,4 +138,35 @@ class CaseOverviewViewSet(viewsets.ViewSet):
 
 class ReportViewSet(viewsets.ViewSet):
     def list(self, request):
-        return render(request, 'Analytics/report.html')
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return redirect('login-list')
+
+            user_role = user.role
+            print(user_role)
+
+            if user_role == 'hod':
+                return render(request, 'Hod/report.html')
+
+            elif user_role == 'coordinator':
+                return render(request, 'Coordinator/report.html')
+
+            elif user_role == 'investigator':
+                return render(request, 'Investigate Officer/report.html')
+
+            elif user_role == 'medical_officer':
+                return render(request, 'Medical Officer/report.html')
+
+            elif user_role == 'data_entry_personnel':
+                return render(request, 'DataEntry/report.html')
+
+            elif user_role == 'admin':
+                return render(request, 'Analytics/report.html')
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return redirect('dashboard-list')
+

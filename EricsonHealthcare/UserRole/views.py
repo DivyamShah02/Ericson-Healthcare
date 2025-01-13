@@ -372,7 +372,7 @@ class GetReportInfoApiViewSet(viewsets.ViewSet):
                     )
 
             user_role = user.role
-            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin' and user_role != 'medical_officer':
                 return Response(
                         {
                             "success": False,

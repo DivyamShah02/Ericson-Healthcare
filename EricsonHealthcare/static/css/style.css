@@ -358,7 +358,7 @@ body {
     border-radius: 5px;
 }
 
-#pdf-controls button {
+/* #pdf-controls button {
     padding: 5px 10px;
     font-size: 14px;
     border: none;
@@ -366,10 +366,19 @@ body {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-}
+} */
 
 #pdf-controls button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
+#current-page, #total-pages {
+    font-weight: 800;
+    color: var(--eh-blue-primary);
+}
+
+#page-info {
+    font-weight: 700;
+    color: var(--eh-dark-grey);
+}

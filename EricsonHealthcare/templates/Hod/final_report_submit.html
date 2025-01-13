@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ericson Healthcare</title>
+
+    <!-- Import BootStrap CSS Library -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Import Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+
+    <!-- Import FontAwsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Import Wow Animation CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Import the official PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/loader.css">
+
+</head>
+
+<body>
+    <div id="spinner" class="spinner-container p-2">
+        <div class="spinner"></div>
+        <!-- <div id="spinner-text" class="loading-text text-center">loading!</div> -->
+    </div>
+
+    <div id="main-content" class="blur">
+        <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <i class="fa fa-chevron-left fa-xl" onclick="window.location.href=`{% url 'dashboard-list' %}`;"></i>
+                <div class="mx-auto p-0" style="font-size: 18px;"><b id="case_id_text">Case #</b></div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <i class="fa fa-bars fa-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-end none-div" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><b>Ericson Healthcare</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div>
+                    <div class="eh-menu-item-active p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'dashboard-list' %}`">
+                        <i class="fa fa-home fa-md me-2"></i>Dashboard
+                    </div>
+
+                    <div class="eh-menu-item p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'reports-list' %}`">
+                        <i class="fa fa-chart-line fa-md me-2"></i>Reports
+                    </div>
+
+                    <!-- <div class="eh-menu-item p-3 py-2 mb-2 text-start">
+                        <i class="fa-regular fa-circle-user fa-md me-2"></i>Account
+                    </div> -->
+                    <hr>
+
+                    <div class="eh-menu-item p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'logout-api-list' %}`">
+                        <i class="fa fa-arrow-right-from-bracket fa-md me-2"></i>Log Out
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Step Section -->
+        <div class="container py-4 pt-4 mt-5">
+            <h1 id="step-name" class="eh-text-blue-primary"></h1>
+            <div class="">
+                <div class="row p-3 pb-0" id="step-1" style="display: none;">
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            &nbsp;&nbsp;&nbsp;
+                            <!-- <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i> -->
+                            <i class="fa fa-circle-dot fa-sm eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-2 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-3 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-4 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-5 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <!-- <div class="eh-progress-bar-line"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 pb-0" id="step-2" style="display: none;">
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-dot fa-sm eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-3 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-4 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-5 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <!-- <div class="eh-progress-bar-line"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 pb-0" id="step-3" style="display: none;">
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-dot fa-sm eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-4 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-5 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <!-- <div class="eh-progress-bar-line"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 pb-0" id="step-4" style="display: none;">
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-dot fa-sm eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-5 fa-sm eh-progress-bar-icon-incomplete"></i>
+                            <!-- <div class="eh-progress-bar-line"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 pb-0" id="step-5" style="display: none;">
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-dot fa-sm eh-progress-bar-icon"></i>
+                            <!-- <div class="eh-progress-bar-line"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 pb-0" id="step-6" style="display: none;">
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <div class="eh-progress-bar-line-completed"></div>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 text-center">
+                        <div class="eh-progress-bar mb-3">
+                            <i class="fa fa-circle-check fa-xl eh-progress-bar-icon"></i>
+                            <!-- <div class="eh-progress-bar-line"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section>
+            <div class="container">
+                <ul class="nav nav-underline mb-3 row" id="case-tab" role="tablist">
+                    <li class="nav-item col text-center" role="presentation">
+                        <a class="nav-link eh-nav-link-case-coordinator active" id="visits-tab" data-bs-toggle="pill"
+                            data-bs-target="#visits" role="tab" aria-controls="visits" aria-selected="true">Case Overview</a>
+                    </li>
+                    <li class="nav-item col text-center" role="presentation">
+                        <a class="nav-link eh-nav-link-case-coordinator" id="documents-tab" data-bs-toggle="pill"
+                            data-bs-target="#documents" role="tab" aria-controls="documents"
+                            aria-selected="false">Documents</a>
+                    </li>
+                    <!-- <li class="nav-item col text-center" role="presentation">
+                      <a class="nav-link eh-nav-link-case-coordinator" id="reports-tab" data-bs-toggle="pill" data-bs-target="#reports" role="tab" aria-controls="reports" aria-selected="false">Reports</a>
+                    </li> -->
+                </ul>
+                <div class="tab-content" id="case-tabContent">
+                    <div class="tab-pane fade show active" id="visits" role="tabpanel" aria-labelledby="visits-tab" tabindex="0">                
+                        <h3 class="eh-head">Case Details</h3>
+                        <div class="row mb-4">
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Id</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_case_id"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
+
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Insurance Company</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_insaurance_company"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
+
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Case Type</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_type_of_case"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
+
+                            
+                                <div class="col-6 text-start eh-key pe-0 pe-md-2">Diagnosis</div>
+                                <div class="col-6 text-end text-lg-start eh-value ps-0 ps-md-2" id="case_details_diagnosis"></div>
+                                <div class="col-12 px-3">
+                                    <hr class="p-0 my-1 visit-card-eh-hr">
+                                </div>                            
+                            
+                        </div>
+                        
+                        <h3 class="eh-head">Visits Details</h3>
+                        <div id="visit-cards">
+                            <div class="my-3">
+                                <div class="p-5 text-center dark-input" id="no-visit-created"
+                                  style="border-radius: 10px; background-color: var(--eh-danger);">
+                                  <i class="fa fa-triangle-exclamation fa-xl eh-text-blue-primary" style="font-size: 2.5rem;"></i>
+                                  <p class="p-0 m-0 mt-2 eh-text-blue-primary"><b>0 Visit created for this case</b></p>
+                                </div>
+                            </div>                            
+                        </div>
+
+                        <h3 class="eh-head mt-4">Medical Officer Remark</h3>
+                        <div class="medical-remark-card p-3 pe-2" id="medical-remark"></div>
+
+                        <div id="final-report" class="mt-4">
+                            <h3 class="eh-head">Final Report</h3>
+                            <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" id="final-report-card">
+                                <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Final Report.pdf</u>
+                                <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                            </div>
+            
+                            <!-- Modal -->
+                            <div class="modal fade" id="viewReportModal" tabindex="-1" aria-labelledby="viewReportModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="viewReportModalLabel">View Document</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="final-report-document-viewer" class="viewer"></div>
+                                            <!-- <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                                <canvas id="pdf-renderer-final-report"></canvas>
+                                            </div> -->
+                                        </div>
+                                        <!-- <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn eh-btn-blue-primary">Save changes</button>
+                                                            </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab"
+                        tabindex="0">
+                        <h3 class="eh-head my-3">Case Documents</h3>
+                        <label class="btn btn-primary eh-btn-blue-primary-no-hover w-100 py-2 mb-3"><b>Upload
+                                Document</b>
+                                <input type="file" id="addDocumentInput" hidden accept=".mp3, .wav, .ogg, .mp4, .webm, .jpg, .jpeg, .png, .gif, .webp, .pdf">
+                        </label>
+                        <div id="document_list_div">
+                            <!-- <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" onclick="openDocModal('https://pdfobject.com/pdf/sample.pdf', 'sample.pdf')">
+                                <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>sample.pdf</u>
+                                <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                            </div> -->
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="viewDocumentModal" tabindex="-1"
+                            aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 text-wrap text-break" id="viewDocumentModalLabel">View Document</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="document-viewer" class="viewer"></div>
+                                        <!-- <div id="pdf-viewer-container" class="pdf-viewer-container">
+                                            <canvas id="pdf-renderer"></canvas>
+                                        </div> -->
+                                        <!-- <iframe src="/media/uploads/suit_divyam(1).jpeg" width="100%" height="500px" id="viewDocumentModalIframe"
+                                            style="border: none;"></iframe> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+                        ...
+                    </div>
+                </div>
+                <div>
+
+                </div>
+
+                <div class="mb-5 pb-5"></div>
+
+                <div class="fixed-bottom mb-2 mx-2 mx-md-5 px-md-5">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <button type="button" onclick="updateCaseStatus('Investigation_confirmation')"
+                                class="btn btn-primary mb-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
+                                <i class="fa fa-arrow-left fa-xl"></i>
+                                <b class="mx-auto">Re-open Case</b>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <button type="button" onclick="updateCaseStatus('Complete')"
+                                class="btn btn-primary mb-md-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
+                                <b class="mx-auto">Submit Report to HOD</b>
+                                <i class="fa fa-arrow-right fa-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Import BootStrap JavaScript Library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Import Wow Animation JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+    <script src="/static/js/process-step.js"></script>
+    <script src="/static/js/loader.js"></script>
+    <script src="/static/js/api_caller.js"></script>
+    <script src="/static/js/script.js"></script>
+
+    <script>
+        new WOW().init();
+
+        const caseId = new URLSearchParams(window.location.search).get('case_id');
+        const document_tab = new URLSearchParams(window.location.search).get('document_tab');
+        console.log(document_tab);
+
+        if (document_tab == 'true') {
+            document.getElementById('documents-tab').click();
+        }
+
+        window.onload = function () {
+            getCaseDetails();
+            getCaseData();
+            getVistDetails();
+            toggle_loader();
+        };
+        processStep(5);
+
+    </script>
+
+    <script>
+        async function getCaseData() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log(result.data.all_docs);
+                    if (result.data.claim_number != '') {
+                        document.getElementById('case_id_text').innerText = `Case #${result.data.claim_number}`;
+                    } else {
+                        document.getElementById('case_id_text').innerText = `Case #${result.data.case_id}`;
+                    }
+                    if (result.data.case_status == 'Creation_confirmation') {
+                        document.getElementById('visits-tab').click();
+                    }
+                    createDocumentList(result.data.all_docs);
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        async function getCaseDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    console.log('hello');
+                    console.log(result.data);
+
+                    document.getElementById('case_details_case_id').innerText = result.data.case_id;
+                    document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
+                    document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
+                    document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+
+                    document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
+                    document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
+
+
+                }
+                else {
+                    window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+    </script>
+
+    <script>
+        function openFinalReportModal(doc_path, doc_name) {
+            displayFinalReportDocument(doc_path);
+            document.getElementById('viewReportModalLabel').innerText = doc_name;
+            const myModal = new bootstrap.Modal(document.getElementById('viewReportModal'));
+            myModal.show();
+        }
+
+        function loadFinalReport(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer-final-report');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 0.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
+
+    </script>
+
+
+    <!-- // Handle Visit related functions -->
+    <script>
+        function toggleCard(card) {
+            let card_id = card.id;
+            let card_detial_id = `${card_id}-detail`;
+            let card_icon_id = `${card_id}-icon`;
+            let card_details_ele = document.getElementById(card_detial_id);
+            console.log(card_detial_id);
+            if (card_details_ele.style.display == 'none') {
+                card_details_ele.style.display = 'block';
+                document.getElementById(card_icon_id).classList.remove('fa-plus');
+                document.getElementById(card_icon_id).classList.add('fa-minus');
+            }
+            else {
+                card_details_ele.style.display = 'none';
+                document.getElementById(card_icon_id).classList.remove('fa-minus');
+                document.getElementById(card_icon_id).classList.add('fa-plus');
+            }
+        }
+
+        function viewQuestions(questions) {
+            let question_list = document.getElementById(`${questions.id}-list`);
+
+            if (question_list.style.display == 'none') {
+                question_list.style.display = 'block';
+                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-down');
+                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-up');
+            }
+            else {
+                question_list.style.display = 'none';
+                document.getElementById(`${questions.id}-icon`).classList.remove('fa-chevron-up');
+                document.getElementById(`${questions.id}-icon`).classList.add('fa-chevron-down');
+            }
+        }
+
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id) {
+            // Create the outer card container
+            const card = document.createElement('div');
+            card.className = 'p-3 mt-3 visit-card';
+
+            // Create the header section
+            const header = document.createElement('div');
+            header.className = 'd-flex';
+            header.id = `card-${cardId}`;
+            header.setAttribute('onclick', 'toggleCard(this)');
+            header.style.cursor = 'pointer';
+
+            // Header - Left side (Visit Number)
+            const headerLeft = document.createElement('div');
+            headerLeft.className = 'col-10 text-start';
+            const title = document.createElement('h5');
+            title.className = 'm-0';
+            // title.textContent = `Visit Number ${visitNumber}`;
+            title.textContent = `${type_of_visit} Visit`;
+            headerLeft.appendChild(title);
+
+            // Header - Right side (Toggle Icon)
+            const headerRight = document.createElement('div');
+            headerRight.className = 'col text-end';
+            const icon = document.createElement('i');
+            icon.className = 'fa fa-plus';
+            icon.id = `card-${cardId}-icon`;
+            headerRight.appendChild(icon);
+
+            // Append header left and right to the header
+            header.appendChild(headerLeft);
+            header.appendChild(headerRight);
+
+            // Create the details section
+            const detailsDiv = document.createElement('div');
+            // detailsDiv.className = 'wow animate__animated animate__fadeInDown';
+            // detailsDiv.setAttribute('data-wow-duration', '0.2s');
+            detailsDiv.style.display = 'none';
+            detailsDiv.id = `card-${cardId}-detail`;
+
+            // Add a horizontal line
+            const hr = document.createElement('hr');
+            detailsDiv.appendChild(hr);
+
+            // Create the details content
+            const detailsRow = document.createElement('div');
+            detailsRow.className = 'row';
+
+            // Add each key-value pair to the details
+            for (const [key, value] of Object.entries(details)) {
+                // Key column
+                const keyCol = document.createElement('div');
+                keyCol.className = 'col-6 text-start eh-key';
+                keyCol.textContent = key;
+
+                // Value column
+                const valueCol = document.createElement('div');
+                valueCol.className = 'col-6 text-end text-lg-start text-break eh-value';
+                valueCol.textContent = value;
+
+                // Append key and value columns
+                detailsRow.appendChild(keyCol);
+                detailsRow.appendChild(valueCol);
+
+                // Add a horizontal line after each detail
+                const detailHrDiv = document.createElement('div');
+                detailHrDiv.className = 'col-12 px-3';
+                const detailHr = document.createElement('hr');
+                detailHr.className = 'p-0 my-1 visit-card-eh-hr';
+                detailHrDiv.appendChild(detailHr);
+                detailsRow.appendChild(detailHrDiv);
+            }
+
+            // Append the details row to the details div
+            detailsDiv.appendChild(detailsRow);
+
+            // Questions Section
+            const questionsContainer = document.createElement('div');
+            questionsContainer.className = 'col-12 mt-2';
+            const questionCard = document.createElement('div');
+            questionCard.className = 'select-question-card p-2';
+
+            const questionHeader = document.createElement('div');
+            questionHeader.className = 'd-flex';
+            questionHeader.id = `visit${visitNumber}-questions`;
+            questionHeader.style.cursor = 'pointer';
+            questionHeader.setAttribute('onclick', 'viewQuestions(this)');
+
+            const questionHeaderLeft = document.createElement('div');
+            questionHeaderLeft.className = 'col text-start';
+            const questionLabel = document.createElement('label');
+            questionLabel.className = 'form-label eh-label m-0';
+            questionLabel.textContent = 'Questions';
+            questionHeaderLeft.appendChild(questionLabel);
+
+            const questionHeaderRight = document.createElement('div');
+            questionHeaderRight.className = 'col text-end';
+            const questionIcon = document.createElement('i');
+            questionIcon.className = 'fa fa-chevron-down';
+            questionIcon.id = `visit${visitNumber}-questions-icon`;
+            questionHeaderRight.appendChild(questionIcon);
+
+            questionHeader.appendChild(questionHeaderLeft);
+            questionHeader.appendChild(questionHeaderRight);
+
+            const questionList = document.createElement('div');
+            questionList.id = `visit${visitNumber}-questions-list`;
+            questionList.className = 'mt-4';
+            questionList.style.display = 'none';
+
+            // Add individual questions
+            questions.forEach((question, index) => {
+                // const questionItem = document.createElement('div');
+                // questionItem.className = 'p-2 py-0';
+
+                // const questionLabel = document.createElement('label');
+                // questionLabel.className = 'form-label eh-label m-0';
+                // questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question}`;
+
+                // const hr = document.createElement('hr');
+                // hr.className = 'm-1';
+
+                // questionItem.appendChild(questionLabel);
+                // questionItem.appendChild(hr);
+
+                // New code for answers in visit card
+                // Create the main card div
+                const questionItem = document.createElement('div');
+                questionItem.classList.add('p-3', 'my-2', 'question-card');
+
+                // Create the question label
+                const questionLabel = document.createElement('label');
+                questionLabel.classList.add('form-label', 'eh-label', 'm-0');
+                questionLabel.innerHTML = `<b>Q${index + 1})</b> ${question.question}`;
+
+                // Create the horizontal line
+                const hr = document.createElement('hr');
+                hr.classList.add('m-1');
+
+                // Create the answer label
+                const answerLabel = document.createElement('label');
+                if (question.answer === false) {
+                    answerLabel.classList.add('form-label', 'm-0', 'text-danger');
+                    answerLabel.innerHTML = `<b>A${index + 1}) Not Yet Answered</b>`;    
+                }
+                else {
+                    answerLabel.classList.add('form-label', 'm-0');
+                    answerLabel.innerHTML = `<b>A${index + 1})</b> ${question.answer}`;
+                }
+
+                // Append children to the card
+                questionItem.appendChild(questionLabel);
+                questionItem.appendChild(hr);
+                questionItem.appendChild(answerLabel);
+
+
+                questionList.appendChild(questionItem);
+            });
+
+            questionCard.appendChild(questionHeader);
+            questionCard.appendChild(questionList);
+            questionsContainer.appendChild(questionCard);
+
+            detailsRow.appendChild(questionsContainer);
+
+            // Append the header and details section to the card
+            card.appendChild(header);
+            card.appendChild(detailsDiv);
+
+            return card;
+        }
+
+        // All Visit related api caller
+        async function getVistDetails() {
+            const Params = {
+                case_id: caseId,
+            };
+
+            const url = "{% url 'visit-api-list' %}?" + toQueryString(Params);
+            const [success, result] = await callApi("GET", url);
+            console.log(result);
+            if (success) {
+                if (result.success) {
+                    if (!result.no_visit_for_case){
+                        result.data.forEach((visit, index) => {
+                            document.getElementById('no-visit-created').style.display = 'none';
+                            console.log(visit);
+                            console.log(visit.visit_id);
+                            let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
+                                console.log(question_lst)
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id);
+                                document.getElementById('visit-cards').appendChild(visit_card);
+                            }).catch((error) => {
+                                console.error("An error occurred:", error);
+                            });
+                            
+                        });
+                    }
+                }
+                else {
+                    // window.location.href=`{% url 'dashboard-list' %}`;
+                }
+            } else {
+                // window.location.href=`{% url 'dashboard-list' %}`;
+            }
+        }
+
+        async function getQuestionAnsersForVisit(visit_id) {
+            const Params = {
+                visit_id: visit_id
+            };
+
+            const url = "{% url 'visit-question-api-list' %}?" + toQueryString(Params); // Construct the full URL with query params
+            const [success, result] = await callApi("GET", url);
+            if (success) {
+                if (result.success) {
+                    return result.data;
+                }
+
+                else {
+                    return [];
+                }
+
+            } else {
+                console.error("GET User Failed:", result);
+            }
+        }
+
+    </script>
+
+    <script>
+        // Handle document section
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        function openDocModal(doc_path, doc_name) {
+            displayDocument(doc_path);
+            document.getElementById('viewDocumentModalLabel').innerText = doc_name;
+            const myModal = new bootstrap.Modal(document.getElementById('viewDocumentModal'));
+            myModal.show();
+        }
+
+        function createDocumentList(documentList) {
+            const container = document.getElementById('document_list_div');
+
+            documentList.forEach((docItem) => {
+                const documentDiv = document.createElement('div');
+                documentDiv.className = 'd-flex align-items-center py-3 px-2 mb-2 document-card';
+                documentDiv.setAttribute('onclick', `openDocModal('${docItem.path}','${docItem.name}')`);
+
+                const icon = document.createElement('i');
+                icon.className = 'fa fa-file-pdf fa-xl';
+
+                const documentName = document.createElement('u');
+                documentName.className = 'text-break';
+                documentName.textContent = docItem.name;
+
+                const nameContainer = document.createElement('div');
+                nameContainer.appendChild(icon);
+                nameContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0')); // Adding spaces
+                nameContainer.appendChild(documentName);
+
+                const downloadDiv = document.createElement('div');
+                downloadDiv.className = 'ms-auto';
+
+                const downloadIcon = document.createElement('a');
+                downloadIcon.href = docItem.path;
+                downloadIcon.download = docItem.name;
+                downloadIcon.className = 'fa fa-download fa-xl mx-2 text-black';
+                downloadIcon.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+
+                downloadDiv.appendChild(downloadIcon);
+
+                documentDiv.appendChild(nameContainer);
+                documentDiv.appendChild(downloadDiv);
+
+                container.appendChild(documentDiv);
+            });
+        }
+
+        function loadPDF(docPath) {
+            const pdfRenderer = document.getElementById('pdf-renderer');
+            const canvasContext = pdfRenderer.getContext('2d');
+
+            // Load the PDF document
+            pdfjsLib.getDocument(docPath).promise.then((pdf) => {
+                // Load the first page of the PDF
+                pdf.getPage(1).then((page) => {
+                    const viewport = page.getViewport({ scale: 0.5 });
+
+                    // Adjust canvas dimensions
+                    pdfRenderer.width = viewport.width;
+                    pdfRenderer.height = viewport.height;
+
+                    // Render the PDF page into the canvas context
+                    page.render({
+                        canvasContext: canvasContext,
+                        viewport: viewport,
+                    });
+                });
+            }).catch((error) => {
+                console.error('Error rendering PDF:', error);
+            });
+        }
+
+        document.getElementById('addDocumentInput').addEventListener('change',async function (event) {
+            const allowedExtensions = ['mp3', 'wav', 'ogg', 'mp4', 'webm', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf'];
+            const file = event.target.files[0];
+            console.log(file)
+
+            if (file) {
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                if (!allowedExtensions.includes(fileExtension)) {
+                    alert(`Unsupported file type: ${file.name}`);
+                    // Clear the input if invalid file is uploaded
+                    event.target.value = '';
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const bodyData = formData;
+                formData.append('case_id', caseId);
+            
+                const url = "{% url 'add-case-document-api-list' %}";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}", true);
+                console.log(result);
+                if (success) {
+                    let case_id = result.data.case_id;
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${case_id}&document_tab=true`;
+                } else {
+                    
+                }
+
+            }
+        });
+
+    </script>
+
+    <script>
+        async function updateCaseStatus(status) {
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to continue?</p>',
+                async () => {
+                    const Params = {
+                        case_id: caseId,
+                        case_status: status
+                    };
+        
+                    const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
+                    const [success, result] = await callApi("GET", url);
+                    console.log(result);
+                    if (success) {
+                        if (result.success) {                
+                                console.log(result.data);
+                                location.reload();
+                        }
+                        else {
+                            window.location.href=`{% url 'dashboard-list' %}`;
+                        }
+                    } else {
+                        window.location.href=`{% url 'dashboard-list' %}`;
+                    }
+                    
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

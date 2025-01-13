@@ -119,7 +119,7 @@ function showModal(title, content, callback) {
     });
 }
 
-function displayDocument(url) {
+function odisplayDocument(url) {
     console.log(url);
     const domain = window.location.origin;
     // const domain = 'https://ericsontpa.pythonanywhere.com';
@@ -175,7 +175,7 @@ function displayDocument(url) {
     }
 }
 
-function odisplayDocument(url) {
+function displayDocument(url) {
     console.log(url);
     const domain = 'https://ericsontpa.pythonanywhere.com';
     const fullUrl = `${domain}${url}`;
@@ -203,9 +203,9 @@ function odisplayDocument(url) {
         const controls = document.createElement('div');
         controls.id = 'pdf-controls';
         controls.innerHTML = `
-            <button id="prev-page" class="btn btn-primary">Previous</button>
+            <button id="prev-page" class="btn btn-primary eh-btn-blue-primary-no-hover"><i class="fa fa-circle-chevron-left"></i></button>
             <span id="page-info">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
-            <button id="next-page" class="btn btn-primary">Next</button>
+            <button id="next-page" class="btn btn-primary eh-btn-blue-primary-no-hover"><i class="fa fa-circle-chevron-right"></i></button>
         `;
         viewer.appendChild(controls);
 
