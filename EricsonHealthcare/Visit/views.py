@@ -359,38 +359,43 @@ class VisitViewSet(viewsets.ViewSet):
 
             # Collect visit details
             for visit in visits:
-                visit_serializer = VisitSerializer(visit)
-                visit_data = visit_serializer.data
+                try:
+                    visit_serializer = VisitSerializer(visit)
+                    visit_data = visit_serializer.data
 
-                visit_type_data = self.get_visit_type_data(visit_data=visit_data)
-                if visit_type_data is not False:
-                    visit_data['visit_type_data'] = visit_type_data
-                
-                    final_card_data = visit_data['visit_type_data']
-                    final_card_data = {k: v for k, v in final_card_data.items() if k not in ("id", "visit_id", "document_paths", "photo_path", "answers")}
+                    visit_type_data = self.get_visit_type_data(visit_data=visit_data)
+                    if visit_type_data is not False:
+                        visit_data['visit_type_data'] = visit_type_data
                     
-                    visit_questions = []
-                    for question_id in final_card_data["questions"]:
-                        que = Question.objects.filter(id=question_id).first()
-                        if que:
-                            visit_questions.append(que.question)
+                        final_card_data = visit_data['visit_type_data']
+                        final_card_data = {k: v for k, v in final_card_data.items() if k not in ("id", "visit_id", "document_paths", "photo_path", "answers")}
+                        
+                        visit_questions = []
+                        for question_id in final_card_data["questions"]:
+                            que = Question.objects.filter(id=question_id).first()
+                            if que:
+                                visit_questions.append(que.question)
 
-                    final_card_data = {k: v for k, v in final_card_data.items() if k != "questions"}
+                        final_card_data = {k: v for k, v in final_card_data.items() if k != "questions"}
 
-                    final_card_data = {
-                        key.replace('_', ' ').title(): value
-                        for key, value in final_card_data.items()
-                    }
+                        final_card_data = {
+                            key.replace('_', ' ').title(): value
+                            for key, value in final_card_data.items()
+                        }
 
-                    final_card_data["Investigator"] = UserDetail.objects.filter(user_id=visit_data['investigator_id']).first().name
-                    final_card_data["TAT"] = visit_data['tat']
+                        final_card_data["Investigator"] = UserDetail.objects.filter(user_id=visit_data['investigator_id']).first().name
+                        final_card_data["TAT"] = visit_data['tat']
 
-                    visit_data["questions"] = visit_questions
+                        visit_data["questions"] = visit_questions
 
-                    visit_data["final_card_data"] = final_card_data
+                        visit_data["final_card_data"] = final_card_data
 
 
-                    case_visit_details_data.append(visit_data)
+                        case_visit_details_data.append(visit_data)
+                except Exception as e:
+                    # logger.error(e, exc_info=True)
+                    print(e)
+                    continue
 
             return Response(
                 {

@@ -1,1 +1,5 @@
 add text-break to document list text (name of the document)
+
+add try in for loop of listing visits
+add validation in visit addinion form
+delete visit option enable
