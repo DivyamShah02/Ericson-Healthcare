@@ -381,7 +381,7 @@
                             <h3 class="eh-head">Final Report</h3>
                             <div class="d-flex align-items-center py-3 px-2 mb-2 document-card" id="final-report-card">
                                 <i class="fa fa-file-pdf fa-xl"></i>&nbsp;&nbsp;&nbsp; <u>Final Report.pdf</u>
-                                <div class="ms-auto"><i class="fa fa-download fa-xl mx-2"></i></div>
+                                <div class="ms-auto"><a class="fa fa-download fa-xl mx-2 text-black" id="final-report-download" download="FinalReport.pdf"></a></div>
                             </div>
             
                             <!-- Modal -->
@@ -558,6 +558,10 @@
 
                     document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
                     document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
+                    document.getElementById('final-report-download').setAttribute('href', `{% url 'render-final-report-api-list' %}?case_id=${caseId}`);
+                    document.getElementById('final-report-download').addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
 
 
                 }

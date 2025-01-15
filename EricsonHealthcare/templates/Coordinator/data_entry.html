@@ -579,6 +579,10 @@
                     if (current_case_status == "Data_entry_confirmation") {
                         if (result.data.final_report) {
                             document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
+                    document.getElementById('final-report-download').setAttribute('href', `{% url 'render-final-report-api-list' %}?case_id=${caseId}`);
+                    document.getElementById('final-report-download').addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
                         }
                         else {
                         document.getElementById('final-report').style.display = 'none';

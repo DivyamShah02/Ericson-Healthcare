@@ -36,9 +36,20 @@
     <div id="main-content" class="blur">
         <div class="px-3 px-md-5 py-3 bg-white eh-bg-blue-primary fixed-top text-white">
             <div class="d-flex justify-content-between align-items-center">
-                <i class="fa fa-circle-user fa-xl"></i>
+                <div class="dropdown">
+                    <button type="button" class="btn p-0" data-bs-toggle="dropdown">
+                        <i class="fa fa-circle-user fa-xl text-white" style="color: #000;"></i>
+                    </button>                
+                    <div class="dropdown-menu dropdown-menu-start" aria-labelledby="transactionID">
+                        <div class="px-3">
+                            <b><u id="account-card-name"></u></b>
+                            <small id="account-card-email"></small>
+                            <small id="account-card-number"></small>
+                        </div>
+                    </div>
+                </div>
                 <div class="mx-auto p-0" style="font-size: 18px;"><b>ERICSON HEALTHCARE</b></div>
-                <i class="fa fa-bell fa-xl me-2"></i>
+                <!-- <i class="fa fa-bell fa-xl me-2"></i> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i class="fa fa-bars fa-xl"></i>
@@ -253,6 +264,9 @@
                     UserData = result.data;
 
                     document.getElementById('account_name').innerText = UserData.name;
+                    document.getElementById('account-card-name').innerText = UserData.name;
+                    document.getElementById('account-card-email').innerText = UserData.email;
+                    document.getElementById('account-card-number').innerText = UserData.contact_number;
 
                     const validRoles = ['admin', 'hod', 'coordinator'];
                     if (validRoles.includes(UserData.role)) {

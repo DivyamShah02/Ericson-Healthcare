@@ -339,7 +339,7 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
             pdf_buffer = create_pdf_from_dict(data_dict=report_data, case_type=case_type, case_id=case_id)
             
             pdf_response = HttpResponse(pdf_buffer.read(), content_type='application/pdf')
-            pdf_response['Content-Disposition'] = 'inline; filename="visit_plan.pdf"'
+            pdf_response['Content-Disposition'] = 'inline; filename="FinalReport.pdf"'
 
             # Reset buffer position before returning it
             pdf_buffer.close()

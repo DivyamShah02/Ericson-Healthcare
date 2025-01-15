@@ -267,6 +267,7 @@ class DashboardApiViewSet(viewsets.ViewSet):
                 'contact_number': user.contact_number,
                 'city': user.city,
                 'state': user.state,
+                'email': user.email,
             }
 
             if user.is_staff:
