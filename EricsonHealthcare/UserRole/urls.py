@@ -10,7 +10,9 @@ router.register(r'login-api', LoginApiViewSet, basename='login-api')
 router.register(r'logout-api', LogoutApiViewSet, basename='logout-api')
 router.register(r'save-device-id-api', SaveDeviceIdApiViewSet, basename='save-device-id-api')
 router.register(r'dashboard-api', DashboardApiViewSet, basename='dashboard-api')
+router.register(r'get-all-users-api', GetAllUsersApiViewSet, basename='get-all-users-api')
 router.register(r'get-report-info-api', GetReportInfoApiViewSet, basename='get-report-info-api')
+router.register(r'change-password-api', ChangePasswordApiViewSet, basename='change-password-api')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from .serializers import UserDetailSerializer
 from .models import UserDetail
+from Case.models import Case, CaseDetails
 
 import random
 import string
@@ -268,6 +269,10 @@ class DashboardApiViewSet(viewsets.ViewSet):
                 'state': user.state,
             }
 
+            if user.is_staff:
+                data['total_users'] = len(UserDetail.objects.all())
+                data['total_cases'] = len(Case.objects.all())
+
             return Response(
                     {
                         "success": True,
@@ -289,6 +294,147 @@ class DashboardApiViewSet(viewsets.ViewSet):
                             },
                             status=status.HTTP_400_BAD_REQUEST
                         )
+
+class GetAllUsersApiViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "data":None,
+                            "error": "User not authorized"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_type = request.query_params.get('user_type')
+            all_user_types = ['hod', 'coordinator', 'investigator', 'medical_officer', 'data_entry_personnel', 'admin']
+            if not user_type or user_type not in all_user_types:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "data":None,
+                            "error": "Please provide user type"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_data = UserDetail.objects.filter(role=user_type)
+            user_data_list = UserDetailSerializer(user_data, many=True).data
+
+            data = {
+                "len_users": len(user_data_list),
+                "users": user_data_list
+            }
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return Response(
+                            {
+                                "success": False,
+                                "user_not_logged_in": True,
+                                "data":None,
+                                "error": e
+                            },
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+
+class ChangePasswordApiViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_id = request.data.get('user_id')
+            if not user_id:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "error": "Please provide User ID"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            get_user = UserDetail.objects.get(user_id=user_id)
+            if get_user is None:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "error": f"User with id - {user_id} not found"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            new_password = request.data.get('new_password')
+            if not new_password:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "error": "Please provide old and new password"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            get_user.set_password(new_password)
+            get_user.save()
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": True,
+                        "error": e
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
 class SaveDeviceIdApiViewSet(viewsets.ViewSet):
     def create(self, request):

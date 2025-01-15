@@ -18,6 +18,7 @@ class UserRegisterViewSet(viewsets.ViewSet):
 class DashboardViewSet(viewsets.ViewSet):
     def list(self, request):
         if request.user.is_staff:
+            return render(request, 'Admin/dashboard.html')
             return redirect('register-list')
         return render(request, 'dashboard.html')
 
@@ -163,7 +164,7 @@ class ReportViewSet(viewsets.ViewSet):
                 return render(request, 'DataEntry/report.html')
 
             elif user_role == 'admin':
-                return render(request, 'Analytics/report.html')
+                return render(request, 'Admin/report.html')
 
         except Exception as ex:
             # logger.error(ex, exc_info=True)
