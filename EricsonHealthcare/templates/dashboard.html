@@ -57,34 +57,7 @@
             </div>
         </div>
 
-        <div class="offcanvas offcanvas-end none-div" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><b>Ericson Healthcare</b></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    <div class="eh-menu-item-active p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'dashboard-list' %}`">
-                        <i class="fa fa-home fa-md me-2"></i>Dashboard
-                    </div>
-
-                    <div class="eh-menu-item p-3 py-2 mb-2 text-start" id="report-nav-tab" onclick="window.location.href=`{% url 'reports-list' %}`">
-                        <i class="fa fa-chart-line fa-md me-2"></i>Reports
-                    </div>
-
-                    <!-- <div class="eh-menu-item p-3 py-2 mb-2 text-start">
-                        <i class="fa-regular fa-circle-user fa-md me-2"></i>Account
-                    </div> -->
-                    <hr>
-
-                    <div class="eh-menu-item p-3 py-2 mb-2 text-start" onclick="window.location.href=`{% url 'logout-api-list' %}`">
-                        <i class="fa fa-arrow-right-from-bracket fa-md me-2"></i>Log Out
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+{% include 'nav.html' %}
         <div class="container mt-5 pt-3">
             <div class="text-start mt-3 mb-2">
                 <h3 class="eh-text-blue-primary"><b>Hello <span id="account_name"></span></b></h3>

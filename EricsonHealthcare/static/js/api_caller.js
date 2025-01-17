@@ -92,3 +92,45 @@ async function exampleApiCallerGET() {
         console.error("GET User Failed:", result);
     }
 }
+
+async function IsUserAuthorized() {
+    const url = "/user/is-user-authorized-api/";
+
+    const [success, result] = await callApi("GET", url);
+
+    if (success) {
+        if (result.success) {
+            return result.data
+        }
+        else {
+            return false
+        }
+
+    } 
+    else {
+        return false
+    }
+}
+
+
+async function logPageLoadUrl() {
+    const currentUrl = window.location.href;
+    console.log(`Page loaded from URL: ${currentUrl}`);
+
+    if (currentUrl.includes('dashboard')) {
+        document.getElementById('dashboard-nav-tab').className = 'eh-menu-item-active p-3 py-2 mb-2 text-start';
+    }
+    else if (currentUrl.includes('reports')) {
+        document.getElementById('reports-nav-tab').className = 'eh-menu-item-active p-3 py-2 mb-2 text-start';
+    }
+    else if (currentUrl.includes('question')) {
+        document.getElementById('add-question-nav-tab').className = 'eh-menu-item-active p-3 py-2 mb-2 text-start';
+    }
+
+    let is_user_authorized = await IsUserAuthorized();
+    if (is_user_authorized) {
+        document.getElementById('add-question-nav-tab').style.display = '';
+    }
+}
+
+logPageLoadUrl();

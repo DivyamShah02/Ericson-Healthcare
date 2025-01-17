@@ -171,3 +171,24 @@ class ReportViewSet(viewsets.ViewSet):
             print(ex)
             return redirect('dashboard-list')
 
+class QuestionAdderViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return redirect('login-list')
+
+            user_role = user.role
+            print(user_role)
+
+            if user_role == 'admin' or user_role == 'hod' or user_role == 'coordinator':
+                return render(request, 'question_adder.html')
+
+            return redirect('dashboard-list')
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return redirect('dashboard-list')
+

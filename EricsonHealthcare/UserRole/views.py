@@ -575,3 +575,48 @@ class GetReportInfoApiViewSet(viewsets.ViewSet):
                             },
                             status=status.HTTP_400_BAD_REQUEST
                         )
+
+class IsUserAuthorizedApiViewSet(viewsets.ViewSet):
+    def list(self, request):
+        try:
+            user = request.user
+
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                data = False
+            
+            else:
+                data = True
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "data":data,
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return Response(
+                            {
+                                "success": False,
+                                "user_not_logged_in": True,
+                                "data":None,
+                                "error": e
+                            },
+                            status=status.HTTP_400_BAD_REQUEST
+                        )

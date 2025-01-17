@@ -41,6 +41,33 @@ class QuestionViewSet(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+            
+            question_text = request.data.get('question')
+            if not question_text:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": "Please provide question"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            question_obj = Question.objects.create(question=question_text)
+            question_obj.save()
+
+            return Response(
+                        {
+                            "success": True,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": False,
+                            "data": "Question added successfully",
+                            "error": None
+                        },
+                        status=status.HTTP_200_OK
+                    )
         
 
         except Exception as ex:
