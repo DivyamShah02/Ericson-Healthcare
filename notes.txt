@@ -1,7 +1,0 @@
-Amazon S3 bucket
-SMS gateway
-email creds to set up mail sending
-pythonanywhere account (free)
-
-apple developer account
-google play console account (developer account)

@@ -3,3 +3,5 @@ add text-break to document list text (name of the document)
 add try in for loop of listing visits
 add validation in visit addinion form
 delete visit option enable
+add medical remark submission pop up
+medical officer not selected from coordinator view after submission

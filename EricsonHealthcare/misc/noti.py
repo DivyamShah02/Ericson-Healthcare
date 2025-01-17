@@ -13,7 +13,7 @@ def send_push_notification(device_id, title, description, image_url=None):
         image_url (str, optional): URL of the image to include in the notification. Defaults to None.
     """
 
-    cred = credentials.Certificate(r"firebase_creds.json")
+    cred = credentials.Certificate(r"ehunt-e7f03-firebase-adminsdk-ug5u7-470c2046f6.json")
     firebase_admin.initialize_app(cred)
 
     message = messaging.Message(
@@ -38,7 +38,7 @@ def send_push_notification(device_id, title, description, image_url=None):
 
 # Example usage
 if __name__ == "__main__":
-    device_id = "er_OhE-RTLSwqr-UqrG2TQ:APA91bF10bRdPrZ3W9XRZ78ykFUY1iTicKUN3zJGCNH0HXDotlYGnXdtA9GBrKwVq8f1wRt2OEt_Mh7pvP02gMMnQrO-KYUB2NwIcbHQaUAt2bCIwovZgu8"  #this is the cfm number 
+    device_id = "fV-chZ6ZTXySP6NOGTUnSE:APA91bG1VUmPufYx4EF9FbmpwyHnDQvhiMGsppgYdYak20QIdd22GulSXjchV07fnexkB-16JlPNmf7GGY6e_dygCCwWGKHm1_Y7FKhqoVEORtVDKgYfgTI"
     title = "Investigation Completed!"
     description = "This is a test notification sent via Firebase!"
     # image_url = "https://prium.github.io/freya/v2.1.0/assets/img/img_1.jpg"  # Optional

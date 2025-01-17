@@ -78,6 +78,7 @@ body {
     font-weight: 600;
     color: var(--eh-blue-primary);
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .eh-menu-item-active {
@@ -85,6 +86,7 @@ body {
     background-color: var(--eh-blue-primary);
     color: white;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .eh-progress-bar {
