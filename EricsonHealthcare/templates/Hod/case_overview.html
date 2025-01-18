@@ -1082,15 +1082,21 @@
                 new_visit_detail['questions'] = getSelectedVisitQuestions();
                 console.log(new_visit_detail);
     
-                const bodyData = new_visit_detail;
-    
-                const url = "{% url 'visit-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                if (success) {
-                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-                } else {
-                    alert('Unable to create new visit`');
-                }
+                showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to create visit?</p>',
+                async () => {
+                    const bodyData = new_visit_detail;
+        
+                    const url = "{% url 'visit-api-list' %}";
+                    const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                    if (success) {
+                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                    } else {
+                        alert('Unable to create new visit`');
+                    }
+                    }
+                );
             }
 
             else {
@@ -1189,16 +1195,22 @@
             update_visit_detail['questions'] = getSelectedVisitQuestions();
             console.log(update_visit_detail);
 
-            const bodyData = update_visit_detail;
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to update visit?</p>',
+                async () => {
+                    const bodyData = update_visit_detail;
 
-            const url = "{% url 'update-visit-api-list' %}";
-            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-            console.log(result);
-            if (success) {
-                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
-            } else {
-                alert('Unable to save the visit details');
-            }
+                    const url = "{% url 'update-visit-api-list' %}";
+                    const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                    console.log(result);
+                    if (success) {
+                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                    } else {
+                        alert('Unable to save the visit details');
+                    }
+                }
+            );
         }
 
     </script>

@@ -869,21 +869,27 @@
                 document.getElementById('medical_officer_select').focus();
             }
             else {
-                const bodyData = {
-                    'case_id': caseId,
-                    'medical_officer_id': medical_officer_id_value,
-                };
-    
-                const url = "{% url 'set-medical-officer-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {                    
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
+                showModal(
+                    'Confirm Action',
+                    '<p>Are you sure you want to select medical officer?</p>',
+                    async () => {
+                        const bodyData = {
+                            'case_id': caseId,
+                            'medical_officer_id': medical_officer_id_value,
+                        };
+            
+                        const url = "{% url 'set-medical-officer-api-list' %}";
+                        const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                        console.log(result)
+                        if (success) {
+                            if (result.success) {                    
+                                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
+                            }
+                        } else {
+                            alert('Unable to assign medical officer');
+                        }
                     }
-                } else {
-                    alert('Unable to assign medical officer');
-                }
+                );
             }
             toggle_loader();
         }
