@@ -536,6 +536,7 @@
             editIcon.className = 'fa fa-pen fa-lg eh-text-blue-primary';
             const deleteIcon = document.createElement('i');
             deleteIcon.className = 'fa fa-trash fa-lg text-danger';
+            deleteIcon.setAttribute('onclick', `deleteVisitDetail('${visit_id}');`);
             actionCol.appendChild(editIcon);
             actionCol.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             actionCol.appendChild(deleteIcon);

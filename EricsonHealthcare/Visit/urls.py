@@ -14,6 +14,7 @@ router.register(r'raise-visit-issue-api', RaiseVisitIssueViewSet, basename='rais
 router.register(r'remove-visit-issue-api', RemoveVisitIssueViewSet, basename='remove-visit-issue-api')
 router.register(r're-investigate-visit-api', ReInvestigateVisitViewSet, basename='re-investigate-visit-api')
 router.register(r'remove-re-investigate-visit-api', RemoveReInvestigateVisitViewSet, basename='remove-re-investigate-visit-api')
+router.register(r'delete-visit-api', DeleteVisitViewSet, basename='delete-visit-api')
 
 urlpatterns = [
     path('', include(router.urls)),

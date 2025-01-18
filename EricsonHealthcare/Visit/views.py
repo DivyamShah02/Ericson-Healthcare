@@ -1135,3 +1135,121 @@ class RemoveReInvestigateVisitViewSet(viewsets.ViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+
+class DeleteVisitViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            visit_id = request.data.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.filter(visit_id=visit_id).first()
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data = VisitSerializer(visit_data_obj).data
+            delete_visit_type_data = self.delete_visit_type_data(visit_data=visit_data)
+            visit_data_obj.delete()
+
+            return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "user_unauthorized": False,
+                    "data": visit_data,
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "user_unauthorized": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    def delete_visit_type_data(self, visit_data):
+        try:
+            visit_type = str(visit_data.get("type_of_visit", ""))
+            if visit_type == 'Hospital':
+                visit_type_data_obj = HospitalVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data_obj.delete()
+                    return True
+                return False
+
+            elif visit_type == 'Lab':
+                visit_type_data_obj = LabVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data_obj.delete()
+                    return True
+                return False
+
+            elif visit_type == 'Chemist':
+                visit_type_data_obj = PharmacyVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data_obj.delete()
+                    return True
+                return False
+
+            else:
+                return False
+
+        except Exception as e:
+            # logger.error(e, exc_info=True)
+            print(e)
+            return False
+
