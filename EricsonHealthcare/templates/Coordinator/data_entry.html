@@ -485,10 +485,11 @@
             document.getElementById('documents-tab').click();
         }
 
-        window.onload = function () {
-            getCaseDetails();
-            getCaseData();
-            getDataEntryPersonnelDetails();
+        window.onload = async function () {
+            await getCaseDetails();
+            await getCaseData();
+            await getDataEntryPersonnelDetails();
+            setUpdatedDataentryPersonnel();
             toggle_loader();
         };
         processStep(4);
@@ -542,29 +543,29 @@
             if (success) {
                 if (result.success) {
                     console.log(result.data);
-                    console.log('hesrgeargagre')
-
-                    document.getElementById('case_details_case_id').innerText = result.data.case_id;
-                    document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
-                    document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
-                    document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
-                    
-                    if (current_case_status == "Data_entry_confirmation") {
-                        if (result.data.final_report) {
-                            document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
-                    document.getElementById('final-report-download').setAttribute('href', `{% url 'render-final-report-api-list' %}?case_id=${caseId}`);
-                    document.getElementById('final-report-download').addEventListener('click', (event) => {
-                        event.stopPropagation();
-                    });
+                    if (!result.case_details_not_added) {
+                        document.getElementById('case_details_case_id').innerText = result.data.case_id;
+                        document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
+                        document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
+                        document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+                        
+                        if (current_case_status == "Data_entry_confirmation") {
+                            if (result.data.final_report) {
+                                document.getElementById('final-report-card').setAttribute('onclick', `openFinalReportModal('{% url 'render-final-report-api-list' %}?case_id=${caseId}','Final Report.pdf')`);
+                                document.getElementById('final-report-download').setAttribute('href', `{% url 'render-final-report-api-list' %}?case_id=${caseId}`);
+                                document.getElementById('final-report-download').addEventListener('click', (event) => {
+                            event.stopPropagation();
+                        });
+                            }
+                            else {
+                            document.getElementById('final-report').style.display = 'none';
+                            document.getElementById('final-report-not-generated').style.display = '';
+                        }
                         }
                         else {
-                        document.getElementById('final-report').style.display = 'none';
-                        document.getElementById('final-report-not-generated').style.display = '';
-                    }
-                    }
-                    else {
-                        document.getElementById('final-report').style.display = 'none';
-                        document.getElementById('final-report-not-generated').style.display = '';
+                            document.getElementById('final-report').style.display = 'none';
+                            document.getElementById('final-report-not-generated').style.display = '';
+                        }
                     }
                 }
                 else {
@@ -603,6 +604,12 @@
             }
         }
 
+        function setUpdatedDataentryPersonnel() {
+            const selectElement = document.getElementById('data_entry_personnel_select');
+            selectElement.value = data_entry_personnel_id;
+        }
+
+
         async function setDataEntryPersonnel() {
             toggle_loader();
             
@@ -613,21 +620,27 @@
                 document.getElementById('data_entry_personnel_select').focus();
             }
             else {
-                const bodyData = {
-                    'case_id': caseId,
-                    'data_entry_personnel_id': data_entry_personnel_id_value,
-                };
+                showModal(
+                    'Confirm Action',
+                    '<p>Are you sure you want to select data entry personnel?</p>',
+                    async () => {
+                        const bodyData = {
+                            'case_id': caseId,
+                            'data_entry_personnel_id': data_entry_personnel_id_value,
+                        };
 
-                const url = "{% url 'set-data-entry-personnel-api-list' %}";
-                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-                console.log(result)
-                if (success) {
-                    if (result.success) {                    
-                        window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
+                        const url = "{% url 'set-data-entry-personnel-api-list' %}";
+                        const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                        console.log(result)
+                        if (success) {
+                            if (result.success) {                    
+                                window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}`;
+                            }
+                        } else {
+                            alert('Unable to assign medical officer');
+                        }
                     }
-                } else {
-                    alert('Unable to assign medical officer');
-                }
+                );
             }
             toggle_loader();
         }

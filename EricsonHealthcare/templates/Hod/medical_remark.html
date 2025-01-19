@@ -464,11 +464,12 @@
             document.getElementById('documents-tab').click();
         }
 
-        window.onload = function () {
-            getCaseDetails();
-            getCaseData();
-            getVistDetails();
-            getMedicalOfficerDetails();
+        window.onload = async function () {
+            await getCaseDetails();
+            await getCaseData();
+            await getVistDetails();
+            await getMedicalOfficerDetails();
+            setUpdatedMedicalOfficer();
             toggle_loader();
         };
         processStep(3);
@@ -516,22 +517,23 @@
 
             const url = "{% url 'case-details-api-list' %}?" + toQueryString(Params);
             const [success, result] = await callApi("GET", url);
-            console.log(result);
             if (success) {
                 if (result.success) {
                     console.log(result.data);
-
-                    document.getElementById('case_details_case_id').innerText = result.data.case_id;
-                    document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
-                    document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
-                    document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
-
-                    if (result.data.medical_officer_remarks) {
-                        document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
-                    }
-                    else {
-                        document.getElementById('medical-remark').style.display = 'none';
-                        document.getElementById('medical-remark-not-given').style.display = '';
+                    console.log(result);
+                    if (!result.case_details_not_added) {
+                        document.getElementById('case_details_case_id').innerText = result.data.case_id;
+                        document.getElementById('case_details_insaurance_company').innerText = result.data.insurance_company;
+                        document.getElementById('case_details_type_of_case').innerText = addSpaces(result.data.type_of_case);
+                        document.getElementById('case_details_diagnosis').innerText = result.data.diagnosis;
+    
+                        if (result.data.medical_officer_remarks) {
+                            document.getElementById('medical-remark').innerText = result.data.medical_officer_remarks;
+                        }
+                        else {
+                            document.getElementById('medical-remark').style.display = 'none';
+                            document.getElementById('medical-remark-not-given').style.display = '';
+                        }
                     }
                 }
                 else {
@@ -540,6 +542,13 @@
             } else {
                 window.location.href=`{% url 'dashboard-list' %}`;
             }
+        }
+
+        function setUpdatedMedicalOfficer() {
+            const selectElement = document.getElementById('medical_officer_select');
+            selectElement.value = medical_officer_id;
+            console.log('wergahtr treagthgra reag')
+            console.log(medical_officer_id);
         }
 
     </script>
