@@ -3,6 +3,7 @@
     /* --eh-blue-primary: #17C6ED; */
     --eh-blue-primary: #130c3d;
     /* --eh-blue-primary-faded: rgba(23, 198, 237, 0.6); */
+    --eh-red-primary: #f60019;
     --eh-blue-primary-faded: rgba(19, 12, 61, 0.6);
     --eh-light-grey: #EBEDED;
     --eh-dark-grey: #7E8A8C;
@@ -13,6 +14,18 @@
 body {
     background-color: var(--eh-body-bg-color);
     font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+@font-face {
+    font-family: 'JuliusBlack';
+    src: url('/static/fonts/JuliusBlackRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Create a class for this font */
+.font-julius {
+    font-family: 'JuliusBlack', sans-serif !important;
 }
 
 .block-div {
@@ -31,6 +44,14 @@ body {
 
 }
 
+.eh-btn-blue-primary-no-hover:hover {
+    background-color: var(--eh-red-primary);
+    color: white;
+    border: none;
+    transition: transform 0.2s ease-in-out;
+
+}
+
 .eh-btn-blue-primary {
     background-color: var(--eh-blue-primary);
     color: white;
@@ -39,9 +60,9 @@ body {
 }
 
 .eh-btn-blue-primary:hover {
-    box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
+    /* box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded); */
     border: none;
-    background-color: var(--eh-blue-primary);
+    background-color: var(--eh-red-primary);
     color: white;
 }
 

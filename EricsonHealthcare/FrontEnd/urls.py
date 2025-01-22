@@ -11,6 +11,7 @@ router.register(r'dashboard', DashboardViewSet, basename='dashboard')
 router.register(r'case_overview', CaseOverviewViewSet, basename='case_overview')
 router.register(r'reports', ReportViewSet, basename='reports')
 router.register(r'add-question', QuestionAdderViewSet, basename='add-question')
+router.register(r'privacy_policy', PrivacyPolicyViewSet, basename='privacy_policy')
 
 
 urlpatterns = [

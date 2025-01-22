@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mx-auto p-0" style="font-size: 18px;"><b>ERICSON HEALTHCARE</b></div>
+                <div class="mx-auto p-0 font-julius" style="font-size: 18px;"><b>ERICSON HEALTHCARE</b></div>
                 <!-- <i class="fa fa-bell fa-xl me-2"></i> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -155,7 +155,7 @@
 
             if (success) {
                 if (result.success){
-                    UserData = result.data;
+                    let UserData = result.data;
 
                     document.getElementById('account_name').innerText = UserData.name;
                     document.getElementById('account-card-name').innerText = UserData.name;

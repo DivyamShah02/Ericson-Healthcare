@@ -12,6 +12,7 @@ from Case.models import Case, CaseDetails
 
 import random
 import string
+from datetime import datetime
 
 logger = None
 
@@ -209,7 +210,8 @@ class LoginApiViewSet(viewsets.ViewSet):
 
             # Login the user
             login(request, authenticated_user)
-            request.session.set_expiry(30 * 24 * 60 * 60)
+            # request.session.set_expiry(30 * 24 * 60 * 60)
+            request.session.set_expiry(30 * 60)
 
             return Response(
                 {
@@ -258,6 +260,15 @@ class DashboardApiViewSet(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+            try:
+                dt_object_last_login = datetime.fromisoformat(str(user.last_login))
+                # formatted_last_login = f"Date: {dt_object_last_login.strftime('%d/%m/%Y')}, Time: {dt_object_last_login.strftime('%H:%M')}"
+                formatted_last_login = f"{dt_object_last_login.strftime('%d/%m/%Y')} - {dt_object_last_login.strftime('%H:%M')}"
+
+            except Exception as e:
+                # logger.error(e, exc_info=True)
+                print(e)
+                formatted_last_login = str(user.last_login)
 
             data = {
                 'id': user.id,
@@ -268,6 +279,7 @@ class DashboardApiViewSet(viewsets.ViewSet):
                 'city': user.city,
                 'state': user.state,
                 'email': user.email,
+                'last_login': formatted_last_login
             }
 
             if user.is_staff:

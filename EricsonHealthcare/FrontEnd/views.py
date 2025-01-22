@@ -192,3 +192,6 @@ class QuestionAdderViewSet(viewsets.ViewSet):
             print(ex)
             return redirect('dashboard-list')
 
+class PrivacyPolicyViewSet(viewsets.ViewSet):
+    def list(self, request):
+        return render(request, 'privacy_policy.html')

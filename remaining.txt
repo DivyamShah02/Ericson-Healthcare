@@ -5,3 +5,27 @@ add validation in visit addinion form
 XX delete visit option enable
 add medical remark submission pop up
 medical officer not selected from coordinator view after submission
+
+
+
+
+user can change password (mobile OTP)
+add red color some where
+need a marquee line of conetent moving right to left on dashbaord
+make the ericson healthcare in julious black font
+make the hello msg of dashboard Divyam shah
+after 30 minutes log out users
+color schemes for inprogress and pending cases on dashbaord
+add a loder after uploading document
+add type of visit to question 
+manage cities and states on entering city auto select 
+
+
+hospital visit
+td - treating doctor
+
+name of the hospital owner
+TD name
+
+total number of beds
+

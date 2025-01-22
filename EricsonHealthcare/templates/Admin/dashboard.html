@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mx-auto p-0" style="font-size: 18px;"><b>ERICSON HEALTHCARE</b></div>
+                <div class="mx-auto p-0 font-julius" style="font-size: 18px;"><b>ERICSON HEALTHCARE</b></div>
                 <!-- <i class="fa fa-bell fa-xl me-2"></i> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -59,8 +59,13 @@
 
         {% include 'nav.html' %}
         <div class="container mt-5 pt-3">
-            <div class="text-start mt-3 mb-2">
-                <h3 class="eh-text-blue-primary"><b>Hello <span id="account_name"></span></b></h3>
+            <marquee>
+                <b>Hello Divyam Shah</b>
+           </marquee>
+            <div class="text-start">
+                <h6 class="eh-text-blue-primary"><b>Hey, <span style="font-size: 1.5rem;" id="account_name"></span><br>Today's login time : <u id="user_last_login"></u></b></h6>
+            </div>
+            <div class="mb-2">
                 <small class="m-0 eh-small">Dashboard</small>
             </div>
 
@@ -349,9 +354,10 @@
 
                     if (success) {
                         if (result.success) {
-                            UserData = result.data;
-
+                            let UserData = result.data;
+                            console.log(UserData)
                             document.getElementById('account_name').innerText = UserData.name;
+                            document.getElementById('user_last_login').innerText = UserData.last_login;
                             document.getElementById('total_users').innerText = UserData.total_users;
                             document.getElementById('total_cases').innerText = UserData.total_cases;
                             document.getElementById('account-card-name').innerText = UserData.name;
