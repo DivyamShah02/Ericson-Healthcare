@@ -46,11 +46,11 @@ class HospitalVisit(models.Model):
     nursing_staff = models.CharField(max_length=255)
     rmo = models.CharField(max_length=255)
     
-    td_registration_number = models.CharField(max_length=100)
-    degree = models.CharField(max_length=100)
-    doctor_registration_number = models.CharField(max_length=100)
-    doctor_contact_number = models.CharField(max_length=15)
-    doctor_email = models.CharField(max_length=255)
+    treating_doctor_registration_number = models.CharField(max_length=100)
+    treating_doctor_degree = models.CharField(max_length=100)
+    treating_doctor_registration_number = models.CharField(max_length=100)
+    treating_doctor_contact_number = models.CharField(max_length=15)
+    treating_doctor_email = models.CharField(max_length=255)
     
     owner_of_the_hospital = models.CharField(max_length=255)
     questions = models.JSONField(null=True, blank=True)
