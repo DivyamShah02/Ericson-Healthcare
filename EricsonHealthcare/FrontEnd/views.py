@@ -182,7 +182,7 @@ class QuestionAdderViewSet(viewsets.ViewSet):
             user_role = user.role
             print(user_role)
 
-            if user_role == 'admin' or user_role == 'hod' or user_role == 'coordinator':
+            if user_role == 'admin' or user_role == 'hod' or user_role == 'coordinator' or user_role == 'medical_officer':
                 return render(request, 'question_adder.html')
 
             return redirect('dashboard-list')

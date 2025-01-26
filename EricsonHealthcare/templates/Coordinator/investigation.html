@@ -723,6 +723,11 @@
             parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_contact_details', 'hospital_family_physician_contact_details', 'Family Physician Contact Details', 'Enter Family Physician Contact Details', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_email', 'hospital_family_physician_email', 'Family Physician Email', 'Enter Family Physician Email'));
             
+            let h6_variable = document.createElement('label');
+            h6_variable.className = 'form-label eh-label';
+            h6_variable.textContent = 'Work Place Visit / Corporate Visit';
+            parentElement.appendChild(h6_variable);
+
             parentElement.appendChild(createInputDiv('type_visit_hospital_work_place', 'hospital_work_place', 'Workplace', 'Enter Workplace', 'checkbox'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_corporate_visit', 'hospital_corporate_visit', 'Corporate Visit', 'Enter Corporate Visit', 'checkbox'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_tat', 'hospital_tat', 'TAT', 'Enter TAT'));
@@ -951,7 +956,17 @@
                 // Value column
                 const valueCol = document.createElement('div');
                 valueCol.className = 'col-6 text-end text-lg-start text-break eh-value';
-                valueCol.textContent = value;
+                if (key=='Corporate Visit' || key=='Work Place') {
+                    if (value) {
+                        valueCol.textContent = 'Yes';
+                    }
+                    else {
+                        valueCol.textContent = 'No';
+                    }
+                }
+                else {
+                    valueCol.textContent = value;
+                }
 
                 // Append key and value columns
                 detailsRow.appendChild(keyCol);

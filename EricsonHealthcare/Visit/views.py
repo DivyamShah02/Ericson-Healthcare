@@ -238,6 +238,15 @@ class VisitViewSet(viewsets.ViewSet):
             visit_type = str(request_data.get("type_of_visit", ""))
 
             if visit_type == 'Hospital':
+                if 'corporate_visit' in request_data and request_data['corporate_visit'] == 'on':
+                    request_data['corporate_visit'] = True
+                else:
+                    request_data['corporate_visit'] = False
+                
+                if 'work_place' in request_data and request_data['work_place'] == 'on':
+                    request_data['work_place'] = True
+                else:
+                    request_data['work_place'] = False
                 visit_type_data_obj = HospitalVisitSerializer(data=request_data)
                 if visit_type_data_obj.is_valid():
                     visit_type_data_obj.save()
@@ -713,6 +722,15 @@ class UpdateVisitViewSet(viewsets.ViewSet):
             visit_id = str(request_data.get("visit_id", ""))
 
             if visit_type == 'Hospital':
+                if 'corporate_visit' in request_data and request_data['corporate_visit'] == 'on':
+                    request_data['corporate_visit'] = True
+                else:
+                    request_data['corporate_visit'] = False
+                
+                if 'work_place' in request_data and request_data['work_place'] == 'on':
+                    request_data['work_place'] = True
+                else:
+                    request_data['work_place'] = False
                 visit_type_data_obj = HospitalVisit.objects.get(visit_id=visit_id)
                 visit_type_serializer = HospitalVisitSerializer(instance=visit_type_data_obj, data=request_data, partial=True)
 
