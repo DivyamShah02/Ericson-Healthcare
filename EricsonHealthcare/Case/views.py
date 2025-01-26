@@ -2,6 +2,7 @@ import os
 
 from django.conf import settings
 from django.shortcuts import render
+from django.db.models import Q
 
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -1160,6 +1161,69 @@ class AddMedicalRemarkCaseViewSet(viewsets.ViewSet):
                     status=status.HTTP_200_OK
                 )
 
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+class getDiagnosisData(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": True,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            query_name = request.data.get('query_name', '')
+            if query_name != '':
+                case_details = CaseDetails.objects.filter(Q(diagnosis__icontains=query_name))
+            else:
+                case_details = CaseDetails.objects.all()
+
+            suggestions = []
+            for case_info in case_details:
+                suggestions.append(case_info.diagnosis)
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data":{'suggestions': suggestions},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
 
         except Exception as ex:
             # logger.error(ex, exc_info=True)

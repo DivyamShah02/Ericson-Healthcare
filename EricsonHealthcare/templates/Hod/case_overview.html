@@ -372,6 +372,7 @@
                                 <label for="diagnosis" class="form-label eh-label">Diagnosis</label>
                                 <input type="text" class="form-control dark-input" id="diagnosis" name="diagnosis"
                                     placeholder="Enter Diagnosis">
+                                <div id="overview_form_diagnosis_suggestion_div"></div>
                             </div>
                             <div class="mb-3 mt-4">
                                 <button type="submit"
@@ -556,6 +557,7 @@
         window.onload = function () {
             getCaseDetails();
             getCaseData();
+            overview_form_get_suggestions();
             getVistDetails();
             getInvestigatorDetails();
             getQuestions();
@@ -607,6 +609,7 @@
             if (success) {
                 if (result.success) {
                     if (!result.case_details_not_added) {
+                        visit_type = result.data.type_of_case;
                         setFormValues(result.data);
                     }
                 }
@@ -621,6 +624,7 @@
     </script>
 
     <script>
+        let visit_type = '';
         // Handle Visit related functions
         function toggleCard(card) {
             let card_id = card.id;
@@ -685,7 +689,10 @@
             }
             else if(not_text == 'checkbox') {
                 input.type = 'checkbox';
-                input.className = 'form-check-input eh-checkbox me-3';                
+                input.className = 'form-check-input eh-checkbox me-3';
+            }
+            else if (not_text == 'number') {
+                input.type = 'number';
             }
             else {
                 input.type = 'text';
@@ -708,6 +715,9 @@
                 div.appendChild(label);
                 div.appendChild(input);
             }
+            const suggestion_box = document.createElement('div');
+            suggestion_box.id = containerId + '_suggestion_div';
+            div.appendChild(suggestion_box)
 
             return div;
         }
@@ -724,32 +734,35 @@
             parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state', 'State', 'Enter State', null, true));
             parentElement.appendChild(createInputDiv('type_visit_hospital_city', 'hospital_city', 'City', 'Enter City'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission', 'date'));
+            if (visit_type != 'CashlessClaimReport') {
             parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge', 'date'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value'));
+            }
+            parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis', 'Diagnosis', 'Enter Diagnosis'));
+            get_suggestions()
             parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number', 'Registration Number', 'Enter Registration Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds', 'No of Beds', 'Enter No of Beds'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu', 'ICU', 'Enter ICU'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds', 'No of Beds', 'Enter No of Beds', 'number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu', 'ICU', 'Enter ICU', 'number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT', 'number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo', 'RMO', 'Enter RMO'));
             
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_degree', 'hospital_treating_doctor_degree', 'Treating Doctor Degree', 'Enter Treating Doctor Degree'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_registration_number', 'hospital_treating_doctor_registration_number', 'Treating Doctor Registration Number', 'Enter Treating Doctor Registration Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_contact_number', 'hospital_treating_doctor_contact_number', 'Treating Doctor Contact Number', 'Enter Treating Doctor Contact Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_contact_number', 'hospital_treating_doctor_contact_number', 'Treating Doctor Contact Number', 'Enter Treating Doctor Contact Number', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_email', 'hospital_treating_doctor_email', 'Treating Doctor Email Id', 'Treating Doctor Enter Email Id'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_name', 'hospital_hospital_owner_name', 'Hospital Owner Name', 'Enter Hospital Owner Name'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_contact_number', 'hospital_hospital_owner_contact_number', 'Hospital Owner Contact Number', 'Enter Hospital Owner Contact Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_contact_number', 'hospital_hospital_owner_contact_number', 'Hospital Owner Contact Number', 'Enter Hospital Owner Contact Number', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_registration_number', 'hospital_hospital_owner_registration_number', 'Hospital Owner Registration Number', 'Enter Hospital Owner Registration Number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_name', 'hospital_anaesthetic_doctor_name', 'Anaesthetic Doctor Name', 'Enter Anaesthetic Doctor Name'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_registration_number', 'hospital_anaesthetic_doctor_registration_number', 'Anaesthetic Doctor Registration Number', 'Enter Anaesthetic Doctor Registration Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_contact_details', 'hospital_anaesthetic_doctor_contact_details', 'Anaesthetic Doctor Contact Details', 'Enter Anaesthetic Doctor Contact Details'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_contact_details', 'hospital_anaesthetic_doctor_contact_details', 'Anaesthetic Doctor Contact Details', 'Enter Anaesthetic Doctor Contact Details', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_email', 'hospital_anaesthetic_doctor_email', 'Anaesthetic Doctor Email', 'Enter Anaesthetic Doctor Email'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_doctor_name', 'hospital_family_physician_doctor_name', 'Family Physician Doctor Name', 'Enter Family Physician Doctor Name'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_registration_number', 'hospital_family_physician_registration_number', 'Family Physician Registration Number', 'Enter Family Physician Registration Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_contact_details', 'hospital_family_physician_contact_details', 'Family Physician Contact Details', 'Enter Family Physician Contact Details'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_contact_details', 'hospital_family_physician_contact_details', 'Family Physician Contact Details', 'Enter Family Physician Contact Details', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_email', 'hospital_family_physician_email', 'Family Physician Email', 'Enter Family Physician Email'));
-            
+
             parentElement.appendChild(createInputDiv('type_visit_hospital_work_place', 'hospital_work_place', 'Workplace', 'Enter Workplace', 'checkbox'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_corporate_visit', 'hospital_corporate_visit', 'Corporate Visit', 'Enter Corporate Visit', 'checkbox'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_tat', 'hospital_tat', 'TAT', 'Enter TAT'));
@@ -1178,6 +1191,7 @@
             }
         }
 
+
         function handleEditVisitModal(type_of_visit){
             document.getElementById('addVisitBtn').click();
             document.getElementById('type_of_visit').value = type_of_visit;
@@ -1450,6 +1464,159 @@
                 }
             );
 
+        }
+
+    </script>
+
+    <script>
+        function get_suggestions() {
+            const debounce = (func, delay) => {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => func(...args), delay);
+                };
+            };
+
+            let inputField = document.getElementById("hospital_diagnosis");
+            inputField.addEventListener("input", debounce((e) => {
+                const query = e.target.value.trim();
+                fetchSuggestions(query);
+            }, 300));
+
+            inputField.addEventListener("blur", () => {
+                setTimeout(() => {
+                    suggestionBox.style.display = "none";
+                }, 200); // Slight delay to allow click on suggestions
+            });
+            let = suggestionBox = document.getElementById('type_visit_hospital_diagnosis_suggestion_div');
+            // suggestionBox.style.position = "absolute";
+            suggestionBox.style.border = "1px solid #ccc";
+            suggestionBox.style.background = "#fff";
+            suggestionBox.style.zIndex = "1000";
+            suggestionBox.style.display = "none";
+            // document.getElementById('type_visit_hospital_diagnosis').appendChild(suggestionBox);
+        }
+
+        async function fetchSuggestions(query) {
+            try {
+                const bodyData = {
+                    query_name: query,
+                };
+
+                const url = "{% url 'get-diagnosis-data-api-list' %}?";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                if (success) {
+                    if (result.success) {
+                        console.log(result.data.suggestions);
+                        showSuggestions(result.data.suggestions);
+                    }
+                }                
+            } catch (error) {
+                console.error("Error fetching suggestions:", error);
+            }
+        }
+
+        function showSuggestions(names) {
+            let inputField = document.getElementById("hospital_diagnosis");
+            let = suggestionBox = document.getElementById('type_visit_hospital_diagnosis_suggestion_div');
+            suggestionBox.innerHTML = "";
+            if (names.length > 0) {
+                names.forEach(name => {
+                    const option = document.createElement("div");
+                    option.textContent = name;
+                    option.style.padding = "8px";
+                    option.style.cursor = "pointer";
+                    option.addEventListener("click", () => {
+                        inputField.value = name;
+                        suggestionBox.style.display = "none";
+                    });
+                    suggestionBox.appendChild(option);
+                });
+                const rect = inputField.getBoundingClientRect();
+                suggestionBox.style.left = `${rect.left}px`;
+                suggestionBox.style.top = `${rect.bottom}px`;
+                suggestionBox.style.width = `${rect.width}px`;
+                suggestionBox.style.display = "block";
+            } else {
+                suggestionBox.style.display = "none";
+            }
+        }
+
+    </script>
+
+    <script>
+        function overview_form_get_suggestions() {
+            let inputField = document.getElementById("diagnosis");
+            const debounce = (func, delay) => {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => func(...args), delay);
+                };
+            };
+
+            inputField.addEventListener("input", debounce((e) => {
+                const query = e.target.value.trim();
+                overview_form_fetchSuggestions(query);
+            }, 300));
+
+            inputField.addEventListener("blur", () => {
+                setTimeout(() => {
+                    suggestionBox.style.display = "none";
+                }, 200); // Slight delay to allow click on suggestions
+            });
+            let = suggestionBox = document.getElementById('overview_form_diagnosis_suggestion_div');
+            // suggestionBox.style.position = "absolute";
+            suggestionBox.style.border = "1px solid #ccc";
+            suggestionBox.style.background = "#fff";
+            suggestionBox.style.zIndex = "1000";
+            suggestionBox.style.display = "none";
+        }
+
+        async function overview_form_fetchSuggestions(query) {
+            try {
+                const bodyData = {
+                    query_name: query,
+                };
+
+                const url = "{% url 'get-diagnosis-data-api-list' %}?";
+                const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                if (success) {
+                    if (result.success) {
+                        console.log(result.data.suggestions);
+                        overview_form_showSuggestions(result.data.suggestions);
+                    }
+                }                
+            } catch (error) {
+                console.error("Error fetching suggestions:", error);
+            }
+        }
+
+        function overview_form_showSuggestions(names) {
+            let inputField = document.getElementById("diagnosis");
+            let = suggestionBox = document.getElementById('overview_form_diagnosis_suggestion_div');
+            suggestionBox.innerHTML = "";
+            if (names.length > 0) {
+                names.forEach(name => {
+                    const option = document.createElement("div");
+                    option.textContent = name;
+                    option.style.padding = "8px";
+                    option.style.cursor = "pointer";
+                    option.addEventListener("click", () => {
+                        inputField.value = name;
+                        suggestionBox.style.display = "none";
+                    });
+                    suggestionBox.appendChild(option);
+                });
+                const rect = inputField.getBoundingClientRect();
+                suggestionBox.style.left = `${rect.left}px`;
+                suggestionBox.style.top = `${rect.bottom}px`;
+                suggestionBox.style.width = `${rect.width}px`;
+                suggestionBox.style.display = "block";
+            } else {
+                suggestionBox.style.display = "none";
+            }
         }
 
     </script>
