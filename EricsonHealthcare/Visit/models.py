@@ -46,13 +46,27 @@ class HospitalVisit(models.Model):
     nursing_staff = models.CharField(max_length=255)
     rmo = models.CharField(max_length=255)
     
-    treating_doctor_registration_number = models.CharField(max_length=100)
     treating_doctor_degree = models.CharField(max_length=100)
     treating_doctor_registration_number = models.CharField(max_length=100)
     treating_doctor_contact_number = models.CharField(max_length=15)
     treating_doctor_email = models.CharField(max_length=255)
-    
-    owner_of_the_hospital = models.CharField(max_length=255)
+
+    hospital_owner_name = models.CharField(max_length=255)
+    hospital_owner_contact_number = models.CharField(max_length=15)
+    hospital_owner_registration_number = models.CharField(max_length=100)
+
+    anaesthetic_doctor_name = models.CharField(max_length=255, null=True, blank=True)
+    anaesthetic_doctor_registration_number = models.CharField(max_length=255, null=True, blank=True)
+    anaesthetic_doctor_contact_details = models.CharField(max_length=255, null=True, blank=True)
+    anaesthetic_doctor_email = models.CharField(max_length=255, null=True, blank=True)
+    family_physician_doctor_name = models.CharField(max_length=255, null=True, blank=True)
+    family_physician_registration_number = models.CharField(max_length=255, null=True, blank=True)
+    family_physician_contact_details = models.CharField(max_length=255, null=True, blank=True)
+    family_physician_email = models.CharField(max_length=255, null=True, blank=True)
+
+    work_place = models.BooleanField(default=False)
+    corporate_visit = models.BooleanField(default=False)
+
     questions = models.JSONField(null=True, blank=True)
     answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)

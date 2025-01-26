@@ -175,6 +175,11 @@ body {
     box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
 }
 
+.eh-checkbox {
+    background-color: var(--eh-light-grey);
+    box-shadow: 0 0 0px 3px var(--eh-blue-primary-faded);
+}
+
 .eh-checkbox:checked {
     background-color: var(--eh-blue-primary);
     border-color: var(--eh-blue-primary);

@@ -674,13 +674,23 @@
             label.textContent = labelText;
 
             const input = document.createElement('input');
+            input.className = 'form-control dark-input';
+
             if (not_text == 'date') {
                 input.type = 'date';
-            } else {
+            } 
+            else if(not_text == 'radio') {
+                input.type = 'radio';
+                input.className = 'form-check-input';                
+            }
+            else if(not_text == 'checkbox') {
+                input.type = 'checkbox';
+                input.className = 'form-check-input eh-checkbox me-3';                
+            }
+            else {
                 input.type = 'text';
             }
             // input.type = 'text';
-            input.className = 'form-control dark-input';
             input.id = inputId;
             input.name = inputId;
             input.placeholder = placeholderText;
@@ -688,8 +698,16 @@
                 input.id = 'visit_state';
             }
 
-            div.appendChild(label);
-            div.appendChild(input);
+            if(not_text == 'checkbox') {
+                div.appendChild(input);
+                div.appendChild(label);
+
+            }
+
+            else {
+                div.appendChild(label);
+                div.appendChild(input);
+            }
 
             return div;
         }
@@ -715,12 +733,25 @@
             parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo', 'RMO', 'Enter RMO'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_registration_number', 'hospital_treating_doctor_registration_number', 'Treating Doctor registration number', 'Enter Treating Doctor registration number'));
+            
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_degree', 'hospital_treating_doctor_degree', 'Treating Doctor Degree', 'Enter Treating Doctor Degree'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_registration_number', 'hospital_treating_doctor_registration_number', 'Treating Doctor Registration Number', 'Enter Treating Doctor Registration Number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_contact_number', 'hospital_treating_doctor_contact_number', 'Treating Doctor Contact Number', 'Enter Treating Doctor Contact Number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_email', 'hospital_treating_doctor_email', 'Treating Doctor Email Id', 'Treating Doctor Enter Email Id'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_owner_of_the_hospital', 'hospital_owner_of_the_hospital', 'Owner of the hospital', 'Enter Owner of the hospital'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_name', 'hospital_hospital_owner_name', 'Hospital Owner Name', 'Enter Hospital Owner Name'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_contact_number', 'hospital_hospital_owner_contact_number', 'Hospital Owner Contact Number', 'Enter Hospital Owner Contact Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_registration_number', 'hospital_hospital_owner_registration_number', 'Hospital Owner Registration Number', 'Enter Hospital Owner Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_name', 'hospital_anaesthetic_doctor_name', 'Anaesthetic Doctor Name', 'Enter Anaesthetic Doctor Name'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_registration_number', 'hospital_anaesthetic_doctor_registration_number', 'Anaesthetic Doctor Registration Number', 'Enter Anaesthetic Doctor Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_contact_details', 'hospital_anaesthetic_doctor_contact_details', 'Anaesthetic Doctor Contact Details', 'Enter Anaesthetic Doctor Contact Details'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_email', 'hospital_anaesthetic_doctor_email', 'Anaesthetic Doctor Email', 'Enter Anaesthetic Doctor Email'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_doctor_name', 'hospital_family_physician_doctor_name', 'Family Physician Doctor Name', 'Enter Family Physician Doctor Name'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_registration_number', 'hospital_family_physician_registration_number', 'Family Physician Registration Number', 'Enter Family Physician Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_contact_details', 'hospital_family_physician_contact_details', 'Family Physician Contact Details', 'Enter Family Physician Contact Details'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_family_physician_email', 'hospital_family_physician_email', 'Family Physician Email', 'Enter Family Physician Email'));
+            
+            parentElement.appendChild(createInputDiv('type_visit_hospital_work_place', 'hospital_work_place', 'Workplace', 'Enter Workplace', 'checkbox'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_corporate_visit', 'hospital_corporate_visit', 'Corporate Visit', 'Enter Corporate Visit', 'checkbox'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_tat', 'hospital_tat', 'TAT', 'Enter TAT'));
             handle_visit_state();
         }
@@ -777,7 +808,7 @@
 
                 const input = document.createElement('input');
                 input.type = 'checkbox';
-                input.className = 'form-check-input eh-checkbox';
+                input.className = 'form-check-input eh-checkbox me-3';
                 input.id = `visit_question${questionNumber}`;
                 input.name = `question${questionNumber}`;
                 input.value = question.id;
