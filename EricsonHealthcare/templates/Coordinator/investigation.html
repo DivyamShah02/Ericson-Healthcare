@@ -1463,9 +1463,13 @@
 
     <script>
         async function updateCaseStatus(status) {
+            let pop_up_text = 'Hey {{user.name}}, this is not quality work to opt for edit option, Inspite of multiple reminders. This is being recorded in your performance.';
+            if (status != 'Creation_confirmation'){
+                pop_up_text = 'Are you sure you want to continue?';
+            }
             showModal(
                 'Confirm Action',
-                '<p>Are you sure you want to continue?</p>',
+                `<p>${pop_up_text}</p>`,
                 async () => {
                     const Params = {
                         case_id: caseId,

@@ -1452,9 +1452,13 @@
 
     <script>
         async function updateCaseStatus(status) {
+            let pop_up_text = 'Hey {{user.name}}, you’ve added visit details and questions. Make sure you haven’t forgotten anything else.';
+            if (status != 'Investigation'){
+                pop_up_text = 'Are you sure you want to continue?';
+            }
             showModal(
                 'Confirm Action',
-                '<p>Are you sure you want to continue?</p>',
+                `<p>${pop_up_text}</p>`,
                 async () => {
                     const Params = {
                         case_id: caseId,

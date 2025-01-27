@@ -1,0 +1,10 @@
+curl --location 'https://buzzify.in/V2/http-api-post.php' \
+--header 'Content-Type: application/json' \
+--data '{
+    "apikey": "6TYr6JM5MUIgWwVw",
+    "senderid": "ERITPA",
+    "number": "9054413199",
+    "message": "Dear Divyam, \nFind Assigned case detail link https://bz1.in/ERITPA/{short} Hope, you will close within TAT of 10. All the best.\nTeam TPA EHPL",
+    "shortlink": 1,
+    "originalurl": "http://ehunt.ericsonhealthcare.com/?name=divyam"
+}'
