@@ -13,6 +13,7 @@ from Case.models import Case, CaseDetails
 import random
 import string
 from datetime import datetime
+from datetime import timedelta
 
 logger = None
 
@@ -261,7 +262,7 @@ class DashboardApiViewSet(viewsets.ViewSet):
                         status=status.HTTP_400_BAD_REQUEST
                     )
             try:
-                dt_object_last_login = datetime.fromisoformat(str(user.last_login))
+                dt_object_last_login = datetime.fromisoformat(str(user.last_login)) + timedelta(hours=5, minutes=30)
                 # formatted_last_login = f"Date: {dt_object_last_login.strftime('%d/%m/%Y')}, Time: {dt_object_last_login.strftime('%H:%M')}"
                 formatted_last_login = f"{dt_object_last_login.strftime('%d/%m/%Y')} - {dt_object_last_login.strftime('%H:%M')}"
 

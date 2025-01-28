@@ -3,7 +3,7 @@ from .models import *
 
 @admin.register(InsuranceCompany)
 class InsuranceCompanyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'company_name', 'RC', 'RR', 'GC', 'PA_Death', 'HDC')
+    list_display = ('id', 'company_name', 'Retail', 'Group', 'PA_Death', 'SMC_CI_Death_Live', 'TTD', 'PPD', 'PA_HDC', 'SMC_HDC', 'LOJ', 'WC', 'PTD', 'Broken_Bones', 'HDC')
     search_fields = ('company_name',)
     list_filter = ('company_name',)
 

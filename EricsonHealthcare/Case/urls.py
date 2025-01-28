@@ -18,6 +18,8 @@ router.register(r'set-medical-remark-api', AddMedicalRemarkCaseViewSet, basename
 
 router.register(r'get-diagnosis-data-api', getDiagnosisData, basename='get-diagnosis-data-api')
 
+router.register(r'get-insaurance-company-data-api', getInsauranceCompanyData, basename='get-insaurance-company-data-api')
+
 urlpatterns = [
     path('', include(router.urls)),
 ]

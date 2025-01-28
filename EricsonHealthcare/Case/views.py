@@ -8,8 +8,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Case, CaseDetails
-from .serializers import CaseSerializers, CaseDetailsSerializer
+from .models import Case, CaseDetails, InsuranceCompany
+from .serializers import CaseSerializers, CaseDetailsSerializer, InsuranceCompanySerializer
 from Visit.models import Visit
 from UserRole.models import UserDetail
 
@@ -310,6 +310,9 @@ class CaseDetailsViewSet(viewsets.ViewSet):
             case_obj.state = request.data.get('state')
             case_obj.claim_value = request.data.get('claim_value')
             case_obj.diagnosis = request.data.get('diagnosis')
+            case_obj.insured_name = request.data.get('insured_name')
+            case_obj.insured_number = request.data.get('insured_number')
+            case_obj.insured_address = request.data.get('insured_address')
             case_obj.save()
             
             case_data.case_status = 'Creation_confirmation'
@@ -1227,6 +1230,63 @@ class getDiagnosisData(viewsets.ViewSet):
 
         except Exception as ex:
             # logger.error(ex, exc_info=True)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+class getInsauranceCompanyData(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": True,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            insaurance_details = InsuranceCompany.objects.all()
+            insaurance_data = InsuranceCompanySerializer(insaurance_details, many=True).data
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data":{'insaurance_data': insaurance_data},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
             return Response(
                         {
                             "success": False,
