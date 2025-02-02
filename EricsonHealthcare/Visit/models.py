@@ -46,10 +46,10 @@ class HospitalVisit(models.Model):
     nursing_staff = models.CharField(max_length=255)
     rmo = models.CharField(max_length=255)
     
-    treating_doctor_degree = models.CharField(max_length=100)
-    treating_doctor_registration_number = models.CharField(max_length=100)
-    treating_doctor_contact_number = models.CharField(max_length=15)
-    treating_doctor_email = models.CharField(max_length=255)
+    treating_doctor_degree = models.CharField(max_length=100, null=True, blank=True)
+    treating_doctor_registration_number = models.CharField(max_length=100, null=True, blank=True)
+    treating_doctor_contact_number = models.CharField(max_length=15, null=True, blank=True)
+    treating_doctor_email = models.CharField(max_length=255, null=True, blank=True)
 
     hospital_owner_name = models.CharField(max_length=255)
     hospital_owner_contact_number = models.CharField(max_length=15)
@@ -99,3 +99,7 @@ class PharmacyVisit(models.Model):
     answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)
     photo_path = models.JSONField(null=True, blank=True)
+
+class City(models.Model):
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)

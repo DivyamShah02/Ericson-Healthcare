@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from .models import Case, CaseDetails, InsuranceCompany
 from .serializers import CaseSerializers, CaseDetailsSerializer, InsuranceCompanySerializer
-from Visit.models import Visit
+from Visit.models import Visit, City
 from UserRole.models import UserDetail
 
 logger = None
@@ -1279,6 +1279,70 @@ class getInsauranceCompanyData(viewsets.ViewSet):
                         "user_not_logged_in": False,
                         "user_unauthorized": False,
                         "data":{'insaurance_data': insaurance_data},
+                        "error": None
+                    },
+                    status=status.HTTP_200_OK
+                )
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": False,                            
+                            "data":None,
+                            "error": str(ex)
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+class cityData(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": True,                            
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            query_name = request.data.get('query_name', '')
+            if query_name != '':
+                city_details = City.objects.filter(Q(city__icontains=query_name))
+            else:
+                city_details = City.objects.all()
+
+            city_data = []
+            for city_info in city_details:
+                city_data.append({'city': city_info.city, 'state':city_info.state})
+
+            return Response(
+                    {
+                        "success": True,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data":{'city_data': city_data},
                         "error": None
                     },
                     status=status.HTTP_200_OK

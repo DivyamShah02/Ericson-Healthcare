@@ -20,6 +20,8 @@ router.register(r'get-diagnosis-data-api', getDiagnosisData, basename='get-diagn
 
 router.register(r'get-insaurance-company-data-api', getInsauranceCompanyData, basename='get-insaurance-company-data-api')
 
+router.register(r'get-city-data-api', cityData, basename='get-city-data-api')
+
 urlpatterns = [
     path('', include(router.urls)),
 ]

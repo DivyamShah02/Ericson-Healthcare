@@ -314,12 +314,12 @@
                         <form action="" id="case_details_form">
                             <div class="mb-3">
                                 <label for="claim_number" class="form-label eh-label">Claim Number</label>
-                                <input type="text" class="form-control dark-input" id="claim_number" name="claim_number"
+                                <input type="text" class="form-control dark-input" id="claim_number" name="claim_number" required
                                     placeholder="Enter Claim Number" autofocus>
                             </div>
                             <div class="mb-3">
                                 <label for="insurance_company" class="form-label eh-label">Insurance Company</label>
-                                <select class="form-select dark-input" aria-label="select" id="insurance_company" name="insurance_company">
+                                <select class="form-select dark-input" aria-label="select" id="insurance_company" name="insurance_company" required>
                                     <option value="">Select Insaurance Company</option>
                                 </select>
                                 <!-- <input type="text" class="form-control dark-input" id="insurance_company" name="insurance_company"
@@ -329,7 +329,7 @@
                                 <label for="type_of_case" class="form-label eh-label">Type Of Case</label>
                                 <!-- <input type="text" class="form-control dark-input" id="type_of_case" name="type_of_case"
                                     placeholder="Enter Type Of Case"> -->
-                                <select class="form-select dark-input" aria-label="select" id="type_of_case" name="type_of_case">
+                                <select class="form-select dark-input" aria-label="select" id="type_of_case" name="type_of_case" required>
                                     <option value="">Select type of case</option>
                                     <option value="Retail">Retail</option>
                                     <option value="Group">Group</option>
@@ -405,7 +405,7 @@
                                 <label for="insured_address" class="form-label eh-label">Insured Address</label>
                                 <input type="text" class="form-control dark-input" id="insured_address" name="insured_address"
                                     placeholder="Enter Insured Address">
-                            </div>                            
+                            </div>
                             <div class="mb-3 mt-4">
                                 <button type="submit"
                                     class="btn btn-primary eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
@@ -453,7 +453,7 @@
                                                 <label for="investigator_select"
                                                     class="form-label eh-label">Investigator Officer</label>
                                                 <select class="form-select dark-input" aria-label="select"
-                                                    id="investigator_select" name="investigator_id">
+                                                    id="investigator_select" name="investigator_id" required>
                                                     <option value="">Select Investigator Officer</option>
                                                     
                                                 </select>
@@ -767,29 +767,30 @@
             deleteElementsWithIdPrefix('type_visit_');
             const parentElement = document.getElementById('add_visit_form_inputs');
             parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_name', 'hospital_hospital_name', 'Hospital Name', 'Enter Hospital Name', null, null, true));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state', 'State', 'Enter State', null, true, true));
             parentElement.appendChild(createInputDiv('type_visit_hospital_city', 'hospital_city', 'City', 'Enter City', null, null, true));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission', 'date', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_state', 'hospital_state', 'State', 'Enter State', null, true, true));
+            city_state_get_suggestions('hospital');
+            parentElement.appendChild(createInputDiv('type_visit_hospital_doa', 'hospital_doa', 'Date of Admission', 'Enter Date of Admission', 'date', null, true));
             if (visit_type != 'CashlessClaimReport') {
-            parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge', 'date', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_dod', 'hospital_dod', 'Date of Discharge', 'Enter Date of Discharge', 'date', null, true));
             }
-            parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value', 'number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis', 'Diagnosis', 'Enter Diagnosis'));
-            get_suggestions()
-            parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number', 'Registration Number', 'Enter Registration Number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds', 'No of Beds', 'Enter No of Beds', 'number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu', 'ICU', 'Enter ICU', 'number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT', 'number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff', 'number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo', 'RMO', 'Enter RMO'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_claim_value', 'hospital_claim_value', 'Claim Value', 'Enter Claim Value', 'number', null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_diagnosis', 'hospital_diagnosis', 'Diagnosis', 'Enter Diagnosis', null, null, true));
+            get_suggestions();
+            parentElement.appendChild(createInputDiv('type_visit_hospital_registration_number', 'hospital_registration_number', 'Registration Number', 'Enter Registration Number', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_no_of_beds', 'hospital_no_of_beds', 'No of Beds', 'Enter No of Beds', 'number', null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_icu', 'hospital_icu', 'ICU', 'Enter ICU', 'number', null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_ot', 'hospital_ot', 'OT', 'Enter OT', 'number', null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_nursing_staff', 'hospital_nursing_staff', 'Nursing staff', 'Enter Nursing staff', 'number', null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_rmo', 'hospital_rmo', 'RMO', 'Enter RMO', null, null, true));
             
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_degree', 'hospital_treating_doctor_degree', 'Treating Doctor Degree', 'Enter Treating Doctor Degree'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_registration_number', 'hospital_treating_doctor_registration_number', 'Treating Doctor Registration Number', 'Enter Treating Doctor Registration Number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_contact_number', 'hospital_treating_doctor_contact_number', 'Treating Doctor Contact Number', 'Enter Treating Doctor Contact Number', 'number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_treating_doctor_email', 'hospital_treating_doctor_email', 'Treating Doctor Email Id', 'Treating Doctor Enter Email Id'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_name', 'hospital_hospital_owner_name', 'Hospital Owner Name', 'Enter Hospital Owner Name'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_contact_number', 'hospital_hospital_owner_contact_number', 'Hospital Owner Contact Number', 'Enter Hospital Owner Contact Number', 'number'));
-            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_registration_number', 'hospital_hospital_owner_registration_number', 'Hospital Owner Registration Number', 'Enter Hospital Owner Registration Number'));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_name', 'hospital_hospital_owner_name', 'Hospital Owner Name', 'Enter Hospital Owner Name', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_contact_number', 'hospital_hospital_owner_contact_number', 'Hospital Owner Contact Number', 'Enter Hospital Owner Contact Number', 'number', true, true));
+            parentElement.appendChild(createInputDiv('type_visit_hospital_hospital_owner_registration_number', 'hospital_hospital_owner_registration_number', 'Hospital Owner Registration Number', 'Enter Hospital Owner Registration Number', null, null, true));
             parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_name', 'hospital_anaesthetic_doctor_name', 'Anaesthetic Doctor Name', 'Enter Anaesthetic Doctor Name'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_registration_number', 'hospital_anaesthetic_doctor_registration_number', 'Anaesthetic Doctor Registration Number', 'Enter Anaesthetic Doctor Registration Number'));
             parentElement.appendChild(createInputDiv('type_visit_hospital_anaesthetic_doctor_contact_details', 'hospital_anaesthetic_doctor_contact_details', 'Anaesthetic Doctor Contact Details', 'Enter Anaesthetic Doctor Contact Details', 'number'));
@@ -817,6 +818,7 @@
             parentElement.appendChild(createInputDiv('type_visit_lab_name', 'lab_name', 'Name', 'Enter Name', null, null, true));
             parentElement.appendChild(createInputDiv('type_visit_lab_city', 'lab_city', 'City', 'Enter City', null, null, true));
             parentElement.appendChild(createInputDiv('type_visit_lab_state', 'lab_state', 'State', 'Enter State', null, true, true));
+            city_state_get_suggestions('lab');
             parentElement.appendChild(createInputDiv('type_visit_lab_address', 'lab_address', 'Address', 'Enter Address', null, null, true));
             parentElement.appendChild(createInputDiv('type_visit_lab_pathologist_name', 'lab_pathologist_name', 'Pathologist Name', 'Enter Pathologist Name'));
             parentElement.appendChild(createInputDiv('type_visit_lab_registration_number', 'lab_registration_number', 'Registration Number', 'Enter Registration Number'));
@@ -829,8 +831,9 @@
             const parentElement = document.getElementById('add_visit_form_inputs');
             parentElement.appendChild(createInputDiv('type_visit_chemist_name_of_chemist', 'chemist_name_of_chemist', 'Name of Chemist', 'Enter Name of Chemist', null, null, true));
             parentElement.appendChild(createInputDiv('type_visit_chemist_address', 'chemist_address', 'Address', 'Enter Address', null, null, true));
-            parentElement.appendChild(createInputDiv('type_visit_chemist_state', 'chemist_state', 'State', 'Enter State', null, true, true));
             parentElement.appendChild(createInputDiv('type_visit_chemist_city', 'chemist_city', 'City', 'Enter City', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_chemist_state', 'chemist_state', 'State', 'Enter State', null, true, true));
+            city_state_get_suggestions('chemist');
             parentElement.appendChild(createInputDiv('type_visit_chemist_gst_number', 'chemist_gst_number', 'GST Number', 'Enter GST Number'));
             parentElement.appendChild(createInputDiv('type_visit_chemist_drug_license_number', 'chemist_drug_license_number', 'Drug Licence Number', 'Enter Drug Licence Number'));
             parentElement.appendChild(createInputDiv('type_visit_chemist_tat', 'chemist_tat', 'TAT', 'Enter TAT', null, null, true));
@@ -1712,6 +1715,85 @@
         }
 
     </script>
+
+<script>
+    function city_state_get_suggestions(type_of_visit) {
+        let inputField = document.getElementById(`${type_of_visit}_city`);
+        const debounce = (func, delay) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => func(...args), delay);
+            };
+        };
+
+        inputField.addEventListener("input", debounce((e) => {
+            const query = e.target.value.trim();
+            city_state_fetchSuggestions(query, type_of_visit);
+        }, 300));
+
+        inputField.addEventListener("blur", () => {
+            setTimeout(() => {
+                suggestionBox.style.display = "none";
+            }, 200); // Slight delay to allow click on suggestions
+        });
+        let = suggestionBox = document.getElementById(`type_visit_${type_of_visit}_city_suggestion_div`);
+        // suggestionBox.style.position = "absolute";
+        suggestionBox.style.border = "1px solid #ccc";
+        suggestionBox.style.background = "#fff";
+        suggestionBox.style.zIndex = "1000";
+        suggestionBox.style.display = "none";
+    }
+
+    async function city_state_fetchSuggestions(query, type_of_visit) {
+        try {
+            const bodyData = {
+                query_name: query,
+            };
+
+            const url = "{% url 'get-city-data-api-list' %}?";
+            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+            if (success) {
+                if (result.success) {
+                    console.log(result.data.suggestions);
+                    city_state_showSuggestions(result.data.city_data, type_of_visit);
+                }
+            }                
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    }
+
+    function city_state_showSuggestions(names, type_of_visit) {
+        let inputField = document.getElementById(`${type_of_visit}_city`);
+        let stateInputField = document.getElementById(`visit_state`);
+        let = suggestionBox = document.getElementById(`type_visit_${type_of_visit}_city_suggestion_div`);
+        suggestionBox.innerHTML = "";
+        if (names.length > 0) {
+            names.forEach(name => {
+                const option = document.createElement("div");
+                option.textContent = name.city;
+                option.style.padding = "8px";
+                option.style.cursor = "pointer";
+                option.addEventListener("click", () => {
+                    inputField.value = name.city;
+                    suggestionBox.style.display = "none";
+                    stateInputField.value = name.state;
+                });
+                suggestionBox.appendChild(option);
+            });
+            const rect = inputField.getBoundingClientRect();
+            suggestionBox.style.left = `${rect.left}px`;
+            suggestionBox.style.top = `${rect.bottom}px`;
+            suggestionBox.style.width = `${rect.width}px`;
+            suggestionBox.style.display = "block";
+        } else {
+            suggestionBox.style.display = "none";
+        }
+    }
+
+</script>
+
 
 </body>
 
