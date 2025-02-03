@@ -85,6 +85,15 @@
                             <div class="mb-3">
                                 <input type="text" class="form-control dark-input" id="newQuestionInput" name="newQuestionInput" placeholder="Enter Question">
                             </div>
+                            <div class="mb-3">
+                                <label for="type_of_visit" class="form-label eh-label">Select Type Of Visit</label>
+                                <select class="form-select dark-input" aria-label="select" id="type_of_visit" name="type_of_visit" required>
+                                    <option value="">Select Type Of Visit</option>
+                                    <option value="hospital">Hospital</option>
+                                    <option value="lab">Lab</option>
+                                    <option value="chemist">Chemist</option>
+                                </select>                                
+                            </div>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -213,14 +222,20 @@
 
         async function uploadNewQuestion() {
             let new_question = document.getElementById('newQuestionInput').value;
+            let type_of_visit = document.getElementById('type_of_visit').value;
             
             if (new_question === "") {
                 alert("Please enter a question");
                 return;
             }
+            else if (type_of_visit === "") {
+                alert("Please select type of visit");
+                return;
+            }
 
             const bodyData = {
-                question: new_question
+                question: new_question,
+                type_of_visit: type_of_visit
             };
 
             const url = "{% url 'question-api-list' %}";

@@ -43,6 +43,7 @@ class QuestionViewSet(viewsets.ViewSet):
                     )
             
             question_text = request.data.get('question')
+            type_of_visit = request.data.get('type_of_visit')
             if not question_text:
                 return Response(
                     {
@@ -55,7 +56,7 @@ class QuestionViewSet(viewsets.ViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            question_obj = Question.objects.create(question=question_text)
+            question_obj = Question.objects.create(question=question_text, visit_type=type_of_visit)
             question_obj.save()
 
             return Response(
@@ -98,8 +99,12 @@ class QuestionViewSet(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
-            
-            all_question_obj = Question.objects.all()
+            type_of_visit = request.GET.get('type_of_visit')
+            if type_of_visit:
+                print(type_of_visit)
+                all_question_obj = Question.objects.filter(visit_type=type_of_visit)
+            else:
+                all_question_obj = Question.objects.all()
             all_question = QuestionSerializers(all_question_obj, many=True).data
 
             return Response(
@@ -112,7 +117,7 @@ class QuestionViewSet(viewsets.ViewSet):
                         },
                         status=status.HTTP_200_OK
                     )
-        
+
         except Exception as ex:
             # logger.error(ex, exc_info=True)
             print(ex)
