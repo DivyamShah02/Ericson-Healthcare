@@ -77,7 +77,7 @@ function addSpaces(input) {
     }
 }
 
-function showModal(title, content, callback) {
+function showModal(title, content, callback, submit_not_needed=false) {
     // Create modal HTML structure
     const modalHtml = `
       <div class="modal fade" id="dynamicConfirmationModal" tabindex="-1" aria-hidden="true">
@@ -112,6 +112,10 @@ function showModal(title, content, callback) {
         bootstrapModal.hide(); // Hide the modal
         modalElement.remove(); // Remove the modal from the DOM
     });
+
+    if (submit_not_needed) {
+        document.getElementById('dynamicConfirmModalButton').style.display = 'none';
+    }
 
     // Clean up modal after hiding
     modalElement.addEventListener('hidden.bs.modal', () => {

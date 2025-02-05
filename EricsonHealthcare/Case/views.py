@@ -763,6 +763,7 @@ class AddDocumentViewSet(viewsets.ViewSet):
 class SetCaseStatus(viewsets.ViewSet):
     def list(self, request):
         try:
+            print('fwraegtrhsyjtgrfwretsrtrhtgraethrsyjtyhtgrfwagetsr')
             user = request.user
             if not user.is_authenticated:
                 return Response(
@@ -866,6 +867,7 @@ class SetCaseStatus(viewsets.ViewSet):
     def check_all_visits(self, case_id) -> bool:
         try:
             all_visits = Visit.objects.filter(case_id=case_id, visit_completed=False)
+            print(all_visits)
             if all_visits:
                 return False
             else:
