@@ -271,9 +271,9 @@
     <script src="/static/js/api_caller.js"></script>
 
     <script>
-        window.onload = function () {
-            GetDashboardDetails();
-            toggle_loader();
+        window.onload = async function () {
+            await GetDashboardDetails();
+            await toggle_loader();
         };
     </script>
 

@@ -828,9 +828,15 @@ class SetCaseStatus(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+            
+            if case_status == 'Investigation_confirmation':
+                all_visits_completed = self.check_all_visits(case_id=case_id)
+            else:
+                all_visits_completed = True
 
-            case_data.case_status = case_status
-            case_data.save()
+            if all_visits_completed:
+                case_data.case_status = case_status
+                case_data.save()
 
             return Response(
                     {
@@ -856,6 +862,18 @@ class SetCaseStatus(viewsets.ViewSet):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+
+    def check_all_visits(self, case_id) -> bool:
+        try:
+            all_visits = Visit.objects.filter(case_id=case_id, visit_completed=False)
+            if all_visits:
+                return False
+            else:
+                return True
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            print(e)
+            return False
 
 class AssignMedicalOfficer(viewsets.ViewSet):
     def create(self, request):

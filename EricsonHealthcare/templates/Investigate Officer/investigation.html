@@ -325,7 +325,7 @@
             }
         }
 
-        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, investigation_started, issue_in_investigation, issue) {
+        function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, investigation_started, issue_in_investigation, issue, visit_completed) {
             // Create the outer card container
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card';
@@ -480,9 +480,12 @@
                 // Append children to the card
                 questionItem.appendChild(questionLabel);
                 questionItem.appendChild(hr);
-                // questionItem.appendChild(answerLabel);
-                questionItem.appendChild(answerInput);
-
+                if (visit_completed) {
+                    questionItem.appendChild(answerLabel);
+                }
+                else {
+                    questionItem.appendChild(answerInput);
+                }
                 questionList.appendChild(questionItem);
             });
 
@@ -510,7 +513,7 @@
     
                 const raise_issue_btn = document.createElement('button');
                 raise_issue_btn.className = 'btn btn-danger w-100';
-                
+
                 if (issue_in_investigation) {
                     raise_issue_btn.setAttribute('onclick', `openIssueModal('${type_of_visit}', '${visit_id}', '${issue}')`);
                 }
@@ -518,9 +521,9 @@
                     raise_issue_btn.setAttribute('onclick', `openIssueModal('${type_of_visit}', '${visit_id}', null)`);    
                 }
                 raise_issue_btn.innerHTML = '<b>Raise an issue</b>';
-    
+
                 raise_issue_div.appendChild(raise_issue_btn);
-    
+
                 detailsDiv.appendChild(start_investigator_div);
                 detailsDiv.appendChild(raise_issue_div);
 
@@ -532,11 +535,19 @@
     
                 const submit_btn = document.createElement('button');
                 submit_btn.id = `submit_${visit_id}`
-                submit_btn.className = 'btn btn-primary eh-btn-blue-primary-no-hover w-100';
+                submit_btn.className = 'btn btn-primary eh-btn-blue-primary-outline w-100 mb-2';
                 submit_btn.innerHTML = '<b>Save Details</b>';
                 submit_btn.setAttribute('onclick', `submitVisitAnswers('${visit_id}')`);
 
                 submit_div.appendChild(submit_btn);
+
+                const complete_visit = document.createElement('button');
+                complete_visit.id = `submit_${visit_id}`
+                complete_visit.className = 'btn btn-primary eh-btn-blue-primary-no-hover w-100';
+                complete_visit.innerHTML = '<b>Complete Visit</b>';
+                complete_visit.setAttribute('onclick', `submitVisitAnswers('${visit_id}', true)`);
+
+                submit_div.appendChild(complete_visit);
 
                 // Create the second button container
                 const raise_issue_div = document.createElement('div');
@@ -554,8 +565,19 @@
     
                 raise_issue_div.appendChild(raise_issue_btn);
     
-                detailsDiv.appendChild(submit_div);
-                detailsDiv.appendChild(raise_issue_div);
+                if (visit_completed){
+                    const edit_visit = document.createElement('button');
+                    edit_visit.id = `submit_${visit_id}`
+                    edit_visit.className = 'btn btn-danger w-100 mt-4';
+                    edit_visit.innerHTML = '<b>Edit Visit</b>';
+                    edit_visit.setAttribute('onclick', `editVisit('${visit_id}')`);
+
+                    detailsDiv.appendChild(edit_visit);
+                }
+                else {
+                    detailsDiv.appendChild(submit_div);
+                    detailsDiv.appendChild(raise_issue_div);
+                }
 
             }
 
@@ -584,7 +606,7 @@
                             console.log(visit);
                             console.log(visit.visit_id);
                             let question_lst = getQuestionAnsersForVisit(visit.visit_id).then((question_lst) => {
-                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id, visit.investigation_started, visit.issue_in_investigation, visit.issue_of_investigator);
+                                const visit_card = createVisitCard(visit.type_of_visit, index, index, visit.final_card_data, question_lst, visit.visit_id, visit.investigation_started, visit.issue_in_investigation, visit.issue_of_investigator, visit.visit_completed);
                                 document.getElementById('visit-cards').appendChild(visit_card);
                             }).catch((error) => {
                                 console.error("An error occurred:", error);
@@ -700,7 +722,8 @@
                 }
         }
 
-        async function submitVisitAnswers(visit_id) {
+        async function submitVisitAnswers(visit_id, visit_completed=false) {
+            toggle_loader();
             let inputs = document.querySelectorAll(`input[id^="input_${visit_id}"]`); 
 
             let values = {};
@@ -718,13 +741,44 @@
             console.log(result)
             if (success) {
                 if (result.success) {
+                    if (visit_completed) {
+                        let complete_visit_bodyData = {
+                            visit_id: visit_id
+                        };
+
+                        let complete_visit_url = "{% url 'complete-visit-api-list' %}";
+                        let [complete_visit_success, complete_visit_result] = await callApi("POST", complete_visit_url, complete_visit_bodyData, "{{csrf_token}}");
+                    }
                     window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
                 }
             } else {
+                toggle_loader();
                 alert('Unable to raise issue');
             }
+            toggle_loader();
         }
 
+        async function editVisit(visit_id) {
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to edit visit?</p>',
+                async () => {
+                    toggle_loader();
+                    let complete_visit_bodyData = {
+                        visit_id: visit_id,
+                        edit_visit: true
+                    };
+
+                    let complete_visit_url = "{% url 'complete-visit-api-list' %}";
+                    let [complete_visit_success, complete_visit_result] = await callApi("POST", complete_visit_url, complete_visit_bodyData, "{{csrf_token}}");
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                    toggle_loader();
+                }
+            );
+            
+        }
+
+        
     </script>
 
     <script>

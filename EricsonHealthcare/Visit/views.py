@@ -1271,3 +1271,80 @@ class DeleteVisitViewSet(viewsets.ViewSet):
             print(e)
             return False
 
+class CompleteVisitViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            visit_id = request.data.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.get(visit_id=visit_id)
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            edit_visit = request.data.get('edit_visit')
+            if edit_visit:
+                visit_data_obj.visit_completed = False
+            
+            else:
+                visit_data_obj.visit_completed = True
+            
+            visit_data_obj.save()
+
+            return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "user_unauthorized": False,
+                    "data": None,
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "user_unauthorized": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+

@@ -15,6 +15,7 @@ class Visit(models.Model):
     re_investigation = models.BooleanField(default=False)
     re_investigation_reason = models.CharField(max_length=255, null=True, blank=True, default='')
 
+    visit_completed = models.BooleanField(default=False)
     TYPE_OF_VISIT_CHOICES = [
         ('Hospital', 'Hospital'),
         ('Treating_doctor', 'Treating Doctor'),

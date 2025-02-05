@@ -231,16 +231,16 @@ class VisitQuestionViewSet(viewsets.ViewSet):
     def create(self, request):
         try:
             user = request.user
-            # if not user.is_authenticated:
-            #     return Response(
-            #             {
-            #                 "success": False,
-            #                 "user_not_logged_in": True,
-            #                 "data":None,
-            #                 "error": None
-            #             },
-            #             status=status.HTTP_400_BAD_REQUEST
-            #         )
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
             visit_id = request.data.get('visit_id')
             answers = request.data.get('answers')
