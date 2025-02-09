@@ -412,3 +412,7 @@ body {
     font-weight: 700;
     color: var(--eh-dark-grey);
 }
+
+.hidden-important {
+    display: none !important;
+}

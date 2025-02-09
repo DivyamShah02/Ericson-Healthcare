@@ -369,8 +369,9 @@ try {
     const dod = document.getElementById('dod');
 }
 catch (error) {
-    console.error("Error fetching suggestions:", error);
+    console.error("Error :", error);
 }
+
 doa.addEventListener('change', function () {
     const startDate = new Date(this.value);
     if (dod.value) {
@@ -395,13 +396,42 @@ try {
 
 }
 catch (error) {
-    console.error("Error fetching suggestions:", error);
+    console.error("Error :", error);
+}
+
+try {
+    let todayIST = new Date();
+    todayIST.setMinutes(todayIST.getMinutes() + todayIST.getTimezoneOffset() + 330);    
+    let todayDate = `${todayIST.toLocaleDateString().split('/')[2]}-${todayIST.toLocaleDateString().split('/')[0].padStart(2, '0')}-${todayIST.toLocaleDateString().split('/')[1].padStart(2, '0')}`
+    console.log(todayDate);
+    document.getElementById('dod').setAttribute('max', todayDate);
+}
+catch (error) {
+    console.error("Error :", error);
+}
+
+try {
+    let todayIST = new Date();
+    todayIST.setMinutes(todayIST.getMinutes() + todayIST.getTimezoneOffset() + 330);    
+    let todayDate = `${todayIST.toLocaleDateString().split('/')[2]}-${todayIST.toLocaleDateString().split('/')[0].padStart(2, '0')}-${todayIST.toLocaleDateString().split('/')[1].padStart(2, '0')}`
+    console.log(todayDate);
+    document.getElementById('doa').setAttribute('max', todayDate);
+}
+catch (error) {
+    console.error("Error :", error);
 }
 
 function handle_hospital() {
     try {
         const hospital_doa = document.getElementById('hospital_doa');
         const hospital_dod = document.getElementById('hospital_dod');
+
+        let todayIST = new Date();
+        todayIST.setMinutes(todayIST.getMinutes() + todayIST.getTimezoneOffset() + 330);    
+        let todayDate = `${todayIST.toLocaleDateString().split('/')[2]}-${todayIST.toLocaleDateString().split('/')[0].padStart(2, '0')}-${todayIST.toLocaleDateString().split('/')[1].padStart(2, '0')}`
+        
+        hospital_doa.setAttribute('max', todayDate);
+        hospital_dod.setAttribute('max', todayDate);
 
         hospital_doa.addEventListener('change', function () {
             const startDate = new Date(this.value);
@@ -473,3 +503,10 @@ function showSimpleModal(title, content) {
     });
 }
 
+document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("focus", function (event) {
+        let el = event.target;
+        el.blur();
+        el.focus();
+    });
+});

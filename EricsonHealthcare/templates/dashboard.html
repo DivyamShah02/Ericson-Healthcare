@@ -208,7 +208,7 @@
             <div class="container">
                 <small class="eh-small-white">All Cases</small>
                 <div class="input-group my-2">
-                    <input type="text" class="form-control dark-input" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control dark-input" id="caseSearch" onkeyup="filterCases()" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-outline-light" type="button" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"><i class="fa fa-magnifying-glass"></i></button>
                     </div>
@@ -414,6 +414,7 @@
                 caseDiv.className = 'd-flex align-items-center px-3 ps-2';
                 caseDiv.style.cursor = 'pointer';
                 caseDiv.setAttribute('onclick', `window.location.href="{% url 'case_overview-list' %}?case_id=${caseItem.case_id}";`);
+                caseDiv.id = `all-div-case-item-${index + 1}`;
 
                 // Left section with case number and status
                 const leftDiv = document.createElement('div');
@@ -427,6 +428,7 @@
 
                 const caseNumber = document.createElement('b');
                 caseNumber.className = 'text-break';
+                caseNumber.id = `all-case-item-${index + 1}`;
 
                 if (caseItem.claim_number != '') {
                     caseNumber.textContent = `Case #${caseItem.claim_number}`;
@@ -553,6 +555,27 @@
             });
         });
     </script>
+
+    <script>
+        function filterCases() {
+            console.log("Filtering cases...");
+            let input = document.getElementById("caseSearch").value.toLowerCase();
+            let cases = document.querySelectorAll("[id^='all-div-case-item-']");
+        
+            cases.forEach(caseItem => {
+                let caseNumber = caseItem.querySelector("[id^='all-case-item-']").innerText.toLowerCase();
+                if (caseNumber.includes(input)) {                    
+                    caseItem.classList.remove("hidden-important");
+                    caseItem.nextElementSibling.style.display = ""; // Show hr
+                } else {
+                    console.log("Hiding case:", caseNumber);
+                    caseItem.classList.add("hidden-important"); // To hide
+                    caseItem.nextElementSibling.style.display = "none"; // Hide hr
+                }
+            });
+        }
+    </script>
+    
 
 </body>
 
