@@ -8,8 +8,8 @@ from rest_framework.decorators import action
 from .models import Question
 from .serializers import QuestionSerializers
 from Case.models import Case, CaseDetails
-from Visit.models import Visit, LabVisit, HospitalVisit, PharmacyVisit
-from Visit.serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSerializer, HospitalVisitSerializer
+from Visit.models import Visit, LabVisit, HospitalVisit, PharmacyVisit, InsuredVisit
+from Visit.serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSerializer, HospitalVisitSerializer, InsuredVisitSerializer
 
 
 # Create your views here.
@@ -55,7 +55,7 @@ class QuestionViewSet(viewsets.ViewSet):
                     },
                     status=status.HTTP_400_BAD_REQUEST
                 )
-            
+            print(type_of_visit)
             question_obj = Question.objects.create(question=question_text, visit_type=type_of_visit)
             question_obj.save()
 
@@ -257,16 +257,16 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            if not answers:
-                return Response(
-                    {
-                        "success": False,
-                        "user_not_logged_in": False,
-                        "data": None,
-                        "error": "answer is required"
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+            # if not answers:
+            #     return Response(
+            #         {
+            #             "success": False,
+            #             "user_not_logged_in": False,
+            #             "data": None,
+            #             "error": "answer is required"
+            #         },
+            #         status=status.HTTP_400_BAD_REQUEST
+            #     )
             try:
                 # Check if a visit with the given 'visit_id' exists
                 visit = Visit.objects.get(visit_id=visit_id)
@@ -287,10 +287,12 @@ class VisitQuestionViewSet(viewsets.ViewSet):
 
             if visit_type == 'Hospital':
                 visit_type_obj = HospitalVisit.objects.get(visit_id=visit_id)
-            if visit_type == 'Lab':
+            elif visit_type == 'Lab':
                 visit_type_obj = LabVisit.objects.get(visit_id=visit_id)
             elif visit_type == 'Chemist':
                 visit_type_obj = PharmacyVisit.objects.get(visit_id=visit_id)
+            elif visit_type == 'Insured':
+                visit_type_obj = InsuredVisit.objects.get(visit_id=visit_id)
 
             # Get current visit questions list
             current_visit_questions = visit_type_obj.questions
@@ -351,6 +353,14 @@ class VisitQuestionViewSet(viewsets.ViewSet):
                     visit_type_data = PharmacyVisitSerializer(visit_type_data_obj).data
                     return visit_type_data
                 return False
+
+            elif visit_type == 'Insured':
+                visit_type_data_obj = InsuredVisit.objects.filter(visit_id=visit_data.visit_id).first()
+                if visit_type_data_obj:
+                    visit_type_data = InsuredVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
 
             else:
                 return False

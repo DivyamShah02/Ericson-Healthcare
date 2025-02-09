@@ -21,6 +21,7 @@ class Visit(models.Model):
         ('Treating_doctor', 'Treating Doctor'),
         ('Lab', 'Lab'),
         ('Chemist', 'Chemist'),
+        ('Insured', 'Insured'),
     ]
     type_of_visit = models.CharField(max_length=50, choices=TYPE_OF_VISIT_CHOICES)
     tat = models.CharField(max_length=100)  # Time to complete visit and submit data
@@ -96,6 +97,20 @@ class PharmacyVisit(models.Model):
     state = models.CharField(max_length=255)
     gst_number = models.CharField(max_length=100)
     drug_license_number = models.CharField(max_length=100)
+    questions = models.JSONField(null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
+    document_paths = models.JSONField(null=True, blank=True)
+    photo_path = models.JSONField(null=True, blank=True)
+
+# Table InsuredVisit
+class InsuredVisit(models.Model):
+    visit_id = models.IntegerField()  # Link to Visit ID
+    name = models.CharField(max_length=255)
+    age = models.CharField(max_length=10)
+    contact_number = models.CharField(max_length=15)
+    address = models.TextField()
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
     questions = models.JSONField(null=True, blank=True)
     answers = models.JSONField(null=True, blank=True)
     document_paths = models.JSONField(null=True, blank=True)

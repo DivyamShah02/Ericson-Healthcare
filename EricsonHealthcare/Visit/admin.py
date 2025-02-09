@@ -25,6 +25,12 @@ class PharmacyVisitAdmin(admin.ModelAdmin):
     search_fields = ('name_of_chemist', 'city', 'gst_number', 'visit_id')
     list_filter = ('city', 'state')
 
+@admin.register(InsuredVisit)
+class InsuredVisitAdmin(admin.ModelAdmin):
+    list_display = ('id', 'visit_id', 'name', 'age', 'contact_number', 'city', 'state')
+    search_fields = ('visit_id', 'name', 'age', 'contact_number', 'city', 'state')
+    list_filter = ('city', 'state')
+
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ('id', 'city', 'state')

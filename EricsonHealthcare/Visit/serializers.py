@@ -1,4 +1,4 @@
-from .models import Visit, HospitalVisit, LabVisit, PharmacyVisit
+from .models import Visit, HospitalVisit, LabVisit, PharmacyVisit, InsuredVisit
 from rest_framework import serializers
 
 
@@ -25,6 +25,10 @@ class PharmacyVisitSerializer(serializers.ModelSerializer):
         model = PharmacyVisit
         fields = '__all__'
 
+class InsuredVisitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InsuredVisit
+        fields = '__all__'
 
 class VisitDetailsViewSetSerializer(serializers.ModelSerializer):
     class Meta:

@@ -446,6 +446,7 @@
                                                     <!-- <option value="Treating_doctor">Treating Doctor</option> -->
                                                     <option value="Lab">Lab</option>
                                                     <option value="Chemist">Chemist</option>
+                                                    <option value="Insured">Insured</option>
                                                 </select>
                                             </div>
                                             <div id="add_visit_form_inputs"></div>
@@ -693,6 +694,10 @@
                 createChemistFormInput();
             }
 
+            if (selectedValue === 'Insured') {
+                createInsuredFormInput();
+            }
+
             if (selectedValue === "") {
                 deleteElementsWithIdPrefix('type_visit_');
             }
@@ -838,6 +843,21 @@
             parentElement.appendChild(createInputDiv('type_visit_chemist_drug_license_number', 'chemist_drug_license_number', 'Drug Licence Number', 'Enter Drug Licence Number'));
             parentElement.appendChild(createInputDiv('type_visit_chemist_tat', 'chemist_tat', 'TAT', 'Enter TAT', null, null, true));
             getQuestions('chemist');
+            handle_visit_state();
+        }
+
+        function createInsuredFormInput() {
+            deleteElementsWithIdPrefix('type_visit_');
+            const parentElement = document.getElementById('add_visit_form_inputs');
+            parentElement.appendChild(createInputDiv('type_visit_insured_name', 'insured_name', 'Name', 'Enter Name', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_age', 'insured_age', 'Age', 'Enter Age', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_contact_number', 'insured_contact_number', 'Contact Number', 'Enter Contact Number', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_address', 'insured_address', 'Address', 'Enter Address', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_city', 'insured_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_insured_state', 'insured_state', 'State', 'Enter State', null, true, true));
+            city_state_get_suggestions('insured');
+            parentElement.appendChild(createInputDiv('type_visit_insured_tat', 'insured_tat', 'TAT', 'Enter TAT', null, null, true));
+            getQuestions('insured');
             handle_visit_state();
         }
 
@@ -1143,7 +1163,7 @@
             }
             const url = "{% url 'question-api-list' %}?" + toQueryString(Params);;
             const [success, result] = await callApi("GET", url);
-            console.log(result);
+            // console.log(result);
             if (success) {
                 if (result.success) {
                     console.log(result.data);
@@ -1229,8 +1249,12 @@
                     uncheckQuestions();
                     handleEditVisitModal(result.data.type_of_visit);
                     visit_edit_data = result.data
-                    setFormValues(result.data);
-                
+                    setFormValues(result.data);                                        
+                    if (document.getElementById('type_visit_insured_address')) {                        
+                        document.querySelectorAll('input[type="text"][name^="insured_name"]')[1].value = result.data.insured_name;
+                        document.querySelectorAll('input[type="text"][name^="insured_address"]')[1].value = result.data.insured_address;                        
+                    }
+
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -1241,23 +1265,30 @@
         }
 
         async function deleteVisitDetail(visit_id) {
-            const bodyData = {
-                visit_id: visit_id,
-            };
+            showModal(
+                'Confirm Action',
+                '<p>Are you sure you want to delete visit? Once visit is deleted it will not be recovered.</p>',
+                async () => {
+                    const bodyData = {
+                        visit_id: visit_id,
+                    };
 
-            const url = "{% url 'delete-visit-api-list' %}?";
-            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
-            console.log(result);
-            if (success) {
-                if (result.success) {
-                    showSimpleModal('Visit Deleted', 'The visit has been deleted successfully');
+                    const url = "{% url 'delete-visit-api-list' %}?";
+                    const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+                    console.log(result);
+                    if (success) {
+                        if (result.success) {
+                            showSimpleModal('Visit Deleted', 'The visit has been deleted successfully');
+                        }
+                        else {
+                            // window.location.href=`{% url 'dashboard-list' %}`;
+                        }
+                    } else {
+                        // window.location.href=`{% url 'dashboard-list' %}`;
+                    }
                 }
-                else {
-                    // window.location.href=`{% url 'dashboard-list' %}`;
-                }
-            } else {
-                // window.location.href=`{% url 'dashboard-list' %}`;
-            }
+            );
+
         }
 
 
@@ -1787,8 +1818,8 @@
                         inputField.value = name.city;
                         suggestionBox.style.display = "none";
                         stateInputField.value = name.state;
+                        getInvestigatorDetails(name.state);
                     });
-                    getInvestigatorDetails(name.state);
                     suggestionBox.appendChild(option);
                 });
                 const rect = inputField.getBoundingClientRect();

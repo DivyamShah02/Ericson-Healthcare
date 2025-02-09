@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
 
-from .serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSerializer, HospitalVisitSerializer
-from .models import Visit, LabVisit, HospitalVisit, PharmacyVisit
+from .serializers import VisitSerializer, PharmacyVisitSerializer, LabVisitSerializer, HospitalVisitSerializer, InsuredVisitSerializer
+from .models import Visit, LabVisit, HospitalVisit, PharmacyVisit, InsuredVisit
 
 from Question.models import Question
 from Case.models import Case
@@ -61,7 +61,7 @@ class VisitCreationViewSet(viewsets.ViewSet):
 
                 visit_detail = {"visit": visit_data}
 
-                # Check if the visit has an associated HospitalVisit, LabVisit, or PharmacyVisit
+                # Check if the visit has an associated HospitalVisit, LabVisit, PharmacyVisit or InsuredVisit
                 if HospitalVisit.objects.filter(visit_id=visit.visit_id).exists():
                     hospital_visit = HospitalVisit.objects.get(visit_id=visit.visit_id)
                     hospital_visit_serializer = HospitalVisitSerializer(hospital_visit)
@@ -94,6 +94,18 @@ class VisitCreationViewSet(viewsets.ViewSet):
                     if questions_ids_lst:
                         questions = self.get_questions_from_id(questions_ids_lst)
                         visit_detail["visit_type"]["questions"] = questions
+
+                elif InsuredVisit.objects.filter(visit_id=visit.visit_id).exists():
+                    insured_visit = InsuredVisit.objects.get(visit_id=visit.visit_id)
+                    insured_visit_serializer = InsuredVisitSerializer(insured_visit)
+                    visit_detail["visit_type"] = insured_visit_serializer.data
+                    visit_detail["visit_type"]["visit_type"] = "Insured"
+
+                    questions_ids_lst = list(insured_visit_serializer.data["questions"].values())
+                    if questions_ids_lst:
+                        questions = self.get_questions_from_id(questions_ids_lst)
+                        visit_detail["visit_type"]["questions"] = questions
+
 
                 else:
                     visit_detail["details"] = "No associated visit details found."
@@ -276,6 +288,16 @@ class VisitViewSet(viewsets.ViewSet):
                     print(visit_type_data_obj.errors)
                     return False
 
+            elif visit_type == 'Insured':
+                visit_type_data_obj = InsuredVisitSerializer(data=request_data)
+                if visit_type_data_obj.is_valid():
+                    visit_type_data_obj.save()
+                    return True
+                else:
+                    # logger.error(visit_type_data_obj.errors)
+                    print(visit_type_data_obj.errors)
+                    return False
+
             else:
                 print('hello here')
                 return False
@@ -443,7 +465,7 @@ class VisitViewSet(viewsets.ViewSet):
     def add_visit_type_details(self, visit, visit_detail):
         """
         Helper method to add details related to HospitalVisit, 
-        LabVisit, or PharmacyVisit.
+        LabVisit, PharmacyVisit or InsuredVisit.
         """
         if HospitalVisit.objects.filter(visit_id=visit.visit_id).exists():
             hospital_visit = HospitalVisit.objects.get(visit_id=visit.visit_id)
@@ -478,6 +500,18 @@ class VisitViewSet(viewsets.ViewSet):
                 questions = self.get_questions_from_id(questions_ids_lst)
                 visit_detail["visit_type"]["questions"] = questions
 
+        elif InsuredVisit.objects.filter(visit_id=visit.visit_id).exists():
+            insured_visit = InsuredVisit.objects.get(visit_id=visit.visit_id)
+            insured_visit_serializer = InsuredVisitSerializer(insured_visit)
+            visit_detail["visit_type"] = insured_visit_serializer.data
+            visit_detail["visit_type"]["visit_type"] = "Insured"
+
+            questions_ids_lst = list(insured_visit_serializer.data["questions"].values())
+            if questions_ids_lst:
+                questions = self.get_questions_from_id(questions_ids_lst)
+                visit_detail["visit_type"]["questions"] = questions
+
+
         else:
             visit_detail["details"] = "No associated visit details found."
 
@@ -504,6 +538,13 @@ class VisitViewSet(viewsets.ViewSet):
                 visit_type_data_obj = PharmacyVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
                 if visit_type_data_obj:
                     visit_type_data = PharmacyVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            elif visit_type == 'Insured':
+                visit_type_data_obj = InsuredVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = InsuredVisitSerializer(visit_type_data_obj).data
                     return visit_type_data
                 return False
 
@@ -617,6 +658,13 @@ class VisitDetailViewSet(viewsets.ViewSet):
                 visit_type_data_obj = PharmacyVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
                 if visit_type_data_obj:
                     visit_type_data = PharmacyVisitSerializer(visit_type_data_obj).data
+                    return visit_type_data
+                return False
+
+            elif visit_type == 'Insured':
+                visit_type_data_obj = InsuredVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data = InsuredVisitSerializer(visit_type_data_obj).data
                     return visit_type_data
                 return False
 
@@ -768,6 +816,20 @@ class UpdateVisitViewSet(viewsets.ViewSet):
                     # logger.error(visit_type_serializer.errors)
                     print(visit_type_serializer.errors)
                     return False
+
+            elif visit_type == 'Insured':
+                visit_type_data_obj = InsuredVisit.objects.get(visit_id=visit_id)
+                visit_type_serializer = InsuredVisitSerializer(instance=visit_type_data_obj, data=request_data, partial=True)
+
+                if visit_type_serializer.is_valid():
+                    visit_type_serializer.save()
+                    return visit_type_serializer.data
+                
+                else:
+                    # logger.error(visit_type_serializer.errors)
+                    print(visit_type_serializer.errors)
+                    return False
+
 
             else:
                 print('hello here')
@@ -1258,6 +1320,13 @@ class DeleteVisitViewSet(viewsets.ViewSet):
 
             elif visit_type == 'Chemist':
                 visit_type_data_obj = PharmacyVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
+                if visit_type_data_obj:
+                    visit_type_data_obj.delete()
+                    return True
+                return False
+
+            elif visit_type == 'Insured':
+                visit_type_data_obj = InsuredVisit.objects.filter(visit_id=visit_data.get('visit_id')).first()
                 if visit_type_data_obj:
                     visit_type_data_obj.delete()
                     return True

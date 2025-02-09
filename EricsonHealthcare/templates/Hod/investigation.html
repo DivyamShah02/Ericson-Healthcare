@@ -366,6 +366,7 @@
                                                     <!-- <option value="Treating_doctor">Treating Doctor</option> -->
                                                     <option value="Lab">Lab</option>
                                                     <option value="Chemist">Chemist</option>
+                                                    <option value="Insured">Insured</option>
                                                 </select>
                                             </div>
                                             <div id="add_visit_form_inputs"></div>
@@ -478,7 +479,7 @@
                             </button>
                         </div>
                         <div class="col-12 col-md-6">
-                            <button type="button" onclick="updateCaseStatus('Medical')"
+                            <button type="button" onclick="updateCaseStatus('Medical')" id="send_case_to_medical_officer"
                                 class="btn btn-primary mb-md-2 eh-btn-blue-primary-no-hover w-100 d-flex justify-content-between align-items-center">
                                 <b class="mx-auto">Send Case to Medical Officer</b>
                                 <i class="fa fa-arrow-right fa-xl"></i>
@@ -520,7 +521,7 @@
             getCaseData();
             getVistDetails();
             getInvestigatorDetails();
-            // getQuestions();
+            getQuestions();
             toggle_loader();
         };
         processStep(2);
@@ -620,6 +621,11 @@
             if (selectedValue === 'Chemist') {
                 createChemistFormInput();
             }
+
+            if (selectedValue === 'Insured') {
+                createInsuredFormInput();
+            }
+
 
             if (selectedValue === 'default') {
                 deleteElementsWithIdPrefix('type_visit_');
@@ -769,6 +775,21 @@
             handle_visit_state();
         }
 
+        function createInsuredFormInput() {
+            deleteElementsWithIdPrefix('type_visit_');
+            const parentElement = document.getElementById('add_visit_form_inputs');
+            parentElement.appendChild(createInputDiv('type_visit_insured_name', 'insured_name', 'Name', 'Enter Name', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_age', 'insured_age', 'Age', 'Enter Age', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_contact_number', 'insured_contact_number', 'Contact Number', 'Enter Contact Number', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_address', 'insured_address', 'Address', 'Enter Address', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_city', 'insured_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_insured_state', 'insured_state', 'State', 'Enter State', null, true, true));
+            city_state_get_suggestions('insured');
+            parentElement.appendChild(createInputDiv('type_visit_insured_tat', 'insured_tat', 'TAT', 'Enter TAT', null, null, true));
+            getQuestions('insured');
+            handle_visit_state();
+        }
+
         function handle_visit_state() {
             document.getElementById('visit_state').addEventListener('change', function() {
                 const state = this.value;
@@ -843,6 +864,9 @@
 
         function createVisitCard(type_of_visit, cardId, visitNumber, details, questions, visit_id, visit) {
             // Create the outer card container
+            if (!visit.visit_completed) {
+                document.getElementById('send_case_to_medical_officer').setAttribute('onclick', "updateCaseStatus('Medical', true)")
+            }
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card px-0 pe-3';
 
@@ -863,24 +887,26 @@
                 header.appendChild(headerIcon);
             }
             else {
-                if (visit.investigation_started) {
-                    const headerIcon = document.createElement('div');
-                    headerIcon.className = 'col-2 text-center';
-                    const headerIconI = document.createElement('i');
-                    headerIconI.className = 'fa fa-check fa-xl';
-                    headerIcon.appendChild(headerIconI);
-                    header.appendChild(headerIcon);
+                const headerIcon = document.createElement('div');
+                const headerIconI = document.createElement('i');
+
+                if (visit.visit_completed) {                    
+                    headerIcon.className = 'col-2 text-center';                    
+                    headerIconI.className = 'fa fa-check fa-xl';                    
+                }
+
+                else if (visit.investigation_started == true && visit.visit_completed == false) {                    
+                    headerIcon.className = 'col-2 text-center';                    
+                    headerIconI.className = 'fa fa-hourglass fa-xl';
                 }
     
-                else{
-                    const headerIcon = document.createElement('div');
-                    headerIcon.className = 'col-2 text-center';
-                    const headerIconI = document.createElement('i');
+                else{                    
+                    headerIcon.className = 'col-2 text-center';                    
                     headerIconI.className = 'fa fa-stopwatch fa-xl';
-                    headerIcon.appendChild(headerIconI);
-                    header.appendChild(headerIcon);
-    
                 }
+                headerIcon.appendChild(headerIconI);
+                header.appendChild(headerIcon);
+    
 
             }
 
@@ -1268,7 +1294,10 @@
                     setFormValues(result.data);
                     visit_edit_data = result.data;
                     setFormValues(result.data);
-                
+                    if (document.getElementById('type_visit_insured_address')) {                        
+                        document.querySelectorAll('input[type="text"][name^="insured_name"]')[1].value = result.data.insured_name;
+                        document.querySelectorAll('input[type="text"][name^="insured_address"]')[1].value = result.data.insured_address;                        
+                    }
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -1480,38 +1509,51 @@
     </script>
 
     <script>
-        async function updateCaseStatus(status) {
+        async function updateCaseStatus(status, move_forward=false) {
             let pop_up_text = 'Hey {{user.name}}, this is not quality work to opt for edit option, Inspite of multiple reminders. This is being recorded in your performance.';
             if (status != 'Creation_confirmation'){
-                pop_up_text = 'Are you sure you want to continue?';
+                pop_up_text = 'Are you sure you want to continue?';                
             }
-            showModal(
-                'Confirm Action',
-                `<p>${pop_up_text}</p>`,
+            if (move_forward) {                
+                showModal(
+                'Action Denied',
+                `<p>Hey {{user.name}}, Field Officer is still on job and all documents are still awaited. So don’t send case to Medical Officer</p>`,
                 async () => {
-                    const Params = {
-                        case_id: caseId,
-                        case_status: status
-                    };
-        
-                    const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
-                    const [success, result] = await callApi("GET", url);
-                    console.log(result);
-                    if (success) {
-                        if (result.success) {                
-                                console.log(result.data);
-                                location.reload();
-                        }
-                        else {
-                            window.location.href=`{% url 'dashboard-list' %}`;
-                        }
-                    } else {
-                        window.location.href=`{% url 'dashboard-list' %}`;
-                    }
-                    
-                }
+                    console.log('debugger');
+                },
+                true
             );
 
+            }
+            else {
+                showModal(
+                    'Confirm Action',
+                    `<p>${pop_up_text}</p>`,
+                    async () => {
+                        const Params = {
+                            case_id: caseId,
+                            case_status: status
+                        };
+            
+                        const url = "{% url 'set-status-api-list' %}?" + toQueryString(Params);
+                        const [success, result] = await callApi("GET", url);
+                        console.log(result);
+                        if (success) {
+                            if (result.success) {                
+                                    console.log(result.data);
+                                    location.reload();
+                            }
+                            else {
+                                window.location.href=`{% url 'dashboard-list' %}`;
+                            }
+                        } else {
+                            window.location.href=`{% url 'dashboard-list' %}`;
+                        }
+                        
+                    }
+                );
+                
+            }    
         }
 
     </script>
@@ -1658,8 +1700,8 @@
                         inputField.value = name.city;
                         suggestionBox.style.display = "none";
                         stateInputField.value = name.state;
+                        getInvestigatorDetails(name.state);
                     });
-                    getInvestigatorDetails(name.state);
                     suggestionBox.appendChild(option);
                 });
                 const rect = inputField.getBoundingClientRect();

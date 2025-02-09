@@ -366,6 +366,7 @@
                                                     <!-- <option value="Treating_doctor">Treating Doctor</option> -->
                                                     <option value="Lab">Lab</option>
                                                     <option value="Chemist">Chemist</option>
+                                                    <option value="Insured">Insured</option>
                                                 </select>
                                             </div>
                                             <div id="add_visit_form_inputs"></div>
@@ -520,7 +521,7 @@
             getCaseData();
             getVistDetails();
             getInvestigatorDetails();
-            // getQuestions();
+            getQuestions();
             toggle_loader();
         };
         processStep(2);
@@ -620,6 +621,11 @@
             if (selectedValue === 'Chemist') {
                 createChemistFormInput();
             }
+
+            if (selectedValue === 'Insured') {
+                createInsuredFormInput();
+            }
+
 
             if (selectedValue === 'default') {
                 deleteElementsWithIdPrefix('type_visit_');
@@ -766,6 +772,21 @@
             parentElement.appendChild(createInputDiv('type_visit_chemist_drug_license_number', 'chemist_drug_license_number', 'Drug Licence Number', 'Enter Drug Licence Number'));
             parentElement.appendChild(createInputDiv('type_visit_chemist_tat', 'chemist_tat', 'TAT', 'Enter TAT', null, null, true));
             getQuestions('chemist');
+            handle_visit_state();
+        }
+
+        function createInsuredFormInput() {
+            deleteElementsWithIdPrefix('type_visit_');
+            const parentElement = document.getElementById('add_visit_form_inputs');
+            parentElement.appendChild(createInputDiv('type_visit_insured_name', 'insured_name', 'Name', 'Enter Name', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_age', 'insured_age', 'Age', 'Enter Age', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_contact_number', 'insured_contact_number', 'Contact Number', 'Enter Contact Number', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_address', 'insured_address', 'Address', 'Enter Address', null, null, true));
+            parentElement.appendChild(createInputDiv('type_visit_insured_city', 'insured_city', 'City', 'Enter City'));
+            parentElement.appendChild(createInputDiv('type_visit_insured_state', 'insured_state', 'State', 'Enter State', null, true, true));
+            city_state_get_suggestions('insured');
+            parentElement.appendChild(createInputDiv('type_visit_insured_tat', 'insured_tat', 'TAT', 'Enter TAT', null, null, true));
+            getQuestions('insured');
             handle_visit_state();
         }
 
@@ -1273,7 +1294,10 @@
                     setFormValues(result.data);
                     visit_edit_data = result.data;
                     setFormValues(result.data);
-                
+                    if (document.getElementById('type_visit_insured_address')) {                        
+                        document.querySelectorAll('input[type="text"][name^="insured_name"]')[1].value = result.data.insured_name;
+                        document.querySelectorAll('input[type="text"][name^="insured_address"]')[1].value = result.data.insured_address;                        
+                    }
                 }
                 else {
                     window.location.href=`{% url 'dashboard-list' %}`;
@@ -1676,8 +1700,8 @@
                         inputField.value = name.city;
                         suggestionBox.style.display = "none";
                         stateInputField.value = name.state;
+                        getInvestigatorDetails(name.state);
                     });
-                    getInvestigatorDetails(name.state);
                     suggestionBox.appendChild(option);
                 });
                 const rect = inputField.getBoundingClientRect();

@@ -352,7 +352,7 @@ class ICLMClosureReport(models.Model):
     # Recommendation
     iclm_recommendation = models.CharField(max_length=50, default="Payable")
 
-    # Insured Visit Details
+    # Insured Details
     insured_details = models.TextField()
     insured_address = models.TextField()
     insured_mobile = models.CharField(max_length=15)
@@ -406,7 +406,7 @@ class SecureMindCriticalIllnessReport(models.Model):
     # Recommendation
     iclm_recommendation = models.CharField(max_length=50, choices=[("Repudiate", "Repudiate"), ("Payable", "Payable"), ("Query", "Query")])
 
-    # Insured Visit Details
+    # Insured Details
     insured_age_sex = models.CharField(max_length=50)
     insured_address = models.TextField()
     insured_mobile = models.CharField(max_length=15)
