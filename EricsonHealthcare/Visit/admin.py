@@ -29,4 +29,4 @@ class PharmacyVisitAdmin(admin.ModelAdmin):
 class CityAdmin(admin.ModelAdmin):
     list_display = ('id', 'city', 'state')
     search_fields = ('city', 'state')
-    list_filter = ('city', 'state')
+    list_filter = ('state',)

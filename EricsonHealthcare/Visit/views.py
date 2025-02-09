@@ -1271,6 +1271,7 @@ class DeleteVisitViewSet(viewsets.ViewSet):
             print(e)
             return False
 
+
 class CompleteVisitViewSet(viewsets.ViewSet):
     def create(self, request):
         try:

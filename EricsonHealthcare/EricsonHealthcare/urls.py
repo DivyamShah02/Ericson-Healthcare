@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import login_to_account
+from .views import login_to_account, add_city
 from django.views.generic import RedirectView
 
 urlpatterns = [
@@ -17,5 +17,7 @@ urlpatterns = [
 
     # Extra Admin urls
     path('custom-admin/login_to_account', login_to_account, name='login_to_account'),
+    path('custom-admin-add-visit', add_city, name='add_city'),
+
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

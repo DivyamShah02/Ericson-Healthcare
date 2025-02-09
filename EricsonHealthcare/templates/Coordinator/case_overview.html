@@ -1763,7 +1763,7 @@
                 const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
                 if (success) {
                     if (result.success) {
-                        console.log(result.data.suggestions);
+                        console.log(result.data.city_data);
                         city_state_showSuggestions(result.data.city_data, type_of_visit);
                     }
                 }                
