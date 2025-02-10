@@ -504,9 +504,14 @@ function showSimpleModal(title, content) {
 }
 
 document.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("focus", function (event) {
-        let el = event.target;
-        el.blur();
-        el.focus();
-    });
+    try {
+        input.addEventListener("focus", function (event) {
+            let el = event.target;
+            el.blur();
+            el.focus();
+        });
+    }
+    catch (error) {
+        console.error("Error:", error);
+    }
 });

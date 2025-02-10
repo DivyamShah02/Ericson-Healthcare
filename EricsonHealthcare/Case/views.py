@@ -1,4 +1,7 @@
 import os
+import boto3
+import base64
+from botocore.exceptions import NoCredentialsError
 
 from django.conf import settings
 from django.shortcuts import render
@@ -397,7 +400,8 @@ class CaseViewSet(viewsets.ViewSet):
             coordinator_id = request.data.get('coordinator_id')
 
             uploaded_file = request.FILES['file']
-            file_path = self.save_file(uploaded_file)
+            # file_path = self.save_file(uploaded_file)
+            file_path = self.upload_file_to_s3(uploaded_file)
 
             try:
                 last_case = Case.objects.latest('id')
@@ -492,7 +496,8 @@ class CaseViewSet(viewsets.ViewSet):
             all_docs = []
             for doc in docs_path_lst:
                 all_docs.append({
-                    "path": os.path.normpath(os.path.join(settings.MEDIA_URL, doc)).replace(os.sep, '/'),
+                    # "path": os.path.normpath(os.path.join(settings.MEDIA_URL, doc)).replace(os.sep, '/'),
+                    "path": os.path.normpath(os.path.join(doc)).replace(os.sep, '/'),
                     "name": os.path.basename(str(doc))
                 })
 
@@ -542,6 +547,46 @@ class CaseViewSet(viewsets.ViewSet):
 
         # Return the relative file path
         return os.path.relpath(file_path, settings.MEDIA_ROOT)
+
+    def upload_file_to_s3(self, uploaded_file):
+        """Uploads a file to AWS S3, renaming it if a file with the same name exists."""
+        region_name = "eu-north-1"
+        s3_client = boto3.client(
+            "s3",
+            aws_access_key_id = self.decrypt("QUtJQTRUNE9DTTU2TENMUUdTNlA="),
+            aws_secret_access_key = self.decrypt("TzRzQmlWK0NvcWdBM2Q1aGhPMXJkeGV0c1YyaWdibjR6YXhrbTRqMA=="),
+            region_name = region_name
+        )
+        
+        bucket_name = "ehunt"
+        base_name, extension = os.path.splitext(uploaded_file.name)
+        file_name = uploaded_file.name
+        s3_key = f"uploads/{file_name}"
+        counter = 1
+
+        # Check if file exists and rename if necessary
+        while True:
+            try:
+                s3_client.head_object(Bucket=bucket_name, Key=s3_key)
+                # If file exists, update the filename
+                file_name = f"{base_name}({counter}){extension}"
+                s3_key = f"uploads/{file_name}"
+                counter += 1
+            except s3_client.exceptions.ClientError:
+                break  # File does not exist, proceed with upload
+
+        # Upload file
+        s3_client.upload_fileobj(uploaded_file, bucket_name, s3_key)
+
+        # Generate file URL
+        file_url = f"https://{bucket_name}.s3.{region_name}.amazonaws.com/{s3_key}"
+
+        return file_url
+
+    def decrypt(self, b64_text):
+        # Decode the Base64 string back to bytes, then to text
+        return base64.b64decode(b64_text.encode()).decode()
+
 
 class GetAllCaseViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -702,7 +747,8 @@ class AddDocumentViewSet(viewsets.ViewSet):
                     )
             
             uploaded_file = request.FILES['file']
-            file_path = self.save_file(uploaded_file)
+            # file_path = self.save_file(uploaded_file)
+            file_path = self.upload_file_to_s3(uploaded_file)
 
             document_paths = case_data.document_paths
             if document_paths is None:
@@ -759,6 +805,46 @@ class AddDocumentViewSet(viewsets.ViewSet):
 
         # Return the relative file path
         return os.path.relpath(file_path, settings.MEDIA_ROOT)
+
+    def upload_file_to_s3(self, uploaded_file):
+        """Uploads a file to AWS S3, renaming it if a file with the same name exists."""
+        region_name = "eu-north-1"
+        s3_client = boto3.client(
+            "s3",
+            aws_access_key_id = self.decrypt("QUtJQTRUNE9DTTU2TENMUUdTNlA="),
+            aws_secret_access_key = self.decrypt("TzRzQmlWK0NvcWdBM2Q1aGhPMXJkeGV0c1YyaWdibjR6YXhrbTRqMA=="),
+            region_name = region_name
+        )
+        
+        bucket_name = "ehunt"
+        base_name, extension = os.path.splitext(uploaded_file.name)
+        file_name = uploaded_file.name
+        s3_key = f"uploads/{file_name}"
+        counter = 1
+
+        # Check if file exists and rename if necessary
+        while True:
+            try:
+                s3_client.head_object(Bucket=bucket_name, Key=s3_key)
+                # If file exists, update the filename
+                file_name = f"{base_name}({counter}){extension}"
+                s3_key = f"uploads/{file_name}"
+                counter += 1
+            except s3_client.exceptions.ClientError:
+                break  # File does not exist, proceed with upload
+
+        # Upload file
+        s3_client.upload_fileobj(uploaded_file, bucket_name, s3_key)
+
+        # Generate file URL
+        file_url = f"https://{bucket_name}.s3.{region_name}.amazonaws.com/{s3_key}"
+
+        return file_url
+
+    def decrypt(self, b64_text):
+        # Decode the Base64 string back to bytes, then to text
+        return base64.b64decode(b64_text.encode()).decode()
+
 
 class SetCaseStatus(viewsets.ViewSet):
     def list(self, request):

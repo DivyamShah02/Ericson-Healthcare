@@ -14,7 +14,6 @@
     text-align: center;
 }
 
-/* Spinner */
 .spinner {
    width: 56px;
    height: 56px;
@@ -23,7 +22,6 @@
    border-radius: 50%;
    border-right-color: var(--eh-blue-primary);
    animation: spinner-a4dj62 1s infinite linear;
-   position: relative;
 }
 
 .spinner::before,
@@ -39,17 +37,6 @@
 .spinner::after {
    margin: 8.9px;
    animation-duration: 3s;
-}
-
-/* Logo in the center */
-.spinner-logo {
-    position: absolute;
-    width: 30px; /* Adjust as needed */
-    height: auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10; /* Ensure it appears above the spinner */
 }
 
 @keyframes spinner-a4dj62 {
