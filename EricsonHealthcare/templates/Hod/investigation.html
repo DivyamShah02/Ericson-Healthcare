@@ -1484,6 +1484,7 @@
             console.log(file)
 
             if (file) {
+                toggle_loader();
                 const fileExtension = file.name.split('.').pop().toLowerCase();
 
                 if (!allowedExtensions.includes(fileExtension)) {
@@ -1506,8 +1507,8 @@
                     let case_id = result.data.case_id;
                     window.location.href=`{% url 'case_overview-list' %}?case_id=${case_id}&document_tab=true`;
                 } else {
-                    
                 }
+                toggle_loader();
 
             }
         });
