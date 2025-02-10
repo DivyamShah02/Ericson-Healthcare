@@ -1,0 +1,166 @@
+<form action="/submit-investigation-report/" method="POST">
+    <!-- Part A -->
+    <div class="mb-3">
+        <label for="policy_number" class="form-label">Policy Number</label>
+        <input type="text" class="form-control" id="policy_number" name="policy_number" maxlength="50" required>
+    </div>
+    <div class="mb-3">
+        <label for="date_of_commencement_policy" class="form-label">Date of Commencement Policy</label>
+        <input type="text" class="form-control" id="date_of_commencement_policy" name="date_of_commencement_policy" maxlength="200" required>
+    </div>
+    <div class="mb-3">
+        <label for="name_and_occupation_of_insured" class="form-label">Name and Occupation of Principal Insured</label>
+        <input type="text" class="form-control" id="name_and_occupation_of_insured" name="name_and_occupation_of_insured" maxlength="255" required>
+    </div>
+    <div class="mb-3">
+        <label for="address_of_insured" class="form-label">Address of Principal Insured</label>
+        <textarea class="form-control" id="address_of_insured" name="address_of_insured" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="name_of_insured_hospitalized" class="form-label">Name of Insured Hospitalized</label>
+        <input type="text" class="form-control" id="name_of_insured_hospitalized" name="name_of_insured_hospitalized" maxlength="255" required>
+    </div>
+    <div class="mb-3">
+        <label for="age_of_insured" class="form-label">Age of Insured</label>
+        <input type="text" class="form-control" id="age_of_insured" name="age_of_insured" maxlength="100" required>
+    </div>
+    <div class="mb-3">
+        <label for="hospital_name_and_address" class="form-label">Hospital Name and Address</label>
+        <input type="text" class="form-control" id="hospital_name_and_address" name="hospital_name_and_address" maxlength="255" required>
+    </div>
+    <div class="mb-3">
+        <label for="period_of_hospitalization" class="form-label">Period of Hospitalization including ICU</label>
+        <input type="text" class="form-control" id="period_of_hospitalization" name="period_of_hospitalization" maxlength="100" required>
+    </div>
+    <div class="mb-3">
+        <label for="illness_diagnosed" class="form-label">Illness Diagnosed as per claim 
+            forms:
+            </label>
+        <textarea class="form-control" id="illness_diagnosed" name="illness_diagnosed" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="date_of_surgery" class="form-label">Date of Surgery if done</label>
+        <input type="text" class="form-control" id="date_of_surgery" name="date_of_surgery" maxlength="200" >
+    </div>
+    <div class="mb-3">
+        <label for="surgery_as_per_claim" class="form-label">Surgery as per Claim</label>
+        <input type="text" class="form-control" id="surgery_as_per_claim" name="surgery_as_per_claim" maxlength="255" required>
+    </div>
+
+    <!-- Part B -->
+    <h4>Part B (to be completed by the Investigating Official)</h4>
+    <div class="mb-3">
+        <label for="si_no" class="form-label">SI No</label>
+        <input type="text" class="form-control" id="si_no" name="si_no" maxlength="200" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="name_of_doctor_or_hospital" class="form-label">Name of Doctor or Hospital</label>
+        <input type="text" class="form-control" id="name_of_doctor_or_hospital" name="name_of_doctor_or_hospital" maxlength="200" required>
+    </div>
+    <div class="mb-3">
+        <label for="place_of_visit" class="form-label">Place of Visit</label>
+        <input type="text" class="form-control" id="place_of_visit" name="place_of_visit" maxlength="200" required>
+    </div>
+    <div class="mb-3">
+        <label for="date_of_visit" class="form-label">Date of Visit</label>
+        <input type="text" class="form-control" id="date_of_visit" name="date_of_visit" maxlength="200" required>
+    </div>
+    <!-- 2a -->
+    <div class="mb-3">
+        <label for="satisfied_with_identity_and_age" class="form-label">Are you satisfied with the identity of the Insured hospitalized and 
+            age? Pl. satisfy yourself  that there is no overstatement or 
+            understatement of age.
+            </label>
+        <input type="text" class="form-control" id="satisfied_with_identity_and_age" name="satisfied_with_identity_and_age" maxlength="100" required>
+    </div>
+    <!-- 2b -->
+    <div class="mb-3">
+        <label for="critical_information_health_habits" class="form-label">Mention any critical information related to health & habits of the Insured gathered during the enquiries.</label>
+        <textarea class="form-control" id="critical_information_health_habits" name="critical_information_health_habits" rows="3"></textarea>
+    </div>
+    <!-- 3 -->
+    <div class="mb-3">
+        <label for="verified_pre_existing_disease_surgery" class="form-label">Have you verified the Indoor case papers in a Hospital to ascertain the Pre Existing Disease (PED) /Surgery, before date of commencement Policy/Date of Revival?  If PED is noticed, mention the nature of disease/surgery and its duration with supported documents.</label>
+        <input type="text" class="form-control" id="verified_pre_existing_disease_surgery" name="verified_pre_existing_disease_surgery" maxlength="100" required>
+    </div>
+    <!-- 4 -->
+    <div class="mb-3">
+        <label for="treatment_details_before_policy" class="form-label">Whether any treatment, tests prior to date of commencement of Policy, Date of Revival are noticed? If yes mention the same with supported documents.</label>
+        <textarea class="form-control" id="treatment_details_before_policy" name="treatment_details_before_policy" rows="3"></textarea>
+    </div>
+    <!-- 5 -->
+    <div class="mb-3">
+        <label for="employed_and_leave_details" class="form-label"> If the Insured was employed, obtain the particulars of leave availed by him/her on sickness/medical grounds before  date of commencement of Policy/Date of Revival from the employer and ascertain, if there is any scheme of reimbursement for medical expenses available for the employees.</label>
+        <input type="text" class="form-control" id="employed_and_leave_details" name="employed_and_leave_details" maxlength="100" required>
+    </div>
+    <!-- 6a -->
+    <div class="mb-3">
+        <label for="health_insurance_scheme_details" class="form-label">Was the Insured a member of any Health Insurance Scheme/ Med 
+            claim? If so, the particulars of benefits availed by him under the scheme should be obtained from the Insurers.
+            </label>
+        <textarea class="form-control" id="health_insurance_scheme_details" name="health_insurance_scheme_details" rows="3"></textarea>
+    </div>
+    <!-- 6b -->
+    <div class="mb-3">
+        <label for="other_health_insurer_details" class="form-label">Whether the insured is having health insurance with any other Insurer,
+            if  so give details?
+            </label>
+        <textarea class="form-control" id="other_health_insurer_details" name="other_health_insurer_details" rows="3"></textarea>
+    </div>
+    <!-- 6c -->
+    <div class="mb-3">
+        <label for="claims_from_other_insurer_details" class="form-label">Whether claim is made from any other insurer. If so give details?</label>
+        <textarea class="form-control" id="claims_from_other_insurer_details" name="claims_from_other_insurer_details" rows="3"></textarea>
+    </div>
+    <!-- 7 -->
+    <div class="mb-3">
+        <label for="ailment_and_surgery_confirmation" class="form-label">Whether the ailment and surgery performed are confirmed by the usual 
+            medical attendant?
+            </label>
+        <input type="text" class="form-control" id="ailment_and_surgery_confirmation" name="ailment_and_surgery_confirmation" maxlength="200" required>
+    </div>
+    <!-- 8 -->
+    <div class="mb-3">
+        <label for="surgery_performed_confirmation" class="form-label">Whether the surgery shown in the claim forms and hospital 
+            reports are actually performed in the hospital?
+            </label>
+        <input type="text" class="form-control" id="surgery_performed_confirmation" name="surgery_performed_confirmation" maxlength="200" required>
+    </div>
+    <!-- 9 -->
+    <div class="mb-3">
+        <label for="misrepresentation_in_hospital_records" class="form-label">Whether any misrepresentation in the hospital records 
+            Submitted, is noticed? If so give details (Details of the claim to be 
+            mentioned)
+            </label>
+        <textarea class="form-control" id="misrepresentation_in_hospital_records" name="misrepresentation_in_hospital_records" ></textarea>
+    </div>
+    <!-- 10 -->
+    <div class="mb-3">
+        <label for="additional_information" class="form-label">Any other information that you desire to give and your 
+            conclusion on the result of investigation
+            </label>
+        <textarea class="form-control" id="additional_information" name="additional_information" ></textarea>
+    </div>
+
+    <!-- Investigating Official's Details -->
+    <div class="mb-3">
+        <label for="investigating_official_name" class="form-label">Investigating Official's Name</label>
+        <input type="text" class="form-control" id="investigating_official_name" name="investigating_official_name" maxlength="255" >
+    </div>
+    
+    <div class="mb-3">
+        <label for="investigating_address" class="form-label">Investigating Official's Address</label>
+        <input type="text" class="form-control" id="investigating_address" name="investigating_address" maxlength="100" >
+    </div>
+    
+    <div class="mb-3">
+        <label for="investigating_designation" class="form-label">Investigating Official's Designation</label>
+        <input type="text" class="form-control" id="investigating_designation" name="investigating_designation" maxlength="100" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="investigation_date" class="form-label">Investigation Date</label>
+        <input type="text" class="form-control" id="investigation_date" name="investigation_date" maxlength="100" required>
+    </div>
+    

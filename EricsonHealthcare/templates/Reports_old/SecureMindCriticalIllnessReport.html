@@ -36,16 +36,15 @@
 <h4>Recommendation</h4>
 <div class="mb-3">
     <label for="iclm_recommendation" class="form-label eh-label">ICLM Recommendation</label>
-    <input type="text" class="form-select" id="iclm_recommendation" name="iclm_recommendation">
-        
+    <select class="form-select" id="iclm_recommendation" name="iclm_recommendation">
+        <option value="Repudiate">Repudiate</option>
+        <option value="Payable">Payable</option>
+        <option value="Query">Query</option>
+    </select>
 </div>
 
 <!-- Insured Visit Details -->
 <h4>Insured Visit Details</h4>
-<div class="mb-3">
-    <label for="insured_details" class="form-label eh-label">Insured Details</label>
-    <input placeholder="Enter Insured Details" type="text" class="form-control dark-input" id="insured_details" name="insured_details" maxlength="50" required>
-</div>
 <div class="mb-3">
     <label for="insured_age_sex" class="form-label eh-label">Insured Age/Sex</label>
     <input placeholder="Enter Insured Age/Sex" type="text" class="form-control dark-input" id="insured_age_sex" name="insured_age_sex" maxlength="50" required>
@@ -111,11 +110,6 @@
 <!-- Treating Doctor Visit -->
 <h4>Treating Doctor Visit</h4>
 <div class="mb-3">
-    <label for="treating_doctor_details" class="form-label eh-label">Treating Doctor Details</label>
-    <input placeholder="Enter Treating Doctor Details" type="text" class="form-control dark-input" id="treating_doctor_details" name="treating_doctor_details" maxlength="255"
-        >
-</div>
-<div class="mb-3">
     <label for="treating_doctor_name" class="form-label eh-label">Treating Doctor Name</label>
     <input placeholder="Enter Treating Doctor Name" type="text" class="form-control dark-input" id="treating_doctor_name" name="treating_doctor_name" maxlength="255"
         required>
@@ -128,7 +122,7 @@
 <div class="mb-3">
     <label for="treating_doctor_registration" class="form-label eh-label">Treating Doctor Registration</label>
     <input placeholder="Enter Treating Doctor Registration" type="text" class="form-control dark-input" id="treating_doctor_registration" name="treating_doctor_registration"
-    ">
+        maxlength="50">
 </div>
 <div class="mb-3">
     <label for="treating_hospital_name" class="form-label eh-label">Treating Hospital Name</label>

@@ -118,30 +118,71 @@
                         <h3 class="eh-head mt-4">Generate Final Report</h3>
                         <div class="generate-final-report-card p-3">
                             <form id="final_report_form">
-                                {% if case_type == 'CashlessClaimReport' %}
-                                    {% include 'Reports/CashlessClaimReport.html' %}
+                                {% if case_type == 'Retail Cashless' %}
+                                    {% include 'Reports/RetailCashless.html' %}
                                 {% endif %}
-                                {% if case_type == 'ClaimReport' %}
-                                    {% include 'Reports/ClaimReport.html' %}
+
+                                {% if case_type == 'Retail Reimbursement' %}
+                                    {% include 'Reports/RetailReimbursement.html' %}
                                 {% endif %}
-                                {% if case_type == 'HDCClosureReport' %}
-                                    {% include 'Reports/HDCClosureReport.html' %}
+
+                                {% if case_type == 'Group Cashless' %}
+                                    {% include 'Reports/GroupClashlessReport.html' %}
                                 {% endif %}
-                                {% if case_type == 'HealthClaimReport' %}
-                                    {% include 'Reports/HealthClaimReport.html' %}
+
+                                {% if case_type == 'Group Reimbursement' %}
+                                    {% include 'Reports/GroupReimbursement.html' %}
                                 {% endif %}
-                                {% if case_type == 'ICLMClosureReport' %}
-                                    {% include 'Reports/ICLMClosureReport.html' %}
-                                {% endif %}
-                                {% if case_type == 'PADeathReport' %}
+
+                                {% if case_type == 'PA Death' %}
                                     {% include 'Reports/PADeathReport.html' %}
                                 {% endif %}
-                                {% if case_type == 'SecureMindCriticalIllnessReport' %}
-                                    {% include 'Reports/SecureMindCriticalIllnessReport.html' %}
+
+                                {% if case_type == 'SMC Death' %}
+                                    {% include 'Reports/SMC_DeathReport.html' %}
                                 {% endif %}
-                                {% if case_type == 'TTDReport' %}
+
+                                {% if case_type == 'SMC Live' %}
+                                    {% include 'Reports/SMC_LiveReport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'PTD' %}
+                                    {% include 'Reports/PTD_PartialtotalDisabilityreport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'PPD' %}
+                                    {% include 'Reports/PPD_PermanentPartialDisabilityReport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'TTD' %}
                                     {% include 'Reports/TTDReport.html' %}
                                 {% endif %}
+
+                                {% if case_type == 'PA HDC' %}
+                                    {% include 'Reports/PA_HDC_FinalClosureReport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'SMC HDC' %}
+                                    {% include 'Reports/SMC_HDC_SecuremindclaimHDCReport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'LOJ' %}
+                                    {% include 'Reports/LOJ_LossOfJobFinalClosureReport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'WC' %}
+                                    {% include 'Reports/WC_WorkmanCompensationFinalClosureReport.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'Broken Bones' %}
+                                    {% include 'Reports/BrokenBones.html' %}
+                                {% endif %}
+
+                                {% if case_type == 'HDC' %}
+                                    {% include 'Reports/HDC.html' %}
+                                {% endif %}
+
+
                                 <div class="my-3">
                                     <button class="btn btn-primary eh-btn-blue-primary-no-hover w-100" type="submit">
                                         <b>Save</b>

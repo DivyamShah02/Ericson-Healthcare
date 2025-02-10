@@ -74,37 +74,69 @@ class AddFinalReportViewSet(viewsets.ViewSet):
 
             case_type = case_details.type_of_case
 
-            if case_type == 'CashlessClaimReport':
-                report_data = CashlessClaimReport.objects.filter(id=final_report_id).first()
-                report_serializer = CashlessClaimReportSerializers(report_data)
+            if case_type == 'Retail Cashless':
+                report_data = RetailCashlessFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = RetailCashlessFinalReportSerializers(report_data)
 
-            elif case_type == 'ClaimReport':
-                report_data = ClaimReport.objects.filter(id=final_report_id).first()
-                report_serializer = ClaimReportSerializers(report_data)
+            elif case_type == 'Retail Reimbursement':
+                report_data = RetailReimbursementFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = RetailReimbursementFinalReportSerializers(report_data)
 
-            elif case_type == 'HDCClosureReport':
-                report_data = HDCClosureReport.objects.filter(id=final_report_id).first()
-                report_serializer = HDCClosureReportSerializers(report_data)
+            elif case_type == 'Group Cashless':
+                report_data = GroupCashlessClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = GroupCashlessClosureReportSerializers(report_data)
 
-            elif case_type == 'HealthClaimReport':
-                report_data = HealthClaimReport.objects.filter(id=final_report_id).first()
-                report_serializer = HealthClaimReportSerializers(report_data)
+            elif case_type == 'Group Reimbursement':
+                report_data = GroupReimbursementFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = GroupReimbursementFinalClosureReportSerializers(report_data)
 
-            elif case_type == 'ICLMClosureReport':
-                report_data = ICLMClosureReport.objects.filter(id=final_report_id).first()
-                report_serializer = ICLMClosureReportSerializers(report_data)
-
-            elif case_type == 'PADeathReport':
+            elif case_type == 'PA Death':
                 report_data = PADeathReport.objects.filter(id=final_report_id).first()
                 report_serializer = PADeathReportSerializers(report_data)
 
-            elif case_type == 'SecureMindCriticalIllnessReport':
-                report_data = SecureMindCriticalIllnessReport.objects.filter(id=final_report_id).first()
-                report_serializer = SecureMindCriticalIllnessReportSerializers(report_data)
+            elif case_type == 'SMC Death':
+                report_data = SecureMindCriticalIllnessDeathFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = SecureMindCriticalIllnessDeathFinalReportSerializers(report_data)
 
-            elif case_type == 'TTDReport':
+            elif case_type == 'SMC Live':
+                report_data = SecureMindCriticalIllnessLiveFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = SecureMindCriticalIllnessLiveFinalReportSerializers(report_data)
+
+            elif case_type == 'PTD':
+                report_data = PermanentTotalDisabilityFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = PermanentTotalDisabilityFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'PPD':
+                report_data = PermanentPartialDisabilityFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = PermanentPartialDisabilityFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'TTD':
                 report_data = TTDReport.objects.filter(id=final_report_id).first()
                 report_serializer = TTDReportSerializers(report_data)
+
+            elif case_type == 'PA HDC':
+                report_data = PersonalAccidentHDCFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = PersonalAccidentHDCFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'SMC HDC':
+                report_data = SecureMindClaimHospitalDailyCashFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = SecureMindClaimHospitalDailyCashFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'LOJ':
+                report_data = LossOfJobFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = LossOfJobFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'WC':
+                report_data = WorkmanCompensationFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = WorkmanCompensationFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'Broken Bones':
+                report_data = BrokenBones.objects.filter(id=final_report_id).first()
+                report_serializer = BrokenBonesSerializers(report_data)
+
+            elif case_type == 'HDC':
+                report_data = HospitalDailyCashFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = HospitalDailyCashFinalClosureReportSerializers(report_data)
 
             return Response(
                     {
@@ -174,23 +206,56 @@ class AddFinalReportViewSet(viewsets.ViewSet):
             case_details = CaseDetails.objects.get(case_id=case_id)
             case_type = case_details.type_of_case
             
-            if case_type == 'CashlessClaimReport':
-                report_serializer = CashlessClaimReportSerializers(data=request.data)
-            elif case_type == 'ClaimReport':
-                report_serializer = ClaimReportSerializers(data=request.data)
-            elif case_type == 'HDCClosureReport':
-                report_serializer = HDCClosureReportSerializers(data=request.data)
-            elif case_type == 'HealthClaimReport':
-                report_serializer = HealthClaimReportSerializers(data=request.data)
-            elif case_type == 'ICLMClosureReport':
-                report_serializer = ICLMClosureReportSerializers(data=request.data)
-            elif case_type == 'PADeathReport':
+
+            if case_type == 'Retail Cashless':
+                report_serializer = RetailCashlessFinalReportSerializers(data=request.data)
+
+            elif case_type == 'Retail Reimbursement':
+                report_serializer = RetailReimbursementFinalReportSerializers(data=request.data)
+
+            elif case_type == 'Group Cashless':
+                report_serializer = GroupCashlessClosureReportSerializers(data=request.data)
+
+            elif case_type == 'Group Reimbursement':
+                report_serializer = GroupReimbursementFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'PA Death':
                 report_serializer = PADeathReportSerializers(data=request.data)
-            elif case_type == 'SecureMindCriticalIllnessReport':
-                report_serializer = SecureMindCriticalIllnessReportSerializers(data=request.data)
-            elif case_type == 'TTDReport':
+
+            elif case_type == 'SMC Death':
+                report_serializer = SecureMindCriticalIllnessDeathFinalReportSerializers(data=request.data)
+
+            elif case_type == 'SMC Live':
+                report_serializer = SecureMindCriticalIllnessLiveFinalReportSerializers(data=request.data)
+
+            elif case_type == 'PTD':
+                report_serializer = PermanentTotalDisabilityFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'PPD':
+                report_serializer = PermanentPartialDisabilityFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'TTD':
                 report_serializer = TTDReportSerializers(data=request.data)
-            
+
+            elif case_type == 'PA HDC':
+                report_serializer = PersonalAccidentHDCFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'SMC HDC':
+                report_serializer = SecureMindClaimHospitalDailyCashFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'LOJ':
+                report_serializer = LossOfJobFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'WC':
+                report_serializer = WorkmanCompensationFinalClosureReportSerializers(data=request.data)
+
+            elif case_type == 'Broken Bones':
+                report_serializer = BrokenBonesSerializers(data=request.data)
+
+            elif case_type == 'HDC':
+                report_serializer = HospitalDailyCashFinalClosureReportSerializers(data=request.data)
+
+
             if report_serializer.is_valid():
                 save_report_serializer = report_serializer.save()
                 print(report_serializer.data)
@@ -302,37 +367,70 @@ class RenderFinalReportViewSet(viewsets.ViewSet):
 
             case_type = case_details.type_of_case
 
-            if case_type == 'CashlessClaimReport':
-                report_data = CashlessClaimReport.objects.filter(id=final_report_id).first()
-                report_serializer = CashlessClaimReportSerializers(report_data)
 
-            elif case_type == 'ClaimReport':
-                report_data = ClaimReport.objects.filter(id=final_report_id).first()
-                report_serializer = ClaimReportSerializers(report_data)
+            if case_type == 'Retail Cashless':
+                report_data = RetailCashlessFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = RetailCashlessFinalReportSerializers(report_data)
 
-            elif case_type == 'HDCClosureReport':
-                report_data = HDCClosureReport.objects.filter(id=final_report_id).first()
-                report_serializer = HDCClosureReportSerializers(report_data)
+            elif case_type == 'Retail Reimbursement':
+                report_data = RetailReimbursementFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = RetailReimbursementFinalReportSerializers(report_data)
 
-            elif case_type == 'HealthClaimReport':
-                report_data = HealthClaimReport.objects.filter(id=final_report_id).first()
-                report_serializer = HealthClaimReportSerializers(report_data)
+            elif case_type == 'Group Cashless':
+                report_data = GroupCashlessClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = GroupCashlessClosureReportSerializers(report_data)
 
-            elif case_type == 'ICLMClosureReport':
-                report_data = ICLMClosureReport.objects.filter(id=final_report_id).first()
-                report_serializer = ICLMClosureReportSerializers(report_data)
+            elif case_type == 'Group Reimbursement':
+                report_data = GroupReimbursementFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = GroupReimbursementFinalClosureReportSerializers(report_data)
 
-            elif case_type == 'PADeathReport':
+            elif case_type == 'PA Death':
                 report_data = PADeathReport.objects.filter(id=final_report_id).first()
                 report_serializer = PADeathReportSerializers(report_data)
 
-            elif case_type == 'SecureMindCriticalIllnessReport':
-                report_data = SecureMindCriticalIllnessReport.objects.filter(id=final_report_id).first()
-                report_serializer = SecureMindCriticalIllnessReportSerializers(report_data)
+            elif case_type == 'SMC Death':
+                report_data = SecureMindCriticalIllnessDeathFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = SecureMindCriticalIllnessDeathFinalReportSerializers(report_data)
 
-            elif case_type == 'TTDReport':
+            elif case_type == 'SMC Live':
+                report_data = SecureMindCriticalIllnessLiveFinalReport.objects.filter(id=final_report_id).first()
+                report_serializer = SecureMindCriticalIllnessLiveFinalReportSerializers(report_data)
+
+            elif case_type == 'PTD':
+                report_data = PermanentTotalDisabilityFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = PermanentTotalDisabilityFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'PPD':
+                report_data = PermanentPartialDisabilityFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = PermanentPartialDisabilityFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'TTD':
                 report_data = TTDReport.objects.filter(id=final_report_id).first()
                 report_serializer = TTDReportSerializers(report_data)
+
+            elif case_type == 'PA HDC':
+                report_data = PersonalAccidentHDCFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = PersonalAccidentHDCFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'SMC HDC':
+                report_data = SecureMindClaimHospitalDailyCashFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = SecureMindClaimHospitalDailyCashFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'LOJ':
+                report_data = LossOfJobFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = LossOfJobFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'WC':
+                report_data = WorkmanCompensationFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = WorkmanCompensationFinalClosureReportSerializers(report_data)
+
+            elif case_type == 'Broken Bones':
+                report_data = BrokenBones.objects.filter(id=final_report_id).first()
+                report_serializer = BrokenBonesSerializers(report_data)
+
+            elif case_type == 'HDC':
+                report_data = HospitalDailyCashFinalClosureReport.objects.filter(id=final_report_id).first()
+                report_serializer = HospitalDailyCashFinalClosureReportSerializers(report_data)
 
             report_data = report_serializer.data
 
