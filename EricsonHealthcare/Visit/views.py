@@ -416,6 +416,9 @@ class VisitViewSet(viewsets.ViewSet):
 
                         final_card_data["Investigator"] = UserDetail.objects.filter(user_id=visit_data['investigator_id']).first().name
                         final_card_data["TAT"] = visit_data['tat']
+                        
+                        if user.role != "investigator":
+                            final_card_data["Visit Cost"] = visit_data['visit_cost']
 
                         visit_data["questions"] = visit_questions
 
@@ -1390,6 +1393,104 @@ class CompleteVisitViewSet(viewsets.ViewSet):
             else:
                 visit_data_obj.visit_completed = True
             
+            visit_data_obj.save()
+
+            return Response(
+                {
+                    "success": True,
+                    "user_not_logged_in": False,
+                    "user_unauthorized": False,
+                    "data": None,
+                    "error": None
+                },
+                status=status.HTTP_200_OK
+            )
+
+
+        except Exception as ex:
+            # logger.error(ex, exc_info=True)
+            print(ex)
+            return Response(
+                {
+                    "success": False,
+                    "user_not_logged_in": False,
+                    "user_unauthorized": False,
+                    "data": None,
+                    "error": str(ex)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class AddVisitCostViewSet(viewsets.ViewSet):
+    def create(self, request):
+        try:
+            user = request.user
+            if not user.is_authenticated:
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": True,
+                            "user_unauthorized": False,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            user_role = user.role
+            if user_role != 'coordinator' and user_role != 'hod' and user_role != 'admin':
+                return Response(
+                        {
+                            "success": False,
+                            "user_not_logged_in": False,
+                            "user_unauthorized": True,
+                            "data":None,
+                            "error": None
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            visit_id = request.data.get('visit_id')
+            if not visit_id:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": "Please provide Visit ID"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_data_obj = Visit.objects.get(visit_id=visit_id)
+            if visit_data_obj is None:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": f"Visit with id - {visit_id} not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            visit_cost = request.data.get('visit_cost')
+            if not visit_cost:
+                return Response(
+                    {
+                        "success": False,
+                        "user_not_logged_in": False,
+                        "user_unauthorized": False,
+                        "data": None,
+                        "error": f"Visit cost not provided"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            visit_data_obj.visit_cost = visit_cost
             visit_data_obj.save()
 
             return Response(

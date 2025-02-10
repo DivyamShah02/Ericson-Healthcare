@@ -873,6 +873,12 @@
             if (!visit.visit_completed) {
                 document.getElementById('send_case_to_medical_officer').setAttribute('onclick', "updateCaseStatus('Medical', true)")
             }
+            else {
+                if (visit.visit_cost=='') {
+                    document.getElementById('send_case_to_medical_officer').setAttribute('onclick', "askToAddCost()")
+                }
+            }
+
             const card = document.createElement('div');
             card.className = 'p-3 mt-3 visit-card px-0 pe-3';
 
@@ -882,7 +888,7 @@
             header.id = `card-${cardId}`;
             header.setAttribute('onclick', 'toggleCard(this)');
             header.style.cursor = 'pointer';
-            
+
             if (visit.issue_in_investigation) {
                 const headerIcon = document.createElement('div');
                 headerIcon.className = 'col-2 text-center';
@@ -1118,6 +1124,35 @@
 
             // Append the header and details section to the card
             card.appendChild(header);
+
+            if (visit.visit_cost=='') {
+                const addCost = document.createElement('div');
+                addCost.className = 'col-12 mt-4';
+
+                const addCostLabel = document.createElement('h5');
+                addCostLabel.className = 'form-label eh-label';
+                addCostLabel.textContent = 'Add Visit Cost';
+                addCostLabel.htmlFor = 'visit_cost';
+                addCost.appendChild(addCostLabel);
+
+                const addCostInput = document.createElement('input');
+                addCostInput.className = 'form-control dark-input';
+                addCostInput.placeholder = 'Enter Visit Cost';
+                addCostInput.id = 'visit_cost';
+                addCostInput.name = 'visit_cost';
+                addCostInput.type = 'number';
+                addCostInput.required = true;
+                addCost.appendChild(addCostInput);
+
+                const addCostButton = document.createElement('button');
+                addCostButton.className = 'btn btn-primary eh-btn-blue-primary w-100 mt-3';
+                addCostButton.textContent = 'Add Cost';
+                addCostButton.setAttribute('onclick', `addVisitCost('${visit_id}')`);
+                addCost.appendChild(addCostButton);
+
+                detailsDiv.appendChild(addCost);
+            }
+
             card.appendChild(detailsDiv);
 
             return card;
@@ -1399,6 +1434,41 @@
             );
         }
 
+        async function addVisitCost(visit_id) {
+            toggle_loader();
+            let visit_cost = document.getElementById('visit_cost').value;            
+            if (visit_cost === "") {
+                toggle_loader();
+                alert("Please enter visit cost");
+                return;
+            }
+            
+            console.log(visit_cost)
+            const bodyData = {
+                visit_id: visit_id,
+                visit_cost: visit_cost
+            };
+
+            const url = "{% url 'add-visit-cost-api-list' %}";
+            const [success, result] = await callApi("POST", url, bodyData, "{{csrf_token}}");
+            if (success) {
+                if (result.success) {
+                    toggle_loader();
+                    window.location.href=`{% url 'case_overview-list' %}?case_id=${caseId}&visit_tab=true`;
+                } else {
+                    console.error("Failed:", result);
+                    toggle_loader();
+                    alert("Unable to add visit cost");
+                }
+            } else {
+                console.error("Failed:", result);
+                toggle_loader();
+                alert("Unable to add visit cost");
+
+            }
+
+        }
+
     </script>
 
     <script>
@@ -1561,6 +1631,17 @@
                 );
                 
             }    
+        }
+
+        async function askToAddCost() {         
+            showModal(
+                'Action Denied',
+                `<p>Hey {{user.name}}, please fill cost of the visit before sending case to Medical Officer</p>`,
+                async () => {
+                    console.log('debugger');
+                },
+                true
+            );            
         }
 
     </script>

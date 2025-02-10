@@ -29,3 +29,8 @@ TD name
 
 total number of beds
 
+--------------------------
+10/2/25
+mail content-
+give details for SATA
+give details to be shown in the report page for case
