@@ -181,9 +181,6 @@ function odisplayDocument(url) {
 
 function displayDocument(url) {
     console.log(url);
-    const domain = 'https://ericsontpa.pythonanywhere.com';
-    const fullUrl = `${domain}${url}`;
-    console.log(fullUrl);
     const viewer = document.getElementById('document-viewer');
     viewer.innerHTML = ''; // Clear previous content
 
@@ -291,10 +288,7 @@ function displayFinalReportDocument(url) {
     console.log(url);
     const viewer = document.getElementById('final-report-document-viewer');
     viewer.innerHTML = ''; // Clear previous content
-    const domain = window.location.origin;
-    // const domain = 'https://ericsontpa.pythonanywhere.com';
-    const fullUrl = `${domain}${url}`;
-    console.log(fullUrl);
+
     // PDF
     console.log(url);
 
